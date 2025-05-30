@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import SidebarLinks from "./ui/sidebarLinks";
 import { IoIosGitMerge } from "react-icons/io";
-import { HiOutlineInboxStack } from "react-icons/hi2";
 
 const Content = styled.div`
     width: 100%;
