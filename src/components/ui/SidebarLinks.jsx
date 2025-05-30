@@ -1,5 +1,4 @@
 import React from "react";
-import { GrServices } from "react-icons/gr";
 import { GoArrowRight } from "react-icons/go";
 import styled from "styled-components";
 
