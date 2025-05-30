@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Sidebar from "./Sidebar";
+import Sidebar from "@/components/Sidebar";
 
 const Content = styled.header` 
     border: 1px solid red;
