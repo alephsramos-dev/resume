@@ -1,9 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import IconHeader from "./ui/iconHeader";
-import SidebarLinks from "./ui/sidebarLinks";
-import { FaGithub, FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
-import { PiDotsSixVerticalBold } from "react-icons/pi";
 import Sidebar from "./Sidebar";
 
 const Content = styled.header` 
