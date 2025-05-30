@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SidebarLinks from "@/components/ui/sidebarLinks";
+import SidebarLinks from "@/components/ui/SidebarLinks";
 import { IoIosGitMerge } from "react-icons/io";
 
 const Content = styled.div`
