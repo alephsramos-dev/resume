@@ -20,9 +20,9 @@ const Content = styled.footer`
         left: 0;
         bottom: 0;
         width: 100%;
-        height: 3px;
+        height: 5px;
         background: linear-gradient(90deg, #d102e4, #5B51D8, #25D366, #d102e4);
-        background-size: 300% 100%;
+        background-size: 500% 100%;
         animation: borderMove 3s linear infinite;
         z-index: 2;
     }
