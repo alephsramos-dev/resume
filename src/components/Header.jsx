@@ -19,6 +19,12 @@ const Content = styled.header`
     align-items: center;
     justify-content: space-between;
 
+    @media (max-width: 768px) {
+        width: 90%;
+        left: 5%;
+        top: 20px;
+    }
+
     & nav {
         display: flex;
         align-items: center;
@@ -27,6 +33,11 @@ const Content = styled.header`
         background-color: #1D1D1D;
         border-radius: 15px;
         padding: 5px 10px;
+
+        @media (max-width: 768px) {
+            border-radius: 10px;
+            width: 100%;
+        }
 
         & > button {
             padding: 10px;

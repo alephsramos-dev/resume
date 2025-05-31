@@ -15,6 +15,11 @@ const Content = styled.button`
     transition: all 0.2s ease-in-out;
     cursor: pointer;
 
+    @media (max-width: 768px) { 
+        padding: 5px;
+        border-radius: 5px;
+    }
+
     &:hover {
         transform: scale(0.95);
         box-shadow: 0 0 20px ${({ color }) => color || "transparent"}50;
@@ -32,6 +37,11 @@ const Content = styled.button`
         width: 20px;
         height: 20px;
         color: ${({ color }) => color || "#ffffff"};
+
+        @media (max-width: 768px) {
+            width: 18px;
+            height: 18px;
+        }
     }
 `
 
