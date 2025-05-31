@@ -54,8 +54,8 @@ export default function Header() {
         <>
             <Content>
                 <nav>
-                    <button onClick={() => window.href("#")}>
-                        <img src="public/icon-aleph-desenvolvedor-web.png" alt="logo do aleph desenvolvedor web" title="Aleph Desenvolvedor Web" loading="eager" />
+                    <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                        <img src="/icon-aleph-desenvolvedor-web.png" alt="logo do aleph desenvolvedor web" title="Aleph Desenvolvedor Web" loading="eager" />
                     </button>
                     <ol>
                         <li>
