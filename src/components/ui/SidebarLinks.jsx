@@ -4,15 +4,23 @@ import styled from "styled-components";
 
 const Content = styled.button`
     display: flex;
+    width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 5px;
-    padding: 10px;
+    padding: 7.5px;
     border-radius: 10px;
     cursor: pointer;
     background-color: transparent;
     border: 1px solid transparent;
     transition: all 0.2s ease-in-out;
+
+    & div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
 
     &:hover,
     &:active,
@@ -22,7 +30,7 @@ const Content = styled.button`
 
         & span {
             color: ${({ color }) => color || "#ffffff"};
-            font-weight: 500;
+            font-weight: 400;
         }
 
         & svg {
@@ -37,9 +45,9 @@ const Content = styled.button`
     }
 
     & span {
-        font-size: 16px;
+        font-size: 14px;
         color: #fff;
-        font-weight: 400;
+        font-weight: 300;
         transition: all 0.2s ease-in-out;
     }
 
@@ -50,7 +58,7 @@ const Content = styled.button`
     }
 
     & .Arrow {
-        font-size: 18px!important;
+        font-size: 16px!important;
         margin-left: 15px;
     }
 `
@@ -66,9 +74,13 @@ export default function SidebarLinks({
     return (
         <>
             <Content onClick={onClick} colorBg={colorBg} color={color} {...props}>
-                {Icone && <Icone />}
-                <span>{nomeDoLink}</span>
-                <GoArrowRight className="Arrow" />
+                <div>
+                    {Icone && <Icone />}
+                    <span>{nomeDoLink}</span>
+                </div>
+                <div>
+                    <GoArrowRight className="Arrow" />
+                </div>  
             </Content>
         </>
     )

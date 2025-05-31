@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Content = styled.button`
     width: auto;
     height: auto;
-    padding: 10px;
+    padding: 7.5px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -29,9 +29,9 @@ const Content = styled.button`
     }
 
     & svg {
-        width: 25px;
-        height: 25px;
-        color: ${({ color }) => color || "#353535"};
+        width: 20px;
+        height: 20px;
+        color: ${({ color }) => color || "#ffffff"};
     }
 `
 
