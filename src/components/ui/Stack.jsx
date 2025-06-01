@@ -50,8 +50,8 @@ const Content = styled.div`
     }
 
     & svg {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
 
         @media (max-width: 768px) {
             width: 35px;
@@ -71,12 +71,11 @@ export default function Stack({
             <Content
                 name={name}
                 style={{
-                    ...(aprender ? {} : { opacity: 0.5, filter: 'grayscale(1)' }),
                     '--stack-span-bg': color || '#1d1d1d',
                 }}
             >
                 {icon}
-                <span>{name}</span>
+                <span>{aprender ? name : 'aprendendo'}</span>
             </Content>
         </>
     )

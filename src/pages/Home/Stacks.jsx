@@ -21,7 +21,7 @@ const Content = styled.main`
 
     @media (max-width: 768px) {
         flex-direction: column;
-        gap: 50px;
+        gap: 30px;
     }
 `
 
@@ -54,7 +54,7 @@ function splitStacks(stacks, layout) {
     return result;
 }
 
-const layout = [4, 5, 6, 5, 4]; // Quantidade de itens por coluna
+const layout = [4, 6, 5, 6, 4]; // Quantidade de itens por coluna
 const columns = splitStacks(stacks, layout);
 
 const ColumnsContainer = styled.div`
@@ -65,7 +65,7 @@ const ColumnsContainer = styled.div`
     width: 50%;
 
     @media (max-width: 768px) {
-        gap: 10px;
+        gap: 7.5px;
         width: 100%;
     }
 `;
@@ -77,7 +77,7 @@ const Column = styled.div`
     gap: 20px;
 
     @media (max-width: 768px) {
-        gap: 5px;
+        gap: 7.5px;
     }
 `;
 
