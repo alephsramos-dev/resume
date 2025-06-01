@@ -66,7 +66,7 @@ const ColumnsContainer = styled.div`
     width: 50%;
 
     @media (max-width: 768px) {
-        gap: 15px;
+        gap: 10px;
         width: 100%;
     }
 `;
@@ -78,7 +78,7 @@ const Column = styled.div`
     gap: 20px;
 
     @media (max-width: 768px) {
-        gap: 10px;
+        gap: 5px;
     }
 `;
 
