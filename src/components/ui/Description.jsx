@@ -3,14 +3,15 @@ import styled from "styled-components";
 
 const Descricao = styled.h1`
     color: ${({ color }) => color || '#1d1d1d'};
-    font-size: 20px;
+    font-size: 22px;
     font-family: 'Urbanist', sans-serif;
-    width: 100%;
+    width: 80%;
     line-height: 100%;
     font-weight: 200;
 
     @media (max-width: 768px) {
         font-size: 16px;
+        width: 100%;
     }
 `;
 

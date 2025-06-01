@@ -19,9 +19,8 @@ const Content = styled.main`
     padding: 5%;
     position: relative;
 
-
     @media (max-width: 768px) {
-        flex-direction: column-reverse;
+        flex-direction: column;
         gap: 50px;
     }
 `
@@ -89,6 +88,16 @@ export default function Stacks() {
     const batchSize = Math.ceil(totalStacks / 8); // quantos aparecem por vez
     const interval = Math.floor(maxDuration / (totalStacks / batchSize));
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth <= 768);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     useEffect(() => {
         let shown = visible.filter(Boolean).length;
         if (shown >= totalStacks) return;
@@ -127,10 +136,11 @@ export default function Stacks() {
                         color="#fff" 
                     />
                     <Description 
-                        descricao="As stacks são conjuntos de tecnologias que utilizamos para desenvolver nossos projetos. Elas são escolhidas com base na eficiência, escalabilidade e facilidade de manutenção. Aqui estão algumas das stacks que utilizamos:" 
+                        descricao="As stacks são conjuntos de tecnologias que utilizamos para desenvolver nossos projetos." 
                         color="#dedede"
                     />
                     <ButtonLight 
+                        show={!isMobile}
                         text="Entrar em contato"
                     />
                 </Texts>
@@ -165,6 +175,10 @@ export default function Stacks() {
                         </Column>
                     ))}
                 </ColumnsContainer>
+                <ButtonLight
+                    show={isMobile}
+                    text="Entrar em contato"
+                />
             </Content>
         </>
     );
