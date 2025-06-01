@@ -8,7 +8,7 @@ import { stacks } from "@/pages/Home/Data/stacksData";
 import { RiStackLine } from "react-icons/ri";
 import PatternLines from "@/components/ui/patterns/PatternLines";
 import PatternMan from "@/components/ui/patterns/PatternMan";
-import ButtonLight from "@/components/ui/buttons/ButtonLight";
+import ButtonLight from "@/components/ui/buttons/ButtonArrrow";
 
 const Content = styled.main`
     width: auto;
