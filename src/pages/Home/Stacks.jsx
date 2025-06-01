@@ -6,6 +6,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { stacks } from "@/pages/Home/Data/stacksData";
 import { RiStackLine } from "react-icons/ri";
+import PatternLines from "@/components/ui/patterns/PatternLines";
+import PatternMan from "@/components/ui/patterns/PatternMan";
+import ButtonLight from "@/components/ui/buttons/ButtonLight";
 
 const Content = styled.main`
     width: auto;
@@ -14,7 +17,13 @@ const Content = styled.main`
     align-items: center;
     justify-content: center;
     padding: 5%;
-    background-color: #000;
+    position: relative;
+
+
+    @media (max-width: 768px) {
+        flex-direction: column-reverse;
+        gap: 50px;
+    }
 `
 
 const Texts = styled.div`
@@ -24,6 +33,16 @@ const Texts = styled.div`
     flex-direction: column;
     gap: 15px;
     width: 50%;
+
+    & button {
+        margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
 `
 
 function splitStacks(stacks, layout) {
@@ -43,8 +62,13 @@ const ColumnsContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
     width: 50%;
+
+    @media (max-width: 768px) {
+        gap: 15px;
+        width: 100%;
+    }
 `;
 
 const Column = styled.div`
@@ -52,6 +76,10 @@ const Column = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: 768px) {
+        gap: 10px;
+    }
 `;
 
 export default function Stacks() {
@@ -86,6 +114,7 @@ export default function Stacks() {
     return (
         <>
             <Content>
+                <PatternMan />
                 <Texts>
                     <Badge 
                         texto="Stacks" 
@@ -94,12 +123,15 @@ export default function Stacks() {
                         color="#5a008430" 
                     />
                     <Title 
-                        titulo="Conheça as stacks que utilizamos" 
+                        titulo={<>Conheça as <b>Stacks</b> que utilizo atualmente</>}
                         color="#fff" 
                     />
                     <Description 
-                    descricao="As stacks são conjuntos de tecnologias que utilizamos para desenvolver nossos projetos. Elas são escolhidas com base na eficiência, escalabilidade e facilidade de manutenção. Aqui estão algumas das stacks que utilizamos:" 
-                    color="#ffffff60"
+                        descricao="As stacks são conjuntos de tecnologias que utilizamos para desenvolver nossos projetos. Elas são escolhidas com base na eficiência, escalabilidade e facilidade de manutenção. Aqui estão algumas das stacks que utilizamos:" 
+                        color="#dedede"
+                    />
+                    <ButtonLight 
+                        text="Entrar em contato"
                     />
                 </Texts>
                 <ColumnsContainer>

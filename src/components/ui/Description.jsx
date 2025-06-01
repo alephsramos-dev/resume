@@ -7,7 +7,11 @@ const Descricao = styled.h1`
     font-family: 'Urbanist', sans-serif;
     width: 100%;
     line-height: 100%;
-    font-weight: 400;
+    font-weight: 200;
+
+    @media (max-width: 768px) {
+        font-size: 16px;
+    }
 `;
 
 export default function Description({

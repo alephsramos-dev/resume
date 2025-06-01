@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Content = styled.div`
-    border: 1px solid #ccc;
     width: max-content;
     height: auto;
     border-radius: 10px;
     background-color: #1d1d1d;
+    border: 1px solid #262626;
     color: #fff;
     display: flex;
     align-items: center;
@@ -15,7 +15,7 @@ const Content = styled.div`
     transition: all 0.2s ease-in-out;
 
     &:hover {
-        background-color: #000000;
+        background-color: #353535;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         transform: scale(0.95);
     }
@@ -52,6 +52,11 @@ const Content = styled.div`
     & svg {
         width: 45px;
         height: 45px;
+
+        @media (max-width: 768px) {
+            width: 35px;
+            height: 35px;
+        }
     }
 `;
 
@@ -66,7 +71,7 @@ export default function Stack({
             <Content
                 name={name}
                 style={{
-                    ...(aprender ? {} : { opacity: 0.4, filter: 'grayscale(1)' }),
+                    ...(aprender ? {} : { opacity: 0.5, filter: 'grayscale(1)' }),
                     '--stack-span-bg': color || '#1d1d1d',
                 }}
             >
