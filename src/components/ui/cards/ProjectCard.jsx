@@ -47,6 +47,10 @@ const Content = styled.div`
             font-weight: 600;
             letter-spacing: 2px;
             color: #ffffff70;
+
+            @media (max-width: 768px) {
+                letter-spacing: 1px;
+            }
         }
 
         & p {
