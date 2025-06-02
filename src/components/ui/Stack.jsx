@@ -46,7 +46,7 @@ const Content = styled.div`
         border-radius: 4px;
         box-shadow: 0 2px 8px #0002;
         pointer-events: none;
-        z-index: 10;
+        z-index: 100;
     }
 
     & svg {

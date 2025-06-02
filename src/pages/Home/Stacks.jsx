@@ -16,7 +16,7 @@ const Content = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5%;
+    padding: 5% 10%;
     position: relative;
 
     @media (max-width: 768px) {

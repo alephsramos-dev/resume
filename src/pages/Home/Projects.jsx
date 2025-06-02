@@ -1,0 +1,277 @@
+import Badge from "@/components/ui/Badge";
+import ProjectCard from "@/components/ui/cards/ProjectCard";
+import Description from "@/components/ui/Description";
+import Title from "@/components/ui/Title";
+import React, { useRef, useState } from "react";
+import { SiOpenproject } from "react-icons/si";
+import { Splide, SplideSlide} from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import styled from "styled-components";
+import { CiCirclePlus } from "react-icons/ci";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+const Content = styled.section`
+    padding: 5% 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #000;
+    gap: 50px;
+`
+
+const Texts = styled.div`
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-direction: row;
+
+    & > div {
+        width: 50%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        height: 100%;
+
+        &:nth-child(1){
+            width: 60%;
+        }
+
+        &:nth-child(2){
+            width: 40%;
+            align-items: flex-end;
+        }
+    }
+`
+
+const Carrossel = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+`
+
+const Navigation = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const CustomArrow = styled.button`
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  & svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 30px;
+  }
+`;
+
+const ProgressBar = styled.div`
+  width: 15%;
+  height: 6px;
+  background: #222;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+`;
+const ProgressFill = styled.div`
+  height: 100%;
+  background: #fff;
+  width: ${props => props.progress}%;
+  transition: width 0.3s;
+`;
+
+const VerMais = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+
+    &:hover svg{
+        color: #ffffff;
+        scale: 1.1;
+    }
+
+    &:hover span {
+        color: #ffffff;
+        scale: 1.1;
+    } 
+
+    & svg {
+        width: 50px;
+        height: 50px;
+        color: #ffffff50;
+        margin-bottom: 20px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    & span {
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff50;
+        transition: all 0.2s ease-in-out;
+    }
+`
+
+export default function Projects() {
+    const [progress, setProgress] = useState(0);
+    const splideRef = useRef(null);
+    const projects = [
+        {
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
+            alt: "",
+            nome: "Pousada Le Ange",
+            data: "12/10/2023",
+            tecnologias: ["react", "javascript", "html", "css", "sass", "vite", "figma", "firebase"],
+        },
+        {
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
+            alt: "",
+            nome: "Projeto 2",
+            data: "01/01/2024",
+            tecnologias: ["react", "typescript", "nodejs", "mongodb"],
+        },
+        {
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
+            alt: "",
+            nome: "Projeto 3",
+            data: "15/03/2024",
+            tecnologias: ["nextjs", "tailwind", "vercel"],
+        },
+        {
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
+            alt: "",
+            nome: "Projeto 4",
+            data: "20/04/2024",
+            tecnologias: ["vue", "pinia", "firebase"],
+        },
+        // Slide 5 exemplo
+        {
+            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
+            alt: "",
+            nome: "Projeto 5",
+            data: "10/05/2024",
+            tecnologias: ["angular", "typescript", "firebase"],
+        },
+        // Slide 6 especial
+        "custom-slide-6"
+    ];
+
+    // Calcula o progresso corretamente baseado no número de slides visíveis e total de slides
+    const handleSplideEvent = (splide) => {
+        const totalSlides = projects.length;
+        const perPage = splide.options.perPage || 1;
+        const maxIndex = totalSlides - perPage;
+        const index = Math.min(splide.index, maxIndex);
+        const progress = totalSlides <= perPage ? 100 : ((index) / maxIndex) * 100;
+        setProgress(progress);
+    };
+
+    const handlePrev = () => {
+        if (splideRef.current) {
+            splideRef.current.splide.go('<');
+        }
+    };
+    const handleNext = () => {
+        if (splideRef.current) {
+            splideRef.current.splide.go('>');
+        }
+    };
+
+    return (
+        <>
+            <Content>
+                <Texts>
+                    <div>
+                        <Badge 
+                            texto="Projetos"
+                            icon={<SiOpenproject />} 
+                            txtcolor="#13ba00" 
+                            color="#0c740030" 
+                        />
+                        <Title 
+                            titulo={<>Projetos utilizando as <b>Tecnologias</b> mais modernas e avançadas</>}
+                            color="#fff"
+                        />
+                    </div>
+                    <div>
+                        <Description 
+                            descricao="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas para criar soluções inovadoras e eficientes."
+                            color="#dadada"
+                        />
+                    </div>
+                </Texts>
+                <Carrossel>
+                    <Splide
+                        ref={splideRef}
+                        options={{
+                            type: 'slide',
+                            perPage: 2,
+                            gap: '2rem',
+                            pagination: false,
+                            arrows: false,
+                            drag: 'free',
+                            breakpoints: {
+                            900: { perPage: 1 }
+                            }
+                        }}
+                        onMove={(_, newIndex) => handleSplideEvent(splideRef.current.splide)}
+                        onDragged={() => handleSplideEvent(splideRef.current.splide)}
+                        aria-label="Projetos"
+                        >
+                        {projects.map((proj, idx) => (
+                            proj === "custom-slide-6" ? (
+                                <SplideSlide key="custom-slide-6" style={{ flex: '0 0 50%', maxWidth: '50%' }}>
+                                    <VerMais style={{ width: '100%', minWidth: 0 }}>
+                                        <CiCirclePlus />
+                                        <span>Ver todos os projetos</span>
+                                    </VerMais>
+                                </SplideSlide>
+                            ) : (
+                                <SplideSlide key={proj.nome + idx}>
+                                    <ProjectCard {...proj} />
+                                </SplideSlide>
+                            )
+                        ))}
+                    </Splide>
+                    <Navigation>
+                        <div style={{display: 'flex', justifyContent: 'center', width: 'auto',}}>
+                            <CustomArrow onClick={handlePrev}><IoIosArrowBack /></CustomArrow>
+                            <CustomArrow onClick={handleNext}><IoIosArrowForward /></CustomArrow>
+                        </div>
+                        <ProgressBar>
+                            <ProgressFill progress={progress} />
+                        </ProgressBar>
+                    </Navigation>
+                </Carrossel>
+            </Content>
+        </>
+    )
+}

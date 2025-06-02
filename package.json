@@ -11,6 +11,8 @@
     "gitpush": "cmd /c \"git add . && git commit -m 'add' && git push origin\""
   },
   "dependencies": {
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide": "^4.1.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
