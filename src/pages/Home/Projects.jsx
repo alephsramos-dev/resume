@@ -20,7 +20,6 @@ const Container = styled.div`
     background-color: #000;
 `
 
-
 const Background = styled.div`
     width: 100%;
     height: 100%;
@@ -48,6 +47,11 @@ const Texts = styled.div`
     justify-content: space-between;
     gap: 15px;
     flex-direction: row;
+
+    @media (max-width: 768px){
+        flex-direction: column;
+        align-items: center;
+    }
 
     & > div {
         width: 50%;
