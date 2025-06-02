@@ -7,10 +7,10 @@ const Content = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 5px;
+    gap: 0px;
     width: auto;
     height: auto;
-    padding: 10px 5px ;
+    padding: 10px 5px;
 
     & img {
         width: 100%;
@@ -18,7 +18,7 @@ const Content = styled.div`
         border-radius: 10px;   
         object-fit: cover;
         object-position: center;
-        margin-bottom: 10px;
+        margin-bottom: 25px;
     }
 
     & hr {
@@ -33,18 +33,25 @@ const Content = styled.div`
         align-items: center;
         justify-content: space-between;
         color: #fff;
+        padding: 0px 0;
 
         & h4 {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 500;
             margin: 0;
         }
 
         & span {
-            font-size: 14px;
+            font-size: 12px;
             text-transform: uppercase;
-            font-weight: 800;
-            color: #ffffff50;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #ffffff70;
+        }
+
+        & p {
+            font-size: 12px;
+            font-weight: 300;
         }
 
         & ol {
@@ -59,11 +66,7 @@ const Content = styled.div`
                 display: flex;
                 align-items: center;
                 justify-content: center;
-
-                & svg {
-                    width: 25px;
-                    height: 25px;
-                }
+                height: 25px;
 
                 & img {
                     width: 25px!important;
@@ -91,16 +94,17 @@ const SaberMaisButton = styled.button`
     left: ${props => props.x}px;
     top: ${props => props.y}px;
     transform: translate(-50%, -50%);
-    background: #1d1d1d;
+    background: #1d1d1d70;
+    backdrop-filter: blur(5px);
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
     color: #fff;
     border: none;
     border-radius: 5px;
     white-space: nowrap;
     padding: 10px 15px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 400;
     transition: opacity 0.2s;
     z-index: 2;
 `;
@@ -142,7 +146,7 @@ export default function ProjectCard({
                 </ImageWrapper>
                 <div>
                     <h4>{nome}</h4>
-                    <span>{data}</span>
+                    <p>{data}</p>
                 </div>
                 
                 <hr />

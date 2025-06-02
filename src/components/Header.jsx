@@ -12,7 +12,7 @@ import Sidebar from "./Sidebar";
 const Content = styled.header` 
     width: auto;
     position: fixed;
-    right: 5%;
+    right: 1.5%;
     top: 20px;
     height: auto;
     display: flex;

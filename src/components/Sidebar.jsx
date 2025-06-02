@@ -22,7 +22,7 @@ const Content = styled.div`
     height: auto;
     position: fixed;
     top: 80px;
-    right: 5%;
+    right: 1.5%;
     display: flex;
     align-items: center;
     justify-content: center;

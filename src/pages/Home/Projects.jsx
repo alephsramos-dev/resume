@@ -9,14 +9,34 @@ import '@splidejs/react-splide/css';
 import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import BannerPousadaLeAnge from '@/assets/banners-project/banner-pousada-le-ange.jpg';
+import { projects as allProjects } from './Data/projectData';
+
+const Container = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+`
+
+
+const Background = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    position: absolute;
+    z-index: -1;
+`
 
 const Content = styled.section`
-    padding: 5% 10%;
+    width: 100%;
+    padding: 2.5%;
+    max-width: 1420px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #000;
     gap: 50px;
 `
 
@@ -50,13 +70,13 @@ const Texts = styled.div`
 `
 
 const Carrossel = styled.div`
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
-    height: auto;
+    box-sizing: border-box;
 `
 
 const Navigation = styled.div`
@@ -143,46 +163,13 @@ const VerMais = styled.div`
 export default function Projects() {
     const [progress, setProgress] = useState(0);
     const splideRef = useRef(null);
-    const projects = [
-        {
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
-            alt: "",
-            nome: "Pousada Le Ange",
-            data: "12/10/2023",
-            tecnologias: ["react", "javascript", "html", "css", "sass", "vite", "figma", "firebase"],
-        },
-        {
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
-            alt: "",
-            nome: "Projeto 2",
-            data: "01/01/2024",
-            tecnologias: ["react", "typescript", "nodejs", "mongodb"],
-        },
-        {
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
-            alt: "",
-            nome: "Projeto 3",
-            data: "15/03/2024",
-            tecnologias: ["nextjs", "tailwind", "vercel"],
-        },
-        {
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
-            alt: "",
-            nome: "Projeto 4",
-            data: "20/04/2024",
-            tecnologias: ["vue", "pinia", "firebase"],
-        },
-        // Slide 5 exemplo
-        {
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8lRbS7eKYzDq-Ftxc1p8G_TTw2unWBMEYUw&s",
-            alt: "",
-            nome: "Projeto 5",
-            data: "10/05/2024",
-            tecnologias: ["angular", "typescript", "firebase"],
-        },
-        // Slide 6 especial
-        "custom-slide-6"
-    ];
+    // Ordena por data (mais recente primeiro) e pega os 5 últimos
+    const sortedProjects = allProjects
+        .slice()
+        .sort((a, b) => new Date(b.data) - new Date(a.data))
+        .slice(0, 5);
+    // Adiciona o slide customizado
+    const projects = [...sortedProjects, "custom-slide-6"];
 
     // Calcula o progresso corretamente baseado no número de slides visíveis e total de slides
     const handleSplideEvent = (splide) => {
@@ -207,71 +194,78 @@ export default function Projects() {
 
     return (
         <>
-            <Content>
-                <Texts>
-                    <div>
-                        <Badge 
-                            texto="Projetos"
-                            icon={<SiOpenproject />} 
-                            txtcolor="#13ba00" 
-                            color="#0c740030" 
-                        />
-                        <Title 
-                            titulo={<>Projetos utilizando as <b>Tecnologias</b> mais modernas e avançadas</>}
-                            color="#fff"
-                        />
-                    </div>
-                    <div>
-                        <Description 
-                            descricao="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas para criar soluções inovadoras e eficientes."
-                            color="#dadada"
-                        />
-                    </div>
-                </Texts>
-                <Carrossel>
-                    <Splide
-                        ref={splideRef}
-                        options={{
-                            type: 'slide',
-                            perPage: 2,
-                            gap: '2rem',
-                            pagination: false,
-                            arrows: false,
-                            drag: 'free',
-                            breakpoints: {
-                            900: { perPage: 1 }
-                            }
-                        }}
-                        onMove={(_, newIndex) => handleSplideEvent(splideRef.current.splide)}
-                        onDragged={() => handleSplideEvent(splideRef.current.splide)}
-                        aria-label="Projetos"
-                        >
-                        {projects.map((proj, idx) => (
-                            proj === "custom-slide-6" ? (
-                                <SplideSlide key="custom-slide-6" style={{ flex: '0 0 50%', maxWidth: '50%' }}>
-                                    <VerMais style={{ width: '100%', minWidth: 0 }}>
-                                        <CiCirclePlus />
-                                        <span>Ver todos os projetos</span>
-                                    </VerMais>
-                                </SplideSlide>
-                            ) : (
-                                <SplideSlide key={proj.nome + idx}>
-                                    <ProjectCard {...proj} />
-                                </SplideSlide>
-                            )
-                        ))}
-                    </Splide>
-                    <Navigation>
-                        <div style={{display: 'flex', justifyContent: 'center', width: 'auto',}}>
-                            <CustomArrow onClick={handlePrev}><IoIosArrowBack /></CustomArrow>
-                            <CustomArrow onClick={handleNext}><IoIosArrowForward /></CustomArrow>
+            <Container>
+                <Background></Background>
+                <Content>
+                    <Texts>
+                        <div>
+                            <Badge 
+                                texto="Projetos"
+                                icon={<SiOpenproject />} 
+                                txtcolor="#13ba00" 
+                                color="#0c740030" 
+                            />
+                            <Title 
+                                titulo={<>Projetos utilizando as <b>Tecnologias</b> mais modernas e avançadas</>}
+                                color="#fff"
+                            />
                         </div>
-                        <ProgressBar>
-                            <ProgressFill progress={progress} />
-                        </ProgressBar>
-                    </Navigation>
-                </Carrossel>
-            </Content>
+                        <div>
+                            <Description 
+                                descricao="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas para criar soluções inovadoras e eficientes."
+                                color="#dadada"
+                            />
+                        </div>
+                    </Texts>
+                    <Carrossel>
+                        <Splide
+                            ref={splideRef}
+                            options={{
+                                type: 'slide',
+                                perPage: 2,
+                                gap: '1rem',
+                                pagination: false,
+                                arrows: false,
+                                drag: 'free',
+                                width: '100%',
+                                autoWidth: false,
+                                breakpoints: {
+                                    1200: { perPage: 2, gap: '1.5rem' },
+                                    900: { perPage: 1, gap: '1rem' },
+                                    600: { perPage: 1, gap: '0.5rem' },
+                                }
+                            }}
+                            onMove={(_, newIndex) => handleSplideEvent(splideRef.current.splide)}
+                            onDragged={() => handleSplideEvent(splideRef.current.splide)}
+                            aria-label="Projetos"
+                            >
+                            {projects.map((proj, idx) => (
+                                proj === "custom-slide-6" ? (
+                                    <SplideSlide key="custom-slide-6" style={{ width: '100%', minWidth: 0 }}>
+                                        <VerMais style={{ width: '100%', minWidth: 0 }}>
+                                            <CiCirclePlus />
+                                            <span>Ver todos os projetos</span>
+                                        </VerMais>
+                                    </SplideSlide>
+                                ) : (
+                                    <SplideSlide key={proj.nome + idx} style={{ width: '100%', minWidth: 0 }}>
+                                        <ProjectCard {...proj} />
+                                    </SplideSlide>
+                                )
+                            ))}
+                        </Splide>
+                        <Navigation>
+                            <div style={{display: 'flex', justifyContent: 'center', width: 'auto',}}>
+                                <CustomArrow onClick={handlePrev}><IoIosArrowBack /></CustomArrow>
+                                <CustomArrow onClick={handleNext}><IoIosArrowForward /></CustomArrow>
+                            </div>
+                            <ProgressBar>
+                                <ProgressFill progress={progress} />
+                            </ProgressBar>
+                        </Navigation>
+                    </Carrossel>
+                </Content>
+            </Container>
         </>
     )
 }
