@@ -1,6 +1,6 @@
 // Exemplo de estrutura para os dados dos projetos
 import BannerPousadaLeAnge from '@/assets/banners-project/banner-pousada-le-ange.jpg';
-import BannerEcoFrame from '@/assets/banners-project/banner-eco-frame.jpg';
+import BannerEcoFrame from '@/assets/banners-project/banner-ecoframe.jpg';
 
 export const projects = [
     {
