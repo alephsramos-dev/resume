@@ -223,17 +223,18 @@ export default function Projects() {
                             options={{
                                 type: 'slide',
                                 perPage: 2,
+                                perMove: 1,
                                 gap: '1rem',
                                 pagination: false,
                                 arrows: false,
-                                drag: 'free',
+                                drag: true,
                                 width: '100%',
                                 autoWidth: false,
                                 breakpoints: {
                                     1200: { perPage: 2, gap: '1.5rem' },
                                     900: { perPage: 1, gap: '1rem' },
                                     600: { perPage: 1, gap: '0.5rem' },
-                                }
+                                },
                             }}
                             onMove={(_, newIndex) => handleSplideEvent(splideRef.current.splide)}
                             onDragged={() => handleSplideEvent(splideRef.current.splide)}
