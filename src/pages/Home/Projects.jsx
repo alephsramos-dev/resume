@@ -1,6 +1,7 @@
 import Badge from "@/components/ui/Badge";
 import ProjectCard from "@/components/ui/cards/ProjectCard";
 import Description from "@/components/ui/Description";
+import { useNavigate } from "react-router-dom";
 import Title from "@/components/ui/Title";
 import React, { useRef, useState } from "react";
 import { SiOpenproject } from "react-icons/si";
@@ -9,7 +10,6 @@ import '@splidejs/react-splide/css';
 import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import BannerPousadaLeAnge from '@/assets/banners-project/banner-pousada-le-ange.jpg';
 import { projects as allProjects } from './Data/projectData';
 
 const Container = styled.div`
@@ -37,6 +37,9 @@ const Content = styled.section`
     justify-content: center;
     flex-direction: column;
     gap: 50px;
+    border: 1px solid #ffffff50;
+    border-bottom: transparent;
+    border-top: transparent;
 
     @media (max-width: 768px){
         gap: 30px;
@@ -188,6 +191,8 @@ function parseDateBR(dateStr) {
 export default function Projects() {
     const [progress, setProgress] = useState(0);
     const splideRef = useRef(null);
+    const navigate = useNavigate();
+
     // Ordena por data (mais recente primeiro) e pega os 5 últimos
     const sortedProjects = allProjects
         .slice()
@@ -268,7 +273,7 @@ export default function Projects() {
                             {projects.map((proj, idx) => (
                                 proj === "custom-slide-6" ? (
                                     <SplideSlide key="custom-slide-6" style={{ width: '100%', minWidth: 0 }}>
-                                        <VerMais style={{ width: '100%', minWidth: 0 }}>
+                                        <VerMais style={{ width: '100%', minWidth: 0 }} onClick={() => navigate('/projetos')}>
                                             <CiCirclePlus />
                                             <span>Ver todos os projetos</span>
                                         </VerMais>

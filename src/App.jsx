@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import All from '@/pages/Home/All'
 import Curriculo from '@/pages/Curriculo/All'
 import Site from '@/pages/Site/All'
+import Project from '@/pages/Projects/All'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<All />} />
         <Route path="/curriculo" element={<Curriculo />} />
         <Route path="/criar-meu-site" element={<Site />} />
+        <Route path="/projetos" element={<Project />} />
       </Routes>
       <Footer />
     </BrowserRouter>

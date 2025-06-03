@@ -6,18 +6,27 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { stacks } from "@/pages/Home/Data/stacksData";
 import { RiStackLine } from "react-icons/ri";
-import PatternLines from "@/components/ui/patterns/PatternLines";
-import PatternMan from "@/components/ui/patterns/PatternMan";
 import ButtonLight from "@/components/ui/buttons/ButtonArrrow";
 
-const Content = styled.main`
-    width: auto;
-    height: auto;
+const Background = styled.div`
+    width: 100%;
+    height: 100%;
+    background-color: #000;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5% 10%;
-    position: relative;
+`
+
+const Content = styled.section`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5%;
+    border: 1px solid #ffffff50;
+    border-bottom: transparent;
+    border-top: transparent;
+    max-width: 1420px;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -62,7 +71,7 @@ const ColumnsContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 25px;
-    width: 50%;
+    width: auto;
 
     @media (max-width: 768px) {
         gap: 7.5px;
@@ -122,8 +131,8 @@ export default function Stacks() {
     let shown = 0;
     return (
         <>
+            <Background>
             <Content>
-                <PatternMan />
                 <Texts>
                     <Badge 
                         texto="Stacks" 
@@ -180,6 +189,7 @@ export default function Stacks() {
                     text="Entrar em contato"
                 />
             </Content>
+            </Background>
         </>
     );
 }
