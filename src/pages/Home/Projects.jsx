@@ -37,9 +37,7 @@ const Content = styled.section`
     justify-content: center;
     flex-direction: column;
     gap: 50px;
-    border: 1px solid #ffffff50;
-    border-bottom: transparent;
-    border-top: transparent;
+    border: 1px solid #ffffff10;
 
     @media (max-width: 768px){
         gap: 30px;

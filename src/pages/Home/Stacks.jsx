@@ -23,7 +23,7 @@ const Content = styled.section`
     align-items: center;
     justify-content: space-between;
     padding: 2.5%;
-    border: 1px solid #ffffff50;
+    border: 1px solid #ffffff10;
     border-bottom: transparent;
     border-top: transparent;
     max-width: 1420px;

@@ -1,9 +1,9 @@
 // Exemplo de estrutura para os dados dos projetos
-import BannerPousadaLeAnge from '@/assets/banners-project/banner-pousada-le-ange.jpg';
-import BannerEcoFrame from '@/assets/banners-project/banner-ecoframe.jpg';
-import BannerNovaMetalica from '@/assets/banners-project/banner-novametalica.png';
-import BannerFast from "@/assets/banners-project/banner-fast.png";
-import BannerYago from "@/assets/banners-project/banner-yago.png";
+import BannerPousadaLeAnge from '@/assets/banners-project/pousadaleange-banner.jpg';
+import BannerAleph from '@/assets/banners-project/alephsramos-banner.jpg';
+import BannerNovaMetalica from '@/assets/banners-project/novametalica-banner.jpg';
+import BannerFast from "@/assets/banners-project/lojafastsistemasconstrutivos-banner.jpg";
+import BannerYago from "@/assets/banners-project/euyagolopes-banner.jpg";
 
 export const projects = [
     {
@@ -14,9 +14,9 @@ export const projects = [
         tecnologias: ["react", "javascript", "html", "css", "sass", "vite", "firebase"],
     },
      {
-        image: BannerEcoFrame,
+        image: BannerAleph,
         alt: "banner-do-site-do-eco-frame-feito-por-aleph-desenvolvedor-web",
-        nome: "EcoFrame",
+        nome: "Aleph Desenvolvedor Web",
         data: "01/02/2025",
         tecnologias: ["javascript", "html", "css"],
     },
