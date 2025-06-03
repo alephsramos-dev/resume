@@ -10,15 +10,19 @@ const Content = styled.div`
     gap: 0px;
     width: auto;
     height: auto;
-    padding: 10px 5px;
+    padding: 15px 5px;
 
     & img {
         width: 100%;
         height: 350px;
-        border-radius: 10px;   
+        border-radius: 15px;   
         object-fit: cover;
         object-position: center;
         margin-bottom: 25px;
+
+        @media (max-width: 768px){
+            height: 250px;    
+        }
     }
 
     & hr {
@@ -35,10 +39,20 @@ const Content = styled.div`
         color: #fff;
         padding: 0px 0;
 
+        @media (max-width: 768px){
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
         & h4 {
             font-size: 22px;
             font-weight: 500;
             margin: 0;
+
+            @media (max-width: 768px){
+                font-size: 20px;
+                margin-top: 15px;
+            }
         }
 
         & span {
@@ -50,12 +64,17 @@ const Content = styled.div`
 
             @media (max-width: 768px) {
                 letter-spacing: 1px;
+                font-size: 14px;
             }
         }
 
         & p {
             font-size: 12px;
             font-weight: 300;
+
+            @media (max-width: 768px){
+                margin-top: 10px;
+            }
         }
 
         & ol {
@@ -89,6 +108,10 @@ const ImageWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 768px){
+        height: 250px;        
+    }
 `;
 
 const SaberMaisButton = styled.button`

@@ -37,6 +37,11 @@ const Content = styled.section`
     justify-content: center;
     flex-direction: column;
     gap: 50px;
+
+    @media (max-width: 768px){
+        gap: 30px;
+        padding: 2.5% 5%;
+    }
 `
 
 const Texts = styled.div`
@@ -61,6 +66,12 @@ const Texts = styled.div`
         flex-direction: column;
         gap: 10px;
         height: 100%;
+
+        @media (max-width: 768px){
+            width: 100%!important;
+            align-items: center!important;
+            text-align: center;
+        }
 
         &:nth-child(1){
             width: 60%;
@@ -121,6 +132,10 @@ const ProgressBar = styled.div`
   border-radius: 3px;
   overflow: hidden;
   position: relative;
+
+  @media (max-width: 768px){
+    width: 50%;
+  }
 `;
 const ProgressFill = styled.div`
   height: 100%;
@@ -164,13 +179,19 @@ const VerMais = styled.div`
     }
 `
 
+// Função para converter data DD/MM/YYYY para Date
+function parseDateBR(dateStr) {
+    const [day, month, year] = dateStr.split('/').map(Number);
+    return new Date(year, month - 1, day);
+}
+
 export default function Projects() {
     const [progress, setProgress] = useState(0);
     const splideRef = useRef(null);
     // Ordena por data (mais recente primeiro) e pega os 5 últimos
     const sortedProjects = allProjects
         .slice()
-        .sort((a, b) => new Date(b.data) - new Date(a.data))
+        .sort((a, b) => parseDateBR(b.data) - parseDateBR(a.data))
         .slice(0, 5);
     // Adiciona o slide customizado
     const projects = [...sortedProjects, "custom-slide-6"];
