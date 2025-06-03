@@ -64,6 +64,7 @@ const Content = styled.div`
 
             @media (max-width: 768px) {
                 letter-spacing: 1px;
+                width: 100%;
                 font-size: 14px;
             }
         }
