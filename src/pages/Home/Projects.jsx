@@ -41,7 +41,7 @@ const Content = styled.section`
 
     @media (max-width: 768px){
         gap: 30px;
-        padding: 2.5% 5%;
+        padding: 5%;
     }
 `
 
@@ -70,8 +70,8 @@ const Texts = styled.div`
 
         @media (max-width: 768px){
             width: 100%!important;
-            align-items: center!important;
-            text-align: center;
+            align-items: flex-start!important;
+            text-align: left;
         }
 
         &:nth-child(1){

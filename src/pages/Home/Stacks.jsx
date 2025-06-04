@@ -71,7 +71,7 @@ const ColumnsContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 25px;
-    width: auto;
+    width: 50%; 
 
     @media (max-width: 768px) {
         gap: 7.5px;

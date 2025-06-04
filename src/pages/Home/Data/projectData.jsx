@@ -16,7 +16,7 @@ export const projects = [
      {
         image: BannerAleph,
         alt: "banner-do-site-do-eco-frame-feito-por-aleph-desenvolvedor-web",
-        nome: "Aleph Desenvolvedor Web",
+        nome: "Alephsramos",
         data: "01/02/2025",
         tecnologias: ["javascript", "html", "css"],
     },
@@ -37,7 +37,7 @@ export const projects = [
      {
         image: BannerFast,
         alt: "",
-        nome: "Fast Sistemas Construtivos",
+        nome: "Fast",
         data: "19/02/2025",
         tecnologias: ["html", "css", "javascript"],
     },
