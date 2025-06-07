@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Descricao = styled.h1`
+const Descricao = styled.p`
     color: ${({ color }) => color || '#1d1d1d'};
     font-size: 20px;
     font-family: 'Urbanist', sans-serif;
