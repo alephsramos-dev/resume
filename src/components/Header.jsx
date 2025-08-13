@@ -22,8 +22,11 @@ const Content = styled.header`
 
     @media (max-width: 768px) {
         width: 90%;
-        left: 5%;
+        right: 5%;
         top: 20px;
+        /* Keep header content aligned to the right on mobile to prevent jumping */
+        justify-content: flex-end;
+        & > nav { margin-left: auto; }
     }
 
     & nav {
@@ -35,11 +38,10 @@ const Content = styled.header`
         border-radius: 15px;
         padding: 5px 10px;
         transition: padding .35s ease, border-radius .35s ease, background-color .35s ease, box-shadow .35s ease;
-        position: relative;
 
         @media (max-width: 768px) {
             border-radius: 10px;
-            width: 100%;
+            width: auto;
         }
 
         & > button {
