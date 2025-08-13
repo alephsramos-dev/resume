@@ -17,6 +17,16 @@ const fadeOut = keyframes`
   to { opacity: 0; transform: translateX(40px); }
 `;
 
+const Backdrop = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  z-index: 950;
+  opacity: ${({ open }) => (open ? 1 : 0)};
+  pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
+  transition: opacity .25s ease;
+`;
+
 const Content = styled.div`
     width: auto;
     height: auto;
@@ -37,6 +47,10 @@ const Content = styled.div`
       : css`${fadeOut} 0.3s ease forwards`};
     pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 
+    @media (max-width: 768px) {
+        right: 5%;
+    }
+
     & > span {
         padding: 5px 10px;
         width: 100%;
@@ -45,14 +59,14 @@ const Content = styled.div`
         opacity: 0.7;
         font-weight: 200;
     }
-`
+`;
 
 const Line = styled.div`
     width: 100%;
     height: 1px;
     background-color: #ffffff40;
     margin: 10px 0;
-`
+`;
 
 const Links = styled.nav`
     display: flex;
@@ -69,7 +83,7 @@ const Links = styled.nav`
         font-family: 'Urbanist', sans-serif;
         padding: 5px;
     }
-`
+`;
 
 const CloseButton = styled.button`
   position: absolute;
@@ -92,10 +106,18 @@ export default function Sidebar({ open, onClose }) {
       window.addEventListener('keydown', handleEsc);
       return () => window.removeEventListener('keydown', handleEsc);
     }, [open, onClose]);
-    if (!open) return null;
+
+    const handleOptionClick = React.useCallback(() => {
+      onClose();
+    }, [onClose]);
+
     return (
+      <>
+        <Backdrop open={open} onClick={onClose} />
         <Content open={open}>
-            <Links>
+            {/* Optional close button if desired */}
+            {/* <CloseButton onClick={onClose}><IoMdClose /></CloseButton> */}
+            <Links onClickCapture={handleOptionClick}>
                 <h4>Nos conheça</h4>
                 <SidebarLinks 
                     icon={BiNetworkChart}
@@ -115,7 +137,7 @@ export default function Sidebar({ open, onClose }) {
                     color="#d102e4"
                     colorBg="#5a0084"
                 />
-                <Line></Line>
+                <Line />
                 <h4>Para você</h4>
                 <SidebarLinks 
                     icon={IoPhonePortraitOutline}
@@ -123,7 +145,7 @@ export default function Sidebar({ open, onClose }) {
                     color="#d90000"
                     colorBg="#790404"
                 />
-                <Line></Line>
+                <Line />
                 <h4>Fale conosco</h4>
                 <SidebarLinks 
                     icon={IoIosContact}
@@ -132,8 +154,9 @@ export default function Sidebar({ open, onClose }) {
                     colorBg="#8b5202"
                 />
             </Links>
-            <Line></Line>
+            <Line />
             <span>Desenvolvido por Aleph</span>
         </Content>
-    )
+      </>
+    );
 }

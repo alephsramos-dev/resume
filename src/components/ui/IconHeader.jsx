@@ -14,6 +14,8 @@ const Content = styled.button`
     text-decoration: none;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
 
     @media (max-width: 768px) { 
         padding: 5px;
@@ -22,7 +24,7 @@ const Content = styled.button`
 
     &:hover {
         transform: scale(0.95);
-        box-shadow: 0 0 20px ${({ color }) => color || "transparent"}50;
+        box-shadow: 0 0 10px ${({ color }) => color || "transparent"}50;
         border-color: transparent;
     }
 
