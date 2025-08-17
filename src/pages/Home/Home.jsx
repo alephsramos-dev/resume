@@ -114,27 +114,21 @@ const Content = styled.section`
         font-size: clamp(2.125rem, 5vw + 1.25rem, 4.5rem);
         color: #f1f1f1;
         width: 85%;
-        max-width: 1200px;
+        max-width: 1150px;
         text-align: center;
         font-family: 'Urbanist', sans-serif;
         font-weight: 300;
         line-height: 1.05;
         margin: 0;
-        /* Ajuste anterior causava quebra por caractere; revertido para comportamento por palavra */
-        overflow-wrap: normal; /* antes: anywhere */
-        word-break: normal;    /* antes: break-word */
-        hyphens: none;         /* antes: auto */
+        white-space: normal;
+        overflow-wrap: normal;
+        word-break: normal;
+        hyphens: none;
         -webkit-hyphens: none;
-        -webkit-text-size-adjust: 100%;
-        /* Em telas ultra estreitas, permitir quebra emergencial usando balance */
-        @supports (text-wrap: balance) {
-          text-wrap: balance;
-        }
-        @media (max-width: 360px) {
-          overflow-wrap: break-word; /* emergencial só em telas muito pequenas */
-        }
+        position: relative;
+        padding-inline: 0;
 
-        .hero-blur-title { font: inherit; line-height: 1.05; display: inline-block; }
+        .hero-blur-title { font: inherit; line-height: 1.05; display: inline-block; max-width: 100%; }
         .hero-blur-title b {
             font-family: "Source Serif 4", serif;
             font-weight: 600;
@@ -152,30 +146,33 @@ const Content = styled.section`
         }
         .hero-blur-title .desktop-break { display: block; }
 
-        @media (max-width: 1024px) { width: 85%; }
-        @media (max-width: 768px) {
-            width: 92%;
-            text-align: center; /* centraliza no iPhone */
+        @media (max-width: 1024px) { width: 88%; }
+        @media (max-width: 820px) { width: 92%; }
+        @media (max-width: 768px) { width: 94%; text-align: center; }
+        @media (max-width: 620px) {
+            font-size: clamp(1.9rem, 6.2vw + .55rem, 3rem);
+            .hero-blur-title b { font-size: clamp(2.1rem, 7vw + .5rem, 3.35rem); letter-spacing: -3px; }
         }
-        @media (max-width: 600px) {
-            width: 95%;
-            font-size: clamp(1.95rem, 6.5vw + .7rem, 3.2rem);
-            .hero-blur-title b { font-size: clamp(2.2rem, 7.5vw + .6rem, 3.6rem); letter-spacing: -3px; }
+        @media (max-width: 540px) {
+            font-size: clamp(1.75rem, 6.8vw + .4rem, 2.7rem);
+            .hero-blur-title b { font-size: clamp(1.95rem, 7.6vw + .4rem, 3rem); letter-spacing: -2px; }
         }
         @media (max-width: 480px) {
-            width: 95%;
-            font-size: clamp(1.85rem, 7vw + .5rem, 2.8rem);
-            .hero-blur-title b { font-size: clamp(2.05rem, 8vw + .4rem, 3.2rem); letter-spacing: -2px; }
+            width: 96%;
+            font-size: clamp(1.65rem, 7.2vw + .35rem, 2.45rem);
+            .hero-blur-title b { font-size: clamp(1.85rem, 7.9vw + .35rem, 2.8rem); letter-spacing: -1.5px; }
         }
-        @media (max-width: 400px) {
-            width: 95%;
-            font-size: clamp(1.7rem, 7.5vw + .4rem, 2.5rem);
-            .hero-blur-title b { font-size: clamp(1.95rem, 8.5vw + .35rem, 2.9rem); letter-spacing: -1px; }
+        @media (max-width: 420px) {
+            font-size: clamp(1.55rem, 7.8vw + .3rem, 2.25rem);
+            .hero-blur-title b { font-size: clamp(1.7rem, 8.5vw + .3rem, 2.55rem); letter-spacing: -1px; }
         }
-        @media (max-width: 360px) {
-            width: 95%;
-            font-size: clamp(1.55rem, 8vw + .3rem, 2.25rem);
-            .hero-blur-title b { font-size: clamp(1.8rem, 9vw + .3rem, 2.6rem); letter-spacing: -1px; }
+        @media (max-width: 380px) {
+            font-size: clamp(1.45rem, 8.2vw + .25rem, 2.05rem);
+            .hero-blur-title b { font-size: clamp(1.6rem, 9vw + .25rem, 2.35rem); letter-spacing: -0.5px; }
+        }
+        @media (max-width: 350px) {
+            font-size: clamp(1.35rem, 8.8vw + .2rem, 1.9rem);
+            .hero-blur-title b { font-size: clamp(1.5rem, 9.5vw + .2rem, 2.15rem); letter-spacing: -0.25px; }
         }
     }
 
