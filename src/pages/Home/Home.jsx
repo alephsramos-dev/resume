@@ -90,12 +90,12 @@ const BG = styled.div`
 
 const Content = styled.section`
     width: 100%;
-    padding: 5% 2.5% 0% 2.5%;
+    padding: 5% 2.5% 5% 2.5%;
     max-width: 1420px;
     min-height: 100dvh;
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
     gap: 30px;
     border-bottom: none;
@@ -103,7 +103,7 @@ const Content = styled.section`
     z-index: 1;
 
     @media (max-width: 768px){
-        gap: 30px;
+        gap: 20px;
         height: 100%;
         padding: 10% 2.5% 20% 2.5%;
         justify-content: flex-end;
@@ -132,40 +132,40 @@ const Content = styled.section`
             font-weight: 400;
         }
         /* iOS suavização */
-        @supports (-webkit-touch-callout: none) { font-weight: 650; }
+        @supports (-webkit-touch-callout: none) { font-weight: 400; }
         .glow {
             position: relative;
             display: inline;
             color: #fff;
             /* Começa mais fraco; anima para intensificar suavemente */
             text-shadow:
-                0 0 1px rgba(255,255,255,0.4),
-                0 0 3px rgba(170,160,255,0.25),
-                0 0 6px rgba(120,90,255,0.15);
+                0 0 1px rgba(255,255,255,0.2),
+                0 0 3px rgba(170,160,255,0.15),
+                0 0 6px rgba(120,90,255,0.05);
             animation: glowIn 1.9s cubic-bezier(.16,.72,.26,1) forwards;
         }
         .glow::after { content: none; }
         @keyframes glowIn {
             0% {
                 text-shadow:
-                    0 0 1px rgba(255,255,255,0.35),
-                    0 0 2px rgba(170,160,255,0.18),
+                    0 0 1px rgba(255,255,255,0.25),
+                    0 0 2px rgba(170,160,255,0.08),
                     0 0 4px rgba(120,90,255,0.08);
                 opacity: .94;
             }
             55% {
                 text-shadow:
-                    0 0 2px rgba(255,255,255,0.55),
-                    0 0 6px rgba(185,175,255,0.32),
-                    0 0 12px rgba(120,90,255,0.18),
-                    0 0 18px rgba(100,70,255,0.12);
+                    0 0 2px rgba(255,255,255,0.25),
+                    0 0 6px rgba(185,175,255,0.12),
+                    0 0 12px rgba(120,90,255,0.08),
+                    0 0 18px rgba(100,70,255,0.02);
             }
             100% {
                 text-shadow:
                     0 0 2px rgba(255,255,255,0.6),
-                    0 0 6px rgba(190,180,255,0.40),
-                    0 0 16px rgba(120,90,255,0.28),
-                    0 0 28px rgba(90,60,255,0.18);
+                    0 0 6px rgba(190,180,255,0.20),
+                    0 0 16px rgba(120,90,255,0.18),
+                    0 0 28px rgba(90,60,255,0.08);
                 opacity: 1;
             }
         }
