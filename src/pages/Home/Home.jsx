@@ -110,38 +110,56 @@ const Content = styled.section`
     }
 
     & h1 { 
-        font-size: 70px;
+        /* Escala fluida: min 34px, preferencial 5vw+20px, max ~72px */
+        font-size: clamp(2.125rem, 5vw + 1.25rem, 4.5rem);
         color: #f1f1f1;
         width: 85%;
         text-align: center;
         font-family: 'Urbanist', sans-serif;
         font-weight: 300;
+        line-height: 1.05;
+        margin: 0;
 
-        .hero-blur-title { font: inherit; line-height: 1.05; }
+        .hero-blur-title { font: inherit; line-height: 1.05; display: inline-block; }
         .hero-blur-title b {
             font-family: "Source Serif 4", serif;
             font-weight: 600;
             letter-spacing: -5px;
             font-style: italic;
-            font-size: 80px;
-            /* Gradiente animado */
+            /* Escala fluida do destaque: ligeiramente maior */
+            font-size: clamp(2.5rem, 6vw + 1rem, 5.25rem);
             background: linear-gradient(120deg,#ffffff 0%,#ffb347 15%,#ff6ec4 35%,#7873f5 55%,#4ADEFF 75%,#ffffff 100%);
             background-size: 300% 300%;
-            background-clip: text; /* padrão */
-            -webkit-background-clip: text; /* Safari/Chrome */
+            background-clip: text;
+            -webkit-background-clip: text;
             color: transparent;
             animation: gradientShift 16s ease-in-out infinite;
             filter: drop-shadow(0 0 4px rgba(255,255,255,0.15));
-
-            @media (max-width: 768px) {
-                font-size: 50px;
-            }
         }
+        .hero-blur-title .desktop-break { display: block; }
 
         @media (max-width: 768px) {
-            font-size: 40px;
+            .hero-blur-title .desktop-break { display: none; }
+        }
+
+        @media (max-width: 1024px) {
+            width: 80%;
+        }
+        @media (max-width: 768px) {
             width: 75%;
             text-align: left;
+        }
+        @media (max-width: 600px) {
+            width: 82%;
+            .hero-blur-title b { letter-spacing: -4px; }
+        }
+        @media (max-width: 480px) {
+            width: 90%;
+            font-size: clamp(2rem, 7vw + .5rem, 3rem);
+            .hero-blur-title b { font-size: clamp(2.4rem, 8vw + .5rem, 3.6rem); letter-spacing: -3px; }
+        }
+        @media (max-width: 380px) {
+            .hero-blur-title b { letter-spacing: -2px; }
         }
     }
 
@@ -332,7 +350,7 @@ export default function Home() {
                             className="hero-blur-title"
                             direction="top"
                         >
-                            Seu site criado pelo <b>melhor</b><br />Desenvolvedor Web
+                            Seu site criado pelo <b>melhor</b><br className="desktop-break" /> Desenvolvedor Web
                         </BlurText>
                     </h1>
                     <aside>
