@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useMemo, useRef, useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 
 // Auto-import all site images (sorted) so they are processed by Vite and can render
@@ -131,8 +131,10 @@ const Img = styled.img`
   transition: transform .45s cubic-bezier(.22,.68,.26,1), box-shadow .6s ease, filter .6s ease;
   will-change: transform;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0); /* força composição em iOS */
   ${({ $active }) => $active && css`
-    transform: translateY(-14px) scale(1.04);
+    transform: translateY(-14px) scale(1.04) translateZ(0);
     box-shadow: 0 10px 35px -8px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,255,255,0.08);
     filter: brightness(1.08) saturate(1.15);
   `}
@@ -183,10 +185,18 @@ const ThreeDMarquee = forwardRef(function ThreeDMarquee({ images = [], className
 
   let runningIndex = 0;
 
+  const [isIOS, setIsIOS] = useState(false);
+  useEffect(() => {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) {
+      setIsIOS(true);
+    }
+  }, []);
+
   return (
-    <Outer className={className} aria-hidden={!interactive && !synthetic} $interactive={interactive} style={synthetic ? { pointerEvents: 'none' } : undefined}>
+    <Outer className={className} aria-hidden={!interactive && !synthetic} $interactive={interactive} style={synthetic ? { pointerEvents: 'none' } : undefined} data-ios-safe={isIOS}>
       <Center>
-        <Grid>
+        <Grid style={isIOS ? { transform: 'rotateX(40deg) rotateZ(-35deg)' } : undefined}>
           {columns.map((col, ci) => (
             <Column key={ci} $index={ci} style={{ pointerEvents: 'none' }}>
               <GridLineV className={lineClass} style={{ '--offset': '80px' }} />
@@ -199,7 +209,7 @@ const ThreeDMarquee = forwardRef(function ThreeDMarquee({ images = [], className
                       ref={el => { imgRefs.current[idx] = el; }}
                       src={src}
                       alt={`site preview ${ci}-${ii}`}
-                      loading="lazy"
+                      decoding="async"
                       draggable={interactive}
                       $active={activeIdx === idx}
                     />
