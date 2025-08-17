@@ -37,6 +37,8 @@ export default function BlurText({
   onAnimationComplete,
   stepDuration = 0.55,
   highlight = [],
+  fullWidth = true,
+  collapseToPlain = false,
 }) {
   // Se children fornecido, ignorar prop text para construção de segmentos.
   const rawContent = children ? children : text;
@@ -80,9 +82,16 @@ export default function BlurText({
 
   const elements = useMemo(() => {
     if (children) return buildSegmentsFromChildren(children);
-    return animateBy === 'words'
-      ? text.split(' ').map(w => ({ type: 'word', node: w }))
-      : text.split('').map(c => ({ type: 'word', node: c }));
+    if (animateBy === 'words') {
+      const words = text.split(' ');
+      const segs = [];
+      words.forEach((w, i) => {
+        segs.push({ type: 'word', node: w });
+        if (i < words.length - 1) segs.push({ type: 'space', node: ' ' });
+      });
+      return segs;
+    }
+    return text.split('').map(c => (c === ' ' ? { type: 'space', node: ' ' } : { type: 'word', node: c }));
   }, [children, text, animateBy]);
 
   const [inView, setInView] = useState(false);
@@ -125,11 +134,16 @@ export default function BlurText({
   const totalDuration = stepDuration * (stepCount - 1);
   const times = Array.from({ length: stepCount }, (_, i) => (stepCount === 1 ? 0 : i / (stepCount - 1)));
 
+  const rootStyle = { lineHeight: 1 };
+  if (fullWidth) {
+    // Mantém comportamento anterior (bloco largo) quando desejado
+    rootStyle.display = 'block';
+  }
   return (
     <Tag
       ref={ref}
       className={className}
-      style={{ lineHeight: 1, textAlign: 'center', display: 'inline-block', width: '100%' }}
+      style={rootStyle}
     >
       {elements.map((segment, index) => {
         if (segment.type === 'br') return <br key={`br-${index}`} />;
@@ -137,15 +151,24 @@ export default function BlurText({
         const spanTransition = { duration: totalDuration, times, delay: (index * delay) / 1000 };
         spanTransition.ease = easing;
         if (segment.type === 'space') return <span key={`s-${index}`} style={{ whiteSpace: 'pre' }}> </span>;
+        const handleEnd = () => {
+          if (index === elements.length - 1) {
+            if (collapseToPlain && ref.current) {
+              // Substitui por texto plano preservando texto original
+              ref.current.textContent = text || (children ? (Array.isArray(children) ? children.join(' ') : children) : '');
+            }
+            onAnimationComplete && onAnimationComplete();
+          }
+        };
         return (
           <motion.span
             key={index}
-            className="inline-block"
-            style={{ willChange: 'transform,filter,opacity', lineHeight: 1 }}
+            className="btw"
+            style={{ display: 'inline-block', willChange: 'transform,filter,opacity', lineHeight: 1, whiteSpace: 'pre' }}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
-            onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
+            onAnimationComplete={handleEnd}
           >
             {segment.node}
           </motion.span>

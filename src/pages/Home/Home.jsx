@@ -16,7 +16,8 @@ import Beams from "@/components/ui/background/Beams";
 import RippleGrid from "@/components/ui/background/Ripple";
 import Silk from "@/components/ui/background/Slick";
 import ThreeDMarquee from "@/components/ui/background/ThreeDMarquee";
-// Removido BlurText para um título mais simples com efeito glow
+import BlurText from "@/components/ui/texts/BlurText";
+// Reintroduzindo BlurText para animação inicial do título
 
 
 const FontStyles = createGlobalStyle`
@@ -153,7 +154,7 @@ const Content = styled.section`
     & h1.hero-title {
         font-size: clamp(2.2rem, 5vw + 1rem, 4.2rem);
         font-family: 'Urbanist', sans-serif;
-        font-weight: 500;
+        font-weight: 400;
         width: 50%;
         max-width: 1200px;
         margin: 0;
@@ -411,9 +412,19 @@ export default function Home() {
                     <div>
                         <GitHubFollowersButton username="alephsramos-dev" />
                     </div>
-                    <h1 className="hero-title">
-                        <span className="glow" data-text="Desenvolvimento Web de alta performance">Desenvolvimento Web de alta performance</span>
-                    </h1>
+                    <div style={{ width: '100%' }}>
+                        <BlurText
+                            as="h1"
+                            className="hero-title"
+                            text="Desenvolvimento Web de alta performance"
+                            animateBy="words"
+                            delay={90}
+                            direction="top"
+                            stepDuration={0.55}
+                            fullWidth={false}
+                            collapseToPlain={true}
+                        />
+                    </div>
                     <aside>
                         <BtnConverse className={btnAnimate ? 'animate' : ''}>
                             {/* Em Vite, arquivos em /public devem ser referenciados com caminho absoluto começando por / */}
