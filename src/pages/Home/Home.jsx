@@ -118,7 +118,7 @@ const Content = styled.section`
         text-align: center;
         font-family: 'Urbanist', sans-serif;
         font-weight: 300;
-        line-height: 1.05;
+        line-height: 1.08;
         margin: 0;
         white-space: normal;
         overflow-wrap: normal;
@@ -128,7 +128,7 @@ const Content = styled.section`
         position: relative;
         padding-inline: 0;
 
-        .hero-blur-title { font: inherit; line-height: 1.05; display: inline-block; max-width: 100%; }
+        .hero-blur-title { font: inherit; line-height: 1.08; display: inline-block; max-width: 100%; letter-spacing: -1px; }
         .hero-blur-title b {
             font-family: "Source Serif 4", serif;
             font-weight: 600;
@@ -145,34 +145,49 @@ const Content = styled.section`
             filter: drop-shadow(0 0 4px rgba(255,255,255,0.15));
         }
         .hero-blur-title .desktop-break { display: block; }
+        /* Normaliza os spans internos (gerados pelo BlurText) em telas pequenas para quebrar como texto comum */
+        @media (max-width: 600px) {
+            .hero-blur-title { letter-spacing: 0; line-height: 1.15; }
+            .hero-blur-title span { display: inline !important; }
+            .hero-blur-title b { letter-spacing: -1px; font-size: clamp(2.1rem, 7.5vw + .6rem, 3.1rem); }
+        }
+        @media (max-width: 480px) {
+            line-height: 1.18;
+            .hero-blur-title { letter-spacing: 0; }
+            .hero-blur-title b { letter-spacing: -0.5px; }
+        }
+        @media (max-width: 380px) {
+            .hero-blur-title { line-height: 1.22; }
+            .hero-blur-title b { letter-spacing: 0; }
+        }
 
         @media (max-width: 1024px) { width: 88%; }
         @media (max-width: 820px) { width: 92%; }
         @media (max-width: 768px) { width: 94%; text-align: center; }
         @media (max-width: 620px) {
             font-size: clamp(1.9rem, 6.2vw + .55rem, 3rem);
-            .hero-blur-title b { font-size: clamp(2.1rem, 7vw + .5rem, 3.35rem); letter-spacing: -3px; }
+            .hero-blur-title b { font-size: clamp(2.1rem, 7vw + .5rem, 3.35rem); letter-spacing: -2px; }
         }
         @media (max-width: 540px) {
             font-size: clamp(1.75rem, 6.8vw + .4rem, 2.7rem);
-            .hero-blur-title b { font-size: clamp(1.95rem, 7.6vw + .4rem, 3rem); letter-spacing: -2px; }
+            .hero-blur-title b { font-size: clamp(1.95rem, 7.6vw + .4rem, 3rem); letter-spacing: -1.5px; }
         }
         @media (max-width: 480px) {
             width: 96%;
             font-size: clamp(1.65rem, 7.2vw + .35rem, 2.45rem);
-            .hero-blur-title b { font-size: clamp(1.85rem, 7.9vw + .35rem, 2.8rem); letter-spacing: -1.5px; }
+            .hero-blur-title b { font-size: clamp(1.85rem, 7.9vw + .35rem, 2.8rem); letter-spacing: -1px; }
         }
         @media (max-width: 420px) {
             font-size: clamp(1.55rem, 7.8vw + .3rem, 2.25rem);
-            .hero-blur-title b { font-size: clamp(1.7rem, 8.5vw + .3rem, 2.55rem); letter-spacing: -1px; }
+            .hero-blur-title b { font-size: clamp(1.7rem, 8.5vw + .3rem, 2.55rem); letter-spacing: -0.5px; }
         }
         @media (max-width: 380px) {
             font-size: clamp(1.45rem, 8.2vw + .25rem, 2.05rem);
-            .hero-blur-title b { font-size: clamp(1.6rem, 9vw + .25rem, 2.35rem); letter-spacing: -0.5px; }
+            .hero-blur-title b { font-size: clamp(1.6rem, 9vw + .25rem, 2.35rem); letter-spacing: -0.25px; }
         }
         @media (max-width: 350px) {
             font-size: clamp(1.35rem, 8.8vw + .2rem, 1.9rem);
-            .hero-blur-title b { font-size: clamp(1.5rem, 9.5vw + .2rem, 2.15rem); letter-spacing: -0.25px; }
+            .hero-blur-title b { font-size: clamp(1.5rem, 9.5vw + .2rem, 2.15rem); letter-spacing: 0; }
         }
     }
 
