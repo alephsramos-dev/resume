@@ -132,9 +132,8 @@ const Content = styled.section`
         .hero-blur-title b {
             font-family: "Source Serif 4", serif;
             font-weight: 600;
-            letter-spacing: -5px;
+            letter-spacing: -2px; /* menos agressivo para permitir quebra natural */
             font-style: italic;
-            /* Escala fluida do destaque: ligeiramente maior */
             font-size: clamp(2.5rem, 6vw + 1rem, 5.25rem);
             background: linear-gradient(120deg,#ffffff 0%,#ffb347 15%,#ff6ec4 35%,#7873f5 55%,#4ADEFF 75%,#ffffff 100%);
             background-size: 300% 300%;
@@ -143,6 +142,13 @@ const Content = styled.section`
             color: transparent;
             animation: gradientShift 16s ease-in-out infinite;
             filter: drop-shadow(0 0 4px rgba(255,255,255,0.15));
+        }
+        @media (min-width: 1200px) { .hero-blur-title b { letter-spacing: -4px; } }
+        @media (max-width: 900px) { .hero-blur-title b { letter-spacing: -1.5px; } }
+        @media (max-width: 700px) { .hero-blur-title b { letter-spacing: -1px; } }
+        @supports (-webkit-touch-callout: none) { /* iOS Safari */
+            .hero-blur-title { word-spacing: 0.05em; }
+            .hero-blur-title b { letter-spacing: -1px; }
         }
         .hero-blur-title .desktop-break { display: block; }
         /* Normaliza os spans internos (gerados pelo BlurText) em telas pequenas para quebrar como texto comum */
@@ -154,7 +160,7 @@ const Content = styled.section`
         @media (max-width: 480px) {
             line-height: 1.18;
             .hero-blur-title { letter-spacing: 0; }
-            .hero-blur-title b { letter-spacing: -0.5px; }
+            .hero-blur-title b { letter-spacing: -0.25px; }
         }
         @media (max-width: 380px) {
             .hero-blur-title { line-height: 1.22; }
@@ -405,7 +411,7 @@ export default function Home() {
                             className="hero-blur-title"
                             direction="top"
                         >
-                            Desenvolvimento Web de <b>alta</b>performance
+                            Desenvolvimento Web de <b>alta</b> performance
                         </BlurText>
                     </h1>
                     <aside>
