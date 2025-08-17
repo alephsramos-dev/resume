@@ -105,7 +105,6 @@ export default function GitHubFollowersButton({ username = 'alephsramos-dev' }) 
     <ButtonRoot href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" aria-label={`Ver perfil no GitHub de ${username}`}> 
       <Left>
         <FaGithub />
-        <span>GitHub</span>
       </Left>
       <Stat>
         <FaUser />

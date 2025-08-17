@@ -9,8 +9,8 @@ const Content = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${({ color }) => color || "transparent"}10;
-    border: 1px solid ${({ color }) => color || "transparent"}10;
+    background-color: ${({ color }) => color || "transparent"}20;
+    border: 1px solid ${({ color }) => color || "transparent"}20;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
@@ -24,7 +24,7 @@ const Content = styled.button`
 
     &:hover {
         transform: scale(0.95);
-        box-shadow: 0 0 10px ${({ color }) => color || "transparent"}50;
+        box-shadow: 0 0 10px ${({ color }) => color || "transparent"}70;
         border-color: transparent;
     }
 
