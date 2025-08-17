@@ -83,7 +83,7 @@ const BG = styled.div`
         /* Apenas escuro uniforme sem foco de luz */
         &::before { display: none; }
         &::after {
-            background: rgba(0,0,0,0.80);
+            background: rgba(0,0,0,0.85);
         }
     }
 `;
@@ -120,11 +120,19 @@ const Content = styled.section`
         font-weight: 300;
         line-height: 1.05;
         margin: 0;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        -webkit-hyphens: auto;
-        hyphens: auto;
+        /* Ajuste anterior causava quebra por caractere; revertido para comportamento por palavra */
+        overflow-wrap: normal; /* antes: anywhere */
+        word-break: normal;    /* antes: break-word */
+        hyphens: none;         /* antes: auto */
+        -webkit-hyphens: none;
         -webkit-text-size-adjust: 100%;
+        /* Em telas ultra estreitas, permitir quebra emergencial usando balance */
+        @supports (text-wrap: balance) {
+          text-wrap: balance;
+        }
+        @media (max-width: 360px) {
+          overflow-wrap: break-word; /* emergencial só em telas muito pequenas */
+        }
 
         .hero-blur-title { font: inherit; line-height: 1.05; display: inline-block; }
         .hero-blur-title b {
@@ -155,14 +163,17 @@ const Content = styled.section`
             .hero-blur-title b { font-size: clamp(2.2rem, 7.5vw + .6rem, 3.6rem); letter-spacing: -3px; }
         }
         @media (max-width: 480px) {
+            width: 95%;
             font-size: clamp(1.85rem, 7vw + .5rem, 2.8rem);
             .hero-blur-title b { font-size: clamp(2.05rem, 8vw + .4rem, 3.2rem); letter-spacing: -2px; }
         }
         @media (max-width: 400px) {
+            width: 95%;
             font-size: clamp(1.7rem, 7.5vw + .4rem, 2.5rem);
             .hero-blur-title b { font-size: clamp(1.95rem, 8.5vw + .35rem, 2.9rem); letter-spacing: -1px; }
         }
         @media (max-width: 360px) {
+            width: 95%;
             font-size: clamp(1.55rem, 8vw + .3rem, 2.25rem);
             .hero-blur-title b { font-size: clamp(1.8rem, 9vw + .3rem, 2.6rem); letter-spacing: -1px; }
         }
