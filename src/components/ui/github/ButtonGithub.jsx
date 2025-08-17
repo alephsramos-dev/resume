@@ -85,30 +85,86 @@ const SkeletonBar = styled.span`
   @keyframes loading { 0% { background-position: 0 0; } 100% { background-position: -200% 0; } }
 `;
 
-export default function GitHubFollowersButton({ username = 'alephsramos-dev' }) {
+export default function GitHubFollowersButton({ username = 'alephsramos-dev', cacheTTL = 60 * 60 * 1000 }) {
   const [followers, setFollowers] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const KEY = `gh_user_${username}`;
+    const cachedRaw = typeof window !== 'undefined' ? localStorage.getItem(KEY) : null;
+    let cached;
+    if (cachedRaw) {
+      try { cached = JSON.parse(cachedRaw); } catch { /* ignore */ }
+    }
+    const now = Date.now();
+    if (cached && cached.followers != null) {
+      setFollowers(cached.followers);
+      setLoading(false);
+      if (now - cached.fetchedAt < cacheTTL) {
+        // Cache fresco o suficiente: não busca agora
+        return;
+      }
+    }
+
     const controller = new AbortController();
-    fetch(`https://api.github.com/users/${username}`, { signal: controller.signal })
-      .then(r => {
-        if (!r.ok) throw new Error('GitHub API error');
-        return r.json();
+    const token = import.meta.env.VITE_GITHUB_TOKEN; // adicione em .env.local se quiser mais limite
+    const headers = { 'Accept': 'application/vnd.github+json' };
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    if (cached?.etag) headers['If-None-Match'] = cached.etag;
+
+    fetch(`https://api.github.com/users/${username}`, { signal: controller.signal, headers })
+      .then(async (r) => {
+        if (r.status === 304 && cached) {
+          // Não modificado: mantém cache
+          setFollowers(cached.followers);
+          setLoading(false);
+          return null;
+        }
+        if (!r.ok) {
+          const data = await r.json().catch(() => ({}));
+          const msg = data?.message || 'GitHub API error';
+            throw new Error(msg);
+        }
+        const etag = r.headers.get('ETag');
+        const data = await r.json();
+        const followersCount = data.followers;
+        setFollowers(followersCount);
+        setLoading(false);
+        try {
+          localStorage.setItem(KEY, JSON.stringify({ followers: followersCount, fetchedAt: Date.now(), etag }));
+        } catch { /* storage full */ }
+        return null;
       })
-      .then(data => setFollowers(data.followers))
-      .catch(err => { if (err.name !== 'AbortError') setError(true); });
+      .catch(err => {
+        if (err.name === 'AbortError') return;
+        // Se limite excedido mas temos cache antigo, mantemos sem marcar erro visível
+        if (/rate limit/i.test(err.message) && cached?.followers != null) {
+          setFollowers(cached.followers);
+          setLoading(false);
+          return;
+        }
+        // Sem cache válido -> erro
+        if (cached?.followers != null) {
+          setFollowers(cached.followers); // fallback silencioso
+        } else {
+          setError(true);
+        }
+        setLoading(false);
+      });
     return () => controller.abort();
-  }, [username]);
+  }, [username, cacheTTL]);
+
+  const display = error ? '—' : loading ? <SkeletonBar /> : followers;
 
   return (
     <ButtonRoot href={`https://github.com/${username}`} target="_blank" rel="noopener noreferrer" aria-label={`Ver perfil no GitHub de ${username}`}> 
       <Left>
         <FaGithub />
       </Left>
-      <Stat>
+      <Stat title={error ? 'Erro ao obter seguidores' : `Seguidores: ${followers ?? ''}`}>
         <FaUser />
-        {error ? '—' : followers === null ? <SkeletonBar /> : followers}
+        {display}
       </Stat>
     </ButtonRoot>
   );
