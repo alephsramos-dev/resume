@@ -16,7 +16,7 @@ import Beams from "@/components/ui/background/Beams";
 import RippleGrid from "@/components/ui/background/Ripple";
 import Silk from "@/components/ui/background/Slick";
 import ThreeDMarquee from "@/components/ui/background/ThreeDMarquee";
-import BlurText from "@/components/ui/texts/BlurText";
+// Removido BlurText para um título mais simples com efeito glow
 
 
 const FontStyles = createGlobalStyle`
@@ -109,92 +109,67 @@ const Content = styled.section`
         flex-direction: column;
     }
 
-    & h1 { 
-        /* Escala fluida: min 34px, preferencial 5vw+20px, max ~72px */
-        font-size: clamp(2.125rem, 5vw + 1.25rem, 4.5rem);
-        color: #f1f1f1;
-        width: 85%;
-        max-width: 1150px;
-        text-align: center;
+    & h1.hero-title {
+        font-size: clamp(2.2rem, 5vw + 1rem, 4.2rem);
         font-family: 'Urbanist', sans-serif;
-        font-weight: 300;
-        line-height: 1.08;
+        font-weight: 600;
+        width: 90%;
+        max-width: 1200px;
         margin: 0;
-        white-space: normal;
-        overflow-wrap: normal;
-        word-break: normal;
-        hyphens: none;
-        -webkit-hyphens: none;
+        text-align: center;
+        line-height: 1;
+        color: #fff;
+        letter-spacing: -0.5px;
         position: relative;
-        padding-inline: 0;
-
-        .hero-blur-title { font: inherit; line-height: 1.08; display: inline-block; max-width: 100%; letter-spacing: -1px; }
-        .hero-blur-title b {
-            font-family: "Source Serif 4", serif;
-            font-weight: 600;
-            letter-spacing: -2px; /* menos agressivo para permitir quebra natural */
-            font-style: italic;
-            font-size: clamp(2.5rem, 6vw + 1rem, 5.25rem);
-            background: linear-gradient(120deg,#ffffff 0%,#ffb347 15%,#ff6ec4 35%,#7873f5 55%,#4ADEFF 75%,#ffffff 100%);
-            background-size: 300% 300%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: gradientShift 16s ease-in-out infinite;
-            filter: drop-shadow(0 0 4px rgba(255,255,255,0.15));
+        white-space: normal;
+        word-break: normal;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        /* iOS suavização */
+        @supports (-webkit-touch-callout: none) { font-weight: 650; }
+        .glow {
+            position: relative;
+            display: inline;
+            color: #fff;
+            /* Começa mais fraco; anima para intensificar suavemente */
+            text-shadow:
+                0 0 1px rgba(255,255,255,0.4),
+                0 0 3px rgba(170,160,255,0.25),
+                0 0 6px rgba(120,90,255,0.15);
+            animation: glowIn 1.9s cubic-bezier(.16,.72,.26,1) forwards;
         }
-        @media (min-width: 1200px) { .hero-blur-title b { letter-spacing: -4px; } }
-        @media (max-width: 900px) { .hero-blur-title b { letter-spacing: -1.5px; } }
-        @media (max-width: 700px) { .hero-blur-title b { letter-spacing: -1px; } }
-        @supports (-webkit-touch-callout: none) { /* iOS Safari */
-            .hero-blur-title { word-spacing: 0.05em; }
-            .hero-blur-title b { letter-spacing: -1px; }
+        .glow::after { content: none; }
+        @keyframes glowIn {
+            0% {
+                text-shadow:
+                    0 0 1px rgba(255,255,255,0.35),
+                    0 0 2px rgba(170,160,255,0.18),
+                    0 0 4px rgba(120,90,255,0.08);
+                opacity: .94;
+            }
+            55% {
+                text-shadow:
+                    0 0 2px rgba(255,255,255,0.55),
+                    0 0 6px rgba(185,175,255,0.32),
+                    0 0 12px rgba(120,90,255,0.18),
+                    0 0 18px rgba(100,70,255,0.12);
+            }
+            100% {
+                text-shadow:
+                    0 0 2px rgba(255,255,255,0.6),
+                    0 0 6px rgba(190,180,255,0.40),
+                    0 0 16px rgba(120,90,255,0.28),
+                    0 0 28px rgba(90,60,255,0.18);
+                opacity: 1;
+            }
         }
-        .hero-blur-title .desktop-break { display: block; }
-        /* Normaliza os spans internos (gerados pelo BlurText) em telas pequenas para quebrar como texto comum */
-        @media (max-width: 600px) {
-            .hero-blur-title { letter-spacing: 0; line-height: 1.15; }
-            .hero-blur-title span { display: inline !important; }
-            .hero-blur-title b { letter-spacing: -1px; font-size: clamp(2.1rem, 7.5vw + .6rem, 3.1rem); }
-        }
-        @media (max-width: 480px) {
-            line-height: 1.18;
-            .hero-blur-title { letter-spacing: 0; }
-            .hero-blur-title b { letter-spacing: -0.25px; }
-        }
-        @media (max-width: 380px) {
-            .hero-blur-title { line-height: 1.22; }
-            .hero-blur-title b { letter-spacing: 0; }
-        }
-
-        @media (max-width: 1024px) { width: 88%; }
-        @media (max-width: 820px) { width: 92%; }
-        @media (max-width: 768px) { width: 94%; text-align: center; }
-        @media (max-width: 620px) {
-            font-size: clamp(1.9rem, 6.2vw + .55rem, 3rem);
-            .hero-blur-title b { font-size: clamp(2.1rem, 7vw + .5rem, 3.35rem); letter-spacing: -2px; }
-        }
-        @media (max-width: 540px) {
-            font-size: clamp(1.75rem, 6.8vw + .4rem, 2.7rem);
-            .hero-blur-title b { font-size: clamp(1.95rem, 7.6vw + .4rem, 3rem); letter-spacing: -1.5px; }
-        }
-        @media (max-width: 480px) {
-            width: 96%;
-            font-size: clamp(1.65rem, 7.2vw + .35rem, 2.45rem);
-            .hero-blur-title b { font-size: clamp(1.85rem, 7.9vw + .35rem, 2.8rem); letter-spacing: -1px; }
-        }
-        @media (max-width: 420px) {
-            font-size: clamp(1.55rem, 7.8vw + .3rem, 2.25rem);
-            .hero-blur-title b { font-size: clamp(1.7rem, 8.5vw + .3rem, 2.55rem); letter-spacing: -0.5px; }
-        }
-        @media (max-width: 380px) {
-            font-size: clamp(1.45rem, 8.2vw + .25rem, 2.05rem);
-            .hero-blur-title b { font-size: clamp(1.6rem, 9vw + .25rem, 2.35rem); letter-spacing: -0.25px; }
-        }
-        @media (max-width: 350px) {
-            font-size: clamp(1.35rem, 8.8vw + .2rem, 1.9rem);
-            .hero-blur-title b { font-size: clamp(1.5rem, 9.5vw + .2rem, 2.15rem); letter-spacing: 0; }
-        }
+        @media (prefers-reduced-motion: reduce) { .glow { animation: none; } }
+        @media (max-width: 820px){ font-size: clamp(2rem, 6vw + .6rem, 3.4rem); }
+        @media (max-width: 640px){ font-size: clamp(1.9rem, 6.8vw + .5rem, 3rem); line-height: 1.15; }
+        @media (max-width: 520px){ font-size: clamp(1.75rem, 7.4vw + .4rem, 2.65rem); line-height: 1.18; letter-spacing: -0.25px; }
+        @media (max-width: 430px){ font-size: clamp(1.6rem, 7.8vw + .35rem, 2.4rem); line-height: 1.2; }
+        @media (max-width: 370px){ font-size: clamp(1.5rem, 8.4vw + .3rem, 2.2rem); line-height: 1.22; }
+        @media (prefers-reduced-motion: reduce){ .glow::after { filter: blur(4px); } }
     }
 
     & p {
@@ -217,15 +192,7 @@ const Content = styled.section`
         }
     }
 
-    @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        & h1 b { animation: none; background-position: 50% 50%; }
-    }
+    /* Removido gradientShift; glow é estático */
 `;
 
 const BtnConhecer = styled.button`
@@ -403,16 +370,8 @@ export default function Home() {
                     <div>
                         <GitHubFollowersButton username="alephsramos-dev" />
                     </div>
-                    <h1>
-                        <BlurText
-                            as="span"
-                            animateBy="words"
-                            delay={80}
-                            className="hero-blur-title"
-                            direction="top"
-                        >
-                            Desenvolvimento Web de <b>alta</b> performance
-                        </BlurText>
+                    <h1 className="hero-title">
+                        <span className="glow" data-text="Desenvolvimento Web de alta performance">Desenvolvimento Web de alta performance</span>
                     </h1>
                     <aside>
                         <BtnConverse className={btnAnimate ? 'animate' : ''}>
