@@ -46,26 +46,49 @@ const BG = styled.div`
     height: 100%;
     z-index: 0;
     pointer-events: none;
+    /* Desktop: metade esquerda escura; transição forte deixando direita bem mais visível */
+    background: linear-gradient(to right,
+        rgba(0,0,0,0.88) 0%,
+        rgba(0,0,0,0.88) 38%,
+        rgba(0,0,0,0.86) 46%,
+        rgba(0,0,0,0.82) 52%, /* início da abertura */
+        rgba(0,0,0,0.65) 58%,
+        rgba(0,0,0,0.48) 64%,
+        rgba(0,0,0,0.34) 70%,
+        rgba(0,0,0,0.24) 76%,
+        rgba(0,0,0,0.16) 82%,
+        rgba(0,0,0,0.10) 88%,
+        rgba(0,0,0,0.06) 94%,
+        rgba(0,0,0,0.03) 100%
+    );
 
-    background: rgba(0,0,0,0.55);
-
-    &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background:
-          radial-gradient(260px 140px at var(--mx,50%) var(--my,50%),
-            rgba(0,0,0,0) 0%,
-            rgba(0,0,0,0.04) 38%,
-            rgba(0,0,0,0.18) 55%,
-            rgba(0,0,0,0.42) 70%,
-            rgba(0,0,0,0.75) 100%),
-          rgba(0,0,0,0.65);
-        background-blend-mode: normal;
-        transition: background 0.5s ease;
-        mix-blend-mode: normal;
-    }
+        &::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                /* Overlay escuro com gradiente que alivia na direita para não matar a abertura */
+                background:
+                    radial-gradient(260px 140px at var(--mx,50%) var(--my,50%),
+                        rgba(0,0,0,0) 0%,
+                        rgba(0,0,0,0.04) 38%,
+                        rgba(0,0,0,0.20) 55%,
+                        rgba(0,0,0,0.48) 70%,
+                        rgba(0,0,0,0.78) 100%),
+                    linear-gradient(to right,
+                        rgba(0,0,0,0.55) 0%,
+                        rgba(0,0,0,0.55) 48%,
+                        rgba(0,0,0,0.50) 56%,
+                        rgba(0,0,0,0.40) 64%,
+                        rgba(0,0,0,0.30) 72%,
+                        rgba(0,0,0,0.22) 80%,
+                        rgba(0,0,0,0.16) 88%,
+                        rgba(0,0,0,0.10) 94%,
+                        rgba(0,0,0,0.06) 100%);
+                background-blend-mode: multiply, normal;
+                transition: background 0.5s ease;
+                mix-blend-mode: normal;
+        }
 
     &::before {
         content: '';
@@ -80,10 +103,21 @@ const BG = styled.div`
     }
 
     @media (hover: none), (max-width: 768px) {
-        /* Apenas escuro uniforme sem foco de luz */
+        /* Mobile: faixa clara menor (topo) e rapidamente escurece para dar contraste ao texto */
+        background: linear-gradient(to bottom,
+            rgba(0,0,0,0.30) 0%,
+            rgba(0,0,0,0.30) 6%,
+            rgba(0,0,0,0.34) 12%,
+            rgba(0,0,0,0.42) 20%,
+            rgba(0,0,0,0.55) 34%,
+            rgba(0,0,0,0.68) 54%,
+            rgba(0,0,0,0.78) 74%,
+            rgba(0,0,0,0.85) 100%
+        );
         &::before { display: none; }
         &::after {
-            background: rgba(0,0,0,0.85);
+            background: radial-gradient(70% 55% at 50% 6%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0.55) 78%, rgba(0,0,0,0.78) 100%),
+                        linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.10) 30%, rgba(0,0,0,0.34) 55%, rgba(0,0,0,0.60) 82%, rgba(0,0,0,0.78) 100%);
         }
     }
 `;
