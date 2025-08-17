@@ -181,15 +181,6 @@ const BtnConhecer = styled.button`
     align-items: center;
     justify-content: center;
     gap: 10px;
-
-    & svg {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        line-height: 0;
-        margin-top: 4px;
-        opacity: 0.8;
-    }
 `
 
 const BtnConverse = styled.button`
@@ -202,6 +193,15 @@ const BtnConverse = styled.button`
     border-radius: 40px;
     cursor: pointer;
     padding: 4px 15px 4px 4px;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+        transform: scale(0.98);
+        border: 2px solid #ffffff20;
+        background-color: #ffffff15;
+        box-shadow: 0 0 30px rgba(255,255,255,0.1);
+        backdrop-filter: blur(5px);
+    }
 
     & img {
         width: 40px;
