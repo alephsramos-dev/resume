@@ -19,6 +19,8 @@ const Content = styled.button`
 
     @media (max-width: 768px) { 
         padding: 5px;
+        background-color: ${({ color }) => color || "transparent"}40;
+        border: 1px solid ${({ color }) => color || "transparent"}40;
         border-radius: 5px;
     }
 
