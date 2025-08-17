@@ -46,20 +46,22 @@ const BG = styled.div`
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    /* Desktop: metade esquerda escura; transição forte deixando direita bem mais visível */
+    /* Desktop: escuro consistente até metade, direita realmente aberta */
     background: linear-gradient(to right,
-        rgba(0,0,0,0.88) 0%,
-        rgba(0,0,0,0.88) 38%,
-        rgba(0,0,0,0.86) 46%,
-        rgba(0,0,0,0.82) 52%, /* início da abertura */
-        rgba(0,0,0,0.65) 58%,
-        rgba(0,0,0,0.48) 64%,
-        rgba(0,0,0,0.34) 70%,
-        rgba(0,0,0,0.24) 76%,
-        rgba(0,0,0,0.16) 82%,
-        rgba(0,0,0,0.10) 88%,
-        rgba(0,0,0,0.06) 94%,
-        rgba(0,0,0,0.03) 100%
+        rgba(0,0,0,0.90) 0%,
+        rgba(0,0,0,0.90) 20%,
+        rgba(0,0,0,0.90) 34%,
+        rgba(0,0,0,0.88) 44%,
+        rgba(0,0,0,0.87) 50%,
+        rgba(0,0,0,0.82) 53%,
+        rgba(0,0,0,0.70) 56%,
+        rgba(0,0,0,0.50) 59%,
+        rgba(0,0,0,0.32) 62%,
+        rgba(0,0,0,0.18) 66%,
+        rgba(0,0,0,0.10) 70%,
+        rgba(0,0,0,0.05) 75%,
+        rgba(0,0,0,0.02) 82%,
+        rgba(0,0,0,0.01) 100%
     );
 
         &::after {
@@ -68,24 +70,28 @@ const BG = styled.div`
                 inset: 0;
                 pointer-events: none;
                 /* Overlay escuro com gradiente que alivia na direita para não matar a abertura */
-                background:
-                    radial-gradient(260px 140px at var(--mx,50%) var(--my,50%),
-                        rgba(0,0,0,0) 0%,
-                        rgba(0,0,0,0.04) 38%,
-                        rgba(0,0,0,0.20) 55%,
-                        rgba(0,0,0,0.48) 70%,
-                        rgba(0,0,0,0.78) 100%),
-                    linear-gradient(to right,
-                        rgba(0,0,0,0.55) 0%,
-                        rgba(0,0,0,0.55) 48%,
-                        rgba(0,0,0,0.50) 56%,
-                        rgba(0,0,0,0.40) 64%,
-                        rgba(0,0,0,0.30) 72%,
-                        rgba(0,0,0,0.22) 80%,
-                        rgba(0,0,0,0.16) 88%,
-                        rgba(0,0,0,0.10) 94%,
-                        rgba(0,0,0,0.06) 100%);
-                background-blend-mode: multiply, normal;
+                                background:
+                                    radial-gradient(250px 130px at var(--mx,45%) var(--my,50%),
+                                        rgba(0,0,0,0) 0%,
+                                        rgba(0,0,0,0.06) 42%,
+                                        rgba(0,0,0,0.24) 60%,
+                                        rgba(0,0,0,0.48) 76%,
+                                        rgba(0,0,0,0.72) 100%),
+                                    linear-gradient(to right,
+                                        rgba(0,0,0,0.65) 0%,
+                                        rgba(0,0,0,0.65) 35%,
+                                        rgba(0,0,0,0.60) 45%,
+                                        rgba(0,0,0,0.58) 50%,
+                                        rgba(0,0,0,0.50) 53%,
+                                        rgba(0,0,0,0.38) 56%,
+                                        rgba(0,0,0,0.22) 58%,
+                                        rgba(0,0,0,0.12) 60%,
+                                        rgba(0,0,0,0.06) 63%,
+                                        rgba(0,0,0,0.03) 67%,
+                                        rgba(0,0,0,0.015) 72%,
+                                        rgba(0,0,0,0) 78%,
+                                        rgba(0,0,0,0) 100%);
+                                background-blend-mode: multiply, normal;
                 transition: background 0.5s ease;
                 mix-blend-mode: normal;
         }

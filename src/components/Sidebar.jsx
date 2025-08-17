@@ -37,8 +37,8 @@ const Content = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #1d1d1b50;
-    backdrop-filter: blur(5px);
+    background-color: #1d1d1b95;
+    backdrop-filter: blur(2px); 
     border-radius: 10px;
     padding: 10px 10px;
     color: #ffffff;
