@@ -112,18 +112,18 @@ const BG = styled.div`
         /* Mobile: faixa clara menor (topo) e rapidamente escurece para dar contraste ao texto */
         background: linear-gradient(to bottom,
             rgba(0,0,0,0.30) 0%,
-            rgba(0,0,0,0.30) 6%,
-            rgba(0,0,0,0.34) 12%,
-            rgba(0,0,0,0.42) 20%,
-            rgba(0,0,0,0.55) 34%,
-            rgba(0,0,0,0.68) 54%,
-            rgba(0,0,0,0.78) 74%,
-            rgba(0,0,0,0.85) 100%
+            rgba(0,0,0,0.30) 4%,
+            rgba(0,0,0,0.35) 9%,
+            rgba(0,0,0,0.44) 16%,
+            rgba(0,0,0,0.57) 28%,
+            rgba(0,0,0,0.70) 48%,
+            rgba(0,0,0,0.80) 70%,
+            rgba(0,0,0,0.87) 100%
         );
         &::before { display: none; }
         &::after {
-            background: radial-gradient(70% 55% at 50% 6%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0.55) 78%, rgba(0,0,0,0.78) 100%),
-                        linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.10) 30%, rgba(0,0,0,0.34) 55%, rgba(0,0,0,0.60) 82%, rgba(0,0,0,0.78) 100%);
+            background: radial-gradient(65% 50% at 50% 5%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.30) 55%, rgba(0,0,0,0.56) 78%, rgba(0,0,0,0.80) 100%),
+                        linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.10) 28%, rgba(0,0,0,0.36) 56%, rgba(0,0,0,0.62) 84%, rgba(0,0,0,0.80) 100%);
         }
     }
 `;
