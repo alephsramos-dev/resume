@@ -35,7 +35,7 @@ const Content = styled.header`
         justify-content: space-between;
         width: auto;
         background-color: #1d1d1b95;
-        backdrop-filter: blur(2px);     
+        backdrop-filter: blur(10px);     
         border-radius: 15px;
         padding: 5px 10px;
         transition: padding .35s ease, border-radius .35s ease, background-color .35s ease, box-shadow .35s ease;

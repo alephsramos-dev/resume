@@ -112,19 +112,19 @@ const BG = styled.div`
     @media (hover: none), (max-width: 768px) {
         /* Mobile: faixa clara menor (topo) e rapidamente escurece para dar contraste ao texto */
         background: linear-gradient(to bottom,
-            rgba(0,0,0,0.30) 0%,
-            rgba(0,0,0,0.30) 4%,
-            rgba(0,0,0,0.35) 9%,
-            rgba(0,0,0,0.44) 16%,
-            rgba(0,0,0,0.57) 28%,
-            rgba(0,0,0,0.70) 48%,
-            rgba(0,0,0,0.80) 70%,
-            rgba(0,0,0,0.87) 100%
+            rgba(0,0,0,0.22) 0%,
+            rgba(0,0,0,0.22) 4%,
+            rgba(0,0,0,0.32) 9%,
+            rgba(0,0,0,0.40) 16%,
+            rgba(0,0,0,0.54) 28%,
+            rgba(0,0,0,0.68) 48%,
+            rgba(0,0,0,0.79) 70%,
+            rgba(0,0,0,0.86) 100%
         );
         &::before { display: none; }
         &::after {
-            background: radial-gradient(65% 50% at 50% 5%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.30) 55%, rgba(0,0,0,0.56) 78%, rgba(0,0,0,0.80) 100%),
-                        linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.10) 28%, rgba(0,0,0,0.36) 56%, rgba(0,0,0,0.62) 84%, rgba(0,0,0,0.80) 100%);
+            background: radial-gradient(65% 50% at 50% 5%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.24) 55%, rgba(0,0,0,0.50) 78%, rgba(0,0,0,0.78) 100%),
+                        linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 28%, rgba(0,0,0,0.32) 56%, rgba(0,0,0,0.60) 84%, rgba(0,0,0,0.78) 100%);
         }
     }
 `;
