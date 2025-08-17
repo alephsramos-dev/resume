@@ -94,7 +94,7 @@ const Content = styled.section`
     max-width: 1420px;
     min-height: 100dvh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     flex-direction: column;
     gap: 30px;
@@ -105,18 +105,19 @@ const Content = styled.section`
     @media (max-width: 768px){
         gap: 30px;
         height: 100%;
-        padding: 10% 2.5% 5% 2.5%;
+        padding: 10% 2.5% 20% 2.5%;
+        justify-content: flex-end;
         flex-direction: column;
     }
 
     & h1.hero-title {
         font-size: clamp(2.2rem, 5vw + 1rem, 4.2rem);
         font-family: 'Urbanist', sans-serif;
-        font-weight: 600;
-        width: 90%;
+        font-weight: 500;
+        width: 50%;
         max-width: 1200px;
         margin: 0;
-        text-align: center;
+        text-align: left;
         line-height: 1;
         color: #fff;
         letter-spacing: -0.5px;
@@ -125,6 +126,11 @@ const Content = styled.section`
         word-break: normal;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
+
+        @media (max-width: 768px){
+            width: 95%;
+            font-weight: 400;
+        }
         /* iOS suavização */
         @supports (-webkit-touch-callout: none) { font-weight: 650; }
         .glow {
@@ -163,13 +169,6 @@ const Content = styled.section`
                 opacity: 1;
             }
         }
-        @media (prefers-reduced-motion: reduce) { .glow { animation: none; } }
-        @media (max-width: 820px){ font-size: clamp(2rem, 6vw + .6rem, 3.4rem); }
-        @media (max-width: 640px){ font-size: clamp(1.9rem, 6.8vw + .5rem, 3rem); line-height: 1.15; }
-        @media (max-width: 520px){ font-size: clamp(1.75rem, 7.4vw + .4rem, 2.65rem); line-height: 1.18; letter-spacing: -0.25px; }
-        @media (max-width: 430px){ font-size: clamp(1.6rem, 7.8vw + .35rem, 2.4rem); line-height: 1.2; }
-        @media (max-width: 370px){ font-size: clamp(1.5rem, 8.4vw + .3rem, 2.2rem); line-height: 1.22; }
-        @media (prefers-reduced-motion: reduce){ .glow::after { filter: blur(4px); } }
     }
 
     & p {
@@ -188,7 +187,9 @@ const Content = styled.section`
         gap: 30px;
 
         @media (max-width: 768px) {
+            gap: 20px;
             flex-direction: column;
+            align-items: flex-start;
         }
     }
 
