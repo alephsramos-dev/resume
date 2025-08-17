@@ -225,6 +225,12 @@ const BtnConverse = styled.button`
     cursor: pointer;
     padding: 4px 15px 4px 4px;
     transition: all .2s ease-in-out;
+    position: relative;
+
+    & img, & div h4, & div span { opacity: 0; transform: translateY(6px); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
+    &.animate img { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+    &.animate div h4 { opacity: 1; transform: translateY(0); transition-delay: .12s; }
+    &.animate div span { opacity: 1; transform: translateY(0); transition-delay: .24s; }
 
     &:hover {
         transform: scale(0.98);
@@ -264,6 +270,7 @@ const BtnConverse = styled.button`
             font-size: 12px;
             font-weight: 200;
             font-family: 'Urbanist', sans-serif;
+            white-space: nowrap;
 
             & svg {
                 width: 8px;
@@ -271,6 +278,10 @@ const BtnConverse = styled.button`
                 animation: statusPulse 1.8s ease-in-out infinite;
                 will-change: transform, filter;
             }
+
+            & .typing-wrapper { position: relative; display: inline-flex; align-items: center; }
+            & .typing-text { display: inline-block; min-width: 8ch; }
+            & .typing-cursor { width: 1px; background: #fff; margin-left: 2px; height: 1em; transform: translateY(1px); animation: blink 1.1s steps(2,end) infinite; opacity: .75; }
         }
     }
 
@@ -279,8 +290,11 @@ const BtnConverse = styled.button`
         50% { transform: scale(1.1); filter: drop-shadow(0 0 6px rgba(0,255,0,0.5)); opacity: 1; }
     }
 
+    @keyframes blink { 0%, 50% { opacity: .75; } 50.01%, 100% { opacity: 0; } }
+
     @media (prefers-reduced-motion: reduce) {
         & div span svg { animation: none; }
+        & img, & div h4, & div span { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
 `
 
@@ -290,6 +304,19 @@ export default function Home() {
     const targetPos = React.useRef({ x: 50, y: 50 });
     const currentPos = React.useRef({ x: 50, y: 50 });
     const marqueeRef = React.useRef(null);
+    const [btnAnimate, setBtnAnimate] = useState(false);
+    const prefersReduced = React.useRef(false);
+
+    useEffect(() => {
+        prefersReduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced.current) {
+            setBtnAnimate(true);
+            return;
+        }
+        // Delay start slightly for smooth entrance
+        const to = setTimeout(() => setBtnAnimate(true), 250);
+        return () => clearTimeout(to);
+    }, []);
 
     useEffect(() => {
         const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -367,8 +394,21 @@ export default function Home() {
                         </BlurText>
                     </h1>
                     <aside>
-                        <BtnConverse>
-                            <img src="public/icon-aleph-desenvolvedor-web.png" alt="" />
+                        <BtnConverse className={btnAnimate ? 'animate' : ''}>
+                            {/* Em Vite, arquivos em /public devem ser referenciados com caminho absoluto começando por / */}
+                            <img
+                                src="/icon-aleph-desenvolvedor-web.png"
+                                alt=""
+                                decoding="async"
+                                loading="eager"
+                                onError={(e) => {
+                                    // Fallback: tenta importar via dynamic import se falhar (caso movido para assets futuramente)
+                                    try {
+                                        import('@/assets/notebook-mockup.png').then(mod => { e.currentTarget.src = mod.default; });
+                                    } catch {}
+                                }}
+                                style={{ display: 'block' }}
+                            />
                             <div>
                                 <h4>Converse comigo agora</h4>
                                 <span>
