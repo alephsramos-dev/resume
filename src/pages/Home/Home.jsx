@@ -130,7 +130,7 @@ const BG = styled.div`
 
 const Content = styled.section`
     width: 100%;
-    padding: 5% 2.5% 5% 2.5%;
+    padding: 5% 2.5% 4% 2.5%;
     max-width: 1420px;
     min-height: 100dvh;
     display: flex;
@@ -145,7 +145,7 @@ const Content = styled.section`
     @media (max-width: 768px){
         gap: 20px;
         height: 100%;
-        padding: 10% 2.5% 20% 2.5%;
+        padding: 10% 2.5% 15% 2.5%;
         justify-content: flex-end;
         flex-direction: column;
     }
@@ -438,9 +438,9 @@ export default function Home() {
                                 </span>
                             </div>
                         </BtnConverse>
-                        <BtnConhecer>
+                        {/* <BtnConhecer>
                             <ShinyText text="Conhecer mais" disabled={false} speed={3} />
-                        </BtnConhecer>
+                        </BtnConhecer> */}
                     </aside>
                 </Content>
             </Container>
