@@ -328,6 +328,22 @@ const BtnConverse = styled.button`
     }
 `
 
+// Animação de entrada para o bloco de followers (fade + slide)
+const FollowersEntrance = styled.div`
+    opacity: 0;
+    transform: translateY(-8px) scale(.98);
+    animation: followersIn .75s cubic-bezier(.16,.72,.26,1) .15s forwards;
+    will-change: opacity, transform;
+    @keyframes followersIn {
+        0% { opacity: 0; transform: translateY(-12px) scale(.96); filter: blur(4px); }
+        55% { opacity: .85; transform: translateY(3px) scale(1.005); filter: blur(0); }
+        100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        animation: none; opacity: 1; transform: none; filter: none;
+    }
+`;
+
 export default function Home() {
     const [hue, setHue] = useState(0);
     const bgRef = React.useRef(null);
@@ -409,9 +425,9 @@ export default function Home() {
                     <ThreeDMarquee speedSeconds={80} synthetic ref={marqueeRef} />
                 </BG>
                 <Content>
-                    <div>
+                    <FollowersEntrance>
                         <GitHubFollowersButton username="alephsramos-dev" />
-                    </div>
+                    </FollowersEntrance>
                     <div style={{ width: '100%' }}>
                         <BlurText
                             as="h1"
