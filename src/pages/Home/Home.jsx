@@ -114,11 +114,17 @@ const Content = styled.section`
         font-size: clamp(2.125rem, 5vw + 1.25rem, 4.5rem);
         color: #f1f1f1;
         width: 85%;
+        max-width: 1200px;
         text-align: center;
         font-family: 'Urbanist', sans-serif;
         font-weight: 300;
         line-height: 1.05;
         margin: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        -webkit-text-size-adjust: 100%;
 
         .hero-blur-title { font: inherit; line-height: 1.05; display: inline-block; }
         .hero-blur-title b {
@@ -138,28 +144,27 @@ const Content = styled.section`
         }
         .hero-blur-title .desktop-break { display: block; }
 
+        @media (max-width: 1024px) { width: 85%; }
         @media (max-width: 768px) {
-            .hero-blur-title .desktop-break { display: none; }
-        }
-
-        @media (max-width: 1024px) {
-            width: 80%;
-        }
-        @media (max-width: 768px) {
-            width: 75%;
-            text-align: left;
+            width: 92%;
+            text-align: center; /* centraliza no iPhone */
         }
         @media (max-width: 600px) {
-            width: 82%;
-            .hero-blur-title b { letter-spacing: -4px; }
+            width: 95%;
+            font-size: clamp(1.95rem, 6.5vw + .7rem, 3.2rem);
+            .hero-blur-title b { font-size: clamp(2.2rem, 7.5vw + .6rem, 3.6rem); letter-spacing: -3px; }
         }
         @media (max-width: 480px) {
-            width: 90%;
-            font-size: clamp(2rem, 7vw + .5rem, 3rem);
-            .hero-blur-title b { font-size: clamp(2.4rem, 8vw + .5rem, 3.6rem); letter-spacing: -3px; }
+            font-size: clamp(1.85rem, 7vw + .5rem, 2.8rem);
+            .hero-blur-title b { font-size: clamp(2.05rem, 8vw + .4rem, 3.2rem); letter-spacing: -2px; }
         }
-        @media (max-width: 380px) {
-            .hero-blur-title b { letter-spacing: -2px; }
+        @media (max-width: 400px) {
+            font-size: clamp(1.7rem, 7.5vw + .4rem, 2.5rem);
+            .hero-blur-title b { font-size: clamp(1.95rem, 8.5vw + .35rem, 2.9rem); letter-spacing: -1px; }
+        }
+        @media (max-width: 360px) {
+            font-size: clamp(1.55rem, 8vw + .3rem, 2.25rem);
+            .hero-blur-title b { font-size: clamp(1.8rem, 9vw + .3rem, 2.6rem); letter-spacing: -1px; }
         }
     }
 
