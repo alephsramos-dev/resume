@@ -363,7 +363,7 @@ export default function Home() {
                             className="hero-blur-title"
                             direction="top"
                         >
-                            Seu site criado pelo <b>melhor</b><br className="desktop-break" /> Desenvolvedor Web
+                            Desenvolvimento Web de <b>alta</b>performance
                         </BlurText>
                     </h1>
                     <aside>
