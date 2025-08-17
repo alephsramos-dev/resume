@@ -1,13 +1,32 @@
-import RecentProjectCard from "@/components/ui/cards/RecentProjectCard";
-import Description from "@/components/ui/Description";
-import BGnoise from "@/components/ui/patterns/BGnoise";
-import Title from "@/components/ui/Title";
-import React from "react";
-import styled from "styled-components";
-import bgHome from "@/assets/banner/bg-home.jpeg";
-import ButtonLines from "@/components/ui/buttons/ButtonLines";
-import ButtonMessage from "@/components/ui/buttons/ButtonMessage";
-import BannerHome from '@/assets/banner/banner-home.png';
+import React, { useState, useEffect } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import DarkVeil from "@/components/ui/background/DarkVeil";
+import SplitText from "@/components/ui/texts/SplitText";
+import ClashDisplayExtraLight from "@/fonts/ClashDisplay-Extralight.otf";
+import ClashDisplayLight from "@/fonts/ClashDisplay-Light.otf";
+import ClashDisplayRegular from "@/fonts/ClashDisplay-Regular.otf";
+import ClashDisplayMedium from "@/fonts/ClashDisplay-Medium.otf";
+import ClashDisplaySemiBold from "@/fonts/ClashDisplay-Semibold.otf";
+import ClashDisplayBold from "@/fonts/ClashDisplay-Bold.otf";
+import ShinyText from "@/components/ui/buttons/ButtonConhecerMais";
+import { TfiArrowTopRight } from "react-icons/tfi";
+import { FaCircle } from "react-icons/fa";
+import GitHubFollowersButton from "@/components/ui/github/ButtonGithub";
+import Beams from "@/components/ui/background/Beams";
+import RippleGrid from "@/components/ui/background/Ripple";
+import Silk from "@/components/ui/background/Slick";
+import ThreeDMarquee from "@/components/ui/background/ThreeDMarquee";
+import BlurText from "@/components/ui/texts/BlurText";
+
+
+const FontStyles = createGlobalStyle`
+  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayExtraLight}) format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayLight}) format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayRegular}) format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayMedium}) format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplaySemiBold}) format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayBold}) format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+`;
 
 const Container = styled.div`
     width: 100%;
@@ -17,75 +36,57 @@ const Container = styled.div`
     background: #000;
     color: #fff;
     position: relative;
-`
+    overflow: hidden;
+`;
 
-const Banner = styled.div`
+const BG = styled.div`
+    position: absolute;
+    inset: 0;
     width: 100%;
-    position: absolute!important;
-    z-index: -1;
     height: 100%;
-    top: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background: rgba(0,0,0,0.55);
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(260px 140px at var(--mx,50%) var(--my,50%),
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0.04) 38%,
+            rgba(0,0,0,0.18) 55%,
+            rgba(0,0,0,0.42) 70%,
+            rgba(0,0,0,0.75) 100%),
+          rgba(0,0,0,0.65);
+        background-blend-mode: normal;
+        transition: background 0.5s ease;
+        mix-blend-mode: normal;
+    }
 
     &::before {
         content: '';
-        width: 100%;
-        height: 100%;
         position: absolute;
-        top: 0;
-        left: 0;
-        background: linear-gradient(0deg, #000 15%, #0000 80%);
-        z-index: 1;
+        inset: 0;
         pointer-events: none;
+        background:
+          radial-gradient(140px 80px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.10), rgba(255,255,255,0) 70%);
+        mix-blend-mode: overlay;
+        opacity: .35;
+        transition: opacity .6s ease;
     }
-    &::after {
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: linear-gradient(180deg, #000 15%, #0000 80%);
-        z-index: 1;
-        pointer-events: none;
-    }
-    /* Lados esquerdo e direito */
-    & span.banner-fade-left {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 80px;
-        height: 100%;
-        background: linear-gradient(90deg, #000 20%, #0000 100%);
-        z-index: 2;
-        pointer-events: none;
-        display: block;
-    }
-    & span.banner-fade-right {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 80px;
-        height: 100%;
-        background: linear-gradient(270deg, #000 20%, #0000 100%);
-        z-index: 2;
-        pointer-events: none;
-        display: block;
-    }
-    & img {
-        object-fit: cover;
-        object-position: center;
-        opacity: 0.9;
-    }
-    @media (max-width: 768px) {
-        width: 100%;
-        border-radius: 0 0 50px 50px;
-        & span.banner-fade-left, & span.banner-fade-right {
-            width: 30px;
+
+    @media (hover: none), (max-width: 768px) {
+        /* Apenas escuro uniforme sem foco de luz */
+        &::before { display: none; }
+        &::after {
+            background: rgba(0,0,0,0.80);
         }
     }
-`
+`;
 
 const Content = styled.section`
     width: 100%;
@@ -96,8 +97,7 @@ const Content = styled.section`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 50px;
-    border: 1px solid #ffffff10;
+    gap: 30px;
     border-bottom: none;
     position: relative;
     z-index: 1;
@@ -105,166 +105,251 @@ const Content = styled.section`
     @media (max-width: 768px){
         gap: 30px;
         height: 100%;
-        padding: 0 2.5% 5% 2.5%;
-        flex-direction: column-reverse;
-    }
-`
-
-const Texts = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 30px;
-
-    @media (max-width: 768px) {
-        width: 100%;
-        align-items: center;
+        padding: 10% 2.5% 5% 2.5%;
+        flex-direction: column;
     }
 
-    & > span {
-        border: 1px solid red;
-        padding: 10px 15px;
-        font-size: 16px;
-        border-radius: 10px;
-        font-family: 'Urbanist', sans-serif;
-        background: #0188a330;
-        border: 1px solid #0188a330;
-        color: #0188a3;
-        box-shadow: 0 0 50px rgba(1, 136, 163, 0.5);
-
-        @media (max-width: 768px) {
-            font-size: 14px;
-        }
-    }
-
-    & h1 {
-        font-size: 46px;
+    & h1 { 
+        font-size: 70px;
+        color: #f1f1f1;
+        width: 85%;
         text-align: center;
-        width: 70%;
+        font-family: 'Urbanist', sans-serif;
+        font-weight: 300;
 
-        & b {
+        .hero-blur-title { font: inherit; line-height: 1.05; }
+        .hero-blur-title b {
+            font-family: "Source Serif 4", serif;
+            font-weight: 600;
+            letter-spacing: -5px;
+            font-style: italic;
+            font-size: 80px;
+            /* Gradiente animado */
+            background: linear-gradient(120deg,#ffffff 0%,#ffb347 15%,#ff6ec4 35%,#7873f5 55%,#4ADEFF 75%,#ffffff 100%);
+            background-size: 300% 300%;
+            background-clip: text; /* padrão */
+            -webkit-background-clip: text; /* Safari/Chrome */
             color: transparent;
-            font-weight: 500;
-            background: linear-gradient(90deg, #00ffdd, #0188a3);
-            -webkit-background-clip: text;
+            animation: gradientShift 16s ease-in-out infinite;
+            filter: drop-shadow(0 0 4px rgba(255,255,255,0.15));
+
+            @media (max-width: 768px) {
+                font-size: 50px;
+            }
         }
 
         @media (max-width: 768px) {
-            font-size: 28px;
-            width: 100%;
-            text-align: center;
+            font-size: 40px;
+            width: 75%;
+            text-align: left;
         }
     }
 
     & p {
+        font-size: 20px;
+        font-family: 'Urbanist', sans-serif;
+        width: 45%;
         text-align: center;
-        width: 50%;
-        opacity: 0.6;
+        color: #f1f1f1cf;
+        font-weight: 200;
+    }
+
+    & aside {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
 
         @media (max-width: 768px) {
-            width: 100%;
+            flex-direction: column;
         }
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        & h1 b { animation: none; background-position: 50% 50%; }
+    }
+`;
+
+const BtnConhecer = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    & svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        margin-top: 4px;
+        opacity: 0.8;
     }
 `
 
-const Carousel = styled.div`
-    width: 95%;    
-    height: 600px;
-    position: relative;
-    /* border-radius: 20px; */
-
-    &::before {
-        content: '';
-        width: 5%;
-        height: 10%;
-        position: absolute;
-        top: -2.5%;
-        left: -1.25%;
-        border: 1px solid #ffffff50;
-        /* border-top-left-radius: 25px; */
-        border-bottom: none;
-        border-right: none;
-    }
-    &::after {
-        content: '';
-        width: 5%;
-        height: 10%;
-        position: absolute;
-        bottom: -2.5%;
-        left: -1.25%;
-        border: 1px solid #ffffff50;
-        border-top: none;
-        /* border-bottom-left-radius: 25px; */
-        border-right: none;
-    }
-    /* Canto superior direito */
-    & .corner-top-right {
-        content: '';
-        width: 5%;
-        height: 10%;
-        position: absolute;
-        top: -2.5%;
-        right: -1.25%;
-        border: 1px solid #ffffff50;
-        border-bottom: none;
-        border-left: none;
-        /* border-top-right-radius: 25px; */
-        pointer-events: none;
-        z-index: 2;
-    }
-    /* Canto inferior direito */
-    & .corner-bottom-right {
-        content: '';
-        width: 5%;
-        height: 10%;
-        position: absolute;
-        bottom: -2.5%;
-        right: -1.25%;
-        border: 1px solid #ffffff50;
-        border-top: none;
-        border-left: none;
-        /* border-bottom-right-radius: 25px; */
-        pointer-events: none;
-        z-index: 2;
-    }
+const BtnConverse = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff10;
+    background-color: #ffffff05;
+    backdrop-filter: blur(10px);
+    border-radius: 40px;
+    cursor: pointer;
+    padding: 4px 15px 4px 4px;
 
     & img {
-        box-shadow: 0 0 20px rgba(1, 136, 163, 0.3);
-        border: 1px solid #ffffff40;
-        /* border-radius: 20px; */
-        width: 100%;
-        height: 100%;
-        object-position: top;
-        object-fit: cover;
+        width: 40px;
+        padding: 7px;
+        border-radius: 50%;
+        background-color: #fff;
+    }
+
+    & div {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        color: #fff;
+        gap: 5px;
+        padding: 0 10px;
+
+        & h4 {
+            font-size: 14px;
+            font-weight: 400;
+            font-family: 'Urbanist', sans-serif;
+        }
+
+        & span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 12px;
+            font-weight: 200;
+            font-family: 'Urbanist', sans-serif;
+
+            & svg {
+                width: 8px;
+                fill: #00ff00;
+                animation: statusPulse 1.8s ease-in-out infinite;
+                will-change: transform, filter;
+            }
+        }
+    }
+
+    @keyframes statusPulse {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,255,0,0.3)); opacity: .95; }
+        50% { transform: scale(1.1); filter: drop-shadow(0 0 6px rgba(0,255,0,0.5)); opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        & div span svg { animation: none; }
     }
 `
 
 export default function Home() {
+    const [hue, setHue] = useState(0);
+    const bgRef = React.useRef(null);
+    const targetPos = React.useRef({ x: 50, y: 50 });
+    const currentPos = React.useRef({ x: 50, y: 50 });
+    const marqueeRef = React.useRef(null);
+
+    useEffect(() => {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReduced) {
+            const duration = 120000;
+            const start = performance.now();
+            let rafHue;
+            const loopHue = (now) => {
+                const elapsed = (now - start) % duration;
+                const progress = elapsed / duration;
+                const h = ((1 - Math.cos(progress * Math.PI * 2)) / 2) * 360;
+                setHue(h);
+                rafHue = requestAnimationFrame(loopHue);
+            };
+            rafHue = requestAnimationFrame(loopHue);
+            return () => cancelAnimationFrame(rafHue);
+        } else {
+            setHue(0);
+        }
+    }, []);
+
+    // Loop de suavização (lerp) da luz
+    useEffect(() => {
+        let raf;
+        const ease = 0.07; // mais suave (segue mais lentamente)
+        const tick = () => {
+            const cx = currentPos.current.x + (targetPos.current.x - currentPos.current.x) * ease;
+            const cy = currentPos.current.y + (targetPos.current.y - currentPos.current.y) * ease;
+            currentPos.current.x = cx;
+            currentPos.current.y = cy;
+            if (bgRef.current) {
+                bgRef.current.style.setProperty('--mx', cx + '%');
+                bgRef.current.style.setProperty('--my', cy + '%');
+            }
+            raf = requestAnimationFrame(tick);
+        };
+        // Desativa no mobile / touch
+        const isTouch = matchMedia('(hover: none)').matches || window.innerWidth < 769;
+        if (!isTouch) tick();
+        return () => cancelAnimationFrame(raf);
+    }, []);
+
+    const handleMouseMove = (e) => {
+        if (!bgRef.current) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        targetPos.current.x = ((e.clientX - rect.left) / rect.width) * 100;
+        targetPos.current.y = ((e.clientY - rect.top) / rect.height) * 100;
+        marqueeRef.current?.highlightAt(e.clientX, e.clientY);
+    };
+
+    const handleMouseLeave = () => {
+        marqueeRef.current?.clearHighlight();
+    };
+
     return (
         <>
-            <Container>
+            <FontStyles />
+            <Container onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+                <BG ref={bgRef}>
+                    <ThreeDMarquee speedSeconds={80} synthetic ref={marqueeRef} />
+                </BG>
                 <Content>
-                    <Texts>
-                        <span>Bem vindo ao meu portfólio_</span>
-                        <h1>Você tem menos de <b>3 segundos</b> para se <b>impressionar</b>, então faça valer!</h1>
-                        <Description 
-                            descricao="Aqui você encontrará uma seleção dos meus projetos mais recentes, onde demonstro minhas habilidades e experiências em desenvolvimento web."
-                            color="#fff"
-                        />
-                        <ButtonMessage />
-                    </Texts>
-                    <Banner>
-                        <img src={bgHome} alt="" loading="lazy" style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit'}} />
-                        <span className="banner-fade-left" />
-                        <span className="banner-fade-right" />
-                    </Banner>
-                    <Carousel>
-                      <span className="corner-top-right" />
-                      <span className="corner-bottom-right" />
-                      <img src={BannerHome} alt="" />
-                    </Carousel>
+                    <div>
+                        <GitHubFollowersButton username="alephsramos-dev" />
+                    </div>
+                    <h1>
+                        <BlurText
+                            as="span"
+                            animateBy="words"
+                            delay={80}
+                            className="hero-blur-title"
+                            direction="top"
+                        >
+                            Seu site criado pelo <b>melhor</b><br />Desenvolvedor Web
+                        </BlurText>
+                    </h1>
+                    <aside>
+                        <BtnConverse>
+                            <img src="public/icon-aleph-desenvolvedor-web.png" alt="" />
+                            <div>
+                                <h4>Converse comigo agora</h4>
+                                <span>
+                                    <FaCircle />
+                                    Online agora
+                                </span>
+                            </div>
+                        </BtnConverse>
+                        <BtnConhecer>
+                            <ShinyText text="Conhecer mais" disabled={false} speed={3} />
+                        </BtnConhecer>
+                    </aside>
                 </Content>
             </Container>
         </>
