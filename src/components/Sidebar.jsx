@@ -20,7 +20,7 @@ const fadeOut = keyframes`
 const Backdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.4);
   z-index: 950;
   opacity: ${({ open }) => (open ? 1 : 0)};
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
