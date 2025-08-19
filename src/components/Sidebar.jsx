@@ -9,6 +9,7 @@ import { IoIosContact } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { SiN8N } from "react-icons/si";
 import { MdDarkMode } from "react-icons/md";
+import { LuPenTool } from "react-icons/lu";
 
 
 const fadeIn = keyframes`
@@ -154,6 +155,12 @@ export default function Sidebar({ open, onClose }) {
                     nomeDoLink="Automação"
                     color="#e2e908"
                     colorBg="#f6ff00"
+                />
+                <SidebarLinks 
+                    icon={LuPenTool}
+                    nomeDoLink="Design"
+                    color="#0840e9"
+                    colorBg="#0231be"
                 />
                 <Line />
                 <h4>Fale comigo</h4>

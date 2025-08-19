@@ -387,7 +387,7 @@ const Avaliacao = styled.section`
                     transform-origin: center bottom;
                     width: max-content;
                     padding: 6px 10px 8px;
-                    background: rgba(0,0,0,0.15);
+                    background: rgba(0,0,0,0.35);
                     backdrop-filter: blur(4px);
                     -webkit-backdrop-filter: blur(4px);
                     border: 1px solid rgba(255,255,255,0.15);
