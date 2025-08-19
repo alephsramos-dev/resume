@@ -11,14 +11,15 @@ const Content = styled.div`
     width: auto;
     height: auto;
     padding: 15px 5px;
+    font-family: 'Urbanist', sans-serif;    
 
     & img {
         width: 100%;
-        height: 350px;
+        height: 300px;
         border-radius: 15px;   
         object-fit: cover;
         object-position: center;
-        margin-bottom: 25px;
+        margin-bottom: 35px;
 
         @media (max-width: 768px){
             height: 250px;    
@@ -27,7 +28,7 @@ const Content = styled.div`
 
     & hr {
         width: 100%;
-        border-color: #353535;
+        border-color: #35353570;
         border-radius: 10px;
     }
 
@@ -46,7 +47,7 @@ const Content = styled.div`
 
         & h4 {
             font-size: 22px;
-            font-weight: 500;
+            font-weight: 400;
             margin: 0;
 
             @media (max-width: 768px){
@@ -58,9 +59,9 @@ const Content = styled.div`
         & span {
             font-size: 12px;
             text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: #ffffff70;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #ffffff60;
 
             @media (max-width: 768px) {
                 letter-spacing: 1px;
@@ -70,7 +71,8 @@ const Content = styled.div`
         }
 
         & p {
-            font-size: 12px;
+            font-size: 14px;
+            opacity: 0.7;
             font-weight: 300;
 
             @media (max-width: 768px){
@@ -105,7 +107,7 @@ const Content = styled.div`
 const ImageWrapper = styled.div`
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,28 +115,6 @@ const ImageWrapper = styled.div`
     @media (max-width: 768px){
         height: 250px;        
     }
-`;
-
-const SaberMaisButton = styled.button`
-    position: absolute;
-    pointer-events: none;
-    opacity: ${props => (props.visible ? 1 : 0)};
-    left: ${props => props.x}px;
-    top: ${props => props.y}px;
-    transform: translate(-50%, -50%);
-    background: #1d1d1d70;
-    backdrop-filter: blur(5px);
-    cursor: pointer;
-    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    white-space: nowrap;
-    padding: 10px 15px;
-    font-size: 16px;
-    font-weight: 400;
-    transition: opacity 0.2s;
-    z-index: 2;
 `;
 
 export default function ProjectCard({
@@ -164,13 +144,6 @@ export default function ProjectCard({
                     onMouseMove={handleMouseMove}
                 >
                     <img src={image} alt={alt} loading="lazy" />
-                    <SaberMaisButton
-                        visible={hover}
-                        x={mousePos.x}
-                        y={mousePos.y}
-                    >
-                        Saber mais
-                    </SaberMaisButton>
                 </ImageWrapper>
                 <div>
                     <h4>{nome}</h4>

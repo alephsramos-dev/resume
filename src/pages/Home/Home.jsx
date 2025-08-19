@@ -38,6 +38,7 @@ const Container = styled.div`
     background: #000;
     color: #fff;
     position: relative;
+    z-index: 2;
     overflow: hidden;
 `;
 

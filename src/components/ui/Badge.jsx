@@ -16,7 +16,7 @@ const Content = styled.div`
 
     & span {
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         font-family: 'Urbanist', sans-serif;
     }
 

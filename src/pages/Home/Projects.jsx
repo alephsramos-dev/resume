@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { projects as allProjects } from './Data/projectData';
+import { IoFolderOpenOutline } from "react-icons/io5";
 
 const Container = styled.div`
     width: 100%;
@@ -18,6 +19,65 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     background-color: #000;
+    position: relative;
+    /* Linha luminosa central superior */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        height: 0.5px;
+        background:
+            linear-gradient(90deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.05) 12%,
+                rgba(255,255,255,0.35) 26%,
+                rgba(255,255,255,0.85) 50%,
+                rgba(255,255,255,0.35) 74%,
+                rgba(255,255,255,0.05) 88%,
+                rgba(255,255,255,0) 100%
+            );
+        border-radius: 999px;
+        filter: drop-shadow(0 0 4px rgba(255,255,255,0.55)) drop-shadow(0 0 14px rgba(255,255,255,0.35)) drop-shadow(0 0 28px rgba(255,255,255,0.2));
+        pointer-events: none;
+        animation: beamPulse 5.2s ease-in-out infinite;
+        opacity: .8;
+        mix-blend-mode: screen;
+    }
+
+    /* Halo difuso ampliando a luz */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -60%);
+        width: 340px;
+        height: 160px;
+        background: radial-gradient(ellipse at center,
+            rgba(255,255,255,0.38) 0%,
+            rgba(255,255,255,0.18) 32%,
+            rgba(255,255,255,0.08) 54%,
+            rgba(255,255,255,0.04) 70%,
+            rgba(255,255,255,0) 100%);
+        filter: blur(38px) saturate(130%);
+        pointer-events: none;
+        opacity: .55;
+        mix-blend-mode: screen;
+        animation: haloFloat 10s ease-in-out infinite;
+    }
+
+    @keyframes beamPulse {
+        0%, 100% { opacity: .85; filter: drop-shadow(0 0 4px rgba(255,255,255,0.55)) drop-shadow(0 0 14px rgba(255,255,255,0.35)) drop-shadow(0 0 28px rgba(255,255,255,0.15)); }
+        50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(255,255,255,0.85)) drop-shadow(0 0 20px rgba(255,255,255,0.50)) drop-shadow(0 0 34px rgba(255,255,255,0.28)); }
+    }
+
+    @keyframes haloFloat {
+        0%, 100% { transform: translate(-50%, -60%) scale(1); opacity: .55; }
+        50% { transform: translate(-50%, -62%) scale(1.06); opacity: .72; }
+    }
 `
 
 const Background = styled.div`
@@ -30,18 +90,17 @@ const Background = styled.div`
 
 const Content = styled.section`
     width: 100%;
-    padding: 2.5%;
+    padding: 3.5% 2.5% 5% 2.5%;
     max-width: 1420px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 50px;
-    border: 1px solid #ffffff10;
 
     @media (max-width: 768px){
         gap: 30px;
-        padding: 5%;
+        padding: 10% 5%;
     }
 `
 
@@ -65,7 +124,7 @@ const Texts = styled.div`
         align-items: flex-start;
         justify-content: center;
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
         height: 100%;
 
         @media (max-width: 768px){
@@ -87,6 +146,7 @@ const Texts = styled.div`
 
 const Carrossel = styled.div`
     width: 100%;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -127,7 +187,7 @@ const CustomArrow = styled.button`
 `;
 
 const ProgressBar = styled.div`
-  width: 15%;
+  width: 25%;
   height: 6px;
   background: #222;
   border-radius: 3px;
@@ -168,13 +228,13 @@ const VerMais = styled.div`
         width: 50px;
         height: 50px;
         color: #ffffff50;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         transition: all 0.2s ease-in-out;
     }
 
     & span {
         font-size: 20px;
-        font-weight: 600;
+        font-weight: 400;
         color: #ffffff50;
         transition: all 0.2s ease-in-out;
     }
@@ -229,18 +289,18 @@ export default function Projects() {
                         <div>
                             <Badge 
                                 texto="Projetos"
-                                icon={<SiOpenproject />} 
+                                icon={<IoFolderOpenOutline />} 
                                 txtcolor="#13ba00" 
                                 color="#0c740030" 
                             />
                             <Title 
-                                titulo={<>Projetos utilizando as <b>Tecnologias</b> mais modernas e avançadas</>}
+                                titulo={<>Projetos utilizando as <b>Tecnologias</b> mais modernas.</>}
                                 color="#fff"
                             />
                         </div>
                         <div>
                             <Description 
-                                descricao="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas para criar soluções inovadoras e eficientes."
+                                descricao="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas."
                                 color="#dadada"
                             />
                         </div>
@@ -250,7 +310,7 @@ export default function Projects() {
                             ref={splideRef}
                             options={{
                                 type: 'slide',
-                                perPage: 2,
+                                perPage: 3,
                                 perMove: 1,
                                 gap: '1rem',
                                 pagination: false,
