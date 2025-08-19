@@ -48,22 +48,24 @@ const BG = styled.div`
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    /* Desktop: escuro consistente até metade, direita realmente aberta */
+    /* Desktop: preto sólido forte que dissolve de forma suave até transparente */
     background: linear-gradient(to right,
-        rgba(0,0,0,0.90) 0%,
-        rgba(0,0,0,0.90) 20%,
-        rgba(0,0,0,0.90) 34%,
-        rgba(0,0,0,0.88) 44%,
-        rgba(0,0,0,0.87) 50%,
-        rgba(0,0,0,0.82) 53%,
-        rgba(0,0,0,0.70) 56%,
-        rgba(0,0,0,0.50) 59%,
-        rgba(0,0,0,0.32) 62%,
-        rgba(0,0,0,0.18) 66%,
-        rgba(0,0,0,0.10) 70%,
-        rgba(0,0,0,0.05) 75%,
-        rgba(0,0,0,0.02) 82%,
-        rgba(0,0,0,0.01) 100%
+        #000 0%,
+        #000 18%,
+        #000 26%,
+        rgba(0,0,0,0.96) 32%,
+        rgba(0,0,0,0.93) 38%,
+        rgba(0,0,0,0.90) 44%,
+        rgba(0,0,0,0.85) 50%,
+        rgba(0,0,0,0.78) 56%,
+        rgba(0,0,0,0.62) 62%,
+        rgba(0,0,0,0.46) 68%,
+        rgba(0,0,0,0.30) 74%,
+        rgba(0,0,0,0.18) 80%,
+        rgba(0,0,0,0.10) 86%,
+        rgba(0,0,0,0.05) 91%,
+        rgba(0,0,0,0.025) 95%,
+        rgba(0,0,0,0) 100%
     );
 
         &::after {
@@ -111,16 +113,20 @@ const BG = styled.div`
     }
 
     @media (hover: none), (max-width: 768px) {
-        /* Mobile: faixa clara menor (topo) e rapidamente escurece para dar contraste ao texto */
+        /* Mobile: preto bem forte em cima dissolvendo para dar profundidade */
         background: linear-gradient(to bottom,
-            rgba(0,0,0,0.22) 0%,
-            rgba(0,0,0,0.22) 4%,
-            rgba(0,0,0,0.32) 9%,
-            rgba(0,0,0,0.40) 16%,
-            rgba(0,0,0,0.54) 28%,
-            rgba(0,0,0,0.68) 48%,
-            rgba(0,0,0,0.79) 70%,
-            rgba(0,0,0,0.86) 100%
+            #000 0%,
+            #000 8%,
+            rgba(0,0,0,0.92) 16%,
+            rgba(0,0,0,0.85) 28%,
+            rgba(0,0,0,0.74) 42%,
+            rgba(0,0,0,0.62) 56%,
+            rgba(0,0,0,0.50) 70%,
+            rgba(0,0,0,0.38) 80%,
+            rgba(0,0,0,0.26) 88%,
+            rgba(0,0,0,0.14) 94%,
+            rgba(0,0,0,0.06) 98%,
+            rgba(0,0,0,0) 100%
         );
         &::before { display: none; }
         &::after {
@@ -263,8 +269,8 @@ const BtnConverse = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #ffffff10;
-    background-color: #ffffff05;
+    border: 1px solid #ffffff70;
+    background-color: #ffffff10;
     backdrop-filter: blur(10px);
     border-radius: 40px;
     cursor: pointer;
@@ -279,7 +285,7 @@ const BtnConverse = styled.button`
 
     &:hover {
         transform: scale(0.98);
-        border: 2px solid #ffffff20;
+        border: 1px solid #ffffff80;
         background-color: #ffffff15;
         box-shadow: 0 0 30px rgba(255,255,255,0.1);
         backdrop-filter: blur(5px);
@@ -360,29 +366,86 @@ const Avaliacao = styled.section`
         position: relative;
         justify-content: center;
 
-        & img {
-            border-radius: 50%;
+        & ol {
+            display: flex;
+            flex-direction: row;
             position: relative;
-            border: 2px solid #ffffff;
 
-            &:hover {
-                transform: translateY(-5px) rotate(-35deg);
-            }
+            & li {
+                position: relative;
 
-            &:nth-child(2){
-                margin-left: -20px;
-            }
+                & div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    gap: 3px;
+                    position: absolute;
+                    top: -55px; /* posiciona acima do avatar */
+                    left: 50%;
+                    transform: translate(-50%, 0) scale(.4);
+                    transform-origin: center bottom;
+                    width: max-content;
+                    padding: 6px 10px 8px;
+                    background: rgba(0,0,0,0.15);
+                    backdrop-filter: blur(4px);
+                    -webkit-backdrop-filter: blur(4px);
+                    border: 1px solid rgba(255,255,255,0.15);
+                    border-radius: 5px;
+                    box-shadow: 0 4px 18px -4px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,0.04) inset;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: transform .38s cubic-bezier(.16,.84,.34,1), opacity .3s ease;
+                    will-change: transform, opacity;
 
-            &:nth-child(3){
-                margin-left: -20px;
-            }
+                    & span {
+                        font-size: 14px;
+                        font-weight: 300;
+                        white-space: nowrap;
+                    }
 
-            &:nth-child(4){
-                margin-left: -20px;
-            }
+                    & p {
+                        font-size: 11px;
+                        font-weight: 500;
+                        white-space: nowrap;
+                        opacity: 0.5;
+                        width: auto;
+                    }
+                }
 
-            &:nth-child(5){
-                margin-left: -20px;
+                
+                &:nth-child(2){
+                    margin-left: -20px;
+                }
+
+                &:nth-child(3){
+                    margin-left: -20px;
+                }
+
+                &:nth-child(4){
+                    margin-left: -20px;
+                }
+
+                &:nth-child(5){
+                    margin-left: -20px;
+                }
+
+                & img {
+                border-radius: 50%;
+                position: relative;
+                border: 2px solid #ffffff;
+                transition: all .2s ease-in-out;
+
+                &:hover {
+                    transform: translateY(-5px) rotate(-15deg);
+                    }
+                }
+
+                /* Hover do item mostra o card de dados */
+                &:hover > div {
+                    transform: translate(-50%, -6px) scale(1);
+                    opacity: 1;
+                }
             }
         }
     }
@@ -536,11 +599,43 @@ export default function Home() {
                 <Content>
                     <Avaliacao>
                         <div>
-                            <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 1" width={50} height={50} />
-                            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 2" width={50} height={50} />
-                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 3" width={50} height={50} />
-                            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 4" width={50} height={50} />
-                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 5" width={50} height={50} />
+                            <ol>
+                                <li>
+                                    <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 1" width={50} height={50} />
+                                    <div>
+                                        <span>Gabriel Ferreira</span>
+                                        <p>Fundador | GP Way</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 2" width={50} height={50} />
+                                    <div>
+                                        <span>Maria Silva</span>
+                                        <p>CEO | Empresa XYZ</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 3" width={50} height={50} />
+                                    <div>
+                                        <span>João Pereira</span>
+                                        <p>CTO | Empresa ABC</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 4" width={50} height={50} />
+                                    <div>
+                                        <span>Fernanda Lima</span>
+                                        <p>CMO | Empresa DEF</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 5" width={50} height={50} />
+                                    <div>
+                                        <span>Lucas Santos</span>
+                                        <p>Analista | Empresa GHI</p>
+                                    </div>
+                                </li>
+                            </ol>
                         </div>
                         <aside>
                             <span>117 clientes satisfeitos</span>
