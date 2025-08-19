@@ -28,22 +28,21 @@ const Container = styled.div`
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
-        height: 0.5px;
-        background:
-            linear-gradient(90deg,
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.05) 12%,
-                rgba(255,255,255,0.35) 26%,
-                rgba(255,255,255,0.85) 50%,
-                rgba(255,255,255,0.35) 74%,
-                rgba(255,255,255,0.05) 88%,
-                rgba(255,255,255,0) 100%
-            );
+        max-width: 900px;
+        height: 1px;
+        background: linear-gradient(90deg,
+            rgba(19,186,0,0) 0%,
+            rgba(19,186,0,0.08) 12%,
+            rgba(19,186,0,0.35) 26%,
+            rgba(19,186,0,0.9) 50%,
+            rgba(19,186,0,0.35) 74%,
+            rgba(19,186,0,0.08) 88%,
+            rgba(19,186,0,0) 100%);
         border-radius: 999px;
-        filter: drop-shadow(0 0 4px rgba(255,255,255,0.55)) drop-shadow(0 0 14px rgba(255,255,255,0.35)) drop-shadow(0 0 28px rgba(255,255,255,0.2));
+        filter: drop-shadow(0 0 4px rgba(19,186,0,0.55)) drop-shadow(0 0 14px rgba(19,186,0,0.35)) drop-shadow(0 0 28px rgba(19,186,0,0.18));
         pointer-events: none;
         animation: beamPulse 5.2s ease-in-out infinite;
-        opacity: .8;
+        opacity: .85;
         mix-blend-mode: screen;
     }
 
@@ -54,24 +53,24 @@ const Container = styled.div`
         top: 0;
         left: 50%;
         transform: translate(-50%, -60%);
-        width: 340px;
+        width: 360px;
         height: 160px;
         background: radial-gradient(ellipse at center,
-            rgba(255,255,255,0.38) 0%,
-            rgba(255,255,255,0.18) 32%,
-            rgba(255,255,255,0.08) 54%,
-            rgba(255,255,255,0.04) 70%,
-            rgba(255,255,255,0) 100%);
-        filter: blur(38px) saturate(130%);
-        pointer-events: none;
+            rgba(19,186,0,0.42) 0%,
+            rgba(19,186,0,0.22) 32%,
+            rgba(19,186,0,0.10) 54%,
+            rgba(19,186,0,0.05) 70%,
+            rgba(19,186,0,0) 100%);
+        filter: blur(46px) saturate(140%);
         opacity: .55;
+        pointer-events: none;
         mix-blend-mode: screen;
         animation: haloFloat 10s ease-in-out infinite;
     }
 
     @keyframes beamPulse {
-        0%, 100% { opacity: .85; filter: drop-shadow(0 0 4px rgba(255,255,255,0.55)) drop-shadow(0 0 14px rgba(255,255,255,0.35)) drop-shadow(0 0 28px rgba(255,255,255,0.15)); }
-        50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(255,255,255,0.85)) drop-shadow(0 0 20px rgba(255,255,255,0.50)) drop-shadow(0 0 34px rgba(255,255,255,0.28)); }
+        0%, 100% { opacity: .85; filter: drop-shadow(0 0 4px rgba(19,186,0,0.55)) drop-shadow(0 0 14px rgba(19,186,0,0.32)) drop-shadow(0 0 28px rgba(19,186,0,0.16)); }
+        50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(19,186,0,0.9)) drop-shadow(0 0 20px rgba(19,186,0,0.55)) drop-shadow(0 0 38px rgba(19,186,0,0.28)); }
     }
 
     @keyframes haloFloat {
@@ -100,7 +99,7 @@ const Content = styled.section`
 
     @media (max-width: 768px){
         gap: 30px;
-        padding: 10% 5%;
+        padding: 10% 2.5%;
     }
 `
 
