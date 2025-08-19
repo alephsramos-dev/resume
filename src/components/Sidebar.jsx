@@ -7,6 +7,9 @@ import { RiStackLine } from "react-icons/ri";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { IoIosContact } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
+import { SiN8N } from "react-icons/si";
+import { MdDarkMode } from "react-icons/md";
+
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateX(40px); }
@@ -119,7 +122,7 @@ export default function Sidebar({ open, onClose }) {
             {/* Optional close button if desired */}
             {/* <CloseButton onClick={onClose}><IoMdClose /></CloseButton> */}
             <Links onClickCapture={handleOptionClick}>
-                <h4>Nos conheça</h4>
+                <h4>Conheça</h4>
                 <SidebarLinks 
                     icon={BiNetworkChart}
                     nomeDoLink="Serviços"
@@ -146,8 +149,14 @@ export default function Sidebar({ open, onClose }) {
                     color="#d90000"
                     colorBg="#790404"
                 />
+                <SidebarLinks 
+                    icon={SiN8N}
+                    nomeDoLink="Automação"
+                    color="#e2e908"
+                    colorBg="#f6ff00"
+                />
                 <Line />
-                <h4>Fale conosco</h4>
+                <h4>Fale comigo</h4>
                 <SidebarLinks 
                     icon={IoIosContact}
                     nomeDoLink="Contato"

@@ -17,6 +17,7 @@ import RippleGrid from "@/components/ui/background/Ripple";
 import Silk from "@/components/ui/background/Slick";
 import ThreeDMarquee from "@/components/ui/background/ThreeDMarquee";
 import BlurText from "@/components/ui/texts/BlurText";
+import { IoStarSharp } from "react-icons/io5";
 // Reintroduzindo BlurText para animação inicial do título
 
 
@@ -146,9 +147,18 @@ const Content = styled.section`
     @media (max-width: 768px){
         gap: 20px;
         height: 100%;
-        padding: 10% 2.5% 15% 2.5%;
+        padding: 10% 2.5% 10% 2.5%;
         justify-content: flex-end;
         flex-direction: column;
+    }
+
+    & div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
     }
 
     & h1.hero-title {
@@ -216,9 +226,14 @@ const Content = styled.section`
         font-size: 20px;
         font-family: 'Urbanist', sans-serif;
         width: 45%;
-        text-align: center;
+        text-align: left;
         color: #f1f1f1cf;
         font-weight: 200;
+
+        @media (max-width: 768px) {
+            font-size: 18px;
+            width: 90%;
+        }
     }
 
     & aside {
@@ -328,21 +343,115 @@ const BtnConverse = styled.button`
     }
 `
 
-// Animação de entrada para o bloco de followers (fade + slide)
-const FollowersEntrance = styled.div`
-    opacity: 0;
-    transform: translateY(-8px) scale(.98);
-    animation: followersIn .75s cubic-bezier(.16,.72,.26,1) .15s forwards;
-    will-change: opacity, transform;
-    @keyframes followersIn {
-        0% { opacity: 0; transform: translateY(-12px) scale(.96); filter: blur(4px); }
-        55% { opacity: .85; transform: translateY(3px) scale(1.005); filter: blur(0); }
-        100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+const Avaliacao = styled.section`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 15px;
+    width: auto;
+
+    & div {
+        display: flex;
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+        position: relative;
+        justify-content: center;
+
+        & img {
+            border-radius: 50%;
+            position: relative;
+            border: 2px solid #ffffff;
+
+            &:hover {
+                transform: translateY(-5px) rotate(-35deg);
+            }
+
+            &:nth-child(2){
+                margin-left: -20px;
+            }
+
+            &:nth-child(3){
+                margin-left: -20px;
+            }
+
+            &:nth-child(4){
+                margin-left: -20px;
+            }
+
+            &:nth-child(5){
+                margin-left: -20px;
+            }
+        }
     }
-    @media (prefers-reduced-motion: reduce) {
-        animation: none; opacity: 1; transform: none; filter: none;
+
+    & aside {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+
+        @media (max-width: 768px) {
+            gap: 5px;
+        }
+
+        & > span {
+            font-weight: 500;
+            font-size: 18px;
+
+            @media (max-width: 768px) {
+                font-size: 15px;
+            }
+        }   
+
+        & div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+
+            & ol {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+
+                & li {
+                    position: relative;
+                    color: #fff200;
+
+                    &:nth-child(2){
+                        margin-left: -3px;
+                    }
+
+                    &:nth-child(3){
+                        margin-left: -3px;
+                    }
+
+                    &:nth-child(4){
+                        margin-left: -3px;
+                    }
+
+                    &:nth-child(5){
+                        margin-left: -3px;
+                    }
+                }
+            }
+
+            & span {
+                font-size: 15px;
+                font-weight: 300;
+                opacity: 0.7;
+
+                @media (max-width: 768px) {
+                    font-size: 13px;
+                }
+            }
+        } 
     }
-`;
+`
 
 export default function Home() {
     const [hue, setHue] = useState(0);
@@ -425,9 +534,28 @@ export default function Home() {
                     <ThreeDMarquee speedSeconds={80} synthetic ref={marqueeRef} />
                 </BG>
                 <Content>
-                    <FollowersEntrance>
-                        <GitHubFollowersButton username="alephsramos-dev" />
-                    </FollowersEntrance>
+                    <Avaliacao>
+                        <div>
+                            <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 1" width={50} height={50} />
+                            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 2" width={50} height={50} />
+                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 3" width={50} height={50} />
+                            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 4" width={50} height={50} />
+                            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1" alt="Perfil 5" width={50} height={50} />
+                        </div>
+                        <aside>
+                            <span>117 clientes satisfeitos</span>
+                            <div>
+                                <ol>
+                                    <li><IoStarSharp /></li>
+                                    <li><IoStarSharp /></li>
+                                    <li><IoStarSharp /></li>
+                                    <li><IoStarSharp /></li>
+                                    <li><IoStarSharp /></li>
+                                </ol>
+                                <span>4.92 Avaliação</span>
+                            </div>
+                        </aside>
+                    </Avaliacao>
                     <div style={{ width: '100%' }}>
                         <BlurText
                             as="h1"
@@ -440,6 +568,7 @@ export default function Home() {
                             fullWidth={false}
                             collapseToPlain={true}
                         />
+                        <p>Desenvolvimento de sites com foco em três pilares: velocidade, segurança e resultados de negócio.</p>
                     </div>
                     <aside>
                         <BtnConverse className={btnAnimate ? 'animate' : ''}>
