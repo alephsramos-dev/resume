@@ -272,7 +272,7 @@ const Avaliacao = styled.section`
                 & img {
                 border-radius: 50%;
                 position: relative;
-                border: 2px solid #ffffff;
+                border: 1px solid #ffffff;
                 transition: all .2s ease-in-out;
 
                 &:hover {

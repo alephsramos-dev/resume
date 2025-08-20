@@ -23,7 +23,7 @@ const StyledButton = styled.button`
 
   &:hover {
     transform: scale(0.98);
-    border: 1px solid #ffffff80;
+    border: 1px solid #ffffff60;
     background-color: #ffffff15;
     box-shadow: 0 0 30px rgba(255,255,255,0.1);
     backdrop-filter: blur(5px);
