@@ -426,10 +426,9 @@ export default function Home() {
             <Container onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
                 <BG ref={bgRef}>
                     <DarkVeil 
-                        noiseIntensity={0.20}   
+                        noiseIntensity={0.10}   
                         speed={2}
                         hueShift={35}
-                        scanlineFrequency={2}
                     />
                 </BG>
                 <Content>
