@@ -54,7 +54,7 @@ const BG = styled.div`
     pointer-events: none;
 
     @media (max-width: 768px) {
-        height: 600px;
+        height: 100%;
     }
 `;
 
