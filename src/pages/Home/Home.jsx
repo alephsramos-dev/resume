@@ -10,7 +10,8 @@ import ClashDisplaySemiBold from "@/fonts/ClashDisplay-Semibold.otf";
 import ClashDisplayBold from "@/fonts/ClashDisplay-Bold.otf";
 import ShinyText from "@/components/ui/buttons/ButtonConhecerMais";
 import { TfiArrowTopRight } from "react-icons/tfi";
-import { FaCircle } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa"; // ainda usado em Avaliacao se necessário
+import ChatNowButton from '@/components/ui/buttons/ChatNowButton';
 import GitHubFollowersButton from "@/components/ui/github/ButtonGithub";
 import Beams from "@/components/ui/background/Beams";
 import RippleGrid from "@/components/ui/background/Ripple";
@@ -18,6 +19,7 @@ import Silk from "@/components/ui/background/Slick";
 import ThreeDMarquee from "@/components/ui/background/ThreeDMarquee";
 import BlurText from "@/components/ui/texts/BlurText";
 import { IoStarSharp } from "react-icons/io5";
+import Particles from "@/components/ui/background/Particles";
 // Reintroduzindo BlurText para animação inicial do título
 
 
@@ -44,96 +46,15 @@ const Container = styled.div`
 
 const BG = styled.div`
     position: absolute;
-    inset: 0;
     width: 100%;
+    right: 0;
+    top: 0;
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    /* Desktop: preto sólido forte que dissolve de forma suave até transparente */
-    background: linear-gradient(to right,
-        #000 0%,
-        #000 18%,
-        #000 26%,
-        rgba(0,0,0,0.96) 32%,
-        rgba(0,0,0,0.93) 38%,
-        rgba(0,0,0,0.90) 44%,
-        rgba(0,0,0,0.85) 50%,
-        rgba(0,0,0,0.78) 56%,
-        rgba(0,0,0,0.62) 62%,
-        rgba(0,0,0,0.46) 68%,
-        rgba(0,0,0,0.30) 74%,
-        rgba(0,0,0,0.18) 80%,
-        rgba(0,0,0,0.10) 86%,
-        rgba(0,0,0,0.05) 91%,
-        rgba(0,0,0,0.025) 95%,
-        rgba(0,0,0,0) 100%
-    );
 
-        &::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                pointer-events: none;
-                /* Overlay escuro com gradiente que alivia na direita para não matar a abertura */
-                                background:
-                                    radial-gradient(250px 130px at var(--mx,45%) var(--my,50%),
-                                        rgba(0,0,0,0) 0%,
-                                        rgba(0,0,0,0.06) 42%,
-                                        rgba(0,0,0,0.24) 60%,
-                                        rgba(0,0,0,0.48) 76%,
-                                        rgba(0,0,0,0.72) 100%),
-                                    linear-gradient(to right,
-                                        rgba(0,0,0,0.65) 0%,
-                                        rgba(0,0,0,0.65) 35%,
-                                        rgba(0,0,0,0.60) 45%,
-                                        rgba(0,0,0,0.58) 50%,
-                                        rgba(0,0,0,0.50) 53%,
-                                        rgba(0,0,0,0.38) 56%,
-                                        rgba(0,0,0,0.22) 58%,
-                                        rgba(0,0,0,0.12) 60%,
-                                        rgba(0,0,0,0.06) 63%,
-                                        rgba(0,0,0,0.03) 67%,
-                                        rgba(0,0,0,0.015) 72%,
-                                        rgba(0,0,0,0) 78%,
-                                        rgba(0,0,0,0) 100%);
-                                background-blend-mode: multiply, normal;
-                transition: background 0.5s ease;
-                mix-blend-mode: normal;
-        }
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background:
-          radial-gradient(140px 80px at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.10), rgba(255,255,255,0) 70%);
-        mix-blend-mode: overlay;
-        opacity: .35;
-        transition: opacity .6s ease;
-    }
-
-    @media (hover: none), (max-width: 768px) {
-        /* Mobile: preto bem forte em cima dissolvendo para dar profundidade */
-        background: linear-gradient(to bottom,
-            #000 0%,
-            #000 8%,
-            rgba(0,0,0,1) 16%,
-            rgba(0,0,0,1) 28%,
-            rgba(0,0,0,1) 42%,
-            rgba(0,0,0,1) 56%,
-            rgba(0,0,0,1) 70%,
-            rgba(0,0,0,1) 80%,
-            rgba(0,0,0,1) 88%,
-            rgba(0,0,0,0.14) 94%,
-            rgba(0,0,0,0.06) 98%,
-            rgba(0,0,0,0) 100%
-        );
-        &::before { display: none; }
-        &::after {
-            background: radial-gradient(65% 50% at 50% 5%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.24) 55%, rgba(0,0,0,0.50) 78%, rgba(0,0,0,0.78) 100%),
-                        linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.08) 28%, rgba(0,0,0,0.32) 56%, rgba(0,0,0,0.60) 84%, rgba(0,0,0,0.78) 100%);
-        }
+    @media (max-width: 768px) {
+        height: 600px;
     }
 `;
 
@@ -266,89 +187,6 @@ const BtnConhecer = styled.button`
     gap: 10px;
 `
 
-const BtnConverse = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ffffff70;
-    background-color: #ffffff10;
-    backdrop-filter: blur(10px);
-    border-radius: 40px;
-    cursor: pointer;
-    padding: 4px 15px 4px 4px;
-    transition: all .2s ease-in-out;
-    position: relative;
-
-    & img, & div h4, & div span { opacity: 0; transform: translateY(6px); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
-    &.animate img { opacity: 1; transform: translateY(0); transition-delay: 0s; }
-    &.animate div h4 { opacity: 1; transform: translateY(0); transition-delay: .12s; }
-    &.animate div span { opacity: 1; transform: translateY(0); transition-delay: .24s; }
-
-    &:hover {
-        transform: scale(0.98);
-        border: 1px solid #ffffff80;
-        background-color: #ffffff15;
-        box-shadow: 0 0 30px rgba(255,255,255,0.1);
-        backdrop-filter: blur(5px);
-    }
-
-    & img {
-        width: 40px;
-        padding: 7px;
-        border-radius: 50%;
-        background-color: #fff;
-    }
-
-    & div {
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        flex-direction: column;
-        color: #fff;
-        gap: 5px;
-        padding: 0 10px;
-
-        & h4 {
-            font-size: 14px;
-            font-weight: 400;
-            font-family: 'Urbanist', sans-serif;
-        }
-
-        & span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            font-size: 12px;
-            font-weight: 200;
-            font-family: 'Urbanist', sans-serif;
-            white-space: nowrap;
-
-            & svg {
-                width: 8px;
-                fill: #00ff00;
-                animation: statusPulse 1.8s ease-in-out infinite;
-                will-change: transform, filter;
-            }
-
-            & .typing-wrapper { position: relative; display: inline-flex; align-items: center; }
-            & .typing-text { display: inline-block; min-width: 8ch; }
-            & .typing-cursor { width: 1px; background: #fff; margin-left: 2px; height: 1em; transform: translateY(1px); animation: blink 1.1s steps(2,end) infinite; opacity: .75; }
-        }
-    }
-
-    @keyframes statusPulse {
-        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,255,0,0.3)); opacity: .95; }
-        50% { transform: scale(1.1); filter: drop-shadow(0 0 6px rgba(0,255,0,0.5)); opacity: 1; }
-    }
-
-    @keyframes blink { 0%, 50% { opacity: .75; } 50.01%, 100% { opacity: 0; } }
-
-    @media (prefers-reduced-motion: reduce) {
-        & div span svg { animation: none; }
-        & img, & div h4, & div span { opacity: 1 !important; transform: none !important; transition: none !important; }
-    }
-`
 
 const Avaliacao = styled.section`
     display: flex;
@@ -523,18 +361,10 @@ export default function Home() {
     const targetPos = React.useRef({ x: 50, y: 50 });
     const currentPos = React.useRef({ x: 50, y: 50 });
     const marqueeRef = React.useRef(null);
-    const [btnAnimate, setBtnAnimate] = useState(false);
     const prefersReduced = React.useRef(false);
 
     useEffect(() => {
         prefersReduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReduced.current) {
-            setBtnAnimate(true);
-            return;
-        }
-        // Delay start slightly for smooth entrance
-        const to = setTimeout(() => setBtnAnimate(true), 250);
-        return () => clearTimeout(to);
     }, []);
 
     useEffect(() => {
@@ -595,7 +425,12 @@ export default function Home() {
             <FontStyles />
             <Container onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
                 <BG ref={bgRef}>
-                    <ThreeDMarquee speedSeconds={80} synthetic ref={marqueeRef} />
+                    <DarkVeil 
+                        noiseIntensity={0.20}   
+                        speed={2}
+                        hueShift={35}
+                        scanlineFrequency={2}
+                    />
                 </BG>
                 <Content>
                     <Avaliacao>
@@ -667,29 +502,7 @@ export default function Home() {
                         <p>Desenvolvimento de sites com foco em três pilares: velocidade, segurança e resultados de negócio.</p>
                     </div>
                     <aside>
-                        <BtnConverse className={btnAnimate ? 'animate' : ''}>
-                            {/* Em Vite, arquivos em /public devem ser referenciados com caminho absoluto começando por / */}
-                            <img
-                                src="/icon-aleph-desenvolvedor-web.png"
-                                alt=""
-                                decoding="async"
-                                loading="eager"
-                                onError={(e) => {
-                                    // Fallback: tenta importar via dynamic import se falhar (caso movido para assets futuramente)
-                                    try {
-                                        import('@/assets/notebook-mockup.png').then(mod => { e.currentTarget.src = mod.default; });
-                                    } catch {}
-                                }}
-                                style={{ display: 'block' }}
-                            />
-                            <div>
-                                <h4>Converse comigo agora</h4>
-                                <span>
-                                    <FaCircle />
-                                    Online agora
-                                </span>
-                            </div>
-                        </BtnConverse>
+                        <ChatNowButton />
                         {/* <BtnConhecer>
                             <ShinyText text="Conhecer mais" disabled={false} speed={3} />
                         </BtnConhecer> */}
