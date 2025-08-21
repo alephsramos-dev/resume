@@ -94,6 +94,15 @@ const CardsGrid = styled.div`
                border-top: 1px solid #ffffff20;
            }
        }
+    /* Mobile: controlar linhas apenas entre os cards (primeiro sem top, ultimo sem bottom) */
+    @media (max-width: 640px) {
+        & > * {
+            border-top: 1px solid #ffffff20; /* linha separadora */
+            border-bottom: 1px solid #ffffff20; /* cria continuidade vertical */
+        }
+        & > *:first-child { border-top: none; }
+        & > *:last-child { border-bottom: none; }
+    }
 
        @media (max-width: 768px) {
            & > *:nth-child(n+5) {

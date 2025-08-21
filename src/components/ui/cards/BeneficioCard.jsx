@@ -67,7 +67,7 @@ const Card = styled.div`
     @media (max-width: 640px) { 
         width: 100%; 
         padding: 28px 28px 36px; 
-        border-top: 1px solid #ffffff20; /* todos no mobile */
+        /* bordas verticais agora controladas pelo grid */
     }
 `;
 
