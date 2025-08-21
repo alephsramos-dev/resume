@@ -56,7 +56,7 @@ const CarouselWrapper = styled.div`
     overflow: hidden;
     display: flex;
     align-items: center;
-    --fade-width: 90px;
+    --fade-width: 150px;
     @media (max-width: 768px){
         --fade-width: 100px;
     }
@@ -119,7 +119,7 @@ export default function EmpresasQueConfiaram() {
                     <div>
                         <Description
                             descricao="Com a confiança das maiores marcas do mundo"
-                            color="#fff"
+                            color="#ffffff80"
                         />
                     </div>
                     <CarouselWrapper aria-label="Logos de empresas que confiaram">

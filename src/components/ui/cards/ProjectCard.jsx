@@ -93,9 +93,13 @@ const Content = styled.div`
                 align-items: center;
                 justify-content: center;
                 height: 25px;
+                border: 1px solid #ffffff20;
+                filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+                border-radius: 5px;
 
                 & img {
                     width: 25px!important;
+                    padding: 3px;
                     height: 25px!important;
                 }
 
