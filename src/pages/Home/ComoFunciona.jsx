@@ -38,6 +38,7 @@ const Content = styled.section`
 
     @media (max-width: 768px){
         padding: 5% 2.5%;
+        gap: 30px;
         flex-direction: column;
     }
 `;
@@ -62,6 +63,7 @@ const Text = styled.div`
 
         @media (max-width: 768px){
             width: 20%;
+            margin: 0;
         }
     }
 `
