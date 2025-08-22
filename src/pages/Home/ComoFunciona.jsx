@@ -56,7 +56,7 @@ const Text = styled.div`
 
     & hr {
         width: 10%;
-        opacity: 0.1;
+        opacity: 0;
         margin: 5px 0;
         left: 0;
 
@@ -118,7 +118,6 @@ export default function ComoFunciona() {
                                 },
                             ]}
                         />
-                        <ChatNowButton />
                     </Text>
                     <Compare>
                             <CompareSlider />

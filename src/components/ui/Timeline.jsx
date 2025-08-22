@@ -179,9 +179,9 @@ const SLineOverlay = styled.div`
     position: absolute;
     left: 0;
     width: 100%;
-    height: 50%;
+    height: 75%;
     bottom: 0;
-    background: #000; /* cor de fundo do container */
+    background: transparent; /* cor de fundo do container */
     z-index: 1;
     pointer-events: none;
 `;
