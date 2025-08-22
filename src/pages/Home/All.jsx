@@ -3,6 +3,7 @@ import Home from "./Home";
 import Projects from "./Projects";
 import EmpresasQueConfiaram from "./Empresas";
 import Beneficios from "./Beneficios";
+import ComoFunciona from "./ComoFunciona";
 
 export default function All() {
     return (
@@ -10,6 +11,7 @@ export default function All() {
             <Home />    
                 <EmpresasQueConfiaram />
                     <Beneficios />
+                        <ComoFunciona />
                 <Projects />
         </>
     )
