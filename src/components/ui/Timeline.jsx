@@ -31,8 +31,8 @@ const SDot = styled.div`
     left: ${p => (p.$left !== undefined ? p.$left : '-50%')};
     transform: ${p => p.$transform || 'translateX(-50%)'};
     top: ${p => (p.$top !== undefined ? p.$top : '0')};
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -43,7 +43,7 @@ const SDot = styled.div`
     & svg {
         position: absolute;
         left: auto;
-        font-size: 16px;
+        font-size: 18px;
         color: #000;
         fill: #000;
         top: auto;
@@ -58,15 +58,19 @@ const SCard = styled.div`
     gap: 10px;
 
     & h4 {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 500;
+        transition: transform .25s cubic-bezier(.4,.2,.2,1);
+        letter-spacing: -0.25px;
         margin-top: 7.5px;
     }
 
     & p {
         font-size: 14px;
-        font-weight: 200;
+        font-weight: 300;
         color: #ffffff80;
+        line-height: 1.45;
+        transition: transform .25s cubic-bezier(.4,.2,.2,1);
     }
 
     & span {
@@ -125,7 +129,7 @@ export function TimelineCard({ title, description, tag, tagColor, children, ...p
             {title ? <h4>{title}</h4> : null}
             {description ? <p>{description}</p> : null}
             {children}
-            {tag ? <span style={tagColor ? { color: tagColor, borderColor: tagColor } : undefined}>{tag}</span> : null}
+            {tag ? <span style={tagColor ? { color: tagColor, borderColor: tagColor, backgroundColor: tagColor ? `${tagColor}20` : undefined } : undefined}>{tag}</span> : null}
         </SCard>
     );
 }
