@@ -1,6 +1,4 @@
 import React from 'react'
-import { ThemeProvider } from 'styled-components'
-import { theme } from './theme/theme'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from '@/components/partials/Header'
 import '@/styles/reset.css'

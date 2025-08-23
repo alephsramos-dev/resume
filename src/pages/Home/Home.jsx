@@ -8,9 +8,6 @@ import ClashDisplayRegular from "@/fonts/ClashDisplay-Regular.otf";
 import ClashDisplayMedium from "@/fonts/ClashDisplay-Medium.otf";
 import ClashDisplaySemiBold from "@/fonts/ClashDisplay-Semibold.otf";
 import ClashDisplayBold from "@/fonts/ClashDisplay-Bold.otf";
-import ShinyText from "@/components/ui/buttons/ButtonConhecerMais";
-import { TfiArrowTopRight } from "react-icons/tfi";
-import { FaCircle } from "react-icons/fa"; // ainda usado em Avaliacao se necessário
 import ChatNowButton from '@/components/ui/buttons/Chat';
 import GitHubFollowersButton from "@/components/ui/buttons/Github";
 import Beams from "@/components/ui/patterns/Beams";
