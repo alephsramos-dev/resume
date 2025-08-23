@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const Descricao = styled.p`
     color: ${({ color }) => color || '#1d1d1d'};
-    font-size: 20px;
+    font-size: 18px;
     font-family: 'Urbanist', sans-serif;
     width: 80%;
-    line-height: 100%;
+    line-height: 1.3;
     font-weight: 200;
 
     @media (max-width: 768px) {

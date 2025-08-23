@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import IconHeader from "./ui/IconHeader";
+import IconHeader from "../ui/badges/IconHeader";
 import { FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -190,7 +190,7 @@ export default function Header() {
             <Content>
                 <nav data-collapsed={collapsed} data-animating={animatingExpand ? 'expand' : undefined}>
                     <button onClick={handleLogoClick} aria-label={collapsed ? 'Expandir navegação' : 'Voltar ao topo'}>
-                        <img src="/icon-aleph-desenvolvedor-web.png" alt="logo do aleph desenvolvedor web" title="Aleph Desenvolvedor Web" loading="eager" />
+                        <img src="/icon-aleph-desenvolvedor-web.svg" alt="logo do aleph desenvolvedor web" title="Aleph Desenvolvedor Web" loading="eager" />
                     </button>
                     <ol>
                         <li>

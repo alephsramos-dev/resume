@@ -1,9 +1,9 @@
 import React from "react";
 import Home from "./Home";
 import Projects from "./Projects";
-import EmpresasQueConfiaram from "./Empresas";
-import Beneficios from "./Beneficios";
-import ComoFunciona from "./ComoFunciona";
+import EmpresasQueConfiaram from "./Companies";
+import Beneficios from "./Benefits";
+import ComoFunciona from "./Trajectory";
 
 export default function All() {
     return (
@@ -11,8 +11,9 @@ export default function All() {
             <Home />    
                 <EmpresasQueConfiaram />
                     <Beneficios />
-                        <ComoFunciona />
-                <Projects />
+                        {/* <ComoFunciona /> */}
+                            
+                            <Projects />
         </>
     )
 }

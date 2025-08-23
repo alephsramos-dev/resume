@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { techIcons } from "@/Data/techIcons";
+import { techIcons } from "@/Data/TechIcons";
 
 const Content = styled.div`
     display: flex;
@@ -16,7 +16,7 @@ const Content = styled.div`
     & img {
         width: 100%;
         height: 300px;
-        border-radius: 15px;   
+        border-radius: 10px;   
         object-fit: cover;
         object-position: center;
         margin-bottom: 35px;
@@ -28,7 +28,7 @@ const Content = styled.div`
 
     & hr {
         width: 100%;
-        border-color: #35353570;
+        border-color: #35353550;
         border-radius: 10px;
     }
 
@@ -46,8 +46,8 @@ const Content = styled.div`
         }
 
         & h4 {
-            font-size: 22px;
-            font-weight: 400;
+            font-size: 24px;
+            font-weight: 500;
             margin: 0;
 
             @media (max-width: 768px){
@@ -59,9 +59,9 @@ const Content = styled.div`
         & span {
             font-size: 12px;
             text-transform: uppercase;
-            font-weight: 400;
+            font-weight: 200;
             letter-spacing: 1px;
-            color: #ffffff60;
+            color: #d1d1d1;
 
             @media (max-width: 768px) {
                 letter-spacing: 1px;
@@ -72,7 +72,7 @@ const Content = styled.div`
 
         & p {
             font-size: 14px;
-            opacity: 0.7;
+            color: #d1d1d1;
             font-weight: 300;
 
             @media (max-width: 768px){

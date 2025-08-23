@@ -59,7 +59,7 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function ChatNowButton({ imgSrc = '/icon-aleph-desenvolvedor-web.png', title = 'Converse comigo agora', statusText = 'Online agora', onClick }) {
+export default function ChatNowButton({ imgSrc = '/icon-black-aleph-desenvolvedor-web.svg', title = 'Converse comigo agora', statusText = 'Online agora', onClick }) {
   const [animate, setAnimate] = useState(false);
   useEffect(() => {
     const to = setTimeout(() => setAnimate(true), 250);

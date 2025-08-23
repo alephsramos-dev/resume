@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import DarkVeil from "@/components/ui/background/DarkVeil";
+import DarkVeil from "@/components/ui/patterns/DarkVeil";
 import SplitText from "@/components/ui/texts/SplitText";
 import ClashDisplayExtraLight from "@/fonts/ClashDisplay-Extralight.otf";
 import ClashDisplayLight from "@/fonts/ClashDisplay-Light.otf";
@@ -11,15 +11,15 @@ import ClashDisplayBold from "@/fonts/ClashDisplay-Bold.otf";
 import ShinyText from "@/components/ui/buttons/ButtonConhecerMais";
 import { TfiArrowTopRight } from "react-icons/tfi";
 import { FaCircle } from "react-icons/fa"; // ainda usado em Avaliacao se necessário
-import ChatNowButton from '@/components/ui/buttons/ChatNowButton';
-import GitHubFollowersButton from "@/components/ui/github/ButtonGithub";
-import Beams from "@/components/ui/background/Beams";
-import RippleGrid from "@/components/ui/background/Ripple";
-import Silk from "@/components/ui/background/Slick";
-import ThreeDMarquee from "@/components/ui/background/ThreeDMarquee";
+import ChatNowButton from '@/components/ui/buttons/Chat';
+import GitHubFollowersButton from "@/components/ui/buttons/Github";
+import Beams from "@/components/ui/patterns/Beams";
+import RippleGrid from "@/components/ui/patterns/Ripple";
+import Silk from "@/components/ui/patterns/Slick";
+import ThreeDMarquee from "@/components/ui/patterns/ThreeDMarquee";
 import BlurText from "@/components/ui/texts/BlurText";
 import { IoStarSharp } from "react-icons/io5";
-import Particles from "@/components/ui/background/Particles";
+import Particles from "@/components/ui/patterns/Particles";
 // Reintroduzindo BlurText para animação inicial do título
 
 
@@ -90,14 +90,14 @@ const Content = styled.section`
     }
 
     & h1.hero-title {
-        font-size: clamp(2.2rem, 5vw + 1rem, 4.2rem);
+        font-size: 42px;
         font-family: 'Urbanist', sans-serif;
         font-weight: 400;
         width: 50%;
         max-width: 1200px;
         margin: 0;
         text-align: left;
-        line-height: 1;
+        line-height: 1.1;
         color: #fff;
         letter-spacing: -0.5px;
         position: relative;
@@ -151,11 +151,12 @@ const Content = styled.section`
     }
 
     & p {
-        font-size: 20px;
+        font-size: 18px;
         font-family: 'Urbanist', sans-serif;
-        width: 45%;
+        width: 35%;
         text-align: left;
-        color: #f1f1f1cf;
+        line-height: 1.3;
+        color: #d1d1d1;
         font-weight: 200;
 
         @media (max-width: 768px) {
@@ -272,7 +273,7 @@ const Avaliacao = styled.section`
                 & img {
                 border-radius: 50%;
                 position: relative;
-                border: 1px solid #ffffff;
+                border: 2px solid #d1d1d1;
                 transition: all .2s ease-in-out;
 
                 &:hover {
@@ -301,7 +302,7 @@ const Avaliacao = styled.section`
 
         & > span {
             font-weight: 500;
-            font-size: 18px;
+            font-size: 16px;
 
             @media (max-width: 768px) {
                 font-size: 15px;
@@ -322,30 +323,30 @@ const Avaliacao = styled.section`
 
                 & li {
                     position: relative;
-                    color: #fff200;
+                    color: #828282;
 
                     &:nth-child(2){
-                        margin-left: -3px;
+                        margin-left: -1px;
                     }
 
                     &:nth-child(3){
-                        margin-left: -3px;
+                        margin-left: -1px;
                     }
 
                     &:nth-child(4){
-                        margin-left: -3px;
+                        margin-left: -1px;
                     }
 
                     &:nth-child(5){
-                        margin-left: -3px;
+                        margin-left: -1px;
                     }
                 }
             }
 
             & span {
-                font-size: 15px;
+                font-size: 12px;
                 font-weight: 300;
-                opacity: 0.7;
+                color: #828282;
 
                 @media (max-width: 768px) {
                     font-size: 13px;
@@ -424,13 +425,13 @@ export default function Home() {
         <>
             <FontStyles />
             <Container onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-                <BG ref={bgRef}>
+                {/* <BG ref={bgRef}>
                     <DarkVeil 
                         noiseIntensity={0.10}   
                         speed={2}
                         hueShift={35}
                     />
-                </BG>
+                </BG> */}
                 <Content>
                     <Avaliacao>
                         <div>

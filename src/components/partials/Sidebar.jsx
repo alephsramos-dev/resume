@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
-import SidebarLinks from "@/components/ui/SidebarLinks";
+import SidebarLinks from "@/components/ui/badges/SidebarLinks";
 import { BiNetworkChart } from "react-icons/bi";
 import { SiOpenproject } from "react-icons/si";
 import { RiStackLine } from "react-icons/ri";

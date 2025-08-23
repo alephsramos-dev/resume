@@ -1,10 +1,10 @@
-import Badge from "@/components/ui/Badge";
-import Description from "@/components/ui/Description";
-import Stack from "@/components/ui/Stack";
-import Title from "@/components/ui/Title";
+import Badge from "@/components/ui/badges/Badge";
+import Description from "@/components/ui/texts/Description";
+import Stack from "@/components/ui/badges/Stack";
+import Title from "@/components/ui/texts/Title";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { stacks } from "@/pages/Home/Data/stacksData";
+import { stacks } from "@/pages/Home/Data/StackData";
 import { RiStackLine } from "react-icons/ri";
 import ButtonLight from "@/components/ui/buttons/ButtonArrrow";
 

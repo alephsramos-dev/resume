@@ -6,7 +6,7 @@ const Titulo = styled.h1`
     font-size: 38px;
     width: 100%;
     font-family: 'Urbanist', sans-serif;
-    line-height: 100%;
+    line-height: 1.1;
     font-weight: 400;
 
     @media (max-width: 768px) {

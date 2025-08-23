@@ -53,13 +53,14 @@ const Card = styled.div`
         font-weight: 500;
         transition: transform .25s cubic-bezier(.4,.2,.2,1);
         letter-spacing: -0.25px;
+        line-height: 1.1;
     }
 
     & p {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 300;
-        color: #ffffff80;
-        line-height: 1.45;
+        color: #d1d1d1;
+        line-height: 1.4;
         transition: transform .25s cubic-bezier(.4,.2,.2,1);
     }
 

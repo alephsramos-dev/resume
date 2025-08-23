@@ -1,8 +1,8 @@
-import Badge from "@/components/ui/Badge";
-import ProjectCard from "@/components/ui/cards/ProjectCard";
-import Description from "@/components/ui/Description";
+import Badge from "@/components/ui/badges/Badge";
+import ProjectCard from "@/components/ui/cards/Project";
+import Description from "@/components/ui/texts/Description";
 import { useNavigate } from "react-router-dom";
-import Title from "@/components/ui/Title";
+import Title from "@/components/ui/texts/Title";
 import React, { useRef, useState } from "react";
 import { SiOpenproject } from "react-icons/si";
 import { Splide, SplideSlide} from '@splidejs/react-splide';
@@ -10,7 +10,7 @@ import '@splidejs/react-splide/css';
 import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { projects as allProjects } from './Data/projectData';
+import { projects as allProjects } from './Data/ProjectData';
 import { IoFolderOpenOutline } from "react-icons/io5";
 
 const Container = styled.div`
@@ -20,63 +20,6 @@ const Container = styled.div`
     justify-content: center;
     background-color: #000;
     position: relative;
-    /* Linha luminosa central superior */
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        max-width: 900px;
-        height: 1px;
-        background: linear-gradient(90deg,
-            rgba(19,186,0,0) 0%,
-            rgba(19,186,0,0.08) 12%,
-            rgba(19,186,0,0.35) 26%,
-            rgba(19,186,0,0.9) 50%,
-            rgba(19,186,0,0.35) 74%,
-            rgba(19,186,0,0.08) 88%,
-            rgba(19,186,0,0) 100%);
-        border-radius: 999px;
-        filter: drop-shadow(0 0 4px rgba(19,186,0,0.55)) drop-shadow(0 0 14px rgba(19,186,0,0.35)) drop-shadow(0 0 28px rgba(19,186,0,0.18));
-        pointer-events: none;
-        animation: beamPulse 5.2s ease-in-out infinite;
-        opacity: .85;
-        mix-blend-mode: screen;
-    }
-
-    /* Halo difuso ampliando a luz */
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, -60%);
-        width: 360px;
-        height: 160px;
-        background: radial-gradient(ellipse at center,
-            rgba(19,186,0,0.42) 0%,
-            rgba(19,186,0,0.22) 32%,
-            rgba(19,186,0,0.10) 54%,
-            rgba(19,186,0,0.05) 70%,
-            rgba(19,186,0,0) 100%);
-        filter: blur(46px) saturate(140%);
-        opacity: .55;
-        pointer-events: none;
-        mix-blend-mode: screen;
-        animation: haloFloat 10s ease-in-out infinite;
-    }
-
-    @keyframes beamPulse {
-        0%, 100% { opacity: .85; filter: drop-shadow(0 0 4px rgba(19,186,0,0.55)) drop-shadow(0 0 14px rgba(19,186,0,0.32)) drop-shadow(0 0 28px rgba(19,186,0,0.16)); }
-        50% { opacity: 1; filter: drop-shadow(0 0 6px rgba(19,186,0,0.9)) drop-shadow(0 0 20px rgba(19,186,0,0.55)) drop-shadow(0 0 38px rgba(19,186,0,0.28)); }
-    }
-
-    @keyframes haloFloat {
-        0%, 100% { transform: translate(-50%, -60%) scale(1); opacity: .55; }
-        50% { transform: translate(-50%, -62%) scale(1.06); opacity: .72; }
-    }
 `
 
 const Background = styled.div`

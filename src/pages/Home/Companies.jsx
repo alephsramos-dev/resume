@@ -1,4 +1,4 @@
-import Description from "@/components/ui/Description";
+import Description from "@/components/ui/texts/Description";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -119,7 +119,7 @@ export default function EmpresasQueConfiaram() {
                     <div>
                         <Description
                             descricao="Com a confiança das maiores marcas do mundo"
-                            color="#ffffff80"
+                            color="#d1d1d1"
                         />
                     </div>
                     <CarouselWrapper aria-label="Logos de empresas que confiaram">

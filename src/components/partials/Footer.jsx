@@ -50,7 +50,7 @@ export default function Footer() {
     return (
         <>
             <Content>
-                <img src="/logo-aleph-desenvolvedor-web.png" alt="" loading="lazy" title="Aleph Desenvolvedor Web" />
+                <img src="/logo-aleph-desenvolvedor-web.svg" alt="" loading="lazy" title="Aleph Desenvolvedor Web" />
                 <p>© 2024 - 2025 | Todos os direitos reservados </p>
             </Content>
         </>

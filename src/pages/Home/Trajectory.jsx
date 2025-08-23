@@ -1,16 +1,16 @@
-import Badge from "@/components/ui/Badge";
-import Description from "@/components/ui/Description";
-import Title from "@/components/ui/Title";
+import Badge from "@/components/ui/badges/Badge";
+import Description from "@/components/ui/texts/Description";
+import Title from "@/components/ui/texts/Title";
 import { HiOutlineChatAlt2 } from "react-icons/hi";
 import React from "react";
 import { TbLoader } from "react-icons/tb";
 import styled from "styled-components";
-import { TimelineList } from "@/components/ui/Timeline";
+import { TimelineList } from "@/components/ui/contents/Timeline";
 import { BiLogoWhatsapp } from "react-icons/bi";
 import { CiCloud, CiPaperplane } from "react-icons/ci";
 import { IoCodeSlashOutline } from "react-icons/io5";
-import { CompareSlider } from "@/components/Compare";
-import ChatNowButton from "@/components/ui/buttons/ChatNowButton";
+import { CompareSlider } from "@/components/ui/contents/Compare";
+import ChatNowButton from "@/components/ui/buttons/Chat";
 
 const Container = styled.div`
     width: 100%;
