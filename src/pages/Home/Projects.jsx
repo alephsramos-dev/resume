@@ -4,13 +4,12 @@ import Description from "@/components/ui/texts/Description";
 import { useNavigate } from "react-router-dom";
 import Title from "@/components/ui/texts/Title";
 import React, { useRef, useState } from "react";
-import { SiOpenproject } from "react-icons/si";
 import { Splide, SplideSlide} from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { projects as allProjects } from './Data/ProjectData';
+import { projects as allProjects } from '@/pages/Data/ProjectData';
 import { IoFolderOpenOutline } from "react-icons/io5";
 
 const Container = styled.div`
