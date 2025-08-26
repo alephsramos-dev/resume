@@ -7,7 +7,7 @@ import BannerYago from "@/assets/portfolio/design-web-euyagolopes.jpg";
 export const projects = [
     {
         image: BannerPousadaLeAnge,
-        alt: "banner-do-site-da-pousada-le-ange-feito-por-aleph-desenvolvedor-web",
+        alt: "banner-do-site-da-pousada-le-ange-feito-por-aleph-desenvolvedor",
         nome: "Pousada Le Ange",
         data: "10/12/2024",
         tecnologias: ["react", "javascript", "html", "css", "sass", "vite", "firebase"],
