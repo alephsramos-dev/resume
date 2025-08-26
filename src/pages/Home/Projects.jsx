@@ -9,7 +9,7 @@ import '@splidejs/react-splide/css';
 import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { projects as allProjects } from './data/ProjectData';
+import { projects as allProjects } from './data/ProjectData.jsx';
 import { IoFolderOpenOutline } from "react-icons/io5";
 
 const Container = styled.div`
