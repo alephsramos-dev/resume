@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { techIcons } from "@/Data/TechIcons";
+import { techIcons } from "@/db/TechIcons";
 
 const Content = styled.div`
     display: flex;
