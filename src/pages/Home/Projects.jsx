@@ -1,5 +1,5 @@
-import Badge from "@/components/ui/badges/Badge";
-import ProjectCard from "@/components/ui/cards/Project";
+import Badge from "@/components/ui/Badge/Badge";
+import ProjectCard from "@/components/ui/Card/Project";
 import Description from "@/components/ui/texts/Description";
 import { useNavigate } from "react-router-dom";
 import Title from "@/components/ui/texts/Title";

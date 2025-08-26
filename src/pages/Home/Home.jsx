@@ -1,41 +1,16 @@
 import React, { useState, useEffect } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import DarkVeil from "@/components/ui/patterns/DarkVeil";
-import SplitText from "@/components/ui/texts/SplitText";
-import ClashDisplayExtraLight from "@/fonts/ClashDisplay-Extralight.otf";
-import ClashDisplayLight from "@/fonts/ClashDisplay-Light.otf";
-import ClashDisplayRegular from "@/fonts/ClashDisplay-Regular.otf";
-import ClashDisplayMedium from "@/fonts/ClashDisplay-Medium.otf";
-import ClashDisplaySemiBold from "@/fonts/ClashDisplay-Semibold.otf";
-import ClashDisplayBold from "@/fonts/ClashDisplay-Bold.otf";
-import ChatNowButton from '@/components/ui/buttons/Chat';
-import GitHubFollowersButton from "@/components/ui/buttons/Github";
-import Beams from "@/components/ui/patterns/Beams";
-import RippleGrid from "@/components/ui/patterns/Ripple";
-import Silk from "@/components/ui/patterns/Slick";
-import ThreeDMarquee from "@/components/ui/patterns/ThreeDMarquee";
+import styled from "styled-components";
+import ChatNowButton from '@/components/ui/Button/Chat';
 import BlurText from "@/components/ui/texts/BlurText";
 import { IoStarSharp } from "react-icons/io5";
-import Particles from "@/components/ui/patterns/Particles";
-// Reintroduzindo BlurText para animação inicial do título
-
-
-const FontStyles = createGlobalStyle`
-  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayExtraLight}) format('opentype'); font-weight: 200; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayLight}) format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayRegular}) format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayMedium}) format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplaySemiBold}) format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
-  @font-face { font-family: 'ClashDisplay'; src: url(${ClashDisplayBold}) format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
-`;
 
 const Container = styled.div`
     width: 100%;
     display: flex; 
     align-items: center;
     justify-content: center;
-    background: #000;
-    color: #fff;
+    background: ${({ theme }) => theme.colors.pureBlack};
+    color: ${({ theme }) => theme.colors.pureWhite};
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -88,14 +63,13 @@ const Content = styled.section`
 
     & h1.hero-title {
         font-size: 42px;
-        font-family: 'Urbanist', sans-serif;
         font-weight: 400;
         width: 50%;
         max-width: 1200px;
         margin: 0;
         text-align: left;
         line-height: 1.1;
-        color: #fff;
+        color: ${({ theme }) => theme.colors.white};
         letter-spacing: -0.5px;
         position: relative;
         white-space: normal;
@@ -112,7 +86,7 @@ const Content = styled.section`
         .glow {
             position: relative;
             display: inline;
-            color: #fff;
+            color: var(---color-white);
             /* Começa mais fraco; anima para intensificar suavemente */
             text-shadow:
                 0 0 1px rgba(255,255,255,0.2),
@@ -149,11 +123,10 @@ const Content = styled.section`
 
     & p {
         font-size: 18px;
-        font-family: 'Urbanist', sans-serif;
         width: 35%;
         text-align: left;
         line-height: 1.3;
-        color: #d1d1d1;
+        color: ${({ theme }) => theme.colors.grey.dark};
         font-weight: 200;
 
         @media (max-width: 768px) {
@@ -177,14 +150,6 @@ const Content = styled.section`
 
     /* Removido gradientShift; glow é estático */
 `;
-
-const BtnConhecer = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-`
-
 
 const Avaliacao = styled.section`
     display: flex;
@@ -320,7 +285,7 @@ const Avaliacao = styled.section`
 
                 & li {
                     position: relative;
-                    color: #828282;
+                    color: #d1d1d1;
 
                     &:nth-child(2){
                         margin-left: -1px;
@@ -420,7 +385,6 @@ export default function Home() {
 
     return (
         <>
-            <FontStyles />
             <Container onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
                 {/* <BG ref={bgRef}>
                     <DarkVeil 
@@ -500,9 +464,6 @@ export default function Home() {
                     </div>
                     <aside>
                         <ChatNowButton />
-                        {/* <BtnConhecer>
-                            <ShinyText text="Conhecer mais" disabled={false} speed={3} />
-                        </BtnConhecer> */}
                     </aside>
                 </Content>
             </Container>

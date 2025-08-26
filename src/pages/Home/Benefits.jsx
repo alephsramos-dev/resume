@@ -1,5 +1,5 @@
-import Badge from "@/components/ui/badges/Badge";
-import BeneficioCard from "@/components/ui/cards/Benefits";
+import Badge from "@/components/ui/Badge/Badge";
+import BeneficioCard from "@/components/ui/Card/Benefits";
 import Description from "@/components/ui/texts/Description";
 import Title from "@/components/ui/texts/Title";
 import React from "react";

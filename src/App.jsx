@@ -1,11 +1,13 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Header from '@/components/partials/Header'
-import '@/styles/reset.css'
-import Footer from '@/components/partials/Footer'
+
+// Layout Components
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+
+// Page Components
 import All from '@/pages/Home/All'
 import Curriculo from '@/pages/Resume/All'
-import Site from '@/pages/Site/All'
 import Project from '@/pages/Projects/All'
 
 export default function App() {
@@ -15,7 +17,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<All />} />
         <Route path="/curriculo" element={<Curriculo />} />
-        <Route path="/criar-meu-site" element={<Site />} />
         <Route path="/projetos" element={<Project />} />
       </Routes>
       <Footer />

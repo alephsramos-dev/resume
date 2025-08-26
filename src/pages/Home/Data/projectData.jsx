@@ -1,9 +1,8 @@
-// Exemplo de estrutura para os dados dos projetos
-import BannerPousadaLeAnge from '@/assets/banners-project/pousadaleange-banner.jpg';
-import BannerAleph from '@/assets/banners-project/alephsramos-banner.jpg';
-import BannerNovaMetalica from '@/assets/banners-project/novametalica-banner.jpg';
-import BannerFast from "@/assets/banners-project/lojafastsistemasconstrutivos-banner.jpg";
-import BannerYago from "@/assets/banners-project/euyagolopes-banner.jpg";
+import BannerPousadaLeAnge from '@/assets/portfolio/design-web-pousadaleange.jpg';
+import BannerAleph from '@/assets/portfolio/design-web-alephsramos.jpg';
+import BannerNovaMetalica from '@/assets/portfolio/design-web-novametalica.jpg';
+import BannerFast from "@/assets/portfolio/design-web-lojafastsistemasconstrutivos.jpg";
+import BannerYago from "@/assets/portfolio/design-web-euyagolopes.jpg";
 
 export const projects = [
     {
