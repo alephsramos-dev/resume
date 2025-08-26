@@ -4,7 +4,7 @@ import Stack from "@/components/ui/Badge/Stack";
 import Title from "@/components/ui/texts/Title";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { stacks } from "@/pages/Home/data/StackData";
+import { stacks } from "@/pages/Home/database/StackData";
 import { RiStackLine } from "react-icons/ri";
 import ButtonLight from "@/components/ui/buttons/ButtonArrrow";
 
