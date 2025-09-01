@@ -28,7 +28,6 @@ export const GlobalStyle = createGlobalStyle`
 
   /* 3. Estilos Globais do Body */
   body {
-    line-height: 1.5; /* Melhora a legibilidade do texto */
     -webkit-font-smoothing: antialiased; /* Suaviza as fontes em navegadores WebKit */
     -moz-osx-font-smoothing: grayscale; /* Suaviza as fontes no Firefox */
     
