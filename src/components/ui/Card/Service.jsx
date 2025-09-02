@@ -18,7 +18,7 @@ const Container = styled.main`
 
     @media (max-width: 768px){
         width: 100%;
-        height: 450px;
+        height: 400px;
         margin: 10px 0;
     }
 
@@ -60,6 +60,10 @@ const ImageBg = styled.div`
     left: 0;
     z-index: 0;
     background-color: #050505;
+
+    @media (max-width: 768px){
+        height: 80%;
+    }
 
     &::before {
         content: '';

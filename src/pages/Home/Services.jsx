@@ -7,6 +7,10 @@ import { IoFolderOpenOutline } from "react-icons/io5";
 import styled from "styled-components";
 
 import DevService from '@/assets/services/desenvolvedor-web-service.svg';
+import AutomationService from '@/assets/services/automation-service.svg';
+import TrafficManagementService from '@/assets/services/traffic-management-service.svg';
+import DesignService from '@/assets/services/design-service.svg';
+import RedatorService from '@/assets/services/redator-service.svg';
 
 const Container = styled.div`
     width: 100%;
@@ -15,7 +19,6 @@ const Container = styled.div`
     justify-content: center;
     background-color: #000;
     position: relative;
-    border: 1px solid red;
 `
 
 const Background = styled.div`
@@ -123,27 +126,27 @@ export default function Services () {
                         />
                         <Service 
                             width="calc(33.33% - 10px)"
-                            imageSrc="https://img-c.udemycdn.com/course/750x422/6310743_c7fe_2.jpg"
-                            nameService="Desenvolvimento Web"
-                            descriptionService="Mais do que um site, uma experiência digital exclusiva. Cada detalhe é planejado para refletir a excelência da sua marca."
+                            imageSrc={AutomationService}
+                            nameService="Automação"
+                            descriptionService="Automação de processos para aumentar a eficiência e reduzir erros."
                         />
                         <Service 
                             width="calc(33.33% - 10px)"
-                            imageSrc="https://img-c.udemycdn.com/course/750x422/6310743_c7fe_2.jpg"
-                            nameService="Desenvolvimento Web"
-                            descriptionService="Criação de sites e aplicações web"
+                            imageSrc={TrafficManagementService}
+                            nameService="Gestão de Tráfego"
+                            descriptionService="Gestão de campanhas publicitárias para maximizar resultados."
                         />
                         <Service 
                             width="calc(40% - 10px)"
-                            imageSrc="https://img-c.udemycdn.com/course/750x422/6310743_c7fe_2.jpg"
-                            nameService="Desenvolvimento Web"
-                            descriptionService="Criação de sites e aplicações web"
+                            imageSrc={DesignService}
+                            nameService="Design Gráfico"
+                            descriptionService="Criação de identidades visuais impactantes e materiais gráficos de alta qualidade."
                         />
                         <Service 
                             width="calc(26.66% - 10px)"
-                            imageSrc="https://img-c.udemycdn.com/course/750x422/6310743_c7fe_2.jpg"
-                            nameService="Desenvolvimento Web"
-                            descriptionService="Criação de sites e aplicações web"
+                            imageSrc={RedatorService}
+                            nameService="Copywriting (Redator)"
+                            descriptionService="Criação de textos persuasivos focados em conversão."
                         />
                     </Grid>
                 </Content>
