@@ -62,7 +62,7 @@ const ImageBg = styled.div`
     background-color: #050505;
 
     @media (max-width: 768px){
-        height: 80%;
+        height: 100%;
     }
 
     &::before {
