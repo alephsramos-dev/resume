@@ -11,7 +11,7 @@ const Container = styled.main`
     height: 400px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 0 0 1px #f1f1f130;
+    box-shadow: 0 0 0 1px #f1f1f120;
     border-radius: 10px;
     margin: 5px;
     transition: all 0.3s ease-in-out;
@@ -75,7 +75,7 @@ const ImageBg = styled.div`
         background: linear-gradient(0deg, #050505, transparent);
 
         @media (max-width: 768px){
-            height: 80%;
+            height: 100%;
         }
     }
 
