@@ -19,7 +19,7 @@ const Container = styled.main`
     @media (max-width: 768px){
         width: 100%;
         height: 400px;
-        margin: 10px 0;
+        margin: 5px 0;
     }
 
     &::before {
