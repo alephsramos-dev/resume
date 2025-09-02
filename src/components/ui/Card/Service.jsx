@@ -79,6 +79,21 @@ const ImageBg = styled.div`
         }
     }
 
+     &::after {
+        content: '';
+        display: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        bottom: 0;
+        background: linear-gradient(0deg, #050505, transparent);
+
+        @media (max-width: 768px){
+            display: block;
+        }
+    }
+
     & img {
         width: 100%;
         height: 100%;
