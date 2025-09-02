@@ -115,7 +115,7 @@ const Texts = styled.div`
     padding: 10px 25px 25px 25px;
 
     & h2 {
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 400;
         line-height: 1.0;
     }
