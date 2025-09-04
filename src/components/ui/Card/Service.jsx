@@ -59,7 +59,7 @@ const ImageBg = styled.div`
     top: 0;
     left: 0;
     z-index: 0;
-    background-color: #050505;
+    background-color: #000;
 
     @media (max-width: 768px){
         height: 100%;
@@ -72,7 +72,7 @@ const ImageBg = styled.div`
         height: 65%;
         left: 0;
         bottom: 0;
-        background: linear-gradient(0deg, #050505, transparent);
+        background: linear-gradient(0deg, #000, transparent);
 
         @media (max-width: 768px){
             height: 100%;
@@ -87,7 +87,7 @@ const ImageBg = styled.div`
         height: 100%;
         left: 0;
         bottom: 0;
-        background: linear-gradient(0deg, #050505, transparent);
+        background: linear-gradient(0deg, #000, transparent);
 
         @media (max-width: 768px){
             display: block;

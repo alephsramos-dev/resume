@@ -32,7 +32,7 @@ const Content = styled.section`
 
     @media (max-width: 768px){
         padding: 10% 5%;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 `;
 
