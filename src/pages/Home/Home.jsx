@@ -47,7 +47,7 @@ const Content = styled.section`
     @media (max-width: 768px){
         gap: 20px;
         height: 100%;
-        padding: 10% 2.5% 10% 2.5%;
+        padding: 10% 5% 10% 5%;
         justify-content: flex-end;
         flex-direction: column;
     }

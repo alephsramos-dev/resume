@@ -46,7 +46,7 @@ const Content = styled.section`
         & > div:first-child { width: 20%; }
     }
     @media (max-width: 768px){
-        padding: 1% 2.5%;
+        padding: 1% 5%;
     }
 `;
 

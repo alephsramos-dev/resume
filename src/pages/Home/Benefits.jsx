@@ -33,7 +33,7 @@ const Content = styled.section`
     z-index: 1;
 
     @media (max-width: 768px){
-        padding: 5% 2.5%;
+        padding: 5% 5%;
     }
 `;
 

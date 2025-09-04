@@ -3,9 +3,8 @@ import Home from "./Home";
 import Projects from "./Projects";
 import EmpresasQueConfiaram from "./Companies";
 import Beneficios from "./Benefits";
-import ComoFunciona from "./Trajectory";
-import ProjectPreview from "@/components/ui/Card/ProjectPreview";
 import Services from "./Services";
+import Automation from "./Automation";
 
 export default function All() {
     return (
@@ -14,9 +13,9 @@ export default function All() {
                 <EmpresasQueConfiaram />
                     <Beneficios />
                         {/* <ComoFunciona /> */}   
-                            
                             <Projects />   
-                                <Services />
-        </>
+                                <Services />   
+                                    <Automation />
+        </> 
     )
 }
