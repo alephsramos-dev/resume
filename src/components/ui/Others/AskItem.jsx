@@ -23,15 +23,15 @@ const Header = styled.button`
   cursor: pointer;
   text-align: left;
 
+  @media (max-width: 768px){
+    padding: 16px 12px;
+  }
+
   & p {
     font-size: 18px;
     font-weight: 300;
     line-height: 1.2;
     margin: 0;
-
-    @media (max-width: 768px){
-        font-size: 16px;
-    }
   }
 
   & span.icon {
@@ -65,6 +65,10 @@ const PanelInner = styled.div`
   border-bottom: none;
   position: relative;
 
+  @media (max-width: 768px){
+     padding: ${({ $open }) => ($open ? "14px 16px" : "0px")};
+  }
+
   &::before{
     content: "";
     position: absolute;
@@ -83,7 +87,7 @@ const PanelInner = styled.div`
     color: #ffffff90;
 
     @media (max-width: 768px){
-        font-size: 14px;
+        font-size: 16px;
     }
   }
 `;
