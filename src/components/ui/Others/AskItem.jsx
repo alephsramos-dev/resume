@@ -59,7 +59,7 @@ const Panel = styled.div`
 `;
 
 const PanelInner = styled.div`
-  min-height: 0; /* necessário para o grid collapse funcionar */
+  min-height: 0; 
   padding: ${({ $open }) => ($open ? "12px 12px" : "0px")};
   border: 1px solid #ffffff20;
   border-bottom: none;
