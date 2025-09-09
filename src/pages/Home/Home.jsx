@@ -87,7 +87,7 @@ const Content = styled.section`
             position: relative;
             display: inline;
             color: var(---color-white);
-            /* Começa mais fraco; anima para intensificar suavemente */
+            /*  anima para intensificar suavemente */
             text-shadow:
                 0 0 1px rgba(255,255,255,0.2),
                 0 0 3px rgba(170,160,255,0.15),
