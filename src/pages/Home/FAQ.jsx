@@ -1,7 +1,7 @@
 import Badge from "@/components/ui/Badge/Badge";
 import AskItem from "@/components/ui/Others/AskItem";
-import Description from "@/components/ui/Texts/Description";
-import Title from "@/components/ui/Texts/Title";
+import Description from "@/components/ui/texts/Description";
+import Title from "@/components/ui/texts/Title";
 import React from "react";
 import { TbMichelinStar } from "react-icons/tb";
 import styled from "styled-components";

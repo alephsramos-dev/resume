@@ -1,4 +1,4 @@
-import Description from "@/components/ui/Texts/Description";
+import Description from "@/components/ui/texts/Description";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";

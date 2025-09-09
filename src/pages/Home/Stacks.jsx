@@ -1,7 +1,7 @@
 import Badge from "@/components/ui/Badge/Badge";
-import Description from "@/components/ui/Texts/Description";
+import Description from "@/components/ui/texts/Description";
 import Stack from "@/components/ui/Badge/Stack";
-import Title from "@/components/ui/Texts/Title";
+import Title from "@/components/ui/texts/Title";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { stacks } from "@/pages/Home/database/StackData";

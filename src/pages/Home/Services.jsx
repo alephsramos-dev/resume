@@ -1,7 +1,7 @@
 import Badge from "@/components/ui/Badge/Badge";
 import Service from "@/components/ui/Card/Service";
-import Description from "@/components/ui/Texts/Description";
-import Title from "@/components/ui/Texts/Title";
+import Description from "@/components/ui/texts/Description";
+import Title from "@/components/ui/texts/Title";
 import React from "react";
 import { IoFolderOpenOutline } from "react-icons/io5";
 import styled from "styled-components";
