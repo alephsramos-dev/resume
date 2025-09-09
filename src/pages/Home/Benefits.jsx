@@ -1,7 +1,7 @@
 import Badge from "@/components/ui/Badge/Badge";
 import BeneficioCard from "@/components/ui/Card/Benefits";
-import Description from "@/components/ui/texts/Description";
-import Title from "@/components/ui/texts/Title";
+import Description from "@/components/ui/Texts/Description";
+import Title from "@/components/ui/Texts/Title";
 import React from "react";
 import { MdStarPurple500 } from "react-icons/md";
 import { TbMichelinStar } from "react-icons/tb";

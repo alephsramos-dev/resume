@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChatNowButton from '@/components/ui/Button/Chat';
-import BlurText from "@/components/ui/texts/BlurText";
+import BlurText from "@/components/ui/Texts/BlurText";
 import { IoStarSharp } from "react-icons/io5";
 
 const Container = styled.div`

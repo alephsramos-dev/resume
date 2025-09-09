@@ -5,6 +5,7 @@ import EmpresasQueConfiaram from "./Companies";
 import Beneficios from "./Benefits";
 import Services from "./Services";
 import Automation from "./Automation";
+import FAQ from "./FAQ";
 
 export default function All() {
     return (
@@ -16,6 +17,7 @@ export default function All() {
                             <Projects />   
                                 <Services />   
                                     <Automation />
+                                        <FAQ />
         </> 
     )
 }

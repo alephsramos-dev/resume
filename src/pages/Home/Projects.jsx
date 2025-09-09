@@ -1,8 +1,8 @@
 import Badge from "@/components/ui/Badge/Badge";
 import ProjectCard from "@/components/ui/Card/Project";
-import Description from "@/components/ui/texts/Description";
+import Description from "@/components/ui/Texts/Description.jsx";
 import { useNavigate } from "react-router-dom";
-import Title from "@/components/ui/texts/Title";
+import Title from "@/components/ui/Texts/Title.jsx";
 import React, { useRef, useState } from "react";
 import { Splide, SplideSlide} from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';

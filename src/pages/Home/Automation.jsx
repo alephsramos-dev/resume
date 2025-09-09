@@ -1,7 +1,7 @@
 import { AnimatedBeamDemo } from "@/components/magicui/automation";
 import Badge from "@/components/ui/Badge/Badge";
-import Description from "@/components/ui/texts/Description";
-import Title from "@/components/ui/texts/Title";
+import Description from "@/components/ui/Texts/Description";
+import Title from "@/components/ui/Texts/Title";
 import React from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { TbMichelinStar } from "react-icons/tb";
