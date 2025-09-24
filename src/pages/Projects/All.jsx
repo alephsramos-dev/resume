@@ -43,7 +43,14 @@ export default function All() {
         <>
             <Container>
                 <Bg>
-                    <BgProject />
+                    <BgProject 
+                        speed={0.6}
+                        hueShift={330}
+                        noiseIntensity={0.1}
+                        scanlineIntensity={0.05}
+                        scanlineDensity={3}
+                        warpAmount={2}
+                    />
                 </Bg>
                 <Header /> 
                     <Portfolio />
