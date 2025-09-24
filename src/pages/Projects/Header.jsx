@@ -12,6 +12,7 @@ const Container = styled.div`
     position: relative;
     z-index: 2;
     overflow: hidden;
+    height: 40vh;
 `;
 
 const Content = styled.section`
