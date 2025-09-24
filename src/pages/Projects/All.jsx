@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import styled from "styled-components";
 import Portfolio from "./Portfolio";
-import BgProject from "@/components/ui/BgProject";
+import BgProject from "@/components/ui/Patterns/BgProject";
 
 const Container = styled.div`
     width: 100%;
