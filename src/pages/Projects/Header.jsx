@@ -1,7 +1,3 @@
-import Badge from "@/components/ui/Badge/Badge";
-import Stack from "@/components/ui/Badge/Stack";
-import Description from "@/components/ui/texts/Description";
-import Title from "@/components/ui/texts/Title";
 import React from "react";
 import styled from "styled-components";
 
