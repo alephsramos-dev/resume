@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import styled from "styled-components";
 import Portfolio from "./Portfolio";
-import DarkVeil from "../../components/ui/Patterns/DarkVeil";
+import DarkVeil from "../../components/ui/Patterns/DarkVeil.jsx";
 
 const Container = styled.div`
     width: 100%;
