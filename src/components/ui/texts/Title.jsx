@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Titulo = styled.h1`
     color: ${({ color }) => color || '#1d1d1d'};
-    font-size: 38px;
+    font-size: ${({ fontSize }) => fontSize || '36px'};
     width: 100%;
     font-family: 'Urbanist', sans-serif;
     line-height: 1.1;
@@ -16,11 +16,12 @@ const Titulo = styled.h1`
 
 export default function Title({
     titulo,
-    color
+    color,
+    fontSize
 }){
     return (
         <>
-            <Titulo color={color}>{titulo}</Titulo>
+            <Titulo fontSize={fontSize} color={color}>{titulo}</Titulo>
         </>
     )
 }

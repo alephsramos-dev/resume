@@ -14,11 +14,15 @@ import sassIcon from '@/assets/icons/sass.svg';
 import figmaIcon from '@/assets/icons/figma.svg';
 import gitIcon from '@/assets/icons/git.svg';
 import githubIcon from '@/assets/icons/github.svg';
+import n8nIcon from '@/assets/icons/n8n.svg';
+import supabaseIcon from '@/assets/icons/supabase.svg';
 import vercelIcon from '@/assets/icons/vercel.svg';
 import firebaseIcon from '@/assets/icons/firebase.svg';
 
 export const techIcons = {
   react: <img src={reactIcon} alt="React" style={{width: 25, height: 25}} />,
+  supabase: <img src={supabaseIcon} alt="Supabase" style={{width: 25, height: 25}} />,
+  n8n: <img src={n8nIcon} alt="n8n" style={{width: 25, height: 25}} />,
   javascript: <img src={javascriptIcon} alt="JavaScript" style={{width: 25, height: 25}} />,
   html: <img src={htmlIcon} alt="HTML5" style={{width: 25, height: 25}} />,
   css: <img src={cssIcon} alt="CSS3" style={{width: 25, height: 25}} />,

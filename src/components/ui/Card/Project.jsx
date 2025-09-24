@@ -123,8 +123,7 @@ const ImageWrapper = styled.div`
 
 export default function ProjectCard({
     image,
-    alt, 
-    nome,
+    title,
     data,
     tecnologias = [] // array de strings, ex: ['react', 'javascript', 'html']
 }) {
@@ -147,10 +146,10 @@ export default function ProjectCard({
                     onMouseLeave={() => setHover(false)}
                     onMouseMove={handleMouseMove}
                 >
-                    <img src={image} alt={alt} loading="lazy" />
+                    <img src={image} alt={title} loading="lazy" />
                 </ImageWrapper>
                 <div>
-                    <h4>{nome}</h4>
+                    <h4>{title}</h4>
                     <p>{data}</p>
                 </div>
                 

@@ -1,0 +1,47 @@
+[
+  {
+    "techName": "React",
+    "tecnologias": ["React"],
+    "color": "#61DAFB"
+  },
+  {
+    "techName": "Javascript",
+    "tecnologias": ["Javascript"],
+    "color": "#F7DF1E"
+  },
+  {
+    "techName": "HTML5",
+    "tecnologias": ["HTML"],
+    "color": "#E34F26"
+  },
+  {
+    "techName": "CSS3",
+    "tecnologias": ["CSS"],
+    "color": "#1572B6"
+  },
+  {
+    "techName": "Supabase",
+    "tecnologias": ["Supabase"],
+    "color": "#3ECF8E"
+  },
+  {
+    "techName": "Vite",
+    "tecnologias": ["Vite"],
+    "color": "#646CFF"
+  },
+  {
+    "techName": "Firebase",
+    "tecnologias": ["Firebase"],
+    "color": "#FFCA28"
+  },
+  {
+    "techName": "Styled Components",
+    "tecnologias": ["Sass"],
+    "color": "#CC6699"
+  },
+  {
+    "techName": "N8N",
+    "tecnologias": ["N8N"],
+    "color": "#EA4B71"
+  }
+]
