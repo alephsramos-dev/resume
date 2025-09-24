@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Portfolio from "./Portfolio";
 import DarkVeil from "@/components/ui/Patterns/DarkVeil.jsx";
 
+
 const Container = styled.div`
     width: 100%;
     display: flex;
