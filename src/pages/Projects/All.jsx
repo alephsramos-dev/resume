@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import styled from "styled-components";
 import Portfolio from "./Portfolio";
-import DarkVeil from "@/components/ui/Patterns/DarkVeil";
+import DarkVeil from "@/components/ui/Patterns/DarkVeil.jsx";
 
 const Container = styled.div`
     width: 100%;
@@ -43,12 +43,7 @@ export default function All() {
         <>
             <Container>
                 <Bg>
-                    <DarkVeil
-                        speed={0.6}
-                        hueShift={330}
-                        noiseIntensity={0.1}
-                        warpAmount={2}
-                    />
+                    <DarkVeil />
                 </Bg>
                 <Header /> 
                     <Portfolio />
