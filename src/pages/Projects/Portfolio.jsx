@@ -8,7 +8,6 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css'; 
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import DarkVeil from "@/components/ui/Patterns/BgProject";
 
 const Container = styled.div`
     width: 100%;
@@ -86,7 +85,6 @@ export default function Portfolio() {
     return (
         <>
             <Container>
-                <DarkVeil />
                 {siteTypes.map(type => (
                     <Content key={type}>
                         <Header>

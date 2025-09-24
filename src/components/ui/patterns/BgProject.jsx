@@ -84,7 +84,7 @@ void main(){
 }
 `;
 
-export default function DarkVeil({
+export default function BgProject({
   hueShift = 0,
   noiseIntensity = 0,
   scanlineIntensity = 0,
