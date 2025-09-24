@@ -15,7 +15,6 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #000000;
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -39,8 +38,9 @@ const Content = styled.section`
     position: relative;
     overflow: hidden;
     z-index: 1;
-    background-color: #101010;
-    border: 1px solid #ffffff15;
+    background-color: #00000030;
+    backdrop-filter: blur(20px);
+    border: 1px solid #ffffff25;
     border-radius: 28px;
 
     @media (max-width: 768px){
