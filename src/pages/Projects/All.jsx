@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import styled from "styled-components";
 import Portfolio from "./Portfolio";
-import Title from "@/components/ui/texts/Title";
+import BgProject from "@/components/ui/BgProject";
 
 const Container = styled.div`
     width: 100%;
@@ -43,7 +43,7 @@ export default function All() {
         <>
             <Container>
                 <Bg>
-                    <Title/>
+                    <BgProject />
                 </Bg>
                 <Header /> 
                     <Portfolio />
