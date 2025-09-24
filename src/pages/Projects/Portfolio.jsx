@@ -44,7 +44,7 @@ const Content = styled.section`
     border-radius: 28px;
 
     @media (max-width: 768px){
-        padding: 5% 5% 2.5% 5%;
+        padding: 5% 5% 5% 5%;
         border-radius: 18px;
     }
 `;

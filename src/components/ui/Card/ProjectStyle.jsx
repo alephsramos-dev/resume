@@ -262,6 +262,7 @@ const Buttons = styled.div`
         border-radius: 8px;
         ${props => props.$smooth && maskWith('8px')};
         ${props => props.$clipBtn && css`clip-path: ${props.$clipBtn};`}
+        color: #000;
 
         @media (max-width: 768px){
             padding: 6px;
