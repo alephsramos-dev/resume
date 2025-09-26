@@ -73,8 +73,8 @@ const Image = styled.div`
     }
 
     & img {
-        width: max-content;
         object-fit: cover;
+        width: 100%;
         height: 100%;
         position: relative;
         z-index: 0;
@@ -288,12 +288,12 @@ export default function ProjectStyle({
     description,
     urlPage,
     githubUrl,
-    onDetails,
     popupBg,
     popupBorder,
     popupColor,
     siteBg,
     siteBorder,
+    slug,
     siteColor,
     smoothCorners = true,
     cornerRadius = 22,
@@ -359,7 +359,7 @@ export default function ProjectStyle({
                 </Texts>
                 <Buttons $smooth={smoothCorners} $clipBtn={buttonSquircle.path}>
                     <div ref={buttonSquircle.ref}>
-                        <button onClick={onDetails}>Ver detalhes</button>
+                        <button onClick={() => window.location.href = `/projetos/${slug}`}>Ver detalhes</button>
                         <button onClick={() => openTarget(urlPage)}>Acessar site <BsBoxArrowUpRight />
 </button>
                     </div>

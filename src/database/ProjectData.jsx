@@ -16,12 +16,28 @@ export const projects = [
     {
         image: "",
         title: "Programa de Fidelidade",
+        slug: "programa-de-fidelidade",
         popupContent: "Novidade",
         siteType: "Aplicações",
         imageCompanyUrl: LogoFastSistemasConstrutivos,
         companyName: "Fast Sistemas Construtivos",
         tecnologias: ["react", "supabase", "n8n", "vite", "sass", "javascript" ],
+        stack: [
+            {
+                "techName": "React",
+                "tecnologias": ["React"],
+                "color": "#61DAFB"
+            },
+            {
+                "techName": "Javascript",
+                "tecnologias": ["Javascript"],
+                "color": "#F7DF1E"
+            }
+        ],
         data: "22/09/2025",
+        duration: 120,
+        plataform: "Código",
+        country: "Brasil",
         description: "Sistema de fidelidade para clientes da fast, sistema totalmente focado em ser automono, o próprio usuário consegue fazer tudo sem depender de ninguém.",
         urlPage: "https://fidelidade.fastsistemasconstrutivos.com.br",
         githubUrl: "https://github.com/alephsramos-dev",
@@ -34,13 +50,30 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: "https://mir-s3-cdn-cf.behance.net/projects/404/774954210683221.Y3JvcCwxNDA2LDExMDAsMTcsMA.png",
         title: "Gerenciador de Agência",
         popupContent: "Útil",
+        slug: "gerenciador-de-agencia",
         siteType: "Aplicações",
         imageCompanyUrl: LogoUnityCompany,
         companyName: "Unity Company",
         tecnologias: ["react", "javascript", "firebase", "vite", "sass"],
+        stack: [
+            {
+                "techName": "React",
+                "tecnologias": ["React"],
+                "color": "#61DAFB"
+            },
+            {
+                "techName": "Javascript",
+                "tecnologias": ["Javascript"],
+                "color": "#F7DF1E"
+            }
+        ],
+        data: "22/09/2025",
+        duration: 120,
+        plataform: "Código",
+        country: "Brasil",
         data: "11/02/2025",
         description: "Gerenciador completo para que o time de marketing consiga ter controle total sobre os projetos, clientes, finanças etc.",
         urlPage: "",
@@ -57,6 +90,7 @@ export const projects = [
         image: "",
         title: "Sistema de Pré-vendas",
         popupContent: "Útil",
+        slug: "sistema-de-pre-vendas",
         siteType: "Aplicações",
         imageCompanyUrl: LogoUnityCompany,
         companyName: "Unity Company",
@@ -77,6 +111,7 @@ export const projects = [
         image: "",
         title: "euYagoLopes",
         popupContent: "Tendência",
+        slug: "euyagolopes",
         siteType: "Landing Page",
         imageCompanyUrl: SemLogo,
         companyName: "euYagoLopes",
@@ -97,6 +132,7 @@ export const projects = [
         image: "",
         title: "Pousada Le Ange",
         popupContent: "Mais visto",
+        slug: "pousada-le-ange",
         siteType: "Institucional",
         imageCompanyUrl: LogoPousadaLeAnge,
         companyName: "Pousada Le Ange",
@@ -117,6 +153,7 @@ export const projects = [
         image: "",
         title: "Nova Metálica",
         popupContent: "Fábrica",
+        slug: "nova-metalica",
         siteType: "Institucional",
         imageCompanyUrl: LogoNovaMetalica,
         companyName: "Nova Metálica",
@@ -136,6 +173,7 @@ export const projects = [
     {
         image: "",
         title: "K'dea Construtora",
+        slug: "kdea-construtora",
         popupContent: "Em alta",
         siteType: "Landing Page",
         imageCompanyUrl: LogoKdea,
@@ -157,6 +195,7 @@ export const projects = [
         image: "",
         title: "Cháles para Airbnb",
         popupContent: "Em alta",
+        slug: "chales-para-airbnb",
         siteType: "Landing Page",
         imageCompanyUrl: LogoFastHomes,
         companyName: "Fast Homes",
@@ -177,6 +216,7 @@ export const projects = [
         image: "",
         title: "Pisos Vinilicos",
         popupContent: "Auge",
+        slug: "pisos-vinilicos",
         siteType: "Landing Page",
         imageCompanyUrl: LogoFastSistemasConstrutivos,
         companyName: "Fast Sistemas Construtivos",
@@ -198,6 +238,7 @@ export const projects = [
         title: "Fast Homes",
         popupContent: "Tendência",
         siteType: "Institucional",
+        slug: "fast-homes",
         imageCompanyUrl: LogoFastHomes,
         companyName: "Fast Homes",
         tecnologias: ["react", "n8n", "firebase", "vite", "sass", "javascript"],
@@ -215,6 +256,8 @@ export const projects = [
     },
    
 ];
+
+export default projects;
 
 
 // {
