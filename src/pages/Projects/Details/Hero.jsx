@@ -9,7 +9,7 @@ import { useMemo } from "react";
 const Container = styled.div`
     width: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     flex-direction: row;
     gap: 16px;
@@ -25,7 +25,7 @@ const Texts = styled.div`
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    gap: 16px;
+    gap: 22px;
 
     @media (max-width: 768px){
         width: 100%;
@@ -39,18 +39,18 @@ const Company = styled.div`
     gap: 12px;
 
     & img {
-        width: 38px;
-        height: 38px;
-        border-radius: 14px;
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
         object-fit: contain;
-        padding: 4px;
+        padding: 2px;
         object-position: center;
         background-color: #fff;
     }
 
     & span {
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 400;
         color: #fff;
     }
 `
@@ -63,7 +63,7 @@ const Infos = styled.ul`
     gap: 4px;
 
     & li {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 400;
         color: #ffffff90;
 
@@ -93,8 +93,8 @@ const Technologies = styled.div`
 
     & ul {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
         gap: 8px;
         flex-wrap: wrap;
     }
@@ -115,6 +115,7 @@ const Image = styled.div`
         height: 100%;
         object-fit: cover;
         object-position: center;
+        border-radius: 16px;
     }
 `
 
@@ -142,29 +143,15 @@ export default function ProjectDetailsHero({
                     <Description
                         descricao={currentProject.description}
                         color="#fff"
+                        fontSize="20px"
                     />
                     <Infos>
-                        <li>
-                            <strong>Plataforma:</strong> {currentProject.plataform}
-                        </li>
-                        <li>
-                            <strong>Tipo:</strong> {currentProject.siteType}
-                        </li>
-                        <li>
-                            <strong>País:</strong> {currentProject.country}
-                        </li>
-                        <li>
-                            <strong>URL: </strong>
-                            <a href={currentProject.urlPage}>
-                                {currentProject.urlPage}
-                            </a>
-                        </li>
-                        <li>
-                            <strong>Data:</strong> {currentProject.data}
-                        </li>
-                        <li>
-                            <strong>Duration:</strong> {currentProject.duration}h
-                        </li>
+                        <li><strong>Plataforma:</strong> {currentProject.plataform}</li>
+                        <li><strong>Tipo:</strong> {currentProject.siteType}</li>
+                        <li><strong>País:</strong> {currentProject.country}</li>
+                        <li><strong>URL: </strong><a href={currentProject.urlPage}>{currentProject.urlPage}</a></li>
+                        <li><strong>Data:</strong> {currentProject.data}</li>
+                        <li><strong>Duration:</strong> {currentProject.duration}h</li>
                     </Infos>
                     <Technologies>
                         <h4>Tecnologias usadas:</h4>

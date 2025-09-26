@@ -65,6 +65,21 @@ export const projects = [
                 "color": "#61DAFB"
             },
             {
+                "techName": "Firebase",
+                "tecnologias": ["Firebase"],
+                "color": "#FFCA28"
+            },
+            {
+                "techName": "Vite",
+                "tecnologias": ["Vite"],
+                "color": "#646CFF"
+            },
+            {
+                "techName": "Sass",
+                "tecnologias": ["Sass"],
+                "color": "#CC6699"
+            },
+            {
                 "techName": "Javascript",
                 "tecnologias": ["Javascript"],
                 "color": "#F7DF1E"

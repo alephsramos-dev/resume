@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const Descricao = styled.p`
     color: ${({ color }) => color || '#1d1d1d'};
-    font-size: 18px;
     font-family: 'Urbanist', sans-serif;
+    font-size: ${({ fontSize }) => fontSize || '18px'};
     width: 80%;
     line-height: 1.3;
     font-weight: 200;
@@ -17,11 +17,12 @@ const Descricao = styled.p`
 
 export default function Description({
     descricao,
-    color
+    color,
+    fontSize
 }){
     return (
         <>
-            <Descricao color={color}>{descricao}</Descricao>
+            <Descricao color={color} fontSize={fontSize}>{descricao}</Descricao>
         </>
     )
 }
