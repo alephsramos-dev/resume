@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Titulo = styled.h1`
     color: ${({ color }) => color || '#1d1d1d'};
     font-size: ${({ fontSize }) => fontSize || '36px'};
-    width: 100%;
+    width: auto;
     font-family: 'Urbanist', sans-serif;
     line-height: 1.1;
     font-weight: 400;

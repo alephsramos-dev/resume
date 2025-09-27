@@ -11,21 +11,72 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     gap: 16px;
 
     @media (max-width: 768px){
-        flex-direction: column-reverse;
+        flex-direction: column;
+        gap: 8px;
     }
 `
 
-const Texts = styled.div`
-    width: 50%;
+const Main = styled.main`
+    width: 100%;
+    min-height: 60vh;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 22px;
+    gap: 24px;
+
+    @media (max-width: 768px){
+        min-height: auto; 
+        padding: 25% 0% 10% 0;
+        gap: 18px;
+    }
+
+`
+
+const Texts = styled.div`
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+
+    @media (max-width: 768px){
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    & span {
+        font-size: 14px;
+        color: #ffffff60;
+        font-weight: 300;
+        text-align: center;
+        width: 100%;
+
+        @media (max-width: 768px){
+            text-align: left;
+        }
+
+        & strong {
+            font-weight: 400;
+            color: #ffffff;
+        }
+    }
+
+    & h1 {
+        font-weight: 500;
+        font-size: 54px;
+        text-align: center;
+
+        @media (max-width: 768px){
+            font-size: 38px;
+            text-align: left;
+        }
+    }
 
     @media (max-width: 768px){
         width: 100%;
@@ -38,86 +89,79 @@ const Company = styled.div`
     align-items: center;
     gap: 12px;
 
+    @media (max-width: 768px){
+        width: 100%;
+        justify-content: flex-start;    
+        gap: 8px;
+    }
+
     & img {
-        width: 32px;
-        height: 32px;
-        border-radius: 10px;
+        width: 36px;
+        height: 36px;
+        border-radius: 14px;
         object-fit: contain;
         padding: 2px;
         object-position: center;
         background-color: #fff;
+
+        @media (max-width: 768px){
+            width: 26px;
+            height: 26px;
+            border-radius: 10px;
+            padding: 1px;
+        }
     }
 
     & span {
-        font-size: 18px;
+        font-size: 20px;
         font-weight: 400;
         color: #fff;
-    }
-`
 
-const Infos = styled.ul`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 4px;
-
-    & li {
-        font-size: 18px;
-        font-weight: 400;
-        color: #ffffff90;
-
-        & strong {
-            font-weight: 500;
-            color: #fff;
+        @media (max-width: 768px){
+            font-size: 16px;
         }
-
-        & a {
-            text-decoration: underline;
-        }
-    }
-`
-
-const Technologies = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
-    gap: 12px;
-
-    & h4 {
-        font-size: 20px;
-        font-weight: 600;
-    }
-
-    & ul {
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 8px;
-        flex-wrap: wrap;
     }
 `
 
 const Image = styled.div`
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
 
-    @media (max-width: 768px){
-        width: 100%;    
+    & span {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 18px;
+        color: #ffffff;
+        font-weight: 400;
+        text-align: center;
+        background: #00000020;
+        padding: 6px 12px;
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+        z-index: 2;
+
+        @media (max-width: 768px){
+            font-size: 14px;    
+        }
+        
     }
-    
+
     & img {
         width: 100%;
-        height: 100%;
+        height: 700px;
         object-fit: cover;
+        border-radius: 36px;
         object-position: center;
-        border-radius: 16px;
+
+        @media (max-width: 768px){
+            height: auto;
+            border-radius: 26px;
+        }
     }
 `
+
 
 export default function ProjectDetailsHero({
     slug
@@ -130,45 +174,22 @@ export default function ProjectDetailsHero({
     return (
         <>
             <Container>
-                <Texts>
+                <Main>
                     <Company>
                         <img src={currentProject.imageCompanyUrl} alt={currentProject.companyName} />
                         <span>{currentProject.companyName}</span>
                     </Company>
-                    <Title
-                        titulo={currentProject.title}
-                        color="#fff"
-                        fontSize="42px"
-                    />
-                    <Description
-                        descricao={currentProject.description}
-                        color="#fff"
-                        fontSize="20px"
-                    />
-                    <Infos>
-                        <li><strong>Plataforma:</strong> {currentProject.plataform}</li>
-                        <li><strong>Tipo:</strong> {currentProject.siteType}</li>
-                        <li><strong>País:</strong> {currentProject.country}</li>
-                        <li><strong>URL: </strong><a href={currentProject.urlPage}>{currentProject.urlPage}</a></li>
-                        <li><strong>Data:</strong> {currentProject.data}</li>
-                        <li><strong>Duration:</strong> {currentProject.duration}h</li>
-                    </Infos>
-                    <Technologies>
-                        <h4>Tecnologias usadas:</h4>
-                        <ul>
-                            {currentProject.stack.map((project, i) => (
-                                <Stack 
-                                    key={i}
-                                    tecnologias={project.tecnologias}
-                                    techName={project.techName}
-                                    color={project.color}
-                                />
-                            ))}
-                        </ul>
-                    </Technologies>
-                </Texts>
+                    <Texts>
+                        <Title
+                            titulo={currentProject.title}
+                            color="#fff"
+                        />
+                        <span>{currentProject.data} / © Todos os direitos reservados / <strong>{currentProject.companyName}</strong></span>
+                    </Texts>
+                </Main>
                 <Image>
                     <img src={currentProject.image} alt={currentProject.title} />
+                    <span>{currentProject.siteType}</span>
                 </Image>
             </Container>
         </>
