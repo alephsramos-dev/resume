@@ -5,7 +5,6 @@ import ProjectStyle from "@/components/ui/Card/ProjectStyle";
 import Title from "@/components/ui/texts/Title";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import 'swiper/css';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 
@@ -19,10 +18,6 @@ const Container = styled.div`
     z-index: 2;
     overflow: hidden;
     gap: 26px;
-
-    @media (max-width: 768px){
-        padding: 0% 1%;
-    }
 `;
 
 const Content = styled.section`
@@ -82,43 +77,43 @@ export default function ProjectDetailsExplore({
     return (
         <>
             <Container>
-                    <Content>
-                        <Header>
-                            <Title 
-                                titulo={`Mais projetos de ${currentProject.siteType}`}
-                                color="#fff"
-                                fontSize="28px"
-                            />
-                            <Control>
-                                <div className="portfolio-button-prev"><MdKeyboardArrowLeft  /></div>
-                                <div className="portfolio-button-next"><MdKeyboardArrowRight  /></div>
-                            </Control>
-                        </Header>
-                        <Swiper
-                            spaceBetween={12}
-                            slidesPerView={1}
-                            modules={[Navigation]}
-                            navigation={{
-                                clickable: true,
-                                nextEl: '.portfolio-button-next',
-                                prevEl: '.portfolio-button-prev',
-                            }}
-                            breakpoints={{
-                                768: {
-                                    slidesPerView: 3,
-                                },
-                            }}
-                            style={{ width: '100%' }}
-                        >
-                            {projects.filter(project => project.siteType === siteType).map(project => (
-                                <SwiperSlide key={project.title}>
-                                    <ProjectStyle
-                                        {...project}
-                                    />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </Content>
+                <Content>
+                    <Header>
+                        <Title 
+                            titulo={`Mais projetos de ${currentProject.siteType}`}
+                            color="#fff"
+                            fontSize="28px"
+                        />
+                        <Control>
+                            <div className="portfolio-button-prev"><MdKeyboardArrowLeft  /></div>
+                            <div className="portfolio-button-next"><MdKeyboardArrowRight  /></div>
+                        </Control>
+                    </Header>
+                    <Swiper
+                        spaceBetween={12}
+                        slidesPerView={1}
+                        modules={[Navigation]}
+                        navigation={{
+                            clickable: true,
+                            nextEl: '.portfolio-button-next',
+                            prevEl: '.portfolio-button-prev',
+                        }}
+                        breakpoints={{
+                            768: {
+                                slidesPerView: 3,
+                            },
+                        }}
+                        style={{ width: '100%' }}
+                    >
+                        {projects.filter(project => project.siteType === siteType).map(project => (
+                            <SwiperSlide key={project.title}>
+                                <ProjectStyle
+                                    {...project}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </Content>
             </Container>    
         </>
     )

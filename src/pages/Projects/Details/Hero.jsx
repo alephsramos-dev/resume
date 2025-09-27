@@ -204,7 +204,7 @@ const Infos = styled.div`
             }
 
             @media (max-width: 768px){
-                font-size: 12px;
+                font-size: 10px;
             }
         }
 
@@ -213,7 +213,7 @@ const Infos = styled.div`
             color: #fff;
 
             @media (max-width: 768px){
-                font-size: 14px;    
+                font-size: 12px;    
             }
         }
     }
