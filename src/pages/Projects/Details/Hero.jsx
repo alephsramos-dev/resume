@@ -259,9 +259,9 @@ export default function ProjectDetailsHero({
     return (
         <>
             <Container>
-                <Fixed visible={fixedVisible}>
+                {/* <Fixed visible={fixedVisible}>
                     {currentProject.title}
-                </Fixed>
+                </Fixed> */}
                 <Main>
                     <Company>
                         <img src={logoAleph} alt="logo-aleph-desenvolvedor-web" />

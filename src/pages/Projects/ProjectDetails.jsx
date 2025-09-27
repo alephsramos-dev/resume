@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Title from "@/components/ui/texts/Title";
 
 import Bg from "@/assets/patterns/bg-model-01.jpg";
+import ProjectDetailsAbout from "./Details/About";
 
 const Container = styled.div`
     width: 100%;
@@ -60,6 +61,9 @@ export default function ProjectDetails({
                     <ProjectDetailsHero 
                         slug={slug}
                     />
+                        <ProjectDetailsAbout 
+                            slug={slug}
+                        />
                 </Content>
             </Container>
         </>
