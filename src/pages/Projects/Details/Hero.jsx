@@ -6,7 +6,7 @@ import logoAleph from "/icon-black-aleph-desenvolvedor-web.svg";
 
 import projects from "@/database/ProjectData";
 import Stack from "@/components/ui/Badge/Stack";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const Container = styled.div`
     width: 100%;
@@ -15,11 +15,28 @@ const Container = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 16px;
+    position: relative;
+    height: 400vh;
 
     @media (max-width: 768px){
         flex-direction: column;
         gap: 8px;
     }
+`
+
+const Fixed = styled.div`
+    width: 100%;
+    max-width: 1440px;
+    font-size: 20px;
+    font-weight: 600;
+    position: sticky;
+    left: 5%;
+    top: 5%;
+    z-index: 10;
+    opacity: ${props => props.visible ? 1 : 0};
+    transform: translateY(${props => props.visible ? '0' : '-8px'});
+    transition: opacity 120ms ease, transform 120ms ease;
+    pointer-events: ${props => props.visible ? 'auto' : 'none'};
 `
 
 const Main = styled.main`
@@ -170,6 +187,27 @@ export default function ProjectDetailsHero({
     slug,
 }) {
 
+    const [fixedVisible, setFixedVisible] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+
+        const onScroll = () => {
+            // show when scrolled past 60% of the viewport height
+            const show = window.scrollY >= 0.7 * window.innerHeight;
+            setFixedVisible(show);
+        };
+
+        // initial check
+        onScroll();
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+
     const currentProject = useMemo(() => {
         return projects.find(project => project.slug === slug);
     }, [slug, projects]);
@@ -177,6 +215,9 @@ export default function ProjectDetailsHero({
     return (
         <>
             <Container>
+                <Fixed visible={fixedVisible}>
+                    {currentProject.title}
+                </Fixed>
                 <Main>
                     <Company>
                         <img src={logoAleph} alt="logo-aleph-desenvolvedor-web" />
