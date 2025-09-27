@@ -10,10 +10,11 @@ const Container = styled.div`
     justify-content: flex-start;
     height: auto;
     position: relative;
-    gap: 26px;
+    gap: 46px;
 
     @media (max-width: 768px){
         flex-direction: column;
+        gap: 26px;
     }
 `
 
@@ -23,7 +24,7 @@ const Texts = styled.div`
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    gap: 8px;
+    gap: 22px;
     width: 70%;
 
     @media (max-width: 768px){
@@ -31,16 +32,51 @@ const Texts = styled.div`
     }
 
     & > h2 {
-        font-size: 16px;
+        width: 100%;
+        font-size: 24px;
         font-weight: 500;
+        padding-bottom: 18px;
+        box-shadow: inset 0 -0.2px 0 0 #ffffff;
+
+        & strong {
+            font-weight: 400;
+            font-size: 14px;
+            color: #ffffff90;
+        }
     }
 
-    & p {
-        font-size: 32px;
-        font-weight: 300;
 
-        @media (max-width: 768px){
-            font-size: 28px;
+    & div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 18px;
+
+        & p {
+            font-weight: 300;
+            color: #ffffff95;
+
+            & strong {
+                color: #ffffff;
+                font-weight: 500;
+            }
+        }
+
+        & ul {
+            display: contents;
+
+            & li {
+                list-style: disc;
+                margin-left: 20px;
+                font-weight: 300;
+                color: #ffffff95;
+
+                & strong {
+                    font-weight: 500;
+                    color: #ffffff;
+                }
+            }
         }
     }
 `
@@ -51,6 +87,8 @@ const Infos = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    position: sticky;
+    top: 100px;
 
     @media (max-width: 768px){
         width: 100%;    
@@ -122,8 +160,8 @@ export default function ProjectDetailsAbout({ slug }) {
         <>
            <Container>
                 <Texts>
-                    <h2>Sobre o projeto</h2>
-                    <p>{currentProject.description}</p>
+                    <h2>Sobre o projeto <strong>/ {currentProject.title || "-"}</strong></h2>
+                    <div dangerouslySetInnerHTML={{ __html: currentProject.fullDescription }} />
                 </Texts>
                 <Infos>
                     <ul>

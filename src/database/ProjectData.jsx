@@ -91,6 +91,7 @@ export const projects = [
         country: "Brasil",
         data: "11/02/2025",
         description: "Gerenciador completo para que o time de marketing consiga ter controle total sobre os projetos, clientes, finanças etc.",
+        fullDescription: "<p>Uma ferramenta robusta e centralizada, projetada para dar à sua equipe <strong>controle total e visibilidade completa</strong> sobre todas as operações essenciais.</p><p>Com ele, você pode gerenciar de forma eficiente:</p><ul><li><strong>Projetos:</strong> Acompanhe o ciclo de vida de cada campanha, desde o briefing até a entrega final, com cronogramas, tarefas e responsáveis.</li><li><strong>Clientes:</strong> Mantenha um registro detalhado de todos os seus clientes, contratos, histórico de comunicação e projetos associados.</li><li><strong>Finanças:</strong> Controle orçamentos, despesas e faturamento de cada projeto, garantindo a saúde financeira do seu departamento.</li><li><strong>E muito mais:</strong> Gere relatórios, analise métricas de desempenho e otimize os fluxos de trabalho da sua equipe.</li></ul>",
         urlPage: "https://gerenciador.unitycompany.com.br",
         githubUrl: "https://github.com/alephsramos-dev",
         onDetails: "",

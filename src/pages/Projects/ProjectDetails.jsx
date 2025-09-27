@@ -6,6 +6,7 @@ import Title from "@/components/ui/texts/Title";
 import Bg from "@/assets/patterns/bg-model-01.jpg";
 import ProjectDetailsAbout from "./Details/About";
 import ProjectDetailsExplore from "./Details/Explore";
+import ProjectDetailsCallToAction from "./Details/CallToAction";
 
 const Container = styled.div`
     width: 100%;
@@ -65,9 +66,12 @@ export default function ProjectDetails({
                         <ProjectDetailsAbout 
                             slug={slug}
                         />
-                            <ProjectDetailsExplore 
+                            <ProjectDetailsCallToAction 
                                 slug={slug}
                             />
+                                <ProjectDetailsExplore 
+                                    slug={slug}
+                                />
                 </Content>
             </Container>
         </>
