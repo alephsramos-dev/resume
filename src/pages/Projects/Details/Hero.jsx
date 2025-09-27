@@ -7,6 +7,8 @@ import logoAleph from "/icon-black-aleph-desenvolvedor-web.svg";
 import projects from "@/database/ProjectData";
 import Stack from "@/components/ui/Badge/Stack";
 import { useMemo, useState, useEffect } from "react";
+import { LuSquareArrowOutUpRight } from "react-icons/lu";
+import { AiOutlineExpand } from "react-icons/ai";
 
 const Container = styled.div`
     width: 100%;
@@ -16,7 +18,6 @@ const Container = styled.div`
     flex-direction: column;
     gap: 16px;
     position: relative;
-    height: 400vh;
 
     @media (max-width: 768px){
         flex-direction: column;
@@ -34,8 +35,8 @@ const Fixed = styled.div`
     top: 5%;
     z-index: 10;
     opacity: ${props => props.visible ? 1 : 0};
-    transform: translateY(${props => props.visible ? '0' : '-8px'});
-    transition: opacity 120ms ease, transform 120ms ease;
+    transform: translateY(${props => props.visible ? '0' : '-16px'});
+    transition: opacity 220ms ease, transform 220ms ease;
     pointer-events: ${props => props.visible ? 'auto' : 'none'};
 `
 
@@ -145,43 +146,86 @@ const Company = styled.div`
 
 const Image = styled.div`
     width: 100%;
-    height: 100%;
+    height: auto;
     position: relative;
-
-    & span {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        font-size: 18px;
-        color: #ffffff;
-        font-weight: 400;
-        text-align: center;
-        background: #00000020;
-        padding: 6px 12px;
-        border-radius: 16px;
-        backdrop-filter: blur(10px);
-        z-index: 2;
-
-        @media (max-width: 768px){
-            font-size: 14px;    
-        }
-        
-    }
 
     & img {
         width: 100%;
         height: 700px;
         object-fit: cover;
-        border-radius: 36px;
         object-position: center;
+        border-radius: 0 0 16px 16px;
 
         @media (max-width: 768px){
-            height: auto;
-            border-radius: 26px;
+            height: 400px;
+            border-radius: 0 0 12px 12px;  
         }
     }
 `
 
+const Infos = styled.div`
+    border: 1px solid #ffffff60;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    border-radius: 16px 16px 0 0;
+
+    @media (max-width: 768px){
+        padding: 10px 12px;
+        border-radius: 12px 12px 0 0;
+    }
+
+    & div {
+        border: 1px solid #ffffff30;
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 38px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background-color: #ffffff15;
+
+        @media (max-width: 768px){
+            gap: 16px;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        & span {
+            font-size: 16px;
+            color: #ffffff;
+
+            & strong {
+                color: #ffffff60;
+            }
+
+            @media (max-width: 768px){
+                font-size: 12px;
+            }
+        }
+
+        & > button {
+            font-size: 18px;
+            color: #fff;
+
+            @media (max-width: 768px){
+                font-size: 14px;    
+            }
+        }
+    }
+
+    & button {
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+
+        @media (max-width: 768px){
+            font-size: 14px;        
+        }
+    }
+`
 
 export default function ProjectDetailsHero({
     slug,
@@ -232,8 +276,18 @@ export default function ProjectDetailsHero({
                     </Texts>
                 </Main>
                 <Image>
+                    <Infos>
+                        <div>
+                            <span><strong>/</strong> {currentProject.urlPage || "URL é privada"}</span>
+                            <button onClick={() => window.open(currentProject.urlPage, '_blank', 'noopener,noreferrer')}>
+                                <LuSquareArrowOutUpRight />
+                            </button>
+                        </div>
+                        <button onClick={() => window.open(currentProject.image, '_blank', 'noopener,noreferrer')}>
+                            <AiOutlineExpand />
+                        </button>
+                    </Infos>
                     <img src={currentProject.image} alt={currentProject.title} />
-                    <span>{currentProject.siteType}</span>
                 </Image>
             </Container>
         </>

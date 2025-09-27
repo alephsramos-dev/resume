@@ -91,7 +91,7 @@ export const projects = [
         country: "Brasil",
         data: "11/02/2025",
         description: "Gerenciador completo para que o time de marketing consiga ter controle total sobre os projetos, clientes, finanças etc.",
-        urlPage: "",
+        urlPage: "https://gerenciador.unitycompany.com.br",
         githubUrl: "https://github.com/alephsramos-dev",
         onDetails: "",
         popupBg: "#ffffff",
