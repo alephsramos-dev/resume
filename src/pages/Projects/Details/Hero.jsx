@@ -155,6 +155,8 @@ const Image = styled.div`
         object-fit: cover;
         object-position: center;
         border-radius: 0 0 16px 16px;
+        border: 1px solid #ffffff60;
+        border-top: none;
 
         @media (max-width: 768px){
             height: 400px;

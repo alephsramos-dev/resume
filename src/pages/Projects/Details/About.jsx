@@ -76,6 +76,10 @@ const Infos = styled.div`
             padding-bottom: 16px;
             box-shadow: inset 0 -0.4px 0 0 #ffffff40;
 
+            &:last-child {
+                box-shadow: none;
+            }
+
             & strong {
                 color: #ffffff;
                 font-size: 16px;
@@ -125,7 +129,6 @@ export default function ProjectDetailsAbout({ slug }) {
                     <ul>
                         <li><strong>Tipo de projeto</strong> {currentProject.siteType || "-"}</li>
                         <li><strong>Data / Duração</strong> {currentProject.data || "-"} / {currentProject.duration || "-"}h</li>
-                        <li><strong>Cliente</strong> {currentProject.companyName || "-"}</li>
                         <li><strong>Tecnologias</strong>
                             <ul>
                                 {currentProject.stack.map((tech, i) => (
@@ -138,7 +141,6 @@ export default function ProjectDetailsAbout({ slug }) {
                                 ))}
                             </ul>
                         </li>
-                        <li><strong>Outros</strong> {currentProject.country || "-"} / {currentProject.plataform || "-"}</li>
                     </ul>
                 </Infos>
             </Container> 

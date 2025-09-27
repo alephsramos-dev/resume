@@ -5,6 +5,7 @@ import Title from "@/components/ui/texts/Title";
 
 import Bg from "@/assets/patterns/bg-model-01.jpg";
 import ProjectDetailsAbout from "./Details/About";
+import ProjectDetailsExplore from "./Details/Explore";
 
 const Container = styled.div`
     width: 100%;
@@ -25,7 +26,7 @@ const Content = styled.section`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 26px;
+    gap: 36px;
     position: relative;
     z-index: 2;
 
@@ -64,6 +65,9 @@ export default function ProjectDetails({
                         <ProjectDetailsAbout 
                             slug={slug}
                         />
+                            <ProjectDetailsExplore 
+                                slug={slug}
+                            />
                 </Content>
             </Container>
         </>
