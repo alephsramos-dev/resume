@@ -2,6 +2,8 @@ import Description from "@/components/ui/texts/Description";
 import Title from "@/components/ui/texts/Title";
 import styled from "styled-components";
 
+import logoAleph from "/icon-black-aleph-desenvolvedor-web.svg";
+
 import projects from "@/database/ProjectData";
 import Stack from "@/components/ui/Badge/Stack";
 import { useMemo } from "react";
@@ -87,6 +89,7 @@ const Company = styled.div`
     width: auto;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
 
     @media (max-width: 768px){
@@ -96,11 +99,11 @@ const Company = styled.div`
     }
 
     & img {
-        width: 36px;
-        height: 36px;
-        border-radius: 14px;
+        width: 28px;
+        height: 28px;
+        border-radius: 10px;
         object-fit: contain;
-        padding: 2px;
+        padding: 6px;
         object-position: center;
         background-color: #fff;
 
@@ -108,12 +111,12 @@ const Company = styled.div`
             width: 26px;
             height: 26px;
             border-radius: 10px;
-            padding: 1px;
+            padding: 4px;
         }
     }
 
     & span {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 400;
         color: #fff;
 
@@ -164,7 +167,7 @@ const Image = styled.div`
 
 
 export default function ProjectDetailsHero({
-    slug
+    slug,
 }) {
 
     const currentProject = useMemo(() => {
@@ -176,8 +179,8 @@ export default function ProjectDetailsHero({
             <Container>
                 <Main>
                     <Company>
-                        <img src={currentProject.imageCompanyUrl} alt={currentProject.companyName} />
-                        <span>{currentProject.companyName}</span>
+                        <img src={logoAleph} alt="logo-aleph-desenvolvedor-web" />
+                        <span>by Aleph</span>
                     </Company>
                     <Texts>
                         <Title
