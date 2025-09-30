@@ -10,6 +10,8 @@ import assessment from '@/db/assessment.json';
 import Title from "@/components/ui/texts/Title";
 import Description from "@/components/ui/texts/Description";
 
+import bgBLur from '@/assets/patterns/bg-blur.jpg';
+
 // ${(props) => props.theme.colors
 
 const Container = styled.div`
@@ -27,14 +29,25 @@ const Container = styled.div`
 const BG = styled.div`
     position: absolute;
     width: 100%;
-    right: 0;
-    top: 0;
-    height: 100%;
+    right: -30%;
+    top: 0%;
+    height: 100%;   
     z-index: 0;
     pointer-events: none;
+    background-image: url(${bgBLur});
+    rotate: 0deg;
+    opacity: 0.8;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: grayscale(500%);
 
     @media (max-width: 768px) {
         height: 100%;
+        right: 0;
+        rotate: 90deg;
+        top: -45%;
+        transform: scale(2);
     }
 `;
 
@@ -255,13 +268,7 @@ export default function Home({
     return (
         <>
             <Container>
-                {/* <BG ref={bgRef}>
-                    <DarkVeil 
-                        noiseIntensity={0.10}   
-                        speed={2}
-                        hueShift={35}
-                    />
-                </BG> */}
+                <BG></BG>
                 <Content>
                     <Assessment>
                         <div className="avatars">
