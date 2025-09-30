@@ -1,0 +1,32 @@
+[
+    {
+        "image": "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1",
+        "alt": "Photo of John Smith",
+        "name": "Jane Doe",
+        "role": "Software Engineer"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1",
+        "alt": "Photo of Maria Silva",
+        "name": "Maria Silva",
+        "role": "Software Engineer"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1",
+        "alt": "Photo of John Smith",
+        "name": "Jane Doe",
+        "role": "Software Engineer"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1",
+        "alt": "Photo of John Smith",
+        "name": "Jane Doe",
+        "role": "Software Engineer"
+    },
+    {
+        "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&fit=crop&crop=faces&auto=format&dpr=1",
+        "alt": "Photo of John Smith",
+        "name": "Jane Doe",
+        "role": "Software Engineer"
+    }
+]
