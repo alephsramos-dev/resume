@@ -11,7 +11,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #000;
+    background: ${(props) => props.theme.colors.black[0]};
     color: #fff;
     position: relative;
     z-index: 2;
@@ -20,31 +20,31 @@ const Container = styled.div`
 
 const Content = styled.section`
     width: 100%;
-    padding: 2.5% 2.5%;
-    max-width: 1420px; /* menor container geral */
+    padding: 2.5%;
+    max-width: 1420px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    gap: 0px;
     position: relative;
     z-index: 1;
 
-    & > div:first-child { /* bloco do titulo */
-        width: 25%;
+    & > div:first-child {
+        width: 20%;
         min-width: 200px;
         display: flex;
         align-items: flex-start;
+
+        & p {
+            color: ${(props) => props.theme.colors.gray[300]};
+            font-size: 18px;
+
+            @media (max-width: 768px){
+                font-size: 16px;
+            }
+        }
     }
 
-    @media (max-width: 1024px){
-        gap: 24px;
-    }
-    @media (max-width: 900px){
-        flex-direction: row;
-        gap: 0px;
-        & > div:first-child { width: 20%; }
-    }
     @media (max-width: 768px){
         padding: 1% 5%;
     }
@@ -57,6 +57,7 @@ const CarouselWrapper = styled.div`
     display: flex;
     align-items: center;
     --fade-width: 150px;
+
     @media (max-width: 768px){
         --fade-width: 100px;
     }
@@ -70,14 +71,22 @@ const CarouselWrapper = styled.div`
         z-index: 3;
         pointer-events: none;
     }
-    &::before { left: 0; background: linear-gradient(90deg,#000 0%,rgba(0,0,0,0) 100%); }
-    &::after { right: 0; background: linear-gradient(-90deg,#000 0%,rgba(0,0,0,0) 100%); }
+
+    &::before { 
+        left: 0; 
+        background: linear-gradient(90deg,#000 0%,rgba(0,0,0,0) 100%);
+    }
+
+    &::after { right: 0; 
+        background: linear-gradient(-90deg,#000 0%,rgba(0,0,0,0) 100%); 
+    }
 `;
 
 // Ajustes globais específicos do Swiper dentro deste escopo
 const CarouselStyles = styled.div`
     width: 100%;
-    --logo-size: 100px; /* tamanho fixo solicitado */
+    --logo-size: 80px;
+
     .swiper { width: 100%; }
     .swiper-wrapper { transition-timing-function: linear !important; }
     .swiper-slide {
@@ -99,18 +108,16 @@ const CarouselStyles = styled.div`
     }
     .swiper-slide-active .logo-item { pointer-events: auto; }
     @media (max-width: 600px){
-        --logo-size: 70px;
+        --logo-size: 60px;
     }
 `;
 
 export default function EmpresasQueConfiaram() {
-    // Carrega todos os SVGs da pasta logos automaticamente (Vite glob)
     const logos = useMemo(() => {
-        const modules = import.meta.glob("@/assets/logos/*.svg", { eager: true, import: 'default' });
-        // Object.values preserva ordem alfabética das chaves do objeto resultante
+        const modules = import.meta.glob("@/assets/client-logos/*.svg", { eager: true, import: 'default' });
         return Object.values(modules);
     }, []);
-        // Duplicamos manualmente se for necessário reforçar densidade (Swiper loop cuida, mas ajuda a suavizar)
+
         const extended = logos.length < 10 ? logos.concat(logos) : logos;
 
         return (
@@ -118,8 +125,7 @@ export default function EmpresasQueConfiaram() {
                 <Content>
                     <div>
                         <Description
-                            descricao="Com a confiança das maiores marcas do mundo"
-                            color="#d1d1d1"
+                            children="Com a confiança das maiores marcas do mundo"
                         />
                     </div>
                     <CarouselWrapper aria-label="Logos de empresas que confiaram">

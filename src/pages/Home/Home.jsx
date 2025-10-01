@@ -35,8 +35,6 @@ const BG = styled.div`
     z-index: 0;
     pointer-events: none;
     background-image: url(${bgBlur});
-    scale: 1;
-    rotate: -0deg;
     opacity: 0.8;   
     background-size: contain;
     background-position: center;
