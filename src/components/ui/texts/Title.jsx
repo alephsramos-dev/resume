@@ -4,9 +4,9 @@ import styled from "styled-components";
 const Children = styled.h1`
     width: auto;
     font-size: ${({ fontSize }) => fontSize };
-    font-family: ${({ theme }) => theme.fonts.urbanist};
-    line-height: ${({ theme }) => theme.lineHeights.heading};
-    font-weight: ${({ theme }) => theme.fontWeights.normal};
+    font-family: ${(props) => props.theme.fonts.urbanist};
+    line-height: ${(props) => props.theme.lineHeights.heading};
+    font-weight: ${(props) => props.theme.fontWeights.medium};
 
     @media (max-width: 768px) {
         font-size: 26px;

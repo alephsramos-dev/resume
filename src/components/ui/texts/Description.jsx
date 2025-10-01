@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const Children = styled.p`
-    font-family: ${({ theme }) => theme.fonts.urbanist};
-    font-size: ${({ fontSize }) => fontSize || '18px'};
     width: auto;
-    line-height: ${({ theme }) => theme.lineHeights.normal};
-    font-weight: ${({ theme }) => theme.fontWeights.light};
+    font-size: ${({ fontSize }) => fontSize };
+    font-family: ${(props) => props.theme.fonts.urbanist};
+    line-height: ${(props) => props.theme.lineHeights.normal};
+    font-weight: ${(props) => props.theme.fontWeights.light};
 
     @media (max-width: 768px) {
         font-size: 16px;

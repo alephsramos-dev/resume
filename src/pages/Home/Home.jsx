@@ -10,7 +10,7 @@ import assessment from '@/db/assessment.json';
 import Title from "@/components/ui/texts/Title";
 import Description from "@/components/ui/texts/Description";
 
-import bgBlur from '@/assets/patterns/bg-option-2.png';
+import bgBlur from '@/assets/patterns/bg-hero-alephsramos.png';
 
 // ${(props) => props.theme.colors
 
@@ -29,15 +29,15 @@ const Container = styled.div`
 const BG = styled.div`
     position: absolute;
     width: 100%;
-    right: -20%;
-    top: 0%;
+    right: -30%;
+    top: 5%;
     height: 100%;   
     z-index: 0;
     pointer-events: none;
     background-image: url(${bgBlur});
     scale: 1;
-    rotate: 90deg;
-    opacity: 0.6;   
+    rotate: -0deg;
+    opacity: 0.8;   
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -243,8 +243,9 @@ const Texts = styled.div`
         gap: 12px;
 
         & h1 {
-            font-size: 48px;
-            color: ${(props) => props.theme.colors.white[100]};
+            font-size: 52px;
+            font-weight: 400;
+            color: ${(props) => props.theme.colors.gray[600]};
 
             @media (max-width: 768px) {
                 font-size: 32px;
@@ -254,7 +255,7 @@ const Texts = styled.div`
         & p {
             font-size: 18px;
             width: 80%;
-            color: ${(props) => props.theme.colors.gray[300]};
+            color: ${(props) => props.theme.colors.gray[200]};
 
             @media (max-width: 768px) {
                 font-size: 16px;
