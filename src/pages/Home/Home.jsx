@@ -47,6 +47,7 @@ const BG = styled.div`
         right: 0;
         top: -15%;
         rotate: 30deg;
+        opacity: 1;
         transform: scale(2.4);
     }
 `;
