@@ -10,7 +10,7 @@ import assessment from '@/db/assessment.json';
 import Title from "@/components/ui/texts/Title";
 import Description from "@/components/ui/texts/Description";
 
-import bgBLur from '@/assets/patterns/bg-blur.jpg';
+import bgBlur from '@/assets/patterns/bg-option-2.png';
 
 // ${(props) => props.theme.colors
 
@@ -29,25 +29,25 @@ const Container = styled.div`
 const BG = styled.div`
     position: absolute;
     width: 100%;
-    right: -30%;
+    right: -20%;
     top: 0%;
     height: 100%;   
     z-index: 0;
     pointer-events: none;
-    background-image: url(${bgBLur});
-    rotate: 0deg;
-    opacity: 0.8;
+    background-image: url(${bgBlur});
+    scale: 1;
+    rotate: 90deg;
+    opacity: 0.6;   
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    filter: grayscale(500%);
 
     @media (max-width: 768px) {
         height: 100%;
         right: 0;
-        rotate: 90deg;
-        top: -45%;
-        transform: scale(2);
+        top: -15%;
+        rotate: 30deg;
+        transform: scale(2.4);
     }
 `;
 
@@ -58,7 +58,7 @@ const Content = styled.section`
     min-height: 100dvh;
     display: flex;
     align-items: flex-start;
-    justify-content: flex-end;
+    justify-content: center;
     flex-direction: column;
     gap: 32px;
     border-bottom: none;
@@ -144,6 +144,7 @@ const Assessment = styled.section`
                 position: relative;
                 border: 2px solid ${(props) => props.theme.colors.white[100]};
                 transition: all .2s ease-in-out;
+                filter: grayscale(40%);
 
                     &:hover {
                         transform: translateY(-4px) rotate(-10deg);
@@ -241,7 +242,7 @@ const Texts = styled.div`
         gap: 12px;
 
         & h1 {
-            font-size: 42px;
+            font-size: 48px;
             color: ${(props) => props.theme.colors.white[100]};
 
             @media (max-width: 768px) {
@@ -251,10 +252,12 @@ const Texts = styled.div`
 
         & p {
             font-size: 18px;
+            width: 80%;
             color: ${(props) => props.theme.colors.gray[300]};
 
             @media (max-width: 768px) {
                 font-size: 16px;
+                width: 100%;
             }
         }
     }
