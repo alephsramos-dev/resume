@@ -11,8 +11,8 @@ export default function All() {
     return (
         <>
             <Home />    
-                <Benefits />
-                    <EmpresasQueConfiaram />    
+                <EmpresasQueConfiaram />    
+                    <Benefits />
                         {/* <ComoFunciona /> */}   
                             <Projects />   
                                 <Services />   

@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import benefits from "@/db/benefits.js";
 import { rgba } from "polished";
-import { Clover } from "@phosphor-icons/react/dist/ssr";
+import { Clover, SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
 
 const Container = styled.div`
     width: 100%;
@@ -81,6 +81,10 @@ const Texts = styled.div`
             color: ${(props) => props.theme.colors.white[100]};
             font-weight: ${(props) => props.theme.fontWeights.normal};
             line-height: ${(props) => props.theme.lineHeights.heading};
+
+            @media (max-width: 768px){
+                font-size: 26px;
+            }
         }
     }
 
@@ -97,6 +101,10 @@ const Texts = styled.div`
             color: ${(props) => props.theme.colors.gray[100]};
             font-weight: ${(props) => props.theme.light};
             line-height: ${(props) => props.theme.lineHeights.heading};
+
+            @media (max-width: 768px){
+                font-size: 16px;
+            }
         }
     }
 `
@@ -150,7 +158,7 @@ export default function Benefits() {
                     <div className="title">
                         <Badge
                             children="Beneficios"
-                            icon={<Clover weight="thin" />}
+                            icon={<SealCheckIcon weight="fill" />}
                             colorText="rgb(0, 136, 255)"
                             bgColor="rgba(92, 184, 255, 0.1)"
                         />

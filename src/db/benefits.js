@@ -1,48 +1,43 @@
-import { MdStarPurple500 } from "react-icons/md";
-import { TbMichelinStar } from "react-icons/tb";
-import { FiZap } from "react-icons/fi";
-
-import { Browsers, ChargingStation, Gauge, GitMerge, Headset, ShieldStar, SketchLogo, UserFocus } from "@phosphor-icons/react";
-import { Browser, TrendUp } from "@phosphor-icons/react/dist/ssr";
+import { BrowsersIcon, GaugeIcon, GitMergeIcon, HeadsetIcon, ShieldStarIcon, SketchLogoIcon, UserFocusIcon, GaugeIcon, TrendUpIcon } from "@phosphor-icons/react/dist/ssr";
 
 const benefits = [
     {
-        icon: Gauge,
+        icon: GaugeIcon,
         title: "Velocidade Extrema",
         description: "Sites que carregam em milissegundos para reter visitantes e impulsionar SEO."
     },
     {
-        icon: SketchLogo,
+        icon: SketchLogoIcon,
         title: "Qualidade Premium",
         description: "Código limpo, escalável e revisado com foco em longevidade e manutenção."
     },
     {
-        icon: UserFocus,
+        icon: UserFocusIcon,
         title: "Conversão Otimizada",
         description: "Arquitetura pensada para transformar tráfego em leads e vendas."
     },
     {
-        icon: ShieldStar,
+        icon: ShieldStarIcon,
         title: "Segurança e Estabilidade",
         description: "Boas práticas, monitoramento e proteção contra falhas comuns."
     },
     {
-        icon: TrendUp,
+        icon: TrendUpIcon,
         title: "Escalabilidade",
         description: "Estrutura pronta para crescer sem reescrever tudo do zero."
     },
     {
-        icon: Browsers,
+        icon: BrowsersIcon,
         title: "SEO Técnico",
         description: "Estratégias e implementação para melhor indexação e ranking."
     },
     {
-        icon: GitMerge,
+        icon: GitMergeIcon,
         title: "Automação & Performance",
         description: "Pipelines, otimização de bundling, imagens e cache inteligente."
     },
     {
-        icon: Headset,
+        icon: HeadsetIcon,
         title: "Suporte Pró ativo",
         description: "Acompanhamento contínuo e melhorias iterativas pós-entrega."
     }
