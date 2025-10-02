@@ -2,17 +2,17 @@ import React from "react";
 import Home from "./Home";
 import Projects from "./Projects";
 import EmpresasQueConfiaram from "./Companies";
-import Beneficios from "./Benefits";
 import Services from "./Services";
 import Automation from "./Automation";
 import FAQ from "./FAQ";
+import Benefits from "./Benefits";
 
 export default function All() {
     return (
         <>
             <Home />    
-                <EmpresasQueConfiaram />
-                    <Beneficios />
+                <Benefits />
+                    <EmpresasQueConfiaram />    
                         {/* <ComoFunciona /> */}   
                             <Projects />   
                                 <Services />   

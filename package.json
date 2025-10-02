@@ -11,6 +11,7 @@
     "gitpush": "cmd /c \"git add . && git commit -m 'add' && git push origin\""
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "@react-three/drei": "^10.7.2",
     "@react-three/fiber": "^9.3.0",
     "@splidejs/react-splide": "^0.7.12",

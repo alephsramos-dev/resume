@@ -2,19 +2,18 @@ import React from "react";
 import styled from "styled-components";
 
 import { FiZap } from "react-icons/fi";
+import { rgba } from "polished";
 
 const Card = styled.div`
     width: 25%;
-    border-left: 1px solid #ffffff20;
-    /* border-top control: só adicionada via grid para desktop linha 2+, mas no mobile todos */
-    padding: 40px;
+    padding: 38px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 15px;
+    border-left: 1px solid ${(props) => rgba(props.theme.colors.gray[100], 0.2)};
+    gap: 16px;
     position: relative;
-    font-family: 'Urbanist', sans-serif;
     isolation: isolate;
 
     &::before {
@@ -22,94 +21,107 @@ const Card = styled.div`
         width: 2px;
         height: 30px;
         left: 0;
-        top: 35%;
+        top: 40%;
         position: absolute;
-        background: #ffffff40;
-        transition: width .25s cubic-bezier(.4,.2,.2,1);
+        background: ${(props) => rgba(props.theme.colors.gray[100], 0.4)};
+        transition: width 1s cubic-bezier(.4,.2,.2,1);
     }
 
     &::after {
         content: '';
-        opacity: 0;
         width: 100%;
         height: 100%;
         top: 0;
         left: 0;
+        opacity: 0;
         position: absolute;
         background: linear-gradient(45deg, #ffffff10, #ffffff00);
-        filter: blur(14px);
         transition: opacity .35s ease;
         pointer-events: none;
         z-index: -1;
     }
 
-    &:hover::before { width: 4px; background: #0066a0; }
-    &:hover::after { opacity: 1; }
-    &:hover h2 { transform: translateX(10px); }
-    &:hover p { transform: translateY(4px); }
+    &:hover::before { 
+        width: 4px; 
+        background: ${(props) => props.theme.colors.blue['basic']}; 
+    }
+
+    &:hover::after { 
+        opacity: 1;
+    }
+
+    &:hover h2 { 
+        transform: translateX(8px); 
+    }
+
+    &:hover p { 
+        transform: translateY(4px);
+    }
 
     & h2 {
         font-size: 26px;
-        font-weight: 500;
+        font-weight: ${(props) => props.theme.fontWeights.normal};
         transition: transform .25s cubic-bezier(.4,.2,.2,1);
         letter-spacing: -0.25px;
-        line-height: 1.1;
+        line-height: ${(props) => props.theme.lineHeights.heading};
     }
 
     & p {
         font-size: 16px;
-        font-weight: 300;
-        color: #d1d1d1;
-        line-height: 1.4;
+        font-weight: ${(props) => props.theme.fontWeights.light};
+        color: ${(props) => props.theme.colors.gray[200]};
+        line-height: ${(props) => props.theme.lineHeights.normal};
         transition: transform .25s cubic-bezier(.4,.2,.2,1);
     }
 
-    @media (max-width: 1100px) { width: 50%; }
+    @media (max-width: 1100px) { 
+        width: 50%; 
+    }
+
     @media (max-width: 640px) { 
         width: 100%; 
         padding: 28px 28px 36px; 
-        /* bordas verticais agora controladas pelo grid */
     }
 `;
 
 const IconWrapper = styled.div`
-    font-size: 40px;
-    margin-bottom: 5px;
+    font-size: 42px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    opacity: 0.95;
-    transition: transform .35s cubic-bezier(.4,.2,.2,1), filter .35s ease;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
+    color: ${(props) => props.theme.colors.gray[100]};
+    transition: transform .35s cubic-bezier(.4,.2,.2,1), color .5s ease;
+
     ${Card}:hover & {
         transform: translateY(-4px);
-        filter: drop-shadow(0 6px 16px rgba(0,0,0,.45));
+        color: ${(props) => props.theme.colors.blue['basic']};
     }
 `;
 
-// Ícone desacoplado para reutilização ou personalização global
-export const BeneficioIcon = ({ as: Icon = FiZap, ...rest }) => {
-    return <IconWrapper><Icon {...rest} /></IconWrapper>;
+export const BeneficioIcon = ({ as: Icon, ...rest }) => {
+    return (
+        <>
+            <IconWrapper>
+                <Icon {...rest} weight="thin"/>
+            </IconWrapper>
+        </>
+    )
 };
 
 export default function BeneficioCard({
-    icon: Icon = FiZap,
-    title,
-    text, // compatibilidade antiga
-    description,
-    descricao, // compatibilidade antiga
+    icon: Icon,
     children,
+    title,
+    description,
     ...rest
 }) {
-    const finalTitle = title || (text ? `${text}` : 'Velocidade Extrema');
-    const finalDescription = description || descricao || 'Sites que carregam instantaneamente para reter visitantes e alcançar melhores posições no Google.';
-
+    
     return (
         <Card {...rest}>
             <BeneficioIcon as={Icon} />
-            <h2>{finalTitle}</h2>
-            <p>{children || finalDescription}</p>
+            <h2>{title}</h2>
+            <p>{description}</p>
         </Card>
     );
 }
