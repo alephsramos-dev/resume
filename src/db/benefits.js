@@ -1,4 +1,4 @@
-import { BrowsersIcon, GaugeIcon, GitMergeIcon, HeadsetIcon, ShieldStarIcon, SketchLogoIcon, UserFocusIcon, GaugeIcon, TrendUpIcon } from "@phosphor-icons/react/dist/ssr";
+import { BrowsersIcon, GaugeIcon, GitMergeIcon, HeadsetIcon, ShieldStarIcon, SketchLogoIcon, UserFocusIcon, TrendUpIcon } from "@phosphor-icons/react/dist/ssr";
 
 const benefits = [
     {
