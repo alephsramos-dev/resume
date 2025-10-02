@@ -72,6 +72,10 @@ const Texts = styled.div`
     & .title {
         width: 60%;
 
+        @media (max-width: 768px){
+            width: 100%;
+        }
+
         & h1 {
             font-size: 32px;
             color: ${(props) => props.theme.colors.white[100]};
@@ -83,6 +87,10 @@ const Texts = styled.div`
     & .description {
         width: 40%;
         align-items: flex-end;
+
+        @media (max-width: 768px){
+            width: 100%;
+        }
 
         & p {
             font-size: 18px;
@@ -144,7 +152,7 @@ export default function Benefits() {
                             children="Beneficios"
                             icon={<Clover weight="thin" />}
                             colorText="rgb(0, 136, 255)"
-                            bgColor="rgba(0, 136, 255, 0.1)"
+                            bgColor="rgba(0, 136, 255, 0.05)"
                         />
                         <Title
                             children="Conheça os beneficios que você terá trabalhando comigo"
