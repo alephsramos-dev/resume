@@ -152,7 +152,7 @@ export default function Benefits() {
                             children="Beneficios"
                             icon={<Clover weight="thin" />}
                             colorText="rgb(0, 136, 255)"
-                            bgColor="rgba(0, 136, 255, 0.05)"
+                            bgColor="rgba(92, 184, 255, 0.1)"
                         />
                         <Title
                             children="Conheça os beneficios que você terá trabalhando comigo"
