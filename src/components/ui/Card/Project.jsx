@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { techIcons } from "@/db/TechIcons";
+import { rgba } from "polished";
 
 const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 0px;
     width: auto;
     height: auto;
-    padding: 15px 5px;
-    font-family: 'Urbanist', sans-serif;    
+    padding: 14px 4px;
 
     & img {
         width: 100%;
         height: 300px;
-        border-radius: 10px;   
+        border-radius: 12px;   
         object-fit: cover;
         object-position: center;
-        margin-bottom: 35px;
+        margin-bottom: 18px;
 
         @media (max-width: 768px){
             height: 250px;    
@@ -28,8 +27,8 @@ const Content = styled.div`
 
     & hr {
         width: 100%;
-        border-color: #35353550;
-        border-radius: 10px;
+        border-color: ${(props) => rgba(props.theme.colors.gray[300], 0.2)};
+        border-radius: 12px;
     }
 
     & div {
@@ -37,42 +36,38 @@ const Content = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: #fff;
-        padding: 0px 0;
+        color: ${(props) => props.theme.colors.white[100]};
 
         @media (max-width: 768px){
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 14px;
         }
 
         & h4 {
             font-size: 24px;
-            font-weight: 500;
-            margin: 0;
+            font-weight: ${(props) => props.theme.fontWeights.normal};
 
             @media (max-width: 768px){
                 font-size: 20px;
-                margin-top: 15px;
+                margin-top: 14px;
             }
         }
 
         & span {
             font-size: 12px;
             text-transform: uppercase;
-            font-weight: 200;
+            font-weight: 300;
             letter-spacing: 1px;
-            color: #d1d1d1;
+            color: ${(props) => props.theme.colors.gray[100]};
 
             @media (max-width: 768px) {
-                letter-spacing: 1px;
                 width: 100%;
-                font-size: 12px;
             }
         }
 
         & p {
-            font-size: 14px;
-            color: #d1d1d1;
+            font-size: 12px;
+            color: ${(props) => props.theme.colors.gray[100]};
             font-weight: 300;
 
             @media (max-width: 768px){
@@ -85,7 +80,7 @@ const Content = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 4px;
             height: auto;
 
             & li {
@@ -93,14 +88,11 @@ const Content = styled.div`
                 align-items: center;
                 justify-content: center;
                 height: 25px;
-                border: 1px solid #ffffff20;
-                filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-                border-radius: 5px;
 
                 & img {
-                    width: 25px!important;
-                    padding: 3px;
-                    height: 25px!important;
+                    width: 24px!important;
+                    padding: 2px;
+                    height: 24px!important;
                 }
 
             }
@@ -117,15 +109,15 @@ const ImageWrapper = styled.div`
     justify-content: center;
 
     @media (max-width: 768px){
-        height: 250px;        
+        height: 260px;        
     }
 `;
 
 export default function ProjectCard({
     image,
     title,
-    data,
-    tecnologias = [] // array de strings, ex: ['react', 'javascript', 'html']
+    date,
+    tecnologias = []
 }) {
     const [hover, setHover] = useState(false);
     const [mousePos, setMousePos] = useState({ x: 300, y: 175 });
@@ -146,13 +138,12 @@ export default function ProjectCard({
                     onMouseLeave={() => setHover(false)}
                     onMouseMove={handleMouseMove}
                 >
-                    <img src={image} alt={title} loading="lazy" />
+                    <img src={image} alt={title} loading="lazy" title={title} />
                 </ImageWrapper>
                 <div>
                     <h4>{title}</h4>
-                    <p>{data}</p>
+                    <p>{date}</p>
                 </div>
-                
                 <hr />
                 <div>
                     <span>Tecnologias Usadas</span>

@@ -10,14 +10,14 @@ import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { projects as allProjects } from '../../database/ProjectData.jsx';
-import { IoFolderOpenOutline } from "react-icons/io5";
+import { FolderStarIcon, FoldersIcon } from "@phosphor-icons/react/dist/ssr";
 
 const Container = styled.div`
     width: 100%;
     display: flex; 
     align-items: center;
     justify-content: center;
-    background-color: #000;
+    background-color: ${(props) => props.theme.colors.black[0]};
     position: relative;
 `
 
@@ -31,16 +31,18 @@ const Background = styled.div`
 
 const Content = styled.section`
     width: 100%;
-    padding: 3.5% 2.5% 5% 2.5%;
+    padding: 5% 2.5%;
     max-width: 1420px;
+    gap: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 50px;
+    position: relative;
+    z-index: 1;
 
     @media (max-width: 768px){
-        gap: 30px;
+        gap: 28px;
         padding: 10% 5%;
     }
 `
@@ -51,8 +53,8 @@ const Texts = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
     flex-direction: row;
+    gap: 14px;
 
     @media (max-width: 768px){
         flex-direction: column;
@@ -61,26 +63,58 @@ const Texts = styled.div`
 
     & > div {
         width: 50%;
+        gap: 18px;
+        height: 100%;
         display: flex;
         align-items: flex-start;
         justify-content: center;
         flex-direction: column;
-        gap: 20px;
-        height: 100%;
 
         @media (max-width: 768px){
             width: 100%!important;
             align-items: flex-start!important;
             text-align: left;
         }
+    }
 
-        &:nth-child(1){
-            width: 60%;
+    & .titles {
+        width: 60%;
+
+        @media (max-width: 768px){
+            width: 100%;
         }
 
-        &:nth-child(2){
-            width: 40%;
-            align-items: flex-end;
+        & h1 {
+            font-size: 32px;
+            width: 80%;
+            color: ${(props) => props.theme.colors.white[100]};
+            font-weight: ${(props) => props.theme.fontWeights.normal};
+            line-height: ${(props) => props.theme.lineHeights.heading};
+
+            @media (max-width: 768px){
+                font-size: 26px;
+                width: 100%;
+            }
+        }
+    }
+
+    & .description {
+        width: 40%;
+        align-items: flex-end;
+
+        @media (max-width: 768px){
+            width: 100%;
+        }
+
+        & p {
+            font-size: 18px;
+            color: ${(props) => props.theme.colors.gray[100]};
+            font-weight: ${(props) => props.theme.light};
+            line-height: ${(props) => props.theme.lineHeights.heading};
+
+            @media (max-width: 768px){
+                font-size: 16px;
+            }
         }
     }
 `
@@ -92,7 +126,7 @@ const Carrossel = styled.div`
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     box-sizing: border-box;
 `
 
@@ -105,16 +139,16 @@ const Navigation = styled.div`
 
 const CustomArrow = styled.button`
   background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
+  border: 1px solid ${(props) => props.theme.colors.gray[100]};
+  color: ${(props) => props.theme.colors.gray[100]};
   border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
-  margin: 0 5px;
+  font-size: 20px;
+  margin: 0 4px;
   cursor: pointer;
   transition: background 0.2s;
 
@@ -122,16 +156,16 @@ const CustomArrow = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
   }
 `;
 
 const ProgressBar = styled.div`
   width: 25%;
-  height: 6px;
-  background: #222;
-  border-radius: 3px;
+  height: 4px;
+  background: ${(props) => props.theme.colors.black[200]};
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
 
@@ -139,9 +173,10 @@ const ProgressBar = styled.div`
     width: 50%;
   }
 `;
+
 const ProgressFill = styled.div`
   height: 100%;
-  background: #fff;
+  background: linear-gradient(90deg, ${(props) => props.theme.colors.green['contrast']}, ${(props) => props.theme.colors.green['light']});
   width: ${props => props.progress}%;
   transition: width 0.3s;
 `;
@@ -156,32 +191,29 @@ const VerMais = styled.div`
     cursor: pointer;
 
     &:hover svg{
-        color: #ffffff;
-        scale: 1.1;
+        color: ${(props) => props.theme.colors.gray[100]};
     }
 
     &:hover span {
-        color: #ffffff;
-        scale: 1.1;
+        color: ${(props) => props.theme.colors.gray[100]};
     } 
 
     & svg {
-        width: 50px;
-        height: 50px;
-        color: #ffffff50;
-        margin-bottom: 10px;
+        width: 42px;
+        height: 42px;
+        color: ${(props) => props.theme.colors.gray[600]};
+        margin-bottom: 12px;
         transition: all 0.2s ease-in-out;
     }
 
     & span {
-        font-size: 20px;
-        font-weight: 400;
-        color: #ffffff50;
+        font-size: 18px;
+        font-weight: 300;
+        color: ${(props) => props.theme.colors.gray[600]};
         transition: all 0.2s ease-in-out;
     }
 `
 
-// Função para converter data DD/MM/YYYY para Date
 function parseDateBR(dateStr) {
     const [day, month, year] = dateStr.split('/').map(Number);
     return new Date(year, month - 1, day);
@@ -192,15 +224,13 @@ export default function Projects() {
     const splideRef = useRef(null);
     const navigate = useNavigate();
 
-    // Ordena por data (mais recente primeiro) e pega os 5 últimos
     const sortedProjects = allProjects
         .slice()
-        .sort((a, b) => parseDateBR(b.data) - parseDateBR(a.data))
-        .slice(0, 5);
-    // Adiciona o slide customizado
-    const projects = [...sortedProjects, "custom-slide-6"];
+        .sort((a, b) => parseDateBR(b.date) - parseDateBR(a.date))
+        .slice(0, 8);
 
-    // Calcula o progresso corretamente baseado no número de slides visíveis e total de slides
+    const projects = [...sortedProjects, "custom-slide-9"];
+
     const handleSplideEvent = (splide) => {
         const totalSlides = projects.length;
         const perPage = splide.options.perPage || 1;
@@ -227,22 +257,20 @@ export default function Projects() {
                 <Background></Background>
                 <Content>
                     <Texts>
-                        <div>
+                        <div className="titles">
                             <Badge 
-                                texto="Projetos"
-                                icon={<IoFolderOpenOutline />} 
-                                txtcolor="#13ba00" 
-                                color="#0c740030" 
+                                children="Projetos"
+                                icon={<FolderStarIcon weight="fill" />} 
+                                colorText="rgb(52, 199, 89)" 
+                                bgColor="rgba(52, 199, 89, 0.1)" 
                             />
                             <Title 
-                                titulo={<>Projetos utilizando as <b>Tecnologias</b> mais modernas.</>}
-                                color="#fff"
+                                children="Projetos utilizando as Tecnologias mais modernas"
                             />
                         </div>
-                        <div>
+                        <div className="description">
                             <Description 
-                                descricao="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas."
-                                color="#dadada"
+                                children="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas."
                             />
                         </div>
                     </Texts>
@@ -260,9 +288,18 @@ export default function Projects() {
                                 width: '100%',
                                 autoWidth: false,
                                 breakpoints: {
-                                    1200: { perPage: 2, gap: '1.5rem' },
-                                    900: { perPage: 1, gap: '1rem' },
-                                    600: { perPage: 1, gap: '0.5rem' },
+                                    1200: { 
+                                        perPage: 2, 
+                                        gap: '1.5rem' 
+                                    },
+                                    900: { 
+                                        perPage: 1, 
+                                        gap: '1rem' 
+                                    },
+                                    600: { 
+                                        perPage: 1, 
+                                        gap: '0.5rem' 
+                                    },
                                 },
                             }}
                             onMove={(_, newIndex) => handleSplideEvent(splideRef.current.splide)}
@@ -270,10 +307,10 @@ export default function Projects() {
                             aria-label="Projetos"
                             >
                             {projects.map((proj, idx) => (
-                                proj === "custom-slide-6" ? (
-                                    <SplideSlide key="custom-slide-6" style={{ width: '100%', minWidth: 0 }}>
+                                proj === "custom-slide-9" ? (
+                                    <SplideSlide key="custom-slide-9" style={{ width: '100%', minWidth: 0 }}>
                                         <VerMais style={{ width: '100%', minWidth: 0 }} onClick={() => navigate('/projetos')}>
-                                            <CiCirclePlus />
+                                            <FoldersIcon weight="thin" />
                                             <span>Ver todos os projetos</span>
                                         </VerMais>
                                     </SplideSlide>
