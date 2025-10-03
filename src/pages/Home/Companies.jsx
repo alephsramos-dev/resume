@@ -59,7 +59,7 @@ const CarouselWrapper = styled.div`
     --fade-width: 150px;
 
     @media (max-width: 768px){
-        --fade-width: 100px;
+        --fade-width: 60px;
     }
 
     &::before, &::after {
@@ -98,10 +98,10 @@ const CarouselStyles = styled.div`
     .logo-item {
         width: var(--logo-size);
         object-fit: contain;
-        padding: 15px;
+        padding: 8px;
         height: 100px;
-        filter: grayscale(1) brightness(.85);
-        opacity: .9;
+        filter: grayscale(100%);
+        opacity: 1;
         transition: filter .25s, opacity .25s, transform .25s;
         user-select: none;
         pointer-events: none; /* apenas visual */
@@ -112,13 +112,13 @@ const CarouselStyles = styled.div`
     }
 `;
 
-export default function EmpresasQueConfiaram() {
+export default function Companies() {
     const logos = useMemo(() => {
-        const modules = import.meta.glob("@/assets/client-logos/*.svg", { eager: true, import: 'default' });
+        const modules = import.meta.glob("@/assets/companies/*-white.svg", { eager: true, import: 'default' });
         return Object.values(modules);
     }, []);
 
-        const extended = logos.length < 10 ? logos.concat(logos) : logos;
+        const extended = logos.length < 8 ? logos.concat(logos) : logos;
 
         return (
             <Container>

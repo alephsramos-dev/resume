@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { projects as allProjects } from '../../database/ProjectData.jsx';
-import { FolderStarIcon, FoldersIcon } from "@phosphor-icons/react/dist/ssr";
+import { AsteriskIcon, FolderStarIcon, FoldersIcon } from "@phosphor-icons/react/dist/ssr";
 
 const Container = styled.div`
     width: 100%;
@@ -260,7 +260,7 @@ export default function Projects() {
                         <div className="titles">
                             <Badge 
                                 children="Projetos"
-                                icon={<FolderStarIcon weight="fill" />} 
+                                icon={<AsteriskIcon weight="fill" />} 
                                 colorText="rgb(52, 199, 89)" 
                                 bgColor="rgba(52, 199, 89, 0.1)" 
                             />

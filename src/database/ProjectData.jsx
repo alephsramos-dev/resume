@@ -5,12 +5,14 @@ import LogoNovaMetalica from '@/assets/brands/pousada-le-ange.png';
 import LogoFastHomes from '@/assets/brands/pousada-le-ange.png';
 import LogoKdea from '@/assets/brands/pousada-le-ange.png';
 import SemLogo from '@/assets/brands/pousada-le-ange.png';
+import Default from '@/assets/banners/default.jpg';
+
 
 import companies from '@/database/companys';
 
 export const projects = [
     {
-        image: "",
+        image: Default,
         title: "Programa de Fidelidade",
         slug: "programa-de-fidelidade",
         popupContent: "Novidade",
@@ -46,7 +48,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "https://mir-s3-cdn-cf.behance.net/projects/404/774954210683221.Y3JvcCwxNDA2LDExMDAsMTcsMA.png",
+        image: Default,
         title: "Gerenciador de Agência",
         popupContent: "Útil",
         slug: "gerenciador-de-agencia",
@@ -99,7 +101,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "Sistema de Pré-vendas",
         popupContent: "Útil",
         slug: "sistema-de-pre-vendas",
@@ -120,7 +122,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "euYagoLopes",
         popupContent: "Tendência",
         slug: "euyagolopes",
@@ -141,7 +143,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "Pousada Le Ange",
         popupContent: "Mais visto",
         slug: "pousada-le-ange",
@@ -162,7 +164,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "Nova Metálica",
         popupContent: "Fábrica",
         slug: "nova-metalica",
@@ -183,7 +185,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "K'dea Construtora",
         slug: "kdea-construtora",
         popupContent: "Em alta",
@@ -204,7 +206,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "Cháles para Airbnb",
         popupContent: "Em alta",
         slug: "chales-para-airbnb",
@@ -225,7 +227,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "Pisos Vinilicos",
         popupContent: "Auge",
         slug: "pisos-vinilicos",
@@ -246,7 +248,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: "",
+        image: Default,
         title: "Fast Homes",
         popupContent: "Tendência",
         siteType: "Institucional",
@@ -275,7 +277,7 @@ export default projects;
 // {
 //     image: "",
 //     
-// title: "",
+//  Default title: "",
 //     popupContent: "",
 //     siteType: "",
 //     imageCompanyUrl: "",
