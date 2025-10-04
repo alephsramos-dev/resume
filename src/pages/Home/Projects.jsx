@@ -316,7 +316,10 @@ export default function Projects() {
                                     </SplideSlide>
                                 ) : (
                                     <SplideSlide key={proj.nome + idx} style={{ width: '100%', minWidth: 0 }}>
-                                        <ProjectCard {...proj} />
+                                        <ProjectCard 
+                                            {...proj} 
+                                            onClick={() => navigate(`/projetos/${proj.slug}`)}
+                                        />
                                     </SplideSlide>
                                 )
                             ))}

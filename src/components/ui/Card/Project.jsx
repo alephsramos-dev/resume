@@ -11,6 +11,7 @@ const Content = styled.div`
     width: auto;
     height: auto;
     padding: 14px 4px;
+    cursor: pointer;
 
     & img {
         width: 100%;
@@ -117,6 +118,7 @@ export default function ProjectCard({
     image,
     title,
     date,
+    onClick,
     tecnologias = []
 }) {
     const [hover, setHover] = useState(false);
@@ -132,7 +134,9 @@ export default function ProjectCard({
 
     return (
         <>
-            <Content>
+            <Content
+                onClick={onClick}
+            >
                 <ImageWrapper
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}

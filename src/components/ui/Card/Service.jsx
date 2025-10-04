@@ -1,6 +1,9 @@
 import React from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import styled from "styled-components";
+import Title from "../texts/Title";
+import Description from "../texts/Description";
+import { rgba } from "polished";
 
 const Container = styled.main`
     display: flex;
@@ -11,15 +14,19 @@ const Container = styled.main`
     height: 400px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 0 0 1px #f1f1f120;
-    border-radius: 10px;
-    margin: 5px;
-    transition: all 0.3s ease-in-out;
+    border-radius: 24px;
+    border: 1px solid ${(props) => rgba(props.theme.colors.gray[100], 0.2)};
+    margin: 4px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: ${({$colorBorder}) => $colorBorder || 'transparent'};
+    }
 
     @media (max-width: 768px){
         width: 100%;
         height: 400px;
-        margin: 5px 0;
+        margin: 4px 0;
     }
 
     &::before {
@@ -27,22 +34,12 @@ const Container = styled.main`
         height: 100%;
         content: '';
         position: absolute;
-        background: rgba(0, 0, 0, 0.2);
+        background: ${(props) => rgba(props.theme.colors.black[500], 0.1)};
         top: 0;
         left: 0;
-        z-index: 1;
         opacity: 0;
+        z-index: 1;
         transition: all 0.3s ease-in-out;
-    }
-
-    &:hover {
-        box-shadow: 0 0 0 1px #f1f1f150;
-    }
-
-    &:hover button {
-        transform: scale(1) translateY(0);
-        opacity: 1;
-        margin-top: 10px;
     }
 
     &:hover::before {
@@ -55,11 +52,11 @@ const ImageBg = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 24px;
     top: 0;
     left: 0;
     z-index: 0;
-    background-color: #000;
+    background-color: ${(props) => props.theme.colors.black[0]};
 
     @media (max-width: 768px){
         height: 100%;
@@ -69,10 +66,10 @@ const ImageBg = styled.div`
         content: '';
         position: absolute;
         width: 100%;
-        height: 65%;
+        height: 100%;
         left: 0;
         bottom: 0;
-        background: linear-gradient(0deg, #000, transparent);
+        background: linear-gradient(0deg, #000000 20%, transparent);
 
         @media (max-width: 768px){
             height: 100%;
@@ -109,24 +106,25 @@ const Texts = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 10px;
+    gap: 18px;
     width: 100%;
     height: auto;
-    padding: 10px 25px 25px 25px;
+    padding: 22px;
 
-    & h2 {
-        font-size: 22px;
+    & h1 {
+        font-size: 26px;
         font-weight: 400;
         line-height: 1.0;
+        color: ${(props) => props.theme.colors.white[300]};
     }
 
     & p {
         font-size: 16px;
         width: 70%;
-        opacity: 0.6;
         line-height: 1.2;
         font-weight: 300;
         transition: all 0.3s ease-in-out;
+        color: ${(props) => props.theme.colors.gray[100]};
 
         @media (max-width: 768px){
             width: 100%;
@@ -137,20 +135,30 @@ const Texts = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
-        color: #f1f1f1;
-        border-radius: 4px;
-        margin-top: -25px;
+        gap: 12px;
+        color: ${(props) => props.theme.colors.white[100]};
         transition: all 0.3s ease-in-out;
-        opacity: 0;
-        border: 1px solid #f1f1f130;
-        padding: 6px 10px;
+        border: 1px solid ${(props) => props.theme.colors.gray[100]};
+        padding: 6px 6px 6px 16px;
         font-size: 16px;
-        transform: translateY(100px);
+        border-radius: 48px;
         background: transparent;
         cursor: pointer;
         position: relative;
         z-index: 1;
+        overflow: hidden;
+
+        & svg {
+            font-size: 18px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: ${(props) => props.theme.colors.white[300]};
+            color: ${(props) => props.theme.colors.black[300]};
+            transition: all 0.3s ease-in-out;
+            transition-delay: 100ms;
+            padding: 4px;
+        }
 
         @media (max-width: 768px){
             opacity: 1;
@@ -162,42 +170,52 @@ const Texts = styled.div`
             content: '';
             position: absolute;
             width: 0%;
-            height: 100%;
-            background: #f1f1f1;
-            top: 0;
+            height: 92%;
+            background: ${(props) => props.theme.colors.white[100]};
+            top: 4%;
+            left: 1%;
             z-index: -2;
-            border-radius: 4px;
-            left: 0;
+            border-radius: 48px;
             transition: all 0.3s ease-in-out;
         }
 
         &:hover {
-            color: #000;
+            color: ${(props) => props.theme.colors.black[300]};
+        }
+
+        &:hover svg {
+            background-color: ${(props) => props.theme.colors.black[100]};
+            color: ${(props) => props.theme.colors.white[100]};
         }
         
         &:hover::before{
-            width: 100%;
+            width: 98%;
         }
     }
 `
 
-export default function Service ({
-    imageSrc,
-    nameService,
-    descriptionService,
-    width
+export default function ServiceCard({
+    image,
+    name,
+    description,
+    width,
+    colorBorder
 }) {
     return (
         <>
-            <Container width={width}>
+            <Container width={width} $colorBorder={colorBorder}> 
                 <ImageBg>
-                    <img src={imageSrc} alt={nameService} loading="lazy" />
+                    <img src={image} alt={name} loading="lazy" />
                 </ImageBg>
                 <Texts>
-                    <h2>{nameService}</h2>
-                    <p>{descriptionService}</p>
+                    <Title 
+                        children={name}
+                    />
+                    <Description 
+                        children={description}
+                    />
                     <button>
-                        <span>Explorar a fundo</span>
+                        <span>Explorar {name.toLowerCase()}</span>
                         <GoArrowUpRight />
                     </button>
                 </Texts>

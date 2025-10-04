@@ -1,16 +1,11 @@
 import Badge from "@/components/ui/Badge/Badge";
-import Service from "@/components/ui/Card/Service";
-import Description from "@/components/ui/texts/Description";
+import ServiceCard from "@/components/ui/Card/Service";
 import Title from "@/components/ui/texts/Title";
 import React from "react";
-import { IoFolderOpenOutline } from "react-icons/io5";
 import styled from "styled-components";
+import { MegaphoneIcon } from "@phosphor-icons/react/dist/ssr";
 
-import DevService from '@/assets/services/desenvolvedor-web-service.svg';
-import AutomationService from '@/assets/services/automation-service.svg';
-import TrafficManagementService from '@/assets/services/traffic-management-service.svg';
-import DesignService from '@/assets/services/design-service.svg';
-import RedatorService from '@/assets/services/redator-service.svg';
+import services from '@/database/services';
 
 const Container = styled.div`
     width: 100%;
@@ -74,6 +69,19 @@ const Texts = styled.div`
             text-align: left;
         }
 
+        & h1 {
+            font-size: 32px;
+            width: 80%;
+            color: ${(props) => props.theme.colors.white[100]};
+            font-weight: ${(props) => props.theme.fontWeights.normal};
+            line-height: ${(props) => props.theme.lineHeights.heading};
+
+            @media (max-width: 768px){
+                font-size: 26px;
+                width: 100%;
+            }
+        }
+
         &:nth-child(1){
             width: 60%;
         }
@@ -104,50 +112,29 @@ export default function Services () {
                      <Texts>
                         <div>
                             <Title
-                                titulo="Bem-vindo à melhor maneira de criar o melhor pro seu negócio."
-                                color="#fff"
+                                children="Bem-vindo à melhor maneira de criar o melhor pro seu negócio."
                             />
                         </div>
                         <div>
                             <Badge 
-                                text="Services"
-                                icon={<IoFolderOpenOutline />} 
-                                bgColor="#ffffff2f" 
-                                colorText="#ffffff" 
+                                children="Serviços"
+                                icon={<MegaphoneIcon weight="fill" />} 
+                                bgColor="rgba(203, 48, 224, 0.1)" 
+                                colorText="rgb(203, 48, 224)" 
                             />
                         </div>
                     </Texts>
                     <Grid>
-                        <Service 
-                            width="calc(66.66% - 10px)"
-                            imageSrc={DevService}
-                            nameService="Desenvolvimento de Sites"
-                            descriptionService="Mais do que um site, uma experiência digital exclusiva. Cada detalhe é planejado para refletir a excelência da sua marca."
-                        />
-                        <Service 
-                            width="calc(33.33% - 10px)"
-                            imageSrc={AutomationService}
-                            nameService="Automação"
-                            descriptionService="Automação de processos para aumentar a eficiência e reduzir erros."
-                        />
-                        <Service 
-                            width="calc(33.33% - 10px)"
-                            imageSrc={TrafficManagementService}
-                            nameService="Gestão de Tráfego"
-                            descriptionService="Gestão de campanhas publicitárias para maximizar resultados."
-                        />
-                        <Service 
-                            width="calc(40% - 10px)"
-                            imageSrc={DesignService}
-                            nameService="Design Gráfico"
-                            descriptionService="Criação de identidades visuais impactantes e materiais gráficos de alta qualidade."
-                        />
-                        <Service 
-                            width="calc(26.66% - 10px)"
-                            imageSrc={RedatorService}
-                            nameService="Copywriting (Redator)"
-                            descriptionService="Criação de textos persuasivos focados em conversão."
-                        />
+                        {services.map((service, i) => (
+                            <ServiceCard
+                                key={i}
+                                width={service.width}
+                                image={service.image}
+                                name={service.name}
+                                description={service.description}
+                                colorBorder={service.colorBorder}
+                            />
+                        ))}
                     </Grid>
                 </Content>
             </Container>
