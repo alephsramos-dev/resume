@@ -51,8 +51,7 @@ const Header = styled.header`
     }
 `
 
-export default function ProjectDetails({
-}) {
+export default function ProjectDetails() {
 
     const { slug } = useParams();
 
