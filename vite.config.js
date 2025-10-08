@@ -12,6 +12,7 @@ export default defineConfig({
     eslint(),
     sitemap({
       hostname: 'https://your-domain.com',
+      robots: false,
     }),
     svgr({
       svgrOptions: {
