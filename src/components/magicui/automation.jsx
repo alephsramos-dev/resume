@@ -16,13 +16,13 @@ import GoogleAdsIcon from "@/assets/brands/google-ads.svg?react";
 const StyledCircle = styled.div`
   z-index: 10;
   display: flex;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  border: 2px solid;
-  background-color: #000;
+  border-radius: 22px;
+  border: 1px solid;
+  background-color: ${(props) => props.theme.colors.black[0]};
   padding: .85rem;
   box-shadow: 0 0 20px -12px rgba(0, 0, 0, 0.8);
 
@@ -47,7 +47,6 @@ const InnerContainer = styled.div`
   width: 100%;
   height: 100%;
   max-height: auto;
-  max-width: 32rem;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
@@ -107,7 +106,7 @@ export function AnimatedBeamDemo() {
           <Circle ref={div2Ref}>
             <Icons.meta />
           </Circle>
-          <Circle ref={div4Ref} size="16">
+          <Circle ref={div4Ref} size="26">
             <Icons.chatgpt/>
           </Circle>
           <Circle ref={div6Ref}>

@@ -1,7 +1,9 @@
 import { AnimatedBeamDemo } from "@/components/magicui/automation";
 import Badge from "@/components/ui/Badge/Badge";
+import ChatNowButton from "@/components/ui/Button/Chat";
 import Description from "@/components/ui/texts/Description";
 import Title from "@/components/ui/texts/Title";
+import { TrophyIcon } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { TbMichelinStar } from "react-icons/tb";
@@ -12,8 +14,8 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f1f1f1;
-    color: #000;
+    background: ${(props) => props.theme.colors.black[0]};
+    color: ${(props) => props.theme.colors.white[0]};
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -22,11 +24,11 @@ const Container = styled.div`
 const Content = styled.section`
     width: 100%;
     padding: 5% 2.5%;
-    max-width: 1420px; /* menor container geral */
+    max-width: 1420px; 
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 50px;
+    gap: 52px;
     position: relative;
     z-index: 1;
 
@@ -42,64 +44,36 @@ const Texts = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    gap: 15px;
+    gap: 18px;
     flex-direction: column;
 
     @media (max-width: 768px){
         flex-direction: column;
         align-items: center;
+        text-align: center;
     }
 
-    & > div {
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        flex-direction: column;
-        gap: 20px;
-        height: 100%;
-
-            & button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: #000000;
-            border-radius: 2px;
-            transition: all 0.3s ease-in-out;
-            border: 1px solid #00000050;
-            padding: 8px 12px;
-            font-size: 16px;
-            cursor: pointer;
-            position: relative;
-            z-index: 1;
-
-            &::before{
-                content: '';
-                position: absolute;
-                width: 0%;
-                height: 100%;
-                background: #000000;
-                top: 0;
-                z-index: -2;
-                border-radius: 2px;
-                left: 0;
-                transition: all 0.3s ease-in-out;
-            }
-
-            &:hover {
-                color: #fbfbfb;
-            }
-            
-            &:hover::before{
-                width: 100%;
-            }
-        }
+    & h1 {
+        font-size: 32px;
+        width: 80%;
+        color: ${(props) => props.theme.colors.white[100]};
+        font-weight: ${(props) => props.theme.fontWeights.normal};
+        line-height: ${(props) => props.theme.lineHeights.heading};
 
         @media (max-width: 768px){
-            width: 100%!important;
-            align-items: flex-start!important;
-            text-align: left;
+            font-size: 26px;
+            width: 100%;
+        }
+    }
+
+    & p {
+        font-size: 18px;
+        color: ${(props) => props.theme.colors.gray[100]};
+        font-weight: ${(props) => props.theme.light};
+        line-height: ${(props) => props.theme.lineHeights.heading};
+
+        @media (max-width: 768px){
+            font-size: 16px;
         }
     }
 `
@@ -110,28 +84,19 @@ export default function Automation() {
             <Container>
                 <Content>
                     <Texts>
-                        <div>
-                            <Badge
-                                texto="Beneficios"
-                                icon={<TbMichelinStar />}
-                                txtcolor="#0066a0"
-                                color="#0066a030"
-                            />
-                            <Title
-                                titulo={<>Automatize tudo hoje mesmo, e evite trabalho manual.</>}
-                                color="#000"
-                            />
-                        </div>
-                        <div>
-                            <Description
-                                descricao="Resultados reais através de arquitetura sólida, foco em conversão e otimização contínua."
-                                color="#1d1d1b"
-                            />
-                            <button>
-                                <span>Explorar a fundo</span>
-                                <GoArrowUpRight />
-                            </button>
-                        </div>
+                        <Badge
+                            children="Novidade"
+                            icon={<TrophyIcon weight="fill"/>}
+                            colorText="rgb(255, 204, 0)"
+                            bgColor="rgb(255, 204, 0, 0.1)"
+                        />
+                        <Title
+                            children="Automatize tudo hoje mesmo, e evite trabalho manual"
+                        />
+                        <Description
+                            children="Resultados reais através de arquitetura sólida, foco em conversão e otimização contínua."
+                        />
+                        <ChatNowButton />
                     </Texts>
                     <AnimatedBeamDemo />
                 </Content>

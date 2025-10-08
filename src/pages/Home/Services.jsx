@@ -133,6 +133,10 @@ export default function Services () {
                                 name={service.name}
                                 description={service.description}
                                 colorBorder={service.colorBorder}
+                                onClick={() => {
+                                    const page = service.slug;
+                                    window.location.href = `/servicos/${page}`;
+                                }}
                             />
                         ))}
                     </Grid>

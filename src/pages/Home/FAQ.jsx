@@ -2,9 +2,13 @@ import Badge from "@/components/ui/Badge/Badge";
 import AskItem from "@/components/ui/Others/AskItem";
 import Description from "@/components/ui/texts/Description";
 import Title from "@/components/ui/texts/Title";
+import { SealQuestionIcon } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 import { TbMichelinStar } from "react-icons/tb";
 import styled from "styled-components";
+import { rgba } from "polished";
+
+import iconAleph from "/icon-black-aleph-desenvolvedor-web.svg";
 
 const Container = styled.div`
     width: 100%;
@@ -23,7 +27,7 @@ const Content = styled.section`
     padding: 5% 2.5%;
     max-width: 1420px; /* menor container geral */
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
     flex-direction: row;
     gap: 100px;
@@ -39,12 +43,10 @@ const Content = styled.section`
 
 const Texts = styled.div`
     width: 50%;
-    height: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: column;
-    gap: 50px;
 
     @media (max-width: 768px){
         flex-direction: column;
@@ -60,7 +62,6 @@ const Texts = styled.div`
         justify-content: center;
         flex-direction: column;
         gap: 20px;
-        height: 100%;
 
         @media (max-width: 768px){
             width: 100%!important;
@@ -70,6 +71,19 @@ const Texts = styled.div`
 
         &:nth-child(1){
             width: 100%;
+
+            & h1 {
+                font-size: 32px;
+                width: 100%;
+                color: ${(props) => props.theme.colors.white[100]};
+                font-weight: ${(props) => props.theme.fontWeights.normal};
+                line-height: ${(props) => props.theme.lineHeights.heading};
+
+                @media (max-width: 768px){
+                    font-size: 26px;
+                    width: 100%;
+                }
+            }
         }
 
         &:nth-child(2){
@@ -78,33 +92,123 @@ const Texts = styled.div`
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            gap: 15px;
-            border-radius: 8px;
-            background-color: #f1f1f110;
-            padding: 20px;
+            gap: 18px;
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px solid ${(props) => rgba(props.theme.colors.gray[100], 0.2)};
 
             @media (max-width: 768px){
-                display: none;
+                padding: 16px;
+                border-radius: 0;
             }
 
-            & p {
-                font-size: 20px;
-                font-weight: 300;
-                line-height: 1.2;
+            & .perfil {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                width: auto;
+                gap: 10px;
+
+                & div {
+                    width: auto;
+                    height: auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 6px;
+                    border-radius: 12px;
+                    background: ${(props) => props.theme.colors.white[300]};
+
+                    & img {
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+
+                & span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 16px;
+                    font-weight: 400;
+                    color: ${(props) => props.theme.colors.white[100]};
+                    line-height: 1;
+                    gap: 4px;
+
+                    & strong {
+                        font-size: 10px;
+                        font-weight: 400;
+                        color: ${(props) => props.theme.colors.gray[100]};
+                        line-height: 1;
+                        position: relative;
+                        top: 2px;
+                        font-style: italic;
+                    }
+                }
+            }
+
+            & h2 {
+                font-size: 22px;
+                color: ${(props) => props.theme.colors.gray[300]};
+                font-weight: ${(props) => props.theme.fontWeights.light};
+                line-height: ${(props) => props.theme.lineHeights.heading};
 
                 @media (max-width: 768px){
                     font-size: 16px;
                 }
             }
 
-            & button {
-                border: 1px solid #fff;
-                border-radius: 4px;
-                color: #000;
-                background-color: #fff;
-                padding: 8px 14px;
-                cursor: pointer;
-                font-weight: 500;
+            & form {
+                width: 100%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                gap: 18px;
+
+                & label {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: ${(props) => props.theme.colors.gray[300]};
+
+                    & input {
+                        width: 100%;
+                        border: none;
+                        border-bottom: 1px solid ${(props) => rgba(props.theme.colors.gray[100], 0.2)};
+                        background: transparent;
+                        color: ${(props) => props.theme.colors.white[100]};
+                        font-size: 16px;
+                        font-weight: 500;
+                        height: fit-content;
+                        resize: vertical;
+                        padding: 8px 0px;
+
+                        &::placeholder {
+                            color: ${(props) => rgba(props.theme.colors.gray[300], 0.6)};
+                            font-weight: 300;
+                            font-size: 14px;
+                        }
+
+                        &:focus {
+                            outline: none;
+                            border-bottom: 1px solid ${(props) => props.theme.colors.pink['basic']};
+                        }
+                    }
+                }
+
+                & button {
+                    border: 1px solid ${(props) => props.theme.colors.pink['basic']};
+                    color: ${(props) => props.theme.colors.pink['basic']};
+                    background-color: transparent;
+                    border-radius: 12px;
+                    padding: 8px 14px;
+                    cursor: pointer;
+                    font-weight: 400;
+                }
             }
         }
     }
@@ -147,6 +251,10 @@ export default function FAQ() {
             q: "Qual é o prazo médio para entrega de um projeto?",
             a: "Depende do escopo, mas geralmente de 2 a 6 semanas para um site institucional completo.",
         },
+        {
+            q: "Qual é o prazo médio para entrega de um projeto?",
+            a: "Depende do escopo, mas geralmente de 2 a 6 semanas para um site institucional completo.",
+        },
     ];
 
     const handleToggle = (index, next) => {
@@ -160,19 +268,29 @@ export default function FAQ() {
                     <Texts>
                         <div>
                             <Badge
-                                texto="Beneficios"
-                                icon={<TbMichelinStar />}
-                                txtcolor="#0066a0"
-                                color="#0066a030"
+                                children="FAQ"
+                                icon={<SealQuestionIcon weight="fill" />}
+                                colorText="rgb(255, 45, 85)"
+                                bgColor="rgb(255, 45, 85, 0.1)"
                             />
                             <Title
-                                titulo={<>Tire a sua dúvvida, veja as perguntas mais frequentes, mas pode fazer a sua também!</>}
-                                color="#fff"
+                                children="Tire a sua dúvida, veja as perguntas mais frequentes"
                             />
-                        </div>
+                        </div>  
                         <div>
-                            <p>Entre em contato diretamente comigo e tire sua dúvida agora mesmo!</p>
-                            <button>Enviar mensagem</button>
+                            <aside className="perfil">
+                                <div>
+                                    <img src={iconAleph} alt="icon-aleph-desenvolvedor-web" />
+                                </div>
+                                <span>Aleph Developer <strong>atendimento</strong></span>
+                            </aside>
+                            <h2>Entre em contato diretamente comigo e tire sua dúvida agora mesmo!</h2>
+                            <form>
+                                <label htmlFor="message">Mensagem:
+                                    <input type="text" id="message" placeholder="Digite sua dúvida  " required />
+                                </label>
+                                <button type="submit">Enviar</button>
+                            </form> 
                         </div>
                     </Texts>
                     <Doubts>

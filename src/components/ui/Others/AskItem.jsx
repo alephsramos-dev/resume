@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { HiOutlinePlus, HiOutlineMinus } from "react-icons/hi";
+import { rgba } from "polished";
+import { MinusIcon, PlusIcon } from "@phosphor-icons/react/dist/ssr";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -38,8 +40,8 @@ const Header = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff50;
-    padding: 8px;
+    color: ${(props) => props.theme.colors.gray[300]};
+    padding: 12px;
     border-radius: 8px;
     transition: transform 220ms cubic-bezier(.2,.8,.2,1), opacity 200ms ease;
   }
@@ -61,7 +63,7 @@ const Panel = styled.div`
 const PanelInner = styled.div`
   min-height: 0; 
   padding: ${({ $open }) => ($open ? "12px 12px" : "0px")};
-  border: 1px solid #ffffff20;
+  border: 1px solid ${( props ) => rgba(props.theme.colors.gray[100], 0.2)};
   border-bottom: none;
   position: relative;
 
@@ -76,7 +78,7 @@ const PanelInner = styled.div`
     left: 0;
     width: 2px;
     height: 100%;
-    background: #01c3a9;
+    background: ${(props) => props.theme.colors.pink['basic']};
   }
 
   & span {
@@ -84,7 +86,7 @@ const PanelInner = styled.div`
     font-size: 16px;
     font-weight: 300;
     line-height: 1.2;
-    color: #ffffff90;
+    color: ${(props) => props.theme.colors.gray[200]};
 
     @media (max-width: 768px){
         font-size: 16px;
@@ -123,7 +125,7 @@ export default function AskItem({
       >
         <p>{question}</p>
         <span className="icon" aria-hidden>
-          {open ? <HiOutlineMinus /> : <HiOutlinePlus />}
+          {open ? <MinusIcon /> : <PlusIcon />}
         </span>
       </Header>
 

@@ -49,10 +49,10 @@ const Container = styled.main`
 `
 
 const ImageBg = styled.div`
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 24px;
+    border-bottom: 1px solid ${(props) => rgba(props.theme.colors.gray[100], 0.2)};
     top: 0;
     left: 0;
     z-index: 0;
@@ -62,7 +62,7 @@ const ImageBg = styled.div`
         height: 100%;
     }
 
-    &::before {
+    /* &::before {
         content: '';
         position: absolute;
         width: 100%;
@@ -89,12 +89,12 @@ const ImageBg = styled.div`
         @media (max-width: 768px){
             display: block;
         }
-    }
+    } */
 
     & img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         object-position: center;
     }
 `
@@ -103,16 +103,22 @@ const Texts = styled.div`
     position: relative;
     z-index: 2;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 18px;
     width: 100%;
     height: auto;
     padding: 22px;
 
+    @media (max-width: 768px){
+        flex-wrap: wrap;
+        padding: 20px;
+        gap: 8px;
+    }
+
     & h1 {
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 400;
         line-height: 1.0;
         color: ${(props) => props.theme.colors.white[300]};
@@ -199,23 +205,24 @@ export default function ServiceCard({
     name,
     description,
     width,
-    colorBorder
+    colorBorder,
+    onClick
 }) {
     return (
         <>
             <Container width={width} $colorBorder={colorBorder}> 
                 <ImageBg>
-                    <img src={image} alt={name} loading="lazy" />
+                    {/* <img src={image} alt={name} loading="lazy" /> */}
                 </ImageBg>
                 <Texts>
                     <Title 
                         children={name}
                     />
-                    <Description 
+                    {/* <Description 
                         children={description}
-                    />
-                    <button>
-                        <span>Explorar {name.toLowerCase()}</span>
+                    /> */}
+                    <button onClick={onClick}>
+                        <span>Explorar</span>
                         <GoArrowUpRight />
                     </button>
                 </Texts>
