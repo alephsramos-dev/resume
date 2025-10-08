@@ -4,8 +4,8 @@ import styled from "styled-components";
 const Content = styled.button`
     width: auto;
     height: auto;
-    padding: 7.5px;
-    border-radius: 10px;
+    padding: 8px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,7 +26,7 @@ const Content = styled.button`
 
     &:hover {
         transform: scale(0.95);
-        box-shadow: 0 0 10px ${({ color }) => color || "transparent"}70;
+        box-shadow: 0 0 10px ${({ color }) => color || "transparent"}80;
         border-color: transparent;
     }
 

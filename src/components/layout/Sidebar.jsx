@@ -1,15 +1,8 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 import SidebarLinks from "@/components/ui/Badge/SidebarLinks";
-import { BiNetworkChart } from "react-icons/bi";
-import { SiOpenproject } from "react-icons/si";
-import { RiStackLine } from "react-icons/ri";
-import { IoPhonePortraitOutline } from "react-icons/io5";
-import { IoIosContact } from "react-icons/io";
-import { IoMdClose } from "react-icons/io";
-import { SiN8N } from "react-icons/si";
-import { MdDarkMode } from "react-icons/md";
-import { LuPenTool } from "react-icons/lu";
+import { AsteriskIcon, BoundingBoxIcon, BrowsersIcon, DevicesIcon, DevToLogoIcon, GitMergeIcon, MegaphoneIcon, MetaLogoIcon, TextAaIcon, TextboxIcon, UserIcon } from "@phosphor-icons/react/dist/ssr";
+import { rgba } from "polished";
 
 
 const fadeIn = keyframes`
@@ -24,7 +17,7 @@ const fadeOut = keyframes`
 const Backdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: ${(props) => rgba(props.theme.colors.black[0], 0.4)};
   z-index: 950;
   opacity: ${({ open }) => (open ? 1 : 0)};
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
@@ -41,11 +34,11 @@ const Content = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #1d1d1b95;
-    backdrop-filter: blur(4px); 
-    border-radius: 10px;
-    padding: 10px 10px;
-    color: #ffffff;
+    background-color: ${(props) => rgba(props.theme.colors.black[100], 0.5)};
+    backdrop-filter: blur(8px); 
+    border-radius: 16px;
+    padding: 8px 12px;
+    color: ${(props) => props.theme.colors.white[100]};
     z-index: 1000;
     animation: ${({ open }) => open
       ? css`${fadeIn} 0.4s cubic-bezier(.68,-0.55,.27,1.55) forwards`
@@ -57,20 +50,20 @@ const Content = styled.div`
     }
 
     & > span {
-        padding: 5px 10px;
+        padding: 4px 12px;
+        color: ${(props) => props.theme.colors.gray[300]};
         width: 100%;
         text-align: center;
         font-size: 10px;
-        opacity: 0.7;
-        font-weight: 200;
+        font-weight: 400;
     }
 `;
 
 const Line = styled.div`
     width: 100%;
     height: 1px;
-    background-color: #ffffff40;
-    margin: 10px 0;
+    background-color: ${(props) => rgba(props.theme.colors.gray[100], 0.1)};
+    margin: 8px 0;
 `;
 
 const Links = styled.nav`
@@ -79,29 +72,14 @@ const Links = styled.nav`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 5px;
+    gap: 4px;
 
     & h4 {
         font-size: 12px;
-        font-weight: 200;
-        opacity: 0.8;
-        font-family: 'Urbanist', sans-serif;
-        padding: 5px;
+        font-weight: 400;
+        color: ${(props) => props.theme.colors.gray[100]};
+        padding: 4px;
     }
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 1100;
-  transition: transform 0.2s;
-  &:hover { transform: scale(1.2) rotate(10deg); }
 `;
 
 export default function Sidebar({ open, onClose }) {
@@ -120,55 +98,66 @@ export default function Sidebar({ open, onClose }) {
       <>
         <Backdrop open={open} onClick={onClose} />
         <Content open={open}>
-            {/* Optional close button if desired */}
-            {/* <CloseButton onClick={onClose}><IoMdClose /></CloseButton> */}
             <Links onClickCapture={handleOptionClick}>
                 <h4>Conheça</h4>
                 <SidebarLinks 
-                    icon={BiNetworkChart}
+                    icon={MegaphoneIcon}
                     textButton="Serviços"
-                    colorText="var(--color-blue-light)"
-                    bgColor="var(--color-blue-dark)"
+                    colorText="rgb(203, 48, 224)"
+                    bgColor="rgb(203, 48, 224, .1)"
+                    onClick={() => window.location.href = '/services'}
                 />
                 <SidebarLinks 
-                    icon={SiOpenproject}
+                    icon={AsteriskIcon}
                     textButton="Projetos"
-                    colorText="#13ba00"
-                    bgColor="#0c7400"
-                />
-                <SidebarLinks 
-                    icon={RiStackLine}
-                    textButton="Stacks"
-                    colorText="#d102e4"
-                    bgColor="#5a0084"
+                    colorText="rgb(52, 199, 89)"
+                    bgColor="rgb(52, 199, 89, .1)"
+                    onClick={() => window.location.href = '/projetos'}
                 />
                 <Line />
-                <h4>Para você</h4>
+                <h4>Serviços</h4>
                 <SidebarLinks 
-                    icon={IoPhonePortraitOutline}
+                    icon={DevicesIcon}
                     textButton="Criar um site"
-                    colorText="#d90000"
-                    bgColor="#790404"
+                    colorText="rgb(0, 200, 179)"
+                    bgColor="rgb(0, 200, 179, .1)"
+                    onClick={() => window.location.href = '/servicos/criacao-de-sites'}
                 />
                 <SidebarLinks 
-                    icon={SiN8N}
+                    icon={GitMergeIcon}
                     textButton="Automação"
-                    colorText="#e2e908"
-                    bgColor="#f6ff00"
+                    colorText="rgb(203, 48, 224)"
+                    bgColor="rgb(203, 48, 224, .1)"
+                    onClick={() => window.location.href = '/servicos/automacao'}
                 />
                 <SidebarLinks 
-                    icon={LuPenTool}
+                    icon={BoundingBoxIcon}
                     textButton="Design"
-                    colorText="#0840e9"
-                    bgColor="#0231be"
+                    colorText="rgb(0, 136, 255)"
+                    bgColor="rgb(0, 136, 255, .1)"
+                    onClick={() => window.location.href = '/servicos/design'}
+                />
+                <SidebarLinks 
+                    icon={MetaLogoIcon}
+                    textButton="Tráfego pago"
+                    colorText="rgb(255, 141, 40)"
+                    bgColor="rgb(255, 141, 40, .1)"
+                    onClick={() => window.location.href = '/servicos/trafego-pago'}
+                />
+                <SidebarLinks 
+                    icon={TextAaIcon}
+                    textButton="Copywriter"
+                    colorText="rgb(97, 85, 245)"
+                    bgColor="rgb(97, 85, 245, .1)"
+                    onClick={() => window.location.href = '/servicos/copywriter'}
                 />
                 <Line />
                 <h4>Fale comigo</h4>
                 <SidebarLinks 
-                    icon={IoIosContact}
+                    icon={UserIcon}
                     textButton="Contato"
-                    colorText="#e08300"
-                    bgColor="#8b5202"
+                    colorText="rgb(255, 204, 0)"
+                    bgColor="rgb(255, 204, 0, .1)"
                 />
             </Links>
             <Line />

@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr";
 import React from "react";
 import { GoArrowRight } from "react-icons/go";
 import styled from "styled-components";
@@ -13,7 +14,7 @@ const Content = styled.button`
     cursor: pointer;
     background-color: transparent;
     border: 1px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease;
 
     & div {
         display: flex;
@@ -25,8 +26,8 @@ const Content = styled.button`
     &:hover,
     &:active,
     &:focus {
-        background-color: ${({ colorBg }) => colorBg || "transparent"}40;
-        border: 1px solid ${({ colorBg }) => colorBg || "transparent"}40;
+        background-color: ${({ bgColor }) => bgColor || "transparent"};
+        border: 1px solid ${({ bgColor }) => bgColor || "transparent"};
 
         & span {
             color: ${({ color }) => color || "#ffffff"};
@@ -46,15 +47,15 @@ const Content = styled.button`
 
     & span {
         font-size: 14px;
-        color: #fff;
+        color: ${(props) => props.theme.colors.white[300]};
         font-weight: 300;
         transition: all 0.2s ease-in-out;
     }
 
     & svg {
-        color: #fff;
+        color: ${(props) => props.theme.colors.gray[300]};
         transition: all 0.2s ease-in-out;
-        font-size: 15px;
+        font-size: 16px;
     }
 
     & .Arrow {
@@ -73,13 +74,13 @@ export default function SidebarLinks({
 }) {
     return (
         <>
-            <Content onClick={onClick} colorBg={bgColor} color={colorText} {...props}>
+            <Content onClick={onClick} bgColor={bgColor} color={colorText} {...props}>
                 <div>
-                    {Icone && <Icone />}
+                    {Icone && <Icone weight="bold" />}
                     <span>{textButton}</span>
                 </div>
                 <div>
-                    <GoArrowRight className="Arrow" />
+                    <ArrowRightIcon className="Arrow" />
                 </div>  
             </Content>
         </>

@@ -6,6 +6,8 @@ import Sidebar from "./Sidebar";
 import { FaInstagram, FaWhatsapp, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { TbGridDots } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io";
+import { rgba } from "polished";
+import { DotsNineIcon, ListIcon, XIcon } from "@phosphor-icons/react/dist/ssr";
 
 const Content = styled.header` 
     width: auto;
@@ -31,10 +33,10 @@ const Content = styled.header`
         align-items: center;
         justify-content: space-between;
         width: auto;
-        background-color: #1d1d1b95;
-        backdrop-filter: blur(4px);     
-        border-radius: 15px;
-        padding: 5px 10px;
+        background-color: ${(props) => rgba(props.theme.colors.black[100], 0.5)};
+        backdrop-filter: blur(6px);     
+        border-radius: 18px;
+        padding: 4px 8px;
         transition: padding .35s ease, border-radius .35s ease, background-color .35s ease, box-shadow .35s ease;
 
         @media (max-width: 768px) {
@@ -216,7 +218,7 @@ export default function Header() {
                         </li>
                         <li>
                             <IconHeader
-                            icon={sidebarOpen ? IoMdClose : TbGridDots}
+                            icon={sidebarOpen ? XIcon : DotsNineIcon}
                             onClick={() => setSidebarOpen(!sidebarOpen)}
                             />  
                         </li>

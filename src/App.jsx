@@ -20,6 +20,11 @@ export default function App() {
         <Route path="/curriculo" element={<Curriculo />} />
         <Route path="/projetos" element={<Project />} />
         <Route path="/projetos/:slug" element={<ProjectDetails />} />
+        <Route path="/servicos/criacao-de-sites" element={<ProjectDetails />} />
+        <Route path="/servicos/automacao" element={<ProjectDetails />} />
+        <Route path="/servicos/trafego-pago" element={<ProjectDetails />} />
+        <Route path="/servicos/design" element={<ProjectDetails />} />
+        <Route path="/servicos/copywriter" element={<ProjectDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>
