@@ -154,7 +154,7 @@ export default function ProjectDetailsAbout({ slug }) {
 
     const currentProject = useMemo(() => {
         return projects.find(project => project.slug === slug);
-    }, [slug, projects]);
+    }, [slug]);
 
     return (
         <>

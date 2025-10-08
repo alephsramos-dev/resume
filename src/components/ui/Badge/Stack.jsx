@@ -7,8 +7,8 @@ const Container = styled.li`
     align-items: center;
     justify-content: center;
     gap: 6px;
-    background-color: ${({ color }) => `${color}20` || '#111'};
-    border: 1px solid ${({ color }) => `${color}30` || '#111'};
+    background-color: ${({ color }) => color ? `${color}20` : '#111'};
+    border: 1px solid ${({ color }) => color ? `${color}30` : '#111'};
     color: ${({ color }) => color || '#fff'};
     padding: 4px 8px;
     border-radius: 8px;

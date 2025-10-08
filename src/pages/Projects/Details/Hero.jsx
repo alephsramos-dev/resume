@@ -6,7 +6,7 @@ import logoAleph from "/icon-black-aleph-desenvolvedor-web.svg";
 
 import projects from "@/database/ProjectData";
 import Stack from "@/components/ui/Badge/Stack";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { AiOutlineExpand } from "react-icons/ai";
 

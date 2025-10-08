@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useMemo } from "react";
-import projects from "@/database/ProjectData";
+// import { useMemo } from "react";
+// import projects from "@/database/ProjectData";
 import Title from "@/components/ui/texts/Title";
 
 const Container = styled.div`
@@ -45,13 +45,11 @@ const Container = styled.div`
     }
 `
 
-export default function ProjectDetailsCallToAction({
-    slug
-}) {
+export default function ProjectDetailsCallToAction() {
 
-    const currentProject = useMemo(() => {
-        return projects.find(project => project.slug === slug);
-    }, [slug, projects]);
+    // const currentProject = useMemo(() => {
+    //     return projects.find(project => project.slug === slug);
+    // }, [slug]);
 
     return (
         <>

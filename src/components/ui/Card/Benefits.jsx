@@ -99,19 +99,18 @@ const IconWrapper = styled.div`
     }
 `;
 
-export const BeneficioIcon = ({ as: Icon, ...rest }) => {
+export const BeneficioIcon = ({ as: IconComponent, ...rest }) => {
     return (
         <>
             <IconWrapper>
-                <Icon {...rest} weight="thin"/>
+                <IconComponent {...rest} weight="thin"/>
             </IconWrapper>
         </>
     )
 };
 
 export default function BeneficioCard({
-    icon: Icon,
-    children,
+    icon,
     title,
     description,
     ...rest
@@ -119,7 +118,7 @@ export default function BeneficioCard({
     
     return (
         <Card {...rest}>
-            <BeneficioIcon as={Icon} />
+            <BeneficioIcon as={icon} />
             <h2>{title}</h2>
             <p>{description}</p>
         </Card>

@@ -302,7 +302,7 @@ export default function Projects() {
                                     },
                                 },
                             }}
-                            onMove={(_, newIndex) => handleSplideEvent(splideRef.current.splide)}
+                            onMove={() => handleSplideEvent(splideRef.current.splide)}
                             onDragged={() => handleSplideEvent(splideRef.current.splide)}
                             aria-label="Projetos"
                             >

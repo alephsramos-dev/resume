@@ -20,7 +20,7 @@ export default function Title({
 
     return (
         <>
-            <Children className="title">{children}</Children>
+            <Children className="title" {...props}>{children}</Children>
         </>
     )
 }

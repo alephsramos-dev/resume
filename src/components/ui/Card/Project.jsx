@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { techIcons } from "@/db/TechIcons";
 import { rgba } from "polished";
@@ -121,16 +121,6 @@ export default function ProjectCard({
     onClick,
     tecnologias = []
 }) {
-    const [hover, setHover] = useState(false);
-    const [mousePos, setMousePos] = useState({ x: 300, y: 175 });
-
-    const handleMouseMove = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        setMousePos({
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        });
-    };
 
     return (
         <>
@@ -138,9 +128,6 @@ export default function ProjectCard({
                 onClick={onClick}
             >
                 <ImageWrapper
-                    onMouseEnter={() => setHover(true)}
-                    onMouseLeave={() => setHover(false)}
-                    onMouseMove={handleMouseMove}
                 >
                     <img src={image} alt={title} loading="lazy" title={title} />
                 </ImageWrapper>

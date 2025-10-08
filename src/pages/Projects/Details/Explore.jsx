@@ -70,7 +70,7 @@ export default function ProjectDetailsExplore({
 
     const currentProject = useMemo(() => {
         return projects.find(project => project.slug === slug)
-    }, [slug, projects]);
+    }, [slug]);
 
     const siteType = currentProject.siteType;
 

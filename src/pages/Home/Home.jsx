@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styled, { useTheme } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import { rgba } from 'polished';
 import ChatNowButton from '@/components/ui/Button/Chat';
 
