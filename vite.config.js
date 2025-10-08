@@ -4,16 +4,16 @@ import svgr from 'vite-plugin-svgr'
 import path from 'path'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import eslint from 'vite-plugin-eslint'
-import sitemap from 'vite-plugin-sitemap'
+// import sitemap from 'vite-plugin-sitemap'
 
 export default defineConfig({
   plugins: [
     react(),
     eslint(),
-    sitemap({
-      hostname: 'https://your-domain.com',
-      robots: false,
-    }),
+    // sitemap({
+    //   hostname: 'https://your-domain.com',
+    //   robots: false,
+    // }),
     svgr({
       svgrOptions: {
         exportType: 'default',
