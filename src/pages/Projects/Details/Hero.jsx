@@ -233,30 +233,9 @@ export default function ProjectDetailsHero({
     slug,
 }) {
 
-    const [fixedVisible, setFixedVisible] = useState(false);
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-
-        const onScroll = () => {
-            // show when scrolled past 60% of the viewport height
-            const show = window.scrollY >= 0.7 * window.innerHeight;
-            setFixedVisible(show);
-        };
-
-        // initial check
-        onScroll();
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-
-        return () => {
-            window.removeEventListener('scroll', onScroll);
-        };
-    }, []);
-
     const currentProject = useMemo(() => {
         return projects.find(project => project.slug === slug);
-    }, [slug, projects]);
+    }, [slug]);
 
     return (
         <>
