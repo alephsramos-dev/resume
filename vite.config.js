@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 import path from 'path'
-import imageOptmizer from 'vite-plugin-image-optimizer'
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 import eslint from 'vite-plugin-eslint'
 import sitemap from 'vite-plugin-sitemap'
 
@@ -23,7 +23,7 @@ export default defineConfig({
   include: '**/*.svg?react',
     }),
 
-    imageOptmizer({
+    ViteImageOptimizer({
       png: {
         quality: 80,
       },
