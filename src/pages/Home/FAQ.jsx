@@ -142,7 +142,7 @@ const Texts = styled.div`
                         color: ${(props) => props.theme.colors.gray[100]};
                         line-height: 1;
                         position: relative;
-                        top: 2px;
+                        top: 2.6px;
                         font-style: italic;
                     }
                 }
