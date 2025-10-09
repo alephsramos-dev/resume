@@ -9,10 +9,10 @@ const Content = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${({ color }) => color || "transparent"}20;
-    border: 1px solid ${({ color }) => color || "transparent"}20;
+    background-color: ${({ color }) => color || "transparent"}10;
+    border: 1px solid ${({ color }) => color || "transparent"}15;
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.4s ease-in-out;
     cursor: pointer;
     position: relative;
     z-index: 1;

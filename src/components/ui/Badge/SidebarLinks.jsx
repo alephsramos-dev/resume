@@ -12,8 +12,8 @@ const Content = styled.button`
     padding: 7.5px;
     border-radius: 10px;
     cursor: pointer;
-    background-color: transparent;
-    border: 1px solid transparent;
+    background-color: ${({ isActive, bgColor }) => isActive ? bgColor : "transparent"};
+    border: 1px solid ${({ isActive, bgColor }) => isActive ? bgColor : "transparent"};
     transition: all 0.2s ease;
 
     & div {
@@ -45,15 +45,21 @@ const Content = styled.button`
         transform: rotate(-45deg);
     }
 
+    ${({ isActive }) => isActive && `
+        .Arrow {
+            transform: rotate(-45deg);
+        }
+    `}
+
     & span {
         font-size: 14px;
-        color: ${(props) => props.theme.colors.white[300]};
-        font-weight: 300;
+        color: ${({ isActive, color, theme }) => isActive ? color : theme.colors.white[300]};
+        font-weight: ${({ isActive }) => isActive ? 400 : 300};
         transition: all 0.2s ease-in-out;
     }
 
     & svg {
-        color: ${(props) => props.theme.colors.gray[300]};
+        color: ${({ isActive, color, theme }) => isActive ? color : theme.colors.gray[300]};
         transition: all 0.2s ease-in-out;
         font-size: 16px;
     }
@@ -70,11 +76,12 @@ export default function SidebarLinks({
     colorText,
     icon: Icone,
     onClick,
+    isActive = false,
     ...props
 }) {
     return (
         <>
-            <Content onClick={onClick} bgColor={bgColor} color={colorText} {...props}>
+            <Content onClick={onClick} bgColor={bgColor} color={colorText} isActive={isActive} {...props}>
                 <div>
                     {Icone && <Icone weight="bold" />}
                     <span>{textButton}</span>

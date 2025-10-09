@@ -3,6 +3,7 @@ import styled, { keyframes, css } from "styled-components";
 import SidebarLinks from "@/components/ui/Badge/SidebarLinks";
 import { AsteriskIcon, BoundingBoxIcon, BrowsersIcon, DevicesIcon, DevToLogoIcon, GitMergeIcon, MegaphoneIcon, MetaLogoIcon, TextAaIcon, TextboxIcon, UserIcon } from "@phosphor-icons/react/dist/ssr";
 import { rgba } from "polished";
+import { useLocation } from "react-router-dom";
 
 
 const fadeIn = keyframes`
@@ -17,7 +18,7 @@ const fadeOut = keyframes`
 const Backdrop = styled.div`
   position: fixed;
   inset: 0;
-  background: ${(props) => rgba(props.theme.colors.black[0], 0.4)};
+  background: ${(props) => rgba(props.theme.colors.black[0], 0.6)};
   z-index: 950;
   opacity: ${({ open }) => (open ? 1 : 0)};
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
@@ -83,6 +84,9 @@ const Links = styled.nav`
 `;
 
 export default function Sidebar({ open, onClose }) {
+    const location = useLocation();
+    const currentPath = location.pathname;
+
     React.useEffect(() => {
       if (!open) return;
       const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
@@ -106,6 +110,7 @@ export default function Sidebar({ open, onClose }) {
                     colorText="rgb(203, 48, 224)"
                     bgColor="rgb(203, 48, 224, .1)"
                     onClick={() => window.location.href = '/services'}
+                    isActive={currentPath === '/services'}
                 />
                 <SidebarLinks 
                     icon={AsteriskIcon}
@@ -113,6 +118,7 @@ export default function Sidebar({ open, onClose }) {
                     colorText="rgb(52, 199, 89)"
                     bgColor="rgb(52, 199, 89, .1)"
                     onClick={() => window.location.href = '/projetos'}
+                    isActive={currentPath === '/projetos'}
                 />
                 <Line />
                 <h4>Serviços</h4>
@@ -122,6 +128,7 @@ export default function Sidebar({ open, onClose }) {
                     colorText="rgb(0, 200, 179)"
                     bgColor="rgb(0, 200, 179, .1)"
                     onClick={() => window.location.href = '/servicos/criacao-de-sites'}
+                    isActive={currentPath === '/servicos/criacao-de-sites'}
                 />
                 <SidebarLinks 
                     icon={GitMergeIcon}
@@ -129,6 +136,7 @@ export default function Sidebar({ open, onClose }) {
                     colorText="rgb(203, 48, 224)"
                     bgColor="rgb(203, 48, 224, .1)"
                     onClick={() => window.location.href = '/servicos/automacao'}
+                    isActive={currentPath === '/servicos/automacao'}
                 />
                 <SidebarLinks 
                     icon={BoundingBoxIcon}
@@ -136,6 +144,7 @@ export default function Sidebar({ open, onClose }) {
                     colorText="rgb(0, 136, 255)"
                     bgColor="rgb(0, 136, 255, .1)"
                     onClick={() => window.location.href = '/servicos/design'}
+                    isActive={currentPath === '/servicos/design'}
                 />
                 <SidebarLinks 
                     icon={MetaLogoIcon}
@@ -143,6 +152,7 @@ export default function Sidebar({ open, onClose }) {
                     colorText="rgb(255, 141, 40)"
                     bgColor="rgb(255, 141, 40, .1)"
                     onClick={() => window.location.href = '/servicos/trafego-pago'}
+                    isActive={currentPath === '/servicos/trafego-pago'}
                 />
                 <SidebarLinks 
                     icon={TextAaIcon}
@@ -150,6 +160,7 @@ export default function Sidebar({ open, onClose }) {
                     colorText="rgb(97, 85, 245)"
                     bgColor="rgb(97, 85, 245, .1)"
                     onClick={() => window.location.href = '/servicos/copywriter'}
+                    isActive={currentPath === '/servicos/copywriter'}
                 />
                 <Line />
                 <h4>Fale comigo</h4>

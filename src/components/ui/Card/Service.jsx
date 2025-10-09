@@ -109,11 +109,11 @@ const Texts = styled.div`
     gap: 18px;
     width: 100%;
     height: auto;
-    padding: 22px;
+    padding: 16px 22px;
 
     @media (max-width: 768px){
         flex-wrap: wrap;
-        padding: 20px;
+        padding: 10px 20px;
         gap: 8px;
     }
 
@@ -201,9 +201,7 @@ const Texts = styled.div`
 `
 
 export default function ServiceCard({
-    image,
     name,
-    description,
     width,
     colorBorder,
     onClick

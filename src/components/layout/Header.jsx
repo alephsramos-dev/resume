@@ -176,7 +176,7 @@ export default function Header() {
         if (collapsed) {
             setCollapsed(false);
         } else {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.location.href = '/';
         }
     };
 
