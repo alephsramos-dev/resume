@@ -7,12 +7,13 @@ import LogoKdea from '@/assets/brands/pousada-le-ange.png';
 import SemLogo from '@/assets/brands/pousada-le-ange.png';
 import Default from '@/assets/banners/default.jpg';
 
+import Teste from '@assets/banners/test.png';
 
 import companies from '@/database/companys';
 
 export const projects = [
     {
-        image: Default,
+        image: Teste,
         title: "Programa de Fidelidade",
         slug: "programa-de-fidelidade",
         popupContent: "Novidade",

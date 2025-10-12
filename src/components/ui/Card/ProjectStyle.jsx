@@ -50,7 +50,7 @@ const Card = styled.div`
 
 const Image = styled.div`
     width: 100%;
-    height: 300px;
+    height: 275px;
     border-radius: 16px;
     ${props => props.$smooth && maskWith('16px')};
     ${props => props.$clip && css`clip-path: ${props.$clip};`}
