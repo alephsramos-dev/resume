@@ -10,6 +10,7 @@ import All from '@/pages/Home/All'
 import Curriculo from '@/pages/Resume/All'
 import Project from '@/pages/Projects/All'
 import ProjectDetails from './pages/Projects/ProjectDetails'
+import Developing from './components/template/developing'
 
 // ScrollToTop Component
 function ScrollToTop() {
@@ -36,11 +37,11 @@ export default function App() {
         <Route path="/curriculo" element={<Curriculo />} />
         <Route path="/projetos" element={<Project />} />
         <Route path="/projetos/:slug" element={<ProjectDetails />} />
-        <Route path="/servicos/criacao-de-sites" element={<ProjectDetails />} />
-        <Route path="/servicos/automacao" element={<ProjectDetails />} />
-        <Route path="/servicos/trafego-pago" element={<ProjectDetails />} />
-        <Route path="/servicos/design" element={<ProjectDetails />} />
-        <Route path="/servicos/copywriter" element={<ProjectDetails />} />
+        <Route path="/servicos/criacao-de-sites" element={<Developing />} />
+        <Route path="/servicos/automacao" element={<Developing />} />
+        <Route path="/servicos/trafego-pago" element={<Developing />} />
+        <Route path="/servicos/design" element={<Developing />} />
+        <Route path="/servicos/copywriter" element={<Developing />} />
       </Routes>
       <Footer />
     </BrowserRouter>
