@@ -7,13 +7,16 @@ import LogoKdea from '@/assets/brands/pousada-le-ange.png';
 import SemLogo from '@/assets/brands/pousada-le-ange.png';
 import Default from '@/assets/banners/default.jpg';
 
-import Teste from '@assets/banners/test.png';
+import Kdea from'@assets/banners/landingpage-kdea.png'
+import EuYagoLopes from '@assets/banners/landingpage-euyagolopes.png'
+import ChaleFastHomes from '@assets/banners/landingpage-fasthomes.png'
+import PisosVinilicos from '@assets/banners/landingpage-pisos-fastsistemasconstrutivos.png'
 
 import companies from '@/database/companys';
 
 export const projects = [
     {
-        image: Teste,
+        image: Default,
         title: "Programa de Fidelidade",
         slug: "programa-de-fidelidade",
         popupContent: "Novidade",
@@ -122,7 +125,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: Default,
+        image: EuYagoLopes,
         title: "euYagoLopes",
         popupContent: "Tendência",
         slug: "euyagolopes",
@@ -185,7 +188,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: Default,
+        image: Kdea,
         title: "K'dea Construtora",
         slug: "kdea-construtora",
         popupContent: "Em alta",
@@ -206,7 +209,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: Default,
+        image: ChaleFastHomes,
         title: "Cháles para Airbnb",
         popupContent: "Em alta",
         slug: "chales-para-airbnb",
@@ -227,7 +230,7 @@ export const projects = [
         siteColor: "#000000",
     },
     {
-        image: Default,
+        image: PisosVinilicos,
         title: "Pisos Vinilicos",
         popupContent: "Auge",
         slug: "pisos-vinilicos",
