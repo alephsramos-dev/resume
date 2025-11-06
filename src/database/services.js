@@ -1,8 +1,8 @@
-import dev from '@/assets/services/desenvolvedor-web-service.svg';
-import automation from '@/assets/services/automation-service.svg';
-import traffic from '@/assets/services/traffic-management-service.svg';
-import design from '@/assets/services/design-service.svg';
-import redator from '@/assets/services/redator-service.svg';
+import dev from '@/assets/services/website.webp';
+import automation from '@/assets/services/automation.webp';
+import traffic from '@/assets/services/trafego-pago.webp';
+import design from '@/assets/services/design-grafic.webp';
+import redator from '@/assets/services/copywriter.webp';
 
 import { rgba } from 'polished';
 
@@ -12,7 +12,7 @@ const services = [
         image: dev,
         name: "Criação de Sites",
         description: "Mais do que um site, uma experiência digital exclusiva. Cada detalhe é planejado para refletir a excelência da sua marca.",
-        width: "calc(50.00% - 10px)",
+        width: "calc(33.33% - 10px)",
         colorBorder: (props) => rgba(props.theme.colors.mint['basic'], 0.2)
     },
     {
@@ -20,7 +20,7 @@ const services = [
         image: automation,
         name: "Automação",
         description: "Automação de processos para aumentar a eficiência e reduzir erros.",
-        width: "calc(50.00% - 10px)",
+        width: "calc(33.33% - 10px)",
         colorBorder: (props) => rgba(props.theme.colors.purple['basic'], 0.2)
     },
     {

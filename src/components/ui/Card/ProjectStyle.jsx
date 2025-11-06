@@ -36,40 +36,26 @@ const Card = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    border-radius: 16px;
-    ${props => props.$smooth && maskWith('16px')};
+    border-radius: 12px;
+    ${props => props.$smooth && maskWith('2px')};
     ${props => props.$clip && css`clip-path: ${props.$clip};`}
-    background-color: #000000;
-    padding: 22px;
-    gap: 4px;
-
-    @media (max-width: 768px){
-        padding: 18px;
-    }
+    background-color: ${(props) => props.theme.colors.black[100]};
+    padding: 0;
+    gap: 8px;
 `
 
 const Image = styled.div`
     width: 100%;
-    height: 275px;
-    border-radius: 16px;
-    ${props => props.$smooth && maskWith('16px')};
-    ${props => props.$clip && css`clip-path: ${props.$clip};`}
+    height: 300px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     z-index: 0;
-    
-    &::before{
-        content: '';
-        width: 100%;
-        height: 60%;
-        background: linear-gradient(0deg, #000000 25%, #00000000 80%);
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        bottom: 0;
+
+    @media (max-width: 768px){
+        height: 250px;
     }
 
     & img {
@@ -81,14 +67,15 @@ const Image = styled.div`
     }
 
     & span {
-        top: 16px;
-        left: 16px;
+        top: 8px;
+        left: 8px;
         position: absolute;
         padding: 6px 10px;
         border-radius: 8px;
+        font-size: 14px;
         ${props => props.$smooth && maskWith('8px')};
         ${props => props.$clipBadge && css`clip-path: ${props.$clipBadge};`}
-        font-weight: 500;
+        font-weight: 400;
         background-color: ${props => props.$popupBg || '#2bba0060'};
         border: 1px solid ${props => props.$popupBorder || '#2bba0070'};
         color: ${props => props.$popupColor || '#fff'};
@@ -107,17 +94,25 @@ const Infos = styled.div`
     z-index: 1;
     width: 100%;
     display: flex;
-    top: -40px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: 12px 18px 0 18px;
+
+    & .info-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: auto;
+    }
 `
 
 const SiteType = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px 12px;
+    padding: 4px 8px;
     border-radius: 8px;
     ${props => props.$smooth && maskWith('8px')};
     ${props => props.$clip && css`clip-path: ${props.$clip};`}
@@ -139,19 +134,20 @@ const Company = styled.div`
     align-items: center;
     justify-content: center;
     gap: 8px;
+    height: 100%;
 
     & div {
         background-color: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 8px;
+        border-radius: 6px;
         ${props => props.$smooth && maskWith('8px')};
         ${props => props.$clip && css`clip-path: ${props.$clip};`}
         padding: 2px;
 
         & img {
-            width: 20px;
+            width: 22px;
             height: auto;
             object-fit: contain;
         }
@@ -160,6 +156,7 @@ const Company = styled.div`
     & p {
         font-size: 14px;
         font-weight: 300;
+        color: ${(props) => props.theme.colors.gray[400]};
 
         @media (max-width: 768px){
             font-size: 12px;
@@ -171,7 +168,7 @@ const Stack = styled.ol`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: 4px;
 `
 
 const Texts = styled.div`
@@ -179,27 +176,22 @@ const Texts = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    top: -20px;
     position: relative;
     gap: 12px;
-
-    & span {
-        font-size: 14px;
-        color: #ffffff50;
-        font-style: italic;
-    }
+    padding: 4px 18px;
 
     & h2 {
         font-size: 24px;
         font-weight: 500;
         line-height: 1.1;
+        color: ${(props) => props.theme.colors.white[500]};
     }
 
     & p {
         font-size: 16px;
         font-weight: 300;
         line-height: 1.2;
-        color: #b9b9b9;
+        color: ${(props) => props.theme.colors.gray[100]};
     }
 
 `
@@ -209,6 +201,16 @@ const Buttons = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 12px 18px 18px 18px;
+
+    & .restrict {
+        cursor: not-allowed;
+        opacity: 0.4;
+        background-color: transparent!important;
+        color: ${(props) => props.theme.colors.gray[500]}!important;
+        border: none!important;
+        font-weight: 300!important;
+    }
 
     & > div {
         display: flex;
@@ -221,7 +223,7 @@ const Buttons = styled.div`
         }
 
         & > button {
-            padding: 8px 16px;
+            padding: 8px 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -257,20 +259,19 @@ const Buttons = styled.div`
     }
 
     & > button {
-        background-color: #fff;
         padding: 8px;
         border-radius: 8px;
         ${props => props.$smooth && maskWith('8px')};
         ${props => props.$clipBtn && css`clip-path: ${props.$clipBtn};`}
-        color: #000;
+        color: ${(props) => props.theme.colors.gray[100]};
 
         @media (max-width: 768px){
             padding: 6px;
         }
 
         & svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
         }
     }
 `
@@ -286,7 +287,7 @@ export default function ProjectStyle({
     tecnologias = [],
     data,
     description,
-    urlPage,
+    urlPage = '',
     githubUrl,
     popupBg,
     popupBorder,
@@ -296,17 +297,17 @@ export default function ProjectStyle({
     slug,
     siteColor,
     smoothCorners = true,
-    cornerRadius = 22,
-    cornerSmoothing = 1,
+    cornerRadius = 6,
+    cornerSmoothing = 3,
     openInNewTab = true
 }) {
     // Figma-like squircles for strong smoothing
     const cardSquircle = useSquircle({ radius: cornerRadius, smoothness: cornerSmoothing });
     const imageSquircle = useSquircle({ radius: cornerRadius, smoothness: cornerSmoothing });
-    const badgeSquircle = useSquircle({ radius: 8, smoothness: cornerSmoothing });
-    const siteTypeSquircle = useSquircle({ radius: 8, smoothness: cornerSmoothing });
-    const logoBoxSquircle = useSquircle({ radius: 8, smoothness: cornerSmoothing });
-    const buttonSquircle = useSquircle({ radius: 8, smoothness: cornerSmoothing });
+    const badgeSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
+    const siteTypeSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
+    const logoBoxSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
+    const buttonSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
 
     const openTarget = (target) => {
         if (!target) return;
@@ -335,15 +336,17 @@ export default function ProjectStyle({
                     </span>
                 </Image>
                 <Infos>
-                    <SiteType $smooth={smoothCorners} $clip={siteTypeSquircle.path} ref={siteTypeSquircle.ref} $siteBg={siteBg} $siteBorder={siteBorder} $siteColor={siteColor}>
-                        <p>{siteType}</p>
-                    </SiteType>
-                    <Company $smooth={smoothCorners}>
-                        <div ref={logoBoxSquircle.ref} $clip={logoBoxSquircle.path}>
-                            <img src={imageCompanyUrl} alt={companyName} />
-                        </div>
-                        <p>{companyName}</p>
-                    </Company>
+                    <div className="info-content">
+                        <SiteType $smooth={smoothCorners} $clip={siteTypeSquircle.path} ref={siteTypeSquircle.ref} $siteBg={siteBg} $siteBorder={siteBorder} $siteColor={siteColor}>
+                            <p>{siteType}</p>
+                        </SiteType>
+                        <Company $smooth={smoothCorners}>
+                            <div ref={logoBoxSquircle.ref} $clip={logoBoxSquircle.path}>
+                                <img src={imageCompanyUrl} alt={companyName} />
+                            </div>
+                            <p>{companyName}</p>
+                        </Company>
+                    </div>
                     <Stack>
                         {tecnologias.slice(0, 3).map((tec, idx) => (
                             <li key={tec + idx} style={{display: 'inline-block'}}>
@@ -359,9 +362,12 @@ export default function ProjectStyle({
                 </Texts>
                 <Buttons $smooth={smoothCorners} $clipBtn={buttonSquircle.path}>
                     <div ref={buttonSquircle.ref}>
-                        <button onClick={() => window.location.href = `/projetos/${slug}`}>Ver detalhes</button>
-                        <button onClick={() => openTarget(urlPage)}>Acessar site <BsBoxArrowUpRight />
-</button>
+                        <button onClick={() => window.location.href = `/projetos/${slug}`}>Detalhes</button>
+                        {
+                            urlPage === '' 
+                            ? <button onClick={() => alert('Essa página é privada!')} className="restrict">Acesso restrito</button>
+                            : <button onClick={() => openTarget(urlPage)}>Acessar<BsBoxArrowUpRight /></button>
+                        }
                     </div>
                     <button onClick={() => openTarget(githubUrl)}>
                         <FaGithub />

@@ -15,7 +15,7 @@ export default function All() {
                     <Benefits />
                         {/* <ComoFunciona /> */}   
                             <Projects />   
-                                <Services />   
+                                {/* <Services />    Seção inativa até que seja definido os banners do bento grid */}
                                     <Automation />
                                         <FAQ />
         </> 

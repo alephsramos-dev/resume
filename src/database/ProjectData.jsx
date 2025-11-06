@@ -271,6 +271,27 @@ export const projects = [
         siteBorder: "#00000010",
         siteColor: "#000000",
     },
+    {
+        image: Default,
+        title: "Loja Fast",
+        popupContent: "Novidade",
+        siteType: "E-commerce",
+        slug: "fast-homes",
+        imageCompanyUrl: LogoFastHomes,
+        companyName: "Fast Homes",
+        tecnologias: ["react", "n8n", "firebase", "vite", "sass", "javascript"],
+        date: "24/04/2025",
+        description: "Site com foco em apresentar de forma de alto padrão todas as casas pré fábricadas.",
+        urlPage: "https://fasthomes.com.br",
+        githubUrl: "https://github.com/alephsramos-dev",
+        onDetails: "",
+        popupBg: "#ffffff",
+        popupBorder: "#00000010",
+        popupColor: "#000000",
+        siteBg: "#ffffff",
+        siteBorder: "#00000010",
+        siteColor: "#000000",
+    },
    
 ];
 

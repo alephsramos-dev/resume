@@ -94,7 +94,7 @@ const ImageBg = styled.div`
     & img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center;
     }
 `
@@ -204,13 +204,14 @@ export default function ServiceCard({
     name,
     width,
     colorBorder,
-    onClick
+    onClick,
+    image
 }) {
     return (
         <>
             <Container width={width} $colorBorder={colorBorder}> 
                 <ImageBg>
-                    {/* <img src={image} alt={name} loading="lazy" /> */}
+                    <img src={image} alt={name} loading="lazy" />
                 </ImageBg>
                 <Texts>
                     <Title 

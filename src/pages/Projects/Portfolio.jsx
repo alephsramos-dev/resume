@@ -18,34 +18,30 @@ const Container = styled.div`
     position: relative;
     z-index: 2;
     overflow: hidden;
-    gap: 26px;
+    gap: 32px;
+    padding: 5% 0;
 
     @media (max-width: 768px){
-        padding: 0% 1%;
+        gap: 14px;
+        padding: 10% 0;
     }
 `;
 
 const Content = styled.section`
     width: 100%;
     height: 100%;
-    padding: 2.5%;
     max-width: 1420px; /* menor container geral */
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 26px;
+    gap: 28px;
     position: relative;
     overflow: hidden;
     z-index: 1;
-    background-color: #00000030;
-    backdrop-filter: blur(20px);
-    border: 1px solid #ffffff25;
-    border-radius: 28px;
 
     @media (max-width: 768px){
-        padding: 5% 5% 5% 5%;
-        border-radius: 18px;
+        padding: 2.5% 5%;
     }
 `;
 
@@ -54,6 +50,11 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & .title {
+        font-size: 32px;
+        color: ${(props) => props.theme.colors.white[300]};
+    }
 `
 
 const Control = styled.div`
@@ -87,19 +88,23 @@ export default function Portfolio() {
             <Container>
                 {siteTypes.map(type => (
                     <Content key={type}>
-                        <Header>
-                            <Title 
-                                titulo={type}
-                                color="#fff"
-                                fontSize="28px"
-                            />
-                            <Control>
-                                <div className="portfolio-button-prev"><MdKeyboardArrowLeft  /></div>
-                                <div className="portfolio-button-next"><MdKeyboardArrowRight  /></div>
-                            </Control>
-                        </Header>
+                        {
+                            projects.filter(project => project.siteType === type).length === 0 ?
+                            null : 
+                            <Header>
+                                <Title 
+                                    className="title"
+                                >
+                                    {type}
+                                </Title>
+                                <Control>
+                                    <div className="portfolio-button-prev"><MdKeyboardArrowLeft  /></div>
+                                    <div className="portfolio-button-next"><MdKeyboardArrowRight  /></div>
+                                </Control>
+                            </Header>
+                        }
                         <Swiper
-                            spaceBetween={12}
+                            spaceBetween={16}
                             slidesPerView={1}
                             modules={[Navigation]}
                             navigation={{

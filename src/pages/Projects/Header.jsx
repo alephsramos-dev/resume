@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import Background from '@assets/patterns/bg.jpg';
 import StackData from "@/database/StackData.json";
 
 const Container = styled.div`
@@ -12,24 +12,43 @@ const Container = styled.div`
     position: relative;
     z-index: 2;
     overflow: hidden;
-    height: 40vh;
+    height: 30vh;
+    background: #000;
+    position: relative;
+
+    &::before{
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url(${Background});
+        background-size: cover;
+        background-position: center;    
+        background-repeat: no-repeat;
+        opacity: 0.4;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
 `;
 
 const Content = styled.section`
     width: 100%;
     height: 100%;
-    padding: 2.5% 2.5% 0 2.5%;
     max-width: 1420px; /* menor container geral */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-end;
     flex-direction: column;
     gap: 22px;
     position: relative;
     z-index: 1;
+    padding: 2.5% 0;
 
     @media (max-width: 768px){
-        padding: 25% 5% 0% 5%;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 7.5% 5%;
     }
 `;
 
@@ -37,25 +56,24 @@ const Texts = styled.div`
     width: 100%;
     height: auto;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: center;
     position: relative;
 
     @media (max-width: 768px){
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        justify-content: flex-end;
     }
 
     & h1 {
-        font-size: 148px;
-        letter-spacing: -5px;
+        font-size: 62px;
         font-weight: 600;
         line-height: 100%;
-        font-family: 'Urbanist', sans-serif;
 
         @media (max-width: 768px){
-            font-size: 82px;
+            font-size: 48px;
         }
     }
 `
