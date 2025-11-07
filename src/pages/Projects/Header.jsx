@@ -27,7 +27,7 @@ const Container = styled.div`
         background-size: cover;
         background-position: center;    
         background-repeat: no-repeat;
-        opacity: 0.4;
+        opacity: 0.6;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 `;

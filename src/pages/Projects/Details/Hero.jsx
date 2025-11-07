@@ -5,7 +5,6 @@ import styled from "styled-components";
 import logoAleph from "/icon-black-aleph-desenvolvedor-web.svg";
 
 import projects from "@/database/ProjectData";
-import Stack from "@/components/ui/Badge/Stack";
 import { useMemo } from "react";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { AiOutlineExpand } from "react-icons/ai";
@@ -64,6 +63,10 @@ const Texts = styled.div`
     justify-content: center;
     flex-direction: column;
     gap: 12px;
+
+    & .title {
+        color: #fff ;
+    }
 
     @media (max-width: 768px){
         align-items: flex-start;
@@ -155,24 +158,25 @@ const Image = styled.div`
         object-fit: cover;
         object-position: center;
         border-radius: 0 0 16px 16px;
-        border: 1px solid #ffffff60;
+        border: 1px solid #ffffff20;
         border-top: none;
 
         @media (max-width: 768px){
-            height: 400px;
+            height: 250px;
             border-radius: 0 0 12px 12px;  
         }
     }
 `
 
 const Infos = styled.div`
-    border: 1px solid #ffffff60;
+    border: 1px solid #ffffff20;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 12px 18px;
     border-radius: 16px 16px 0 0;
+    background-color: #000;
 
     @media (max-width: 768px){
         padding: 10px 12px;
@@ -180,7 +184,7 @@ const Infos = styled.div`
     }
 
     & div {
-        border: 1px solid #ffffff30;
+        border: 1px solid #ffffff10;
         width: auto;
         display: flex;
         align-items: center;
@@ -249,10 +253,9 @@ export default function ProjectDetailsHero({
                         <span>by Aleph</span>
                     </Company>
                     <Texts>
-                        <Title
-                            titulo={currentProject.title}
-                            color="#fff"
-                        />
+                        <Title clasasName="title">
+                            {currentProject.title}
+                        </Title>
                         <span>{currentProject.data} / © Todos os direitos reservados / <strong>{currentProject.companyName}</strong></span>
                     </Texts>
                 </Main>

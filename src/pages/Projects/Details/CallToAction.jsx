@@ -5,21 +5,36 @@ import Title from "@/components/ui/texts/Title";
 
 const Container = styled.div`
     border: 1px solid red;
-    width: 100%;
+    width: 85%;
+    max-width: 600px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: auto;
-    position: relative;
-    padding: 20px;
-    border: 1px solid #ffffff20;
+    padding: 12px 14px;
+    border: 1px solid #ffffff10;
     background-color: #ffffff10;
+    backdrop-filter: blur(8px);
     border-radius: 22px;
+    position: fixed;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    z-index: 9999;
+
+    & .title {
+        font-size: 24px;
+        color: ${(props) => props.theme.colors.white[200]};
+
+        @media (max-width: 768px){
+            font-size: 18px;
+        }
+    }
 
     @media (max-width: 768px){
         flex-direction: row;
         gap: 18px;
-        padding: 16px;
+        padding: 12px 14px;
         border-radius: 18px;
     }
 
@@ -54,11 +69,9 @@ export default function ProjectDetailsCallToAction() {
     return (
         <>
             <Container>
-                <Title 
-                    titulo="Crie o seu projeto!"
-                    color="#fff"
-                    fontSize="24px"
-                />
+                <Title className="title">
+                    Crie o seu projeto!
+                </Title>
                 <button>
                     Clique aqui!
                 </button>

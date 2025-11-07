@@ -3,7 +3,7 @@ import ProjectDetailsHero from "./Details/Hero";
 import { useParams } from "react-router-dom";
 import Title from "@/components/ui/texts/Title";
 
-import Bg from "@/assets/patterns/bg-model-01.jpg";
+import Bg from "@/assets/patterns/bg.jpg";
 import ProjectDetailsAbout from "./Details/About";
 import ProjectDetailsExplore from "./Details/Explore";
 import ProjectDetailsCallToAction from "./Details/CallToAction";
@@ -16,12 +16,32 @@ const Container = styled.div`
     flex-direction: column;
     gap: 26px;
     background-color: #000;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        max-height: 90vh;
+        background: url(${Bg}) no-repeat bottom;
+        background-size: cover;
+        opacity: 0.4;
+        border-bottom: 1px solid #ffffff40;
+
+        @media (max-width: 768px){
+            max-height: 60vh;
+            opacity: 0.2;
+        }
+    }
 `;
 
 const Content = styled.section`
     width: 100%;
     height: 100%;
-    padding: 2.5%;
+    padding: 2.5% 2.5% 5% 2.5%;
     max-width: 1420px;
     display: flex;
     align-items: center;
@@ -32,7 +52,7 @@ const Content = styled.section`
     z-index: 2;
 
     @media (max-width: 768px){
-        padding: 5%;
+        padding: 5% 5% 10% 5%;
     }
 `;
 

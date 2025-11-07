@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import projects from "@/database/ProjectData";
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import Stack from "@/components/ui/Badge/Stack";
+import Bg from '@assets/patterns/bg.jpg'
 
 const Container = styled.div`
     width: 100%;
@@ -24,62 +25,114 @@ const Texts = styled.div`
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    gap: 22px;
+    flex-wrap: wrap;
+    gap: 16px;
     width: 70%;
 
     @media (max-width: 768px){
         width: 100%;    
     }
 
-    & > h2 {
+    & > aside {
         width: 100%;
-        font-size: 24px;
-        font-weight: 500;
-        padding-bottom: 18px;
-        box-shadow: inset 0 -0.2px 0 0 #ffffff;
-
-        & strong {
-            font-weight: 400;
-            font-size: 14px;
-            color: #ffffff90;
-        }
-    }
-
-
-    & div {
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        font-size: 18px;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 8px;
+        box-shadow: inset 0 -0.2px 0 0 #ffffff80;
 
-        & p {
-            font-weight: 300;
-            color: #ffffff95;
+        & > h2 {
+            width: 100%;
+            font-size: 28px;
+            font-weight: 400;
+            color: ${(props) => props.theme.colors.white[100]};
+
+            @media (max-width: 768px){
+                font-size: 22px;
+            }
 
             & strong {
-                color: #ffffff;
-                font-weight: 500;
+                font-weight: 400;
+                font-size: 12px;
+                color: ${(props) => props.theme.colors.gray[100]};
             }
         }
 
-        & ul {
-            display: contents;
-
-            & li {
-                list-style: disc;
-                margin-left: 20px;
-                font-weight: 300;
-                color: #ffffff95;
-
-                & strong {
-                    font-weight: 500;
-                    color: #ffffff;
-                }
-            }
-        }
     }
 `
+
+const AboutContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 18px;
+
+    & h3 {
+        font-size: 26px;
+        margin-top: 8px;
+        font-weight: 500;
+        color: ${(props) => props.theme.colors.white[100]};
+
+        @media (max-width: 768px){
+            font-size: 22px;
+        }
+    }
+
+    & p {
+        font-size: 18px;
+        font-weight: 300;
+        color: ${(props) => props.theme.colors.gray[400]};
+
+        @media (max-width: 768px){
+            font-size: 16px;
+        }
+    }
+
+    & p strong,
+    & li strong {
+        color: ${(props) => props.theme.colors.gray[400]};
+        font-weight: 400;
+    }
+
+    & ul,
+    & ol {
+        padding-left: 22px;
+        margin: 0px 0 8px 0;
+    }
+
+    & ul li {
+        list-style: disc;
+        color: ${(props) => props.theme.colors.gray[400]};
+        font-weight: 300;
+        margin: 2px 0;
+
+        @media (max-width: 768px){
+            font-size: 16px;
+        }
+    }
+
+    & a {
+        color: ${(props) => props.theme.colors.white[200]};
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    & img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin: 8px 0 12px 0;
+        display: block;
+    }
+
+    & span {
+        font-size: 12px;
+        color: ${(props) => props.theme.colors.gray[100]};
+        font-style: italic;
+        margin-top: -12px;
+    }
+`;
 
 const Infos = styled.div`
     width: 30%;
@@ -100,6 +153,11 @@ const Infos = styled.div`
         justify-content: center;
         flex-direction: column;
         gap: 12px;
+        width: 100%;
+
+        @media (max-width: 768px){
+            width: 100%;
+        }
 
         & > li {
             font-size: 16px;
@@ -158,19 +216,21 @@ export default function ProjectDetailsAbout({ slug }) {
 
     return (
         <>
-           <Container>
+            <Container>
                 <Texts>
-                    <h2>Sobre o projeto <strong>/ {currentProject.title || "-"}</strong></h2>
-                    <div dangerouslySetInnerHTML={{ __html: currentProject.fullDescription }} />
+                    <aside>
+                        <h2>Sobre o projeto <strong>/ {currentProject.title || "-"}</strong></h2>
+                    </aside>
+                    <AboutContent dangerouslySetInnerHTML={{ __html: currentProject.fullDescription }} />
                 </Texts>
                 <Infos>
                     <ul>
                         <li><strong>Tipo de projeto</strong> {currentProject.siteType || "-"}</li>
-                        <li><strong>Data / Duração</strong> {currentProject.data || "-"} / {currentProject.duration || "-"}h</li>
+                        <li><strong>Data / Duração</strong> {currentProject.date || "-"} / {currentProject.duration || "-"}h</li>
                         <li><strong>Tecnologias</strong>
                             <ul>
-                                {currentProject.stack.map((tech, i) => (
-                                    <Stack 
+                                {(currentProject.stack || []).map((tech, i) => (
+                                    <Stack
                                         key={i}
                                         techName={tech.techName}
                                         tecnologias={tech.tecnologias}
@@ -181,7 +241,7 @@ export default function ProjectDetailsAbout({ slug }) {
                         </li>
                     </ul>
                 </Infos>
-            </Container> 
-        </> 
+            </Container>
+        </>
     )
 }

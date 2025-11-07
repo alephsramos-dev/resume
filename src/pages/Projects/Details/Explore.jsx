@@ -38,6 +38,11 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & .title {
+        font-size: 24px;
+        color: ${(props) => props.theme.colors.white[200]};
+    }
 `
 
 const Control = styled.div`
@@ -79,11 +84,9 @@ export default function ProjectDetailsExplore({
             <Container>
                 <Content>
                     <Header>
-                        <Title 
-                            titulo={`Mais projetos de ${currentProject.siteType}`}
-                            color="#fff"
-                            fontSize="28px"
-                        />
+                        <Title className="title">
+                            Mais projetos de {currentProject.siteType}
+                        </Title>
                         <Control>
                             <div className="portfolio-button-prev"><MdKeyboardArrowLeft  /></div>
                             <div className="portfolio-button-next"><MdKeyboardArrowRight  /></div>
