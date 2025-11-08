@@ -28,12 +28,12 @@ const Container = styled.div`
         max-height: 90vh;
         background: url(${Bg}) no-repeat bottom;
         background-size: cover;
-        opacity: 0.6;
+        opacity: 0.4;
         border-bottom: 1px solid #ffffff40;
 
         @media (max-width: 768px){
             max-height: 60vh;
-            opacity: 0.2;
+            opacity: 0.3;
         }
     }
 `;
@@ -79,15 +79,15 @@ export default function ProjectDetails() {
         <>
             <Container>
                 <Content>
+                    <ProjectDetailsCallToAction 
+                        slug={slug}
+                    />
                     <ProjectDetailsHero 
                         slug={slug}
                     />
                         <ProjectDetailsAbout 
                             slug={slug}
                         />
-                            <ProjectDetailsCallToAction 
-                                slug={slug}
-                            />
                                 <ProjectDetailsExplore 
                                     slug={slug}
                                 />

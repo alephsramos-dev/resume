@@ -1,8 +1,79 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import projects from "@/database/ProjectData";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Stack from "@/components/ui/Badge/Stack";
 import Bg from '@assets/patterns/bg.jpg'
+import mediumZoom from "medium-zoom";
+
+const ZoomOverrideStyles = createGlobalStyle`
+    .medium-zoom-overlay {
+        z-index: 9999 !important;
+        background: rgba(0, 0, 0, 0.92) !important;
+        backdrop-filter: blur(4px);
+    }
+
+    .medium-zoom-image--opened {
+        z-index: 10000 !important;
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+        border-radius: 12px;
+    }
+`;
+
+const FullscreenModal = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    opacity: ${props => props.$isClosing ? 0 : 1};
+    transition: opacity 0.25s ease;
+`;
+
+const FullscreenImage = styled.img`
+    max-width: 90vh;
+    max-height: 90vw;
+    object-fit: contain;
+    transform: rotate(90deg) scale(${props => props.$isClosing ? 0.9 : 1});
+    opacity: ${props => props.$isClosing ? 0 : 1};
+    transition: transform 0.25s ease, opacity 0.25s ease;
+`;
+
+const CloseButton = styled.button`
+    position: absolute;
+    bottom: 62px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: ${(props) => props.theme.colors.black[100]};
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    color: white;
+    width: auto;
+    padding: 6px 14px;
+    border-radius: 18px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
+    z-index: 10001;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateX(-50%) scale(1.1);
+    }
+
+    &:active {
+        transform: translateX(-50%) scale(0.95);
+    }
+`;
 
 const Container = styled.div`
     width: 100%;
@@ -133,6 +204,14 @@ const AboutContent = styled.div`
         margin: 8px 0 12px 0;
         display: block;
         border: 1px solid #ffffff20;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+
+        @media (max-width: 768px) {
+            &:hover {
+                opacity: 0.9;
+            }
+        }
     }
 
     & span {
@@ -229,15 +308,103 @@ export default function ProjectDetailsAbout({ slug }) {
     const currentProject = useMemo(() => {
         return projects.find(project => project.slug === slug);
     }, [slug]);
+    const contentRef = useRef(null);
+    const zoomRef = useRef(null);
+    const [fullscreenImage, setFullscreenImage] = useState(null);
+    const [isClosing, setIsClosing] = useState(false);
+    const isMobile = window.innerWidth <= 768;
+
+    useEffect(() => {
+        if (!contentRef.current) {
+            return undefined;
+        }
+
+        const images = contentRef.current.querySelectorAll('img');
+
+        if (!images.length) {
+            if (zoomRef.current) {
+                zoomRef.current.detach();
+                zoomRef.current = null;
+            }
+            return undefined;
+        }
+
+        // On mobile, add click handler to open fullscreen
+        if (isMobile) {
+            const handleImageClick = (imgSrc) => (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setFullscreenImage(imgSrc);
+            };
+
+            images.forEach((img) => {
+                // Remove existing event listener if any
+                img.onclick = null;
+                // Add new event listener
+                img.onclick = handleImageClick(img.src);
+            });
+
+            // Cleanup function
+            return () => {
+                images.forEach((img) => {
+                    img.onclick = null;
+                });
+            };
+        } else {
+            // On desktop, use medium-zoom
+            if (zoomRef.current) {
+                zoomRef.current.detach();
+            }
+
+            zoomRef.current = mediumZoom(images, {
+                background: '#000000d9',
+                margin: 24,
+            });
+
+            return () => {
+                if (zoomRef.current) {
+                    zoomRef.current.detach();
+                    zoomRef.current = null;
+                }
+            };
+        }
+    }, [currentProject, isMobile, fullscreenImage]);
+
+    if (!currentProject) {
+        return null;
+    }
+
+    const handleCloseFullscreen = () => {
+        setIsClosing(true);
+        setTimeout(() => {
+            setFullscreenImage(null);
+            setIsClosing(false);
+        }, 250); // Match animation duration
+    };
 
     return (
         <>
+            <ZoomOverrideStyles />
+            {fullscreenImage && (
+                <FullscreenModal onClick={handleCloseFullscreen} $isClosing={isClosing}>
+                    <CloseButton onClick={handleCloseFullscreen}>Fechar</CloseButton>
+                    <FullscreenImage
+                        src={fullscreenImage}
+                        alt="Fullscreen"
+                        onClick={(e) => e.stopPropagation()}
+                        $isClosing={isClosing}
+                    />
+                </FullscreenModal>
+            )}
             <Container>
                 <Texts>
                     <aside>
                         <h2>Sobre o projeto <strong>/ {currentProject.title || "-"}</strong></h2>
                     </aside>
-                    <AboutContent dangerouslySetInnerHTML={{ __html: currentProject.fullDescription }} />
+                    <AboutContent
+                        ref={contentRef}
+                        dangerouslySetInnerHTML={{ __html: currentProject?.fullDescription || "" }}
+                    />
                 </Texts>
                 <Infos>
                     <ul>

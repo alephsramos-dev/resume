@@ -47,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		min-height: 100vh;
 		line-height: 1.5;
-		background: #fff;
+		background: #000;
 		color: #222;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;

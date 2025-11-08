@@ -151,6 +151,11 @@ const Company = styled.div`
             width: 24px;
             height: 24px;
             object-fit: contain;
+
+            @media (max-width: 768px){
+                width: 26px;
+                height: 26px;
+            }
         }
     }
 

@@ -75,7 +75,7 @@ const Texts = styled.div`
 
     & span {
         font-size: 14px;
-        color: #ffffff60;
+        color: ${(props) => props.theme.colors.gray[200]};
         font-weight: 300;
         text-align: center;
         width: 100%;

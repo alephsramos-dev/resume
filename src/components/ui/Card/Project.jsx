@@ -89,11 +89,13 @@ const Content = styled.div`
                 align-items: center;
                 justify-content: center;
                 height: 25px;
+                border-radius: 0;
 
                 & img {
                     width: 24px!important;
                     padding: 2px;
                     height: 24px!important;
+                    border-radius: 0;
                 }
 
             }

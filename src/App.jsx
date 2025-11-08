@@ -1,9 +1,11 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 
 // Layout Components
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import PageTransition from '@/components/layout/PageTransition'
 
 // Page Components
 import All from '@/pages/Home/All'
@@ -20,11 +22,31 @@ function ScrollToTop() {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant' // ou 'smooth' para um scroll suave
+      behavior: 'instant'
     });
   }, [pathname]);
 
   return null;
+}
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><All /></PageTransition>} />
+        <Route path="/curriculo" element={<PageTransition><Curriculo /></PageTransition>} />
+        <Route path="/projetos" element={<PageTransition><Project /></PageTransition>} />
+        <Route path="/projetos/:slug" element={<PageTransition><ProjectDetails /></PageTransition>} />
+        <Route path="/servicos/criacao-de-sites" element={<PageTransition><Developing /></PageTransition>} />
+        <Route path="/servicos/automacao" element={<PageTransition><Developing /></PageTransition>} />
+        <Route path="/servicos/trafego-pago" element={<PageTransition><Developing /></PageTransition>} />
+        <Route path="/servicos/design" element={<PageTransition><Developing /></PageTransition>} />
+        <Route path="/servicos/copywriter" element={<PageTransition><Developing /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  );
 }
 
 export default function App() {
@@ -32,17 +54,7 @@ export default function App() {
     <BrowserRouter>
       <ScrollToTop />
       <Header />
-      <Routes>
-        <Route path="/" element={<All />} />
-        <Route path="/curriculo" element={<Curriculo />} />
-        <Route path="/projetos" element={<Project />} />
-        <Route path="/projetos/:slug" element={<ProjectDetails />} />
-        <Route path="/servicos/criacao-de-sites" element={<Developing />} />
-        <Route path="/servicos/automacao" element={<Developing />} />
-        <Route path="/servicos/trafego-pago" element={<Developing />} />
-        <Route path="/servicos/design" element={<Developing />} />
-        <Route path="/servicos/copywriter" element={<Developing />} />
-      </Routes>
+      <AnimatedRoutes />
       <Footer />
     </BrowserRouter>
   )

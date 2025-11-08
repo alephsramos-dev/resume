@@ -12,6 +12,7 @@ import LinkedInIcon from "@/assets/brands/linkedin.svg?react";
 import GmailIcon from "@/assets/brands/gmail.svg?react";
 import ExcelIcon from "@/assets/brands/excel.svg?react";
 import GoogleAdsIcon from "@/assets/brands/google-ads.svg?react";
+import AlephIcon from "@/assets/brands/aleph.svg?react";
 
 const StyledCircle = styled.div`
   z-index: 10;
@@ -30,6 +31,12 @@ const StyledCircle = styled.div`
     width: 4rem;
     height: 4rem;
   `}
+
+  & svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
 `;
 
 const Container = styled.div`
@@ -73,12 +80,13 @@ Circle.displayName = "Circle";
 const Icons = {
   meta: () => <MetaIcon />,
   chatgpt: () => <ChatGPTIcon fill="#fff" />,
-  whatsapp: () => <WhatsAppIcon fill="#fff"/>,
-  linkedin: () => <LinkedInIcon fill="#fff"/>,
+  whatsapp: () => <WhatsAppIcon fill="#fff" />,
+  linkedin: () => <LinkedInIcon fill="#fff" />,
   gmail: () => <GmailIcon />,
   excel: () => <ExcelIcon />,
-  googleAds: () => <GoogleAdsIcon />
-};  
+  googleAds: () => <GoogleAdsIcon />,
+  aleph: () => <AlephIcon style={{ fill: '#fff', width: '100%', height: '100%' }} />
+};
 
 
 export function AnimatedBeamDemo() {
@@ -95,11 +103,11 @@ export function AnimatedBeamDemo() {
     <Container ref={containerRef}>
       <InnerContainer>
         <Row>
-          <Circle ref={div1Ref}>
-            <Icons.googleAds />
-          </Circle>
           <Circle ref={div5Ref}>
             <Icons.excel />
+          </Circle>
+          <Circle ref={div1Ref}>
+            <Icons.chatgpt />
           </Circle>
         </Row>
         <Row>
@@ -107,7 +115,7 @@ export function AnimatedBeamDemo() {
             <Icons.meta />
           </Circle>
           <Circle ref={div4Ref} size="26">
-            <Icons.chatgpt/>
+            <Icons.aleph />
           </Circle>
           <Circle ref={div6Ref}>
             <Icons.linkedin />

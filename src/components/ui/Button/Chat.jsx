@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaCircle } from 'react-icons/fa';
 import { rgba } from 'polished';
+import ContactFormModal from '@/components/ui/Modal/ContactFormModal';
 
 const StyledButton = styled.button`
   display: flex;
@@ -113,20 +114,50 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function ChatNowButton({ logoSrc = '/icon-black-aleph-desenvolvedor-web.svg', buttonText = 'Converse comigo agora', statusText = 'Online agora', onClick }) {
+export default function ChatNowButton({
+  logoSrc = '/icon-black-aleph-desenvolvedor-web.svg',
+  buttonText = 'Converse comigo agora',
+  statusText = 'Online agora',
+  onClick,
+  modalSource = 'Chat CTA',
+  privacyPolicyUrl,
+  onModalOpenChange
+}) {
   const [animate, setAnimate] = useState(false);
   useEffect(() => {
     const to = setTimeout(() => setAnimate(true), 250);
     return () => clearTimeout(to);
   }, []);
 
+  const handleTriggerClick = useCallback(
+    (event, triggerOnClick) => {
+      if (typeof triggerOnClick === 'function') {
+        triggerOnClick(event);
+      }
+      if (typeof onClick === 'function') {
+        onClick(event);
+      }
+    },
+    [onClick]
+  );
+
   return (
-    <StyledButton className={animate ? 'animate' : ''} onClick={onClick}>
-      <img src={logoSrc} alt="" loading="eager" decoding="async" />
-      <div>
-        <h4>{buttonText}</h4>
-        <span><FaCircle /> {statusText}</span>
-      </div>
-    </StyledButton>
+    <ContactFormModal
+      source={modalSource}
+      privacyPolicyUrl={privacyPolicyUrl}
+      onOpenChange={onModalOpenChange}
+      trigger={({ onClick: triggerOnClick }) => (
+        <StyledButton
+          className={animate ? 'animate' : ''}
+          onClick={(event) => handleTriggerClick(event, triggerOnClick)}
+        >
+          <img src={logoSrc} alt="" loading="eager" decoding="async" />
+          <div>
+            <h4>{buttonText}</h4>
+            <span><FaCircle /> {statusText}</span>
+          </div>
+        </StyledButton>
+      )}
+    />
   );
 }
