@@ -256,7 +256,7 @@ export default function ProjectDetailsHero({
                         <Title clasasName="title">
                             {currentProject.title}
                         </Title>
-                        <span>{currentProject.data} / © Todos os direitos reservados / <strong>{currentProject.companyName}</strong></span>
+                        <span>{currentProject.date} / © Todos os direitos reservados / <strong>{currentProject.companyName}</strong></span>
                     </Texts>
                 </Main>
                 <Image>

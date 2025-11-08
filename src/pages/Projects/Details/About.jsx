@@ -11,10 +11,10 @@ const Container = styled.div`
     justify-content: flex-start;
     height: auto;
     position: relative;
-    gap: 46px;
+    gap: 0px;
 
     @media (max-width: 768px){
-        flex-direction: column;
+        flex-direction: column-reverse;
         gap: 26px;
     }
 `
@@ -28,9 +28,11 @@ const Texts = styled.div`
     flex-wrap: wrap;
     gap: 16px;
     width: 70%;
+    border-right: 1px solid #ffffff20;
 
     @media (max-width: 768px){
         width: 100%;    
+        border-right: none;
     }
 
     & > aside {
@@ -67,6 +69,11 @@ const AboutContent = styled.div`
     align-items: flex-start;
     gap: 12px;
     font-size: 18px;
+    padding-right: 18px;
+
+    @media (max-width: 768px){
+        padding-right: 0px;
+    }
 
     & h3 {
         font-size: 26px;
@@ -113,9 +120,10 @@ const AboutContent = styled.div`
     }
 
     & a {
-        color: ${(props) => props.theme.colors.white[200]};
+        color: ${(props) => props.theme.colors.blue.contrast};
         text-decoration: underline;
         text-underline-offset: 3px;
+        font-weight: 300;
     }
 
     & img {
@@ -124,6 +132,7 @@ const AboutContent = styled.div`
         border-radius: 12px;
         margin: 8px 0 12px 0;
         display: block;
+        border: 1px solid #ffffff20;
     }
 
     & span {
@@ -145,6 +154,8 @@ const Infos = styled.div`
 
     @media (max-width: 768px){
         width: 100%;    
+        position: relative;
+        top: 0;
     }
     
     & ul {
@@ -171,6 +182,11 @@ const Infos = styled.div`
             width: 100%;
             padding-bottom: 16px;
             box-shadow: inset 0 -0.4px 0 0 #ffffff40;
+            padding-left: 16px;
+
+            @media (max-width: 768px){
+                padding-left: 0;
+            }
 
             &:last-child {
                 box-shadow: none;

@@ -28,7 +28,7 @@ const Container = styled.div`
         max-height: 90vh;
         background: url(${Bg}) no-repeat bottom;
         background-size: cover;
-        opacity: 0.4;
+        opacity: 0.6;
         border-bottom: 1px solid #ffffff40;
 
         @media (max-width: 768px){

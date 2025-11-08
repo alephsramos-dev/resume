@@ -42,6 +42,7 @@ const Card = styled.div`
     background-color: ${(props) => props.theme.colors.black[100]};
     padding: 0;
     gap: 8px;
+    cursor: pointer;
 `
 
 const Image = styled.div`
@@ -137,7 +138,7 @@ const Company = styled.div`
     height: 100%;
 
     & div {
-        background-color: #fff;
+        background-color: transparent;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -147,8 +148,8 @@ const Company = styled.div`
         padding: 2px;
 
         & img {
-            width: 22px;
-            height: auto;
+            width: 24px;
+            height: 24px;
             object-fit: contain;
         }
     }
@@ -159,7 +160,7 @@ const Company = styled.div`
         color: ${(props) => props.theme.colors.gray[400]};
 
         @media (max-width: 768px){
-            font-size: 12px;
+            font-size: 14px;
         }
     }
 `
@@ -231,13 +232,19 @@ const Buttons = styled.div`
             ${props => props.$smooth && maskWith('8px')};
             ${props => props.$clipBtn && css`clip-path: ${props.$clipBtn};`}
             cursor: pointer;
+            font-weight: 400;
+            transition: opacity 0.2s;
+
+            &:hover {
+                opacity: 0.8;
+            }
 
             @media (max-width: 768px){
                 font-size: 14px;
             }
 
             &:nth-child(1){
-                border: 1px solid #fff;
+                border: 1px solid #ffffff60;
                 color: #fff;
             }
 
@@ -309,6 +316,10 @@ export default function ProjectStyle({
     const logoBoxSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
     const buttonSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
 
+    const logoSrc = typeof imageCompanyUrl === 'string'
+        ? imageCompanyUrl
+        : imageCompanyUrl?.default ?? imageCompanyUrl?.src ?? '';
+
     const openTarget = (target) => {
         if (!target) return;
         if (typeof target === 'string') {
@@ -328,7 +339,7 @@ export default function ProjectStyle({
 
     return (
         <>
-            <Card $smooth={smoothCorners} $clip={cardSquircle.path} ref={cardSquircle.ref}>
+            <Card $smooth={smoothCorners} $clip={cardSquircle.path} ref={cardSquircle.ref} onClick={() => window.location.href = `/projetos/${slug}`}>
                 <Image $smooth={smoothCorners} $clip={imageSquircle.path} ref={imageSquircle.ref} $popupBg={popupBg} $popupBorder={popupBorder} $popupColor={popupColor}>
                     <img src={image} alt={title} />
                     <span ref={badgeSquircle.ref} $clipBadge={badgeSquircle.path}>
@@ -342,14 +353,14 @@ export default function ProjectStyle({
                         </SiteType>
                         <Company $smooth={smoothCorners}>
                             <div ref={logoBoxSquircle.ref} $clip={logoBoxSquircle.path}>
-                                <img src={imageCompanyUrl} alt={companyName} />
+                                {logoSrc && <img src={logoSrc} alt={companyName} />}
                             </div>
                             <p>{companyName}</p>
                         </Company>
                     </div>
                     <Stack>
                         {tecnologias.slice(0, 3).map((tec, idx) => (
-                            <li key={tec + idx} style={{display: 'inline-block'}}>
+                            <li key={tec + idx} style={{ display: 'inline-block' }}>
                                 {techIcons[tec.toLowerCase()] || tec}
                             </li>
                         ))}
@@ -364,9 +375,9 @@ export default function ProjectStyle({
                     <div ref={buttonSquircle.ref}>
                         <button onClick={() => window.location.href = `/projetos/${slug}`}>Detalhes</button>
                         {
-                            urlPage === '' 
-                            ? <button onClick={() => alert('Essa página é privada!')} className="restrict">Acesso restrito</button>
-                            : <button onClick={() => openTarget(urlPage)}>Acessar<BsBoxArrowUpRight /></button>
+                            urlPage === ''
+                                ? <button onClick={() => alert('Essa página é privada!')} className="restrict">Acesso restrito</button>
+                                : <button onClick={() => openTarget(urlPage)}>Acessar<BsBoxArrowUpRight /></button>
                         }
                     </div>
                     <button onClick={() => openTarget(githubUrl)}>

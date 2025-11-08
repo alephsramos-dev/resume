@@ -42,6 +42,11 @@ const Header = styled.header`
     & .title {
         font-size: 24px;
         color: ${(props) => props.theme.colors.white[200]};
+
+        @media (max-width: 768px){
+            font-size: 22px;
+            width: 80%;
+        }
     }
 `
 

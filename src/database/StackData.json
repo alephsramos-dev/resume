@@ -15,6 +15,11 @@
     "color": "#E34F26"
   },
   {
+    "techName": "Figma",
+    "tecnologias": ["Figma"],
+    "color": "#a259ff"
+  },
+  {
     "techName": "CSS3",
     "tecnologias": ["CSS"],
     "color": "#1572B6"
@@ -38,6 +43,31 @@
     "techName": "Styled Components",
     "tecnologias": ["Sass"],
     "color": "#CC6699"
+  },
+  {
+    "techName": "Emotion",
+    "tecnologias": ["Emotion"],
+    "color": "#FF4785"
+  },
+  {
+    "techName": "Github",
+    "tecnologias": ["Github"],
+    "color": "#fafbfc"
+  },
+  {
+    "techName": "Hostgator",
+    "tecnologias": ["Hostgator"],
+    "color": "#229ad0"
+  },
+  {
+    "techName": "HTML5",
+    "tecnologias": ["HTML5"],
+    "color": "#E34F26"
+  },
+  {
+    "techName": "CSS3",
+    "tecnologias": ["CSS3"],
+    "color": "#1572B6"
   },
   {
     "techName": "N8N",
