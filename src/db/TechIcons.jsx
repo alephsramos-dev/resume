@@ -22,6 +22,7 @@ import html5Icon from '@/assets/icons/html5.svg';
 import css3Icon from '@/assets/icons/css3.svg';
 import hostgatorIcon from '@/assets/icons/hostgator.svg';
 
+
 export const techIcons = {
   react: <img src={reactIcon} alt="React" style={{width: 25, height: 25}} title="React"/>,
   supabase: <img src={supabaseIcon} alt="Supabase" style={{width: 25, height: 25}} title="Supabase"/>,
@@ -45,5 +46,6 @@ export const techIcons = {
   firebase: <img src={firebaseIcon} alt="Firebase" style={{width: 25, height: 25}} />,
   html5: <img src={html5Icon} alt="HTML5" style={{width: 25, height: 25}} />,
   css3: <img src={css3Icon} alt="CSS3" style={{width: 25, height: 25}} />,
+  emotion: <img src={sassIcon} alt="Emotion" style={{width: 25, height: 25}} />,
   hostgator: <img src={hostgatorIcon} alt="HostGator" style={{width: 25, height: 25}} />,
 };

@@ -75,7 +75,12 @@ const companies = {
         name: "Eco Frame",
         slug: "eco-frame",
         image: ecoframe,
-    }
+    },
+    "steel-conecta": {
+        name: "Steel Conecta",
+        slug: "steel-conecta",
+        image: steelconecta,
+    },
 };
 
 export default companies;

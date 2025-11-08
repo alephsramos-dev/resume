@@ -20,6 +20,11 @@
     "color": "#a259ff"
   },
   {
+    "techName": "N8N",
+    "tecnologias": ["N8N"],
+    "color": "#EA4B71"
+  },
+  {
     "techName": "CSS3",
     "tecnologias": ["CSS"],
     "color": "#1572B6"

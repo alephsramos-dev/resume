@@ -342,9 +342,13 @@ export default function ProjectStyle({
             <Card $smooth={smoothCorners} $clip={cardSquircle.path} ref={cardSquircle.ref} onClick={() => window.location.href = `/projetos/${slug}`}>
                 <Image $smooth={smoothCorners} $clip={imageSquircle.path} ref={imageSquircle.ref} $popupBg={popupBg} $popupBorder={popupBorder} $popupColor={popupColor}>
                     <img src={image} alt={title} />
-                    <span ref={badgeSquircle.ref} $clipBadge={badgeSquircle.path}>
-                        {popupContent}
-                    </span>
+                    {
+                        popupContent === '' ? null : (
+                            <span ref={badgeSquircle.ref} $clipBadge={badgeSquircle.path}>
+                                {popupContent}
+                            </span>
+                        )
+                    }
                 </Image>
                 <Infos>
                     <div className="info-content">
