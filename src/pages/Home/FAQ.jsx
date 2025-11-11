@@ -232,28 +232,36 @@ export default function FAQ() {
     const [openIndex, setOpenIndex] = React.useState(0);
     const faqs = [
         {
-            q: "Quais tecnologias você usa para desenvolver os sites?",
-            a: "Trabalho principalmente com React, Vite e Styled-Components no front, e Integrações via APIs e Node quando necessário.",
+            q: "Quanto custa para desenvolver um site profissional?",
+            a: "O investimento varia conforme complexidade, integrações e volume de conteúdo. Após entender seus objetivos, apresento uma proposta personalizada com escopo e etapas claras.",
         },
         {
-            q: "O site é otimizado para SEO e performance?",
-            a: "Sim. Implemento boas práticas de SEO técnico, otimização de imagens e bundle, além de métricas Core Web Vitals.",
+            q: "Qual é o prazo médio de desenvolvimento?",
+            a: "Projetos institucionais simples levam em torno de 2–4 semanas. Projetos mais completos (blog, automações, integrações) podem levar 4–6 semanas ou mais.",
         },
         {
-            q: "Você faz integração com WhatsApp, Instagram e Google Ads?",
-            a: "Sim, realizo integrações com plataformas de comunicação e automações para captação e qualificação de leads.",
+            q: "Como é o processo de criação?",
+            a: "Dividimos em: briefing, arquitetura e UX, layout/UI, desenvolvimento funcional, otimização (SEO e performance), revisão, publicação e monitoramento inicial.",
         },
         {
-            q: "Como funciona o suporte e manutenção após a publicação?",
-            a: "Ofereço planos de manutenção com melhorias recorrentes, correções e monitoramento contínuo.",
+            q: "Você cuida da hospedagem e domínio?",
+            a: "Posso orientar na escolha (performance e custo) ou configurar para você. Também integro CDN, SSL e e-mails profissionais quando necessário.",
         },
         {
-            q: "Qual é o prazo médio para entrega de um projeto?",
-            a: "Depende do escopo, mas geralmente de 2 a 6 semanas para um site institucional completo.",
+            q: "Quais integrações posso ter no site?",
+            a: "Integro WhatsApp, Instagram, Google Analytics/Tag Manager, Google Ads, Pixel Meta, CRM, formulários avançados e automações de leads.",
         },
         {
-            q: "Qual é o prazo médio para entrega de um projeto?",
-            a: "Depende do escopo, mas geralmente de 2 a 6 semanas para um site institucional completo.",
+            q: "Qual a diferença entre um site institucional e uma landing page?",
+            a: "Landing page é focada em uma única oferta/conversão. Site institucional apresenta a empresa de forma completa com várias seções e páginas.",
+        },
+        {
+            q: "Vou poder atualizar o conteúdo depois?",
+            a: "Se precisar de autonomia, podemos usar CMS ou criar áreas editáveis. Caso prefira, faço atualizações via plano de manutenção.",
+        },
+        {
+            q: "Existe manutenção após a entrega?",
+            a: "Sim. Ofereço planos com monitoramento, melhorias contínuas, ajustes de performance, segurança e novos componentes conforme crescimento.",
         },
     ];
 
