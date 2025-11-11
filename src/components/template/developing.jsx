@@ -1,6 +1,6 @@
 import { SpinnerBallIcon, SpinnerIcon } from "@phosphor-icons/react/dist/ssr";
 import { IconLoader } from "@tabler/icons-react";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const spin = keyframes`
     from {
@@ -16,19 +16,23 @@ const Spinner = styled.span`
 `
 
 export default function Developing() {
-    return <main style={{
-        width: '100vw',
-        height: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        gap: '20px',
-        justifyContent: 'center',
-        textAlign: 'center',
-        backgroundColor: '#000',
-    }}>
+    return <main
+        data-aos="fade-up"
+        data-aos-duration="800"
+        data-aos-offset="0"
+        style={{
+            width: '100vw',
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            gap: '20px',
+            justifyContent: 'center',
+            textAlign: 'center',
+            backgroundColor: '#000',
+        }}>
         <Spinner>
-            <SpinnerIcon color="#fff" size={38}/>
+            <SpinnerIcon color="#fff" size={38} />
         </Spinner>
         <h1
             style={{

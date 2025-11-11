@@ -192,7 +192,7 @@ export default function Header() {
                             <IconHeader
                             icon={FaInstagram}
                             color="#5B51D8"
-                            onClick={() => window.open("https://www.instagram.com/alephsramos", "_blank")}
+                            onClick={() => window.open("https://www.instagram.com/alephsramosdev", "_blank")}
                             />   
                         </li>
                         <li>

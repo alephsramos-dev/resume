@@ -28,12 +28,12 @@ const Container = styled.div`
         max-height: 90vh;
         background: url(${Bg}) no-repeat bottom;
         background-size: cover;
-        opacity: 0.4;
+        opacity: 0.3;
         border-bottom: 1px solid #ffffff40;
 
         @media (max-width: 768px){
             max-height: 60vh;
-            opacity: 0.3;
+            opacity: 0.2;
         }
     }
 `;
@@ -72,7 +72,6 @@ const Header = styled.header`
 `
 
 export default function ProjectDetails() {
-
     const { slug } = useParams();
 
     return (
@@ -82,15 +81,15 @@ export default function ProjectDetails() {
                     <ProjectDetailsCallToAction 
                         slug={slug}
                     />
-                    <ProjectDetailsHero 
-                        slug={slug}
-                    />
-                        <ProjectDetailsAbout 
+                        <ProjectDetailsHero 
                             slug={slug}
                         />
-                                <ProjectDetailsExplore 
-                                    slug={slug}
-                                />
+                            <ProjectDetailsAbout 
+                                slug={slug}
+                            />
+                                    <ProjectDetailsExplore 
+                                        slug={slug}
+                                    />
                 </Content>
             </Container>
         </>

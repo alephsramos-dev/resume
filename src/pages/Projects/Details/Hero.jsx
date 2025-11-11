@@ -247,7 +247,7 @@ export default function ProjectDetailsHero({
                 {/* <Fixed visible={fixedVisible}>
                     {currentProject.title}
                 </Fixed> */}
-                <Main>
+                <Main data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                     <Company>
                         <img src={logoAleph} alt="logo-aleph-desenvolvedor-web" />
                         <span>by Aleph</span>
@@ -259,7 +259,7 @@ export default function ProjectDetailsHero({
                         <span>{currentProject.date} / © Todos os direitos reservados / <strong>{currentProject.companyName}</strong></span>
                     </Texts>
                 </Main>
-                <Image>
+                <Image data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">
                     <Infos>
                         <div>
                             <span><strong>/</strong> {currentProject.urlPage || "URL é privada"}</span>

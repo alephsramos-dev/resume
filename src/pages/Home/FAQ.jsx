@@ -263,9 +263,9 @@ export default function FAQ() {
 
     return (
         <>
-             <Container>
+            <Container>
                 <Content>
-                    <Texts>
+                    <Texts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                         <div>
                             <Badge
                                 children="FAQ"
@@ -276,7 +276,7 @@ export default function FAQ() {
                             <Title
                                 children="Tire a sua dúvida, veja as perguntas mais frequentes"
                             />
-                        </div>  
+                        </div>
                         <div>
                             <aside className="perfil">
                                 <div>
@@ -290,10 +290,10 @@ export default function FAQ() {
                                     <input type="text" id="message" placeholder="Digite sua dúvida  " required />
                                 </label>
                                 <button type="submit">Enviar</button>
-                            </form> 
+                            </form>
                         </div>
                     </Texts>
-                    <Doubts>
+                    <Doubts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">
                         {faqs.map((item, idx) => (
                             <AskItem
                                 key={idx}

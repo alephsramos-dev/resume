@@ -83,7 +83,7 @@ export default function Automation() {
         <>
             <Container>
                 <Content>
-                    <Texts>
+                    <Texts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                         <Badge
                             children="Novidade"
                             icon={<TrophyIcon weight="fill"/>}

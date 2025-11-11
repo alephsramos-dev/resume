@@ -87,14 +87,14 @@ export default function ProjectDetailsExplore({
     return (
         <>
             <Container>
-                <Content>
+                <Content data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                     <Header>
                         <Title className="title">
                             Mais projetos de {currentProject.siteType}
                         </Title>
                         <Control>
-                            <div className="portfolio-button-prev"><MdKeyboardArrowLeft  /></div>
-                            <div className="portfolio-button-next"><MdKeyboardArrowRight  /></div>
+                            <div className="portfolio-button-prev"><MdKeyboardArrowLeft /></div>
+                            <div className="portfolio-button-next"><MdKeyboardArrowRight /></div>
                         </Control>
                     </Header>
                     <Swiper
@@ -113,7 +113,7 @@ export default function ProjectDetailsExplore({
                         }}
                         style={{ width: '100%' }}
                     >
-                        {projects.filter(project => project.siteType === siteType).map(project => (
+                        {projects.filter(project => project.siteType === siteType && project.slug !== slug).map(project => (
                             <SwiperSlide key={project.title}>
                                 <ProjectStyle
                                     {...project}
@@ -122,7 +122,7 @@ export default function ProjectDetailsExplore({
                         ))}
                     </Swiper>
                 </Content>
-            </Container>    
+            </Container>
         </>
     )
 }

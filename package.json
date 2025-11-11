@@ -17,6 +17,7 @@
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
     "@tabler/icons-react": "^3.34.1",
+    "aos": "^2.3.4",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "figma-squircle": "^1.1.0",

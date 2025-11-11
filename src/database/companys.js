@@ -22,7 +22,7 @@ const companies = {
         image: steelconecta,
     },
     "fast-sistemas-construtivos": {
-        name: "Fast Sistemas Construtivos",
+        name: "Fast Sistemas",
         slug: "fast-sistemas-construtivos",
         image: fast,
     },

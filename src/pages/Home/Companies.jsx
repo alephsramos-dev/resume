@@ -118,39 +118,39 @@ export default function Companies() {
         return Object.values(modules);
     }, []);
 
-        const extended = logos.length < 8 ? logos.concat(logos) : logos;
+    const extended = logos.length < 8 ? logos.concat(logos) : logos;
 
-        return (
-            <Container>
-                <Content>
-                    <div>
-                        <Description
-                            children="Com a confiança das maiores marcas do mundo"
-                        />
-                    </div>
-                    <CarouselWrapper aria-label="Logos de empresas que confiaram">
-                        <CarouselStyles>
-                                <Swiper
-                                    modules={[Autoplay, FreeMode]}
-                                    loop
-                                    freeMode={{ enabled: true, momentum: true }}
-                                    allowTouchMove={true}
-                                    speed={2500} /* menor valor => movimento mais rápido */
-                                    autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
-                                    slidesPerView={"auto"}
-                                    spaceBetween={10}
-                                    loopAdditionalSlides={extended.length}
-                                    watchSlidesProgress
-                                >
-                                {extended.map((src, i) => (
-                                    <SwiperSlide key={i} aria-label={`Logo ${i + 1}`}>
-                                        <img className="logo-item" src={src} alt={`Logo ${i + 1}`} loading="lazy" />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </CarouselStyles>
-                    </CarouselWrapper>
-                </Content>
-            </Container>
-        );
+    return (
+        <Container>
+            <Content data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
+                <div>
+                    <Description
+                        children="Com a confiança das maiores marcas do mundo"
+                    />
+                </div>
+                <CarouselWrapper aria-label="Logos de empresas que confiaram">
+                    <CarouselStyles>
+                        <Swiper
+                            modules={[Autoplay, FreeMode]}
+                            loop
+                            freeMode={{ enabled: true, momentum: true }}
+                            allowTouchMove={true}
+                            speed={2500} /* menor valor => movimento mais rápido */
+                            autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: false }}
+                            slidesPerView={"auto"}
+                            spaceBetween={10}
+                            loopAdditionalSlides={extended.length}
+                            watchSlidesProgress
+                        >
+                            {extended.map((src, i) => (
+                                <SwiperSlide key={i} aria-label={`Logo ${i + 1}`}>
+                                    <img className="logo-item" src={src} alt={`Logo ${i + 1}`} loading="lazy" />
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </CarouselStyles>
+                </CarouselWrapper>
+            </Content>
+        </Container>
+    );
 }

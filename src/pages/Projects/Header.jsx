@@ -92,7 +92,7 @@ export default function Header() {
         <>
             <Container>
                 <Content>
-                    <Texts>
+                    <Texts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                         <h1>Portfólio</h1>
                     </Texts>
                     {/* <List>

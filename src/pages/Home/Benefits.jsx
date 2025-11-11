@@ -154,7 +154,7 @@ export default function Benefits() {
     return (
         <Container>
             <Content>
-                <Texts>
+                <Texts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                     <div className="title">
                         <Badge
                             children="Beneficios"
@@ -172,7 +172,7 @@ export default function Benefits() {
                         />
                     </div>
                 </Texts>
-                <BeneficiosContent>
+                <BeneficiosContent data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">
                     <CardsGrid>
                         {benefits.map((i) => (
                             <BeneficioCard

@@ -4,7 +4,9 @@ import ChaleFastHomes from '@assets/banners/landingpage-fasthomes.png'
 import PisosVinilicos from '@assets/banners/landingpage-pisos-fastsistemasconstrutivos.png'
 import SteelConecta from '@assets/banners/landingpage-steelconecta.png'
 import LpLeange from '@assets/banners/landingpage-leange.png'
-
+import NovaMetalica from '@assets/banners/institucional-novametalica.png'
+import FastHomes from '@assets/banners/institucional-fasthomes.png'
+import PousadaLeAnge from '@assets/banners/institucional-leange.png'
 
 import { PasteEuYagoLopes } from '@assets/portfolio/euyagolopes/index';
 import { PasteKdea } from '@assets/portfolio/kdea/index';
@@ -12,6 +14,9 @@ import { PasteChaleFastHomes} from '@assets/portfolio/chale-fasthomes/index';
 import { PasteFastPisos } from '@assets/portfolio/fast-pisos/index';
 import { PasteSteelConecta } from '@assets/portfolio/steelconecta/index';
 import { PasteLpLeAnge } from '@assets/portfolio/lp-leange/index';
+import { PasteNovaMetalica } from '@assets/portfolio/nova-metalica/index';
+import { PasteFastHomes } from '@assets/portfolio/fasthomes/index';
+import { PastePousadaLeAnge } from '@assets/portfolio/leange/index';
 
 import companies from '@/database/companys';
 
@@ -479,6 +484,242 @@ export const projects = [
         siteBg: "#1d537d20",
         siteBorder: "#1d537d20",
         siteColor: "#1d537d",
+    },
+    {
+        image: NovaMetalica,
+        title: "Nova Metálica",
+        slug: "nova-metalica",
+        popupContent: "Fábrica",
+        siteType: "Institucional",
+        imageCompanyUrl: companies['nova-metalica'].image,
+        companyName: companies['nova-metalica'].name,
+        tecnologias: ["react", "vite", "firebase", "n8n", "emotion", "vercel", "figma"],
+        stack: [
+            {
+                "techName": "React",
+                "tecnologias": ["React"],
+                "color": "#61DAFB"
+            },
+            {
+                "techName": "Vite",
+                "tecnologias": ["Vite"],
+                "color": "#646CFF"
+            },
+            {
+                "techName": "Firebase",
+                "tecnologias": ["Firebase"],
+                "color": "#FFCA28"
+            },
+            {
+                "techName": "n8n",
+                "tecnologias": ["n8n"],
+                "color": "#EA4B71"
+            },
+            {
+                "techName": "Emotion",
+                "tecnologias": ["Emotion"],
+                "color": "#ff4785"
+            },
+            {
+                "techName": "Vercel",
+                "tecnologias": ["Vercel"],
+                "color": "#ffffff"
+            },
+            {
+                "techName": "Figma",
+                "tecnologias": ["Figma"],
+                "color": "#a259ff"
+            }
+        ],
+        date: "20/04/2025",
+        duration: 280,
+        plataform: "Código",
+        country: "Brasil",
+        description: "Uma fábrica de estruturas metálicas especializada em Steel Frame, oferecendo soluções completas para construção rápida, sustentável e eficiente.",
+        urlPage: "https://www.novametalica.com.br",
+        fullDescription: `
+                       <p> Toda a sua estrutura é projetada para se posicionar como a principal autoridade e fábrica B2B de perfis para construção a seco no Rio de Janeiro. O site não vende apenas produtos; ele vende confiança, tecnologia e parceria para construtoras, engenheiros e profissionais do setor. O foco é claro: captar leads B2B qualificados, oferecendo soluções de engenharia (como o sistema FRAMECAD) e garantindo a procedência do material (aço 100% nacional). </p>
+
+                        <img src="${PasteNovaMetalica.novaMetalicaSectionSobre}" alt="nova-metalica-section-institucional-sobre-missao-visao" /> <span>Nova Metálica | © Todos os direitos reservados | Acesso em: <a href="https://novametalica.com.br/#sobre" target="_blank">https://novametalica.com.br/#sobre</a></span>
+
+                        <h3>Institucional e Proposta de Valor</h3> <p> Mais do que um simples "Sobre Nós", o site dedica uma seção robusta para estabelecer sua credibilidade como a "primeira fábrica de perfis para Steel Frame e Drywall do Rio de Janeiro". Detalha Missão, Visão e Valores (Inovação, Qualidade, Sustentabilidade), gerando uma forte sensação de confiança e solidez para parceiros B2B. </p>
+
+                        <img src="${PasteNovaMetalica.novaMetalicaSectionProducts}" alt="nova-metalica-section-produtos-steel-frame-drywall-stick-engenheirado" /> <span>Nova Metálica | © Todos os direitos reservados | Acesso em: <a href="https://novametalica.com.br/#produtos" target="_blank">https://novametalica.com.br/#produtos</a></span> <h3>Soluções Construtivas (Produtos)</h3> <p> O núcleo comercial do site. É claramente segmentado entre Steel Frame e Drywall. O site vai além de listar "guias e montantes"; ele diferencia suas duas principais ofertas: Perfis Stick (padrão, para corte em obra) e Perfis Engenheirados (customizados de fábrica com projeto), atendendo a diferentes níveis de complexidade de obra. </p>
+
+                        <img src="${PasteNovaMetalica.novaMetalicaSectionDiferenciais}" alt="nova-metalica-section-diferenciais-tecnologia-framecad-aco-nacional" /> <span>Nova Metálica | © Todos os direitos reservados | Acesso em: <a href="https://novametalica.com.br/#diferenciais" target="_blank">https://novametalica.com.br/#diferenciais</a></span> <h3>Diferenciais Tecnológicos (O "Porquê")</h3> <p> Esta é a principal seção de autoridade. A empresa justifica seu valor destacando: 1) Tecnologia de Ponta (máquinas FRAMECAD e Metalso) que garantem precisão e menor taxa de aço; 2) Qualidade do Material (uso exclusivo de "aço 100% nacional" e "normatizado", citando parceiros como a CSN); e 3) Serviços de Engenharia (oferece o serviço de cálculo estrutural, um imenso valor agregado). </p>
+
+                        <img src="${PasteNovaMetalica.novaMetalicaSectionForm}" alt="nova-metalica-section-formulario-orcamento-b2b" /> <span>Nova Metálica | © Todos os direitos reservados | Acesso em: <a href="https://novametalica.com.br/#orcamento" target="_blank">https://novametalica.com.br/#orcamento</a></span> <h3>Captação de Leads (Orçamento)</h3> <p> A conclusão lógica de toda a jornada do usuário. O site não possui um "carrinho" de compras, mas sim múltiplos CTAs ("Solicitar Orçamento") que levam a um formulário B2B detalhado. O objetivo não é vender online, mas capturar projetos e iniciar uma negociação comercial qualificada. </p>
+
+                        <h3>Pontos positivos</h3>
+
+                        <ul> <li>Posicionamento B2B impecável: A linguagem, o design e as ofertas são 100% focados em construtoras, engenheiros e arquitetos.</li> <li>Forte Geração de Autoridade: O site não diz apenas "somos bons", ele <i>prova</i> com "Tecnologia FRAMECAD", "Aço 100% Nacional" e "Perfis Normatizados".</li> <li>Diferenciação de Serviço: Oferecer "Cálculo Estrutural" e "Perfis Engenheirados" eleva a empresa de "fábrica" para "parceira de engenharia".</li> <li>Jornada do Usuário Clara: O site educa (Sobre/Diferenciais), apresenta a solução (Produtos) e converte (Orçamento).</li> <li>Otimizado para Captação de Leads: Múltiplos CTAs claros e um formulário B2B focado em projetos, não em produtos avulsos.</li> <li>Automação (Back-end): (Como mencionado em outros projetos) Uso de automação, como n8n, para integrar os formulários de orçamento diretamente ao CRM, garantindo um atendimento B2B rápido e eficiente.</li> </ul>
+                `,
+        githubUrl: "https://github.com/alephsramos-dev",
+        popupBg: "#ffffff60",
+        popupBorder: "#ffffff80",
+        popupColor: "#ffffff",
+        siteBg: "#189dd620",
+        siteBorder: "#189dd620",
+        siteColor: "#189dd6",
+    },
+    {
+        image: FastHomes,
+        title: "Fast Homes",
+        slug: "fast-homes",
+        popupContent: "Inovador",
+        siteType: "Institucional",
+        imageCompanyUrl: companies['fast-homes'].image,
+        companyName: companies['fast-homes'].name,
+        tecnologias: ["react", "vite", "supabase", "n8n", "emotion", "vercel", "figma"],
+        stack: [
+            {
+                "techName": "React",
+                "tecnologias": ["React"],
+                "color": "#61DAFB"
+            },
+            {
+                "techName": "Vite",
+                "tecnologias": ["Vite"],
+                "color": "#646CFF"
+            },
+            {
+                "techName": "Supabase",
+                "tecnologias": ["Supabase"],
+                "color": "#3ECF8E"
+            },
+            {
+                "techName": "n8n",
+                "tecnologias": ["n8n"],
+                "color": "#EA4B71"
+            },
+            {
+                "techName": "Emotion",
+                "tecnologias": ["Emotion"],
+                "color": "#ff4785"
+            },
+            {
+                "techName": "Vercel",
+                "tecnologias": ["Vercel"],
+                "color": "#ffffff"
+            },
+            {
+                "techName": "Figma",
+                "tecnologias": ["Figma"],
+                "color": "#a259ff"
+            }
+        ],
+        date: "12/07/2025",
+        duration: 420,
+        plataform: "Código",
+        country: "Brasil",
+        description: "Casas modulares em Steel Frame, oferecendo soluções rápidas, sustentáveis e personalizadas para construção residencial de alta qualidade.",
+        urlPage: "https://www.fasthomes.com.br",
+        fullDescription: `
+                    <p> Toda a sua estrutura tem como foco se posicionar como um ecossistema completo da construção em Steel Frame. O portal atua como um hub central que se ramifica para atender três públicos principais: o Cliente Final (B2C) que sonha com a casa própria, o Arquiteto/Engenheiro (B2B) que busca um parceiro de execução, e o Investidor (B2B) que procura novos negócios (como o funil dos chalés). </p>
+
+                    <img src="${PasteFastHomes.FastHomesSectionCatalog}" alt="fasthomes-section-catalogo-b2c-modelos-prontos" /> <span>Fast Homes | © Todos os direitos reservados | Acesso em: <a href="https://fasthomes.com.br/catalogo" target="_blank">https://fasthomes.com.br/catalogo</a></span>
+
+                    <h3>Catálogo B2C (Modelos Prontos)</h3> <p> Esta é a principal vitrine para o cliente final. Uma galeria completa com filtros (área, quartos, pavimentos) que apresenta os modelos de casas prontas (Acácia, Cajueiro, Araucária). O objetivo é converter o sonho do cliente B2C em um lead qualificado, facilitando a visualização do produto final. </p>
+
+                    <img src="${PasteFastHomes.FastHomesSectionProjects}" alt="fasthomes-section-seu-projeto-b2b-arquitetos" /> <span>Fast Homes | © Todos os direitos reservados | Acesso em: <a href="https://fasthomes.com.br/seu-projeto" target="_blank">https://fasthomes.com.br/seu-projeto</a></span> <h3>Seu Projeto (Funil B2B - Arquitetos)</h3> <p> Uma seção dedicada a arquitetos, engenheiros e clientes que já possuem um projeto personalizado. A Fast Homes não se limita aos seus modelos e se posiciona como a parceira tecnológica (em Steel Frame) para "dar vida" ao projeto do profissional, captando um lead B2B de execução. </p>
+
+                    <img src="${PasteFastHomes.FastHomesSectionParceiros}" alt="fasthomes-section-sobre-nos-e-parcerias-de-autoridade" /> <span>Fast Homes | © Todos os direitos reservados | Acesso em: <a href="https://fasthomes.com.br/sobre-nos" target="_blank">https://fasthomes.com.br/sobre-nos</a></span> <h3>Sobre Nós e Parcerias (Autoridade)</h3> <p> A seção de geração de confiança. Explica a metodologia (rapidez, sustentabilidade, tecnologia) e, o mais importante, ancora a marca em seus parceiros estratégicos de peso (como Nova Metálica, Saint-Gobain e Fast Sistemas Construtivos), transmitindo credibilidade e solidez de ecossistema. </p>
+
+                    <img src="${PasteFastHomes.FastHomesSectionForm}" alt="fasthomes-section-formulario-segmentado-b2c-b2b-investidor" /> <span>Fast Homes | © Todos os direitos reservados | Acesso em: <a href="https://fasthomes.com.br/contato" target="_blank">https://fasthomes.com.br/contato</a></span> <h3>Hub de Conversão (Formulário Segmentado)</h3> <p> A ferramenta de conversão do site é um formulário inteligente que segmenta o lead no momento da entrada. Ao perguntar "Escolha a opção que melhor te representa", ele divide o fluxo de atendimento entre "Cliente Final", "Arquiteto/Engenheiro" e "Construtor/Investidor", otimizando todo o processo comercial. </p>
+
+                    <h3>Pontos positivos</h3>
+
+                    <ul> <li>Ecossistema Completo: É um portal que integra múltiplos funis de negócio (B2C, B2B, Investidores) em um só lugar.</li> <li>Segmentação Clara de Público: O site direciona cada tipo de visitante para uma jornada específica, otimizando a conversão.</li> <li>Jornada B2C Intuitiva: O catálogo com filtros facilita a escolha do cliente final.</li> <li>Posicionamento B2B: A página "Seu Projeto" respeita e atrai arquitetos e engenheiros como parceiros.</li> <li>Forte Geração de Autoridade: O uso das logomarcas dos parceiros (Nova Metálica, Saint-Gobain) gera confiança imediata.</li> <li>Estratégia Multicanal: O formulário captura leads de "Investidores", que são então direcionados para funis específicos (como o site chale.fasthomes.com.br).</li> </ul>
+                `,
+        githubUrl: "https://github.com/alephsramos-dev",
+        popupBg: "#ffffff60",
+        popupBorder: "#ffffff80",
+        popupColor: "#ffffff",
+        siteBg: "#909e4f20",
+        siteBorder: "#909e4f20",
+        siteColor: "#909e4f",
+    },
+    {
+        image: PousadaLeAnge,
+        title: "Pousada Le Ange",
+        slug: "pousada-le-ange",
+        popupContent: "Em alta",
+        siteType: "Institucional",
+        imageCompanyUrl: companies['pousada-le-ange'].image,
+        companyName: companies['pousada-le-ange'].name,
+        tecnologias: ["react", "vite", "firebase", "emotion", "vercel", "figma"],
+        stack: [
+            {
+                "techName": "React",
+                "tecnologias": ["React"],
+                "color": "#61DAFB"
+            },
+            {
+                "techName": "Vite",
+                "tecnologias": ["Vite"],
+                "color": "#646CFF"
+            },
+            {
+                "techName": "Firebase",
+                "tecnologias": ["Firebase"],
+                "color": "#FFCA28"
+            },
+            {
+                "techName": "n8n",
+                "tecnologias": ["n8n"],
+                "color": "#EA4B71"
+            },
+            {
+                "techName": "Emotion",
+                "tecnologias": ["Emotion"],
+                "color": "#ff4785"
+            },
+            {
+                "techName": "Vercel",
+                "tecnologias": ["Vercel"],
+                "color": "#ffffff"
+            },
+            {
+                "techName": "Figma",
+                "tecnologias": ["Figma"],
+                "color": "#a259ff"
+            }
+        ],
+        date: "09/11/2024",
+        duration: 460,
+        plataform: "Código",
+        country: "Brasil",
+        description: "Pousada de alto padrão, localizada em Miguel Pereira-RJ, e Buzios-RJ, oferecendo conforto, lazer e experiências exclusivas para hóspedes e seus pets.",
+        urlPage: "https://www.fasthomes.com.br",
+        fullDescription: `
+                    <p> Toda a sua estrutura tem como foco se posicionar como um portal de luxo "Pet Lover". O site funciona como um hub que apresenta as duas unidades (Serra e Mar), mas seu objetivo principal é vender um conceito: uma experiência de alto padrão onde o pet tem total liberdade e é o convidado de honra, não apenas um "aceito". </p>
+
+                    <img src="${PastePousadaLeAnge.leangeSectionUnidades}" alt="pousada-le-ange-hub-section-unidades-serra-e-mar" /> <span>Pousada Le Ange | © Todos os direitos reservados | Acesso em: <a href="https://pousadaleange.com.br" target="_blank">https://pousadaleange.com.br</a></span>
+
+                    <h3>Hub de Unidades (Serra e Mar)</h3> <p> A seção principal do site, que divide a jornada do usuário. Apresenta as "2 unidades, 2 cenários incomparáveis": a Le Ange Serra (Miguel Pereira RJ), focada na Mata Atlântica e sossego, e a Le Ange Mar (Búzios RJ), focada na experiência de praia (a 150m da Praia Rasa). </p>
+
+                    <img src="${PastePousadaLeAnge.leangeSectionPet}" alt="pousada-le-ange-hub-section-diferencial-pet-lovers" /> <span>Pousada Le Ange | © Todos os direitos reservados | Acesso em: <a href="https://pousadaleange.com.br" target="_blank">https://pousadaleange.com.br</a></span> 
+
+                    <img src="${PastePousadaLeAnge.leangeSectionPolicy}" alt="pousada-le-ange-hub-section-diferencial-pet-lovers" /> <span>Pousada Le Ange | © Todos os direitos reservados | Acesso em: <a href="https://pousadaleange.com.br" target="_blank">https://pousadaleange.com.br</a></span> 
+                    
+                    <h3>Diferencial (Mais que Pet Friendly)</h3> <p> O coração do site. Uma seção inteira dedicada a provar o conceito "Pet Lovers", detalhando que não há restrição de porte, não há taxas extras para o pet, e eles têm acesso total (incluindo piscinas com tratamento de ozônio). Também estabelece regras claras (não aceita menores de 13 anos) para garantir um ambiente focado. </p>
+                    
+                    <img src="${PastePousadaLeAnge.leangeSectionAcomodacao}" alt="pousada-le-ange-hub-section-acomodacoes-e-experiencias" /> <span>Pousada Le Ange | © Todos os direitos reservados | Acesso em: <a href="https://pousadaleange.com.br" target="_blank">https://pousadaleange.com.br</a></span>
+                    <img src="${PastePousadaLeAnge.leangeSectionPacotes}" alt="pousada-le-ange-hub-section-acomodacoes-e-experiencias" /> <span>Pousada Le Ange | © Todos os direitos reservados | Acesso em: <a href="https://pousadaleange.com.br" target="_blank">https://pousadaleange.com.br</a></span>
+                    
+                    <h3>Acomodações e Experiências</h3> <p> Uma galeria unificada que exibe as "suítes mais procuradas" de ambas as unidades, reforçando o padrão de luxo da marca. Detalha também as experiências (gastronomia inclusa, adega, spa, hot tub, agility para pets) que consolidam a pousada como um destino completo. </p>
+
+                    <h3>Pontos positivos</h3>
+
+                    <ul> <li>Posicionamento de marca extremamente claro: O foco "100% Pet Lover" é o principal argumento de venda e está em toda a comunicação.</li> <li>Função de "Hub" bem executada: O site consegue vender a marca "Le Ange" e, ao mesmo tempo, direcionar o cliente para a unidade que mais lhe agrada (Serra ou Mar).</li> <li>Quebra de Objeções: As regras claras (pets socializados, sem menores de 13 anos) qualificam o público e evitam frustrações.</li> <li>Forte Apelo Visual: O site usa fotos de alta qualidade que mesclam luxo (bangalôs, banheiras) com o lifestyle pet (cães na piscina, na cama).</li> <li>Foco na Reserva Direta: Múltiplos CTAs ("Fazer reserva!", "Central de Reservas") para capturar o cliente sem intermediários.</li> </ul>
+                `,
+        githubUrl: "https://github.com/alephsramos-dev",
+        popupBg: "#ffffff60",
+        popupBorder: "#ffffff80",
+        popupColor: "#ffffff",
+        siteBg: "#60b1eb20",
+        siteBorder: "#60b1eb20",
+        siteColor: "#60b1eb",
     },
 ];
 

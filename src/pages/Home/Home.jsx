@@ -143,7 +143,10 @@ const Assessment = styled.section`
                 position: relative;
                 border: 2px solid ${(props) => props.theme.colors.white[100]};
                 transition: all .2s ease-in-out;
-                filter: grayscale(40%);
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                object-position: center;
 
                     &:hover {
                         transform: translateY(-4px) rotate(-10deg);
@@ -273,7 +276,7 @@ export default function Home({
             <Container>
                 <BG></BG>
                 <Content>
-                    <Assessment>
+                    <Assessment data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                         <div className="avatars">
                             <ol className="list">
                                 {assessment.map((item, i) => (
@@ -301,12 +304,12 @@ export default function Home({
                             </div>
                         </aside>
                     </Assessment>
-                    <Texts>
+                    <Texts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">
                         <aside className="titles">
-                            <Title 
+                            <Title
                                 children="Desenvolvimento Web de alta performance"
                             />
-                            <Description 
+                            <Description
                                 children="Desenvolvimento de sites com foco em três pilares: velocidade, segurança e resultados de negócio."
                             />
                         </aside>

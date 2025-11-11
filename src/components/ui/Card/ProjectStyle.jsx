@@ -40,7 +40,7 @@ const Card = styled.div`
     ${props => props.$smooth && maskWith('2px')};
     ${props => props.$clip && css`clip-path: ${props.$clip};`}
     background-color: ${(props) => props.theme.colors.black[100]};
-    padding: 0;
+    padding-bottom: 6px;
     gap: 8px;
     cursor: pointer;
 `
@@ -127,6 +127,7 @@ const SiteType = styled.div`
 
     & p {
         font-size: 12px;
+        font-weight: 600;
     }
 `
 
@@ -153,8 +154,8 @@ const Company = styled.div`
             object-fit: contain;
 
             @media (max-width: 768px){
-                width: 26px;
-                height: 26px;
+                width: 32px;
+                height: 32px;
             }
         }
     }
@@ -165,7 +166,7 @@ const Company = styled.div`
         color: ${(props) => props.theme.colors.gray[400]};
 
         @media (max-width: 768px){
-            font-size: 14px;
+            font-size: 16px;
         }
     }
 `

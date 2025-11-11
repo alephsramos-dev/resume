@@ -4,7 +4,7 @@ import Description from "@/components/ui/texts/Description.jsx";
 import { useNavigate } from "react-router-dom";
 import Title from "@/components/ui/texts/Title.jsx";
 import React, { useRef, useState } from "react";
-import { Splide, SplideSlide} from '@splidejs/react-splide';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
@@ -256,25 +256,25 @@ export default function Projects() {
             <Container>
                 <Background></Background>
                 <Content>
-                    <Texts>
+                    <Texts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                         <div className="titles">
-                            <Badge 
+                            <Badge
                                 children="Projetos"
-                                icon={<AsteriskIcon weight="fill" />} 
-                                colorText="rgb(52, 199, 89)" 
-                                bgColor="rgba(52, 199, 89, 0.1)" 
+                                icon={<AsteriskIcon weight="fill" />}
+                                colorText="rgb(52, 199, 89)"
+                                bgColor="rgba(52, 199, 89, 0.1)"
                             />
-                            <Title 
+                            <Title
                                 children="Projetos utilizando as Tecnologias mais modernas"
                             />
                         </div>
                         <div className="description">
-                            <Description 
+                            <Description
                                 children="Aqui estão alguns dos meus projetos mais recentes, onde utilizei tecnologias modernas e avançadas."
                             />
                         </div>
                     </Texts>
-                    <Carrossel>
+                    <Carrossel data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">
                         <Splide
                             ref={splideRef}
                             options={{
@@ -288,24 +288,24 @@ export default function Projects() {
                                 width: '100%',
                                 autoWidth: false,
                                 breakpoints: {
-                                    1200: { 
-                                        perPage: 2, 
-                                        gap: '1.5rem' 
+                                    1200: {
+                                        perPage: 2,
+                                        gap: '1.5rem'
                                     },
-                                    900: { 
-                                        perPage: 1, 
-                                        gap: '1rem' 
+                                    900: {
+                                        perPage: 1,
+                                        gap: '1rem'
                                     },
-                                    600: { 
-                                        perPage: 1, 
-                                        gap: '0.5rem' 
+                                    600: {
+                                        perPage: 1,
+                                        gap: '0.5rem'
                                     },
                                 },
                             }}
                             onMove={() => handleSplideEvent(splideRef.current.splide)}
                             onDragged={() => handleSplideEvent(splideRef.current.splide)}
                             aria-label="Projetos"
-                            >
+                        >
                             {projects.map((proj, idx) => (
                                 proj === "custom-slide-9" ? (
                                     <SplideSlide key="custom-slide-9" style={{ width: '100%', minWidth: 0 }}>
@@ -316,8 +316,8 @@ export default function Projects() {
                                     </SplideSlide>
                                 ) : (
                                     <SplideSlide key={proj.nome + idx} style={{ width: '100%', minWidth: 0 }}>
-                                        <ProjectCard 
-                                            {...proj} 
+                                        <ProjectCard
+                                            {...proj}
                                             onClick={() => navigate(`/projetos/${proj.slug}`)}
                                         />
                                     </SplideSlide>
@@ -325,7 +325,7 @@ export default function Projects() {
                             ))}
                         </Splide>
                         <Navigation>
-                            <div style={{display: 'flex', justifyContent: 'center', width: 'auto',}}>
+                            <div style={{ display: 'flex', justifyContent: 'center', width: 'auto', }}>
                                 <CustomArrow onClick={handlePrev}><IoIosArrowBack /></CustomArrow>
                                 <CustomArrow onClick={handleNext}><IoIosArrowForward /></CustomArrow>
                             </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes, css } from "styled-components";
 import SidebarLinks from "@/components/ui/Badge/SidebarLinks";
+import ContactFormModal from "@/components/ui/Modal/ContactFormModal";
 import { AsteriskIcon, BoundingBoxIcon, BrowsersIcon, DevicesIcon, DevToLogoIcon, GitMergeIcon, MegaphoneIcon, MetaLogoIcon, TextAaIcon, TextboxIcon, UserIcon } from "@phosphor-icons/react/dist/ssr";
 import { rgba } from "polished";
 import { useLocation } from "react-router-dom";
@@ -42,8 +43,8 @@ const Content = styled.div`
     color: ${(props) => props.theme.colors.white[100]};
     z-index: 1000;
     animation: ${({ open }) => open
-      ? css`${fadeIn} 0.4s cubic-bezier(.68,-0.55,.27,1.55) forwards`
-      : css`${fadeOut} 0.3s ease forwards`};
+        ? css`${fadeIn} 0.4s cubic-bezier(.68,-0.55,.27,1.55) forwards`
+        : css`${fadeOut} 0.3s ease forwards`};
     pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
 
     @media (max-width: 768px) {
@@ -88,41 +89,48 @@ export default function Sidebar({ open, onClose }) {
     const currentPath = location.pathname;
 
     React.useEffect(() => {
-      if (!open) return;
-      const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
-      window.addEventListener('keydown', handleEsc);
-      return () => window.removeEventListener('keydown', handleEsc);
+        if (!open) return;
+        const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
+        window.addEventListener('keydown', handleEsc);
+        return () => window.removeEventListener('keydown', handleEsc);
     }, [open, onClose]);
 
     const handleOptionClick = React.useCallback(() => {
-      onClose();
+        onClose();
     }, [onClose]);
 
     return (
-      <>
-        <Backdrop open={open} onClick={onClose} />
-        <Content open={open}>
-            <Links onClickCapture={handleOptionClick}>
-                <h4>Conheça</h4>
-                <SidebarLinks 
+        <>
+            <Backdrop open={open} onClick={onClose} />
+            <Content open={open}>
+                <Links onClickCapture={handleOptionClick}>
+                    <h4>Conheça</h4>
+                    {/* <SidebarLinks 
                     icon={MegaphoneIcon}
                     textButton="Serviços"
                     colorText="rgb(203, 48, 224)"
                     bgColor="rgb(203, 48, 224, .1)"
-                    onClick={() => window.location.href = '/services'}
+                    // onClick={() => window.location.href = '/services'}
+                    onClick={() => {
+                            const anchor = document.getElementById('services');
+                            if (anchor) {
+                                anchor.scrollIntoView('');
+                            } 
+                        }
+                    }
                     isActive={currentPath === '/services'}
-                />
-                <SidebarLinks 
-                    icon={AsteriskIcon}
-                    textButton="Projetos"
-                    colorText="rgb(52, 199, 89)"
-                    bgColor="rgb(52, 199, 89, .1)"
-                    onClick={() => window.location.href = '/projetos'}
-                    isActive={currentPath === '/projetos'}
-                />
-                <Line />
-                <h4>Serviços</h4>
-                <SidebarLinks 
+                /> */}
+                    <SidebarLinks
+                        icon={AsteriskIcon}
+                        textButton="Projetos"
+                        colorText="rgb(52, 199, 89)"
+                        bgColor="rgb(52, 199, 89, .1)"
+                        onClick={() => window.location.href = '/projetos'}
+                        isActive={currentPath === '/projetos'}
+                    />
+                    <Line />
+                    {/* <h4>Serviços</h4> */}
+                    {/* <SidebarLinks 
                     icon={DevicesIcon}
                     textButton="Criar um site"
                     colorText="rgb(0, 200, 179)"
@@ -161,19 +169,25 @@ export default function Sidebar({ open, onClose }) {
                     bgColor="rgb(97, 85, 245, .1)"
                     onClick={() => window.location.href = '/servicos/copywriter'}
                     isActive={currentPath === '/servicos/copywriter'}
-                />
+                /> */}
+                    {/* <Line /> */}
+                    <h4>Fale comigo</h4>
+                    <ContactFormModal
+                        source="Sidebar - Contato"
+                        trigger={({ onClick }) => (
+                            <SidebarLinks
+                                icon={UserIcon}
+                                textButton="Falar comigo"
+                                colorText="rgb(255, 204, 0)"
+                                bgColor="rgb(255, 204, 0, .1)"
+                                onClick={onClick}
+                            />
+                        )}
+                    />
+                </Links>
                 <Line />
-                <h4>Fale comigo</h4>
-                <SidebarLinks 
-                    icon={UserIcon}
-                    textButton="Contato"
-                    colorText="rgb(255, 204, 0)"
-                    bgColor="rgb(255, 204, 0, .1)"
-                />
-            </Links>
-            <Line />
-            <span>Desenvolvido por Aleph</span>
-        </Content>
-      </>
+                <span>by @alephsramosdev</span>
+            </Content>
+        </>
     );
 }

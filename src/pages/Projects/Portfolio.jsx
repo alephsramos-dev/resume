@@ -1,11 +1,11 @@
 import ProjectStyle from "@/components/ui/Card/ProjectStyle";
 import Title from "@/components/ui/texts/Title";
 import React from "react";
-import styled from "styled-components"; 
+import styled from "styled-components";
 import { projects } from "@/database/ProjectData";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import 'swiper/css'; 
+import 'swiper/css';
 import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
@@ -22,7 +22,7 @@ const Container = styled.div`
     padding: 5% 0;
 
     @media (max-width: 768px){
-        gap: 14px;
+        gap: 0px;
         padding: 10% 0;
     }
 `;
@@ -87,21 +87,21 @@ export default function Portfolio() {
         <>
             <Container>
                 {siteTypes.map(type => (
-                    <Content key={type}>
+                    <Content key={type} data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                         {
                             projects.filter(project => project.siteType === type).length === 0 ?
-                            null : 
-                            <Header>
-                                <Title 
-                                    className="title"
-                                >
-                                    {type}
-                                </Title>
-                                <Control>
-                                    <div className="portfolio-button-prev"><MdKeyboardArrowLeft  /></div>
-                                    <div className="portfolio-button-next"><MdKeyboardArrowRight  /></div>
-                                </Control>
-                            </Header>
+                                null :
+                                <Header>
+                                    <Title
+                                        className="title"
+                                    >
+                                        {type}
+                                    </Title>
+                                    <Control>
+                                        <div className="portfolio-button-prev"><MdKeyboardArrowLeft /></div>
+                                        <div className="portfolio-button-next"><MdKeyboardArrowRight /></div>
+                                    </Control>
+                                </Header>
                         }
                         <Swiper
                             spaceBetween={16}
@@ -129,7 +129,7 @@ export default function Portfolio() {
                         </Swiper>
                     </Content>
                 ))}
-            </Container>        
+            </Container>
         </>
     )
 }

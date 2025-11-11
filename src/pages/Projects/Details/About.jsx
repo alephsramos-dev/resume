@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import Stack from "@/components/ui/Badge/Stack";
 import Bg from '@assets/patterns/bg.jpg'
 import mediumZoom from "medium-zoom";
+import { rgba } from "polished";
 
 const ZoomOverrideStyles = createGlobalStyle`
     .medium-zoom-overlay {
@@ -237,7 +238,7 @@ const Infos = styled.div`
         top: 0;
     }
     
-    & ul {
+    & .list {
         display: flex;
         align-items: flex-start;
         justify-content: center;
@@ -249,7 +250,46 @@ const Infos = styled.div`
             width: 100%;
         }
 
-        & > li {
+        & .timing {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 16px;
+            box-shadow: inset 0 -0.4px 0 0 #ffffff40;
+            padding-bottom: 16px;
+
+            @media (max-width: 768px){
+                padding-left: 0;
+            }
+
+            & h2 {
+                font-size: 16px;
+                font-weight: 600;
+                color: ${(props) => props.theme.colors.white[100]};
+            }
+
+            & p {
+                font-size: 16px;
+                font-weight: 300;
+                color: ${(props) => props.theme.colors.gray[300]};
+            }
+
+            & .badge-hours {
+                padding: 4px 12px;
+                border-radius: 24px;
+                font-size: 20px;
+                background: ${(props) => rgba(props.theme.colors.blue.basic, 0.2)};
+                border: 1px solid ${(props) => rgba(props.theme.colors.blue.basic, 0.3)};
+                
+                & h6 {
+                    font-weight: 300!important;
+                    color: ${(props) => props.theme.colors.blue.contrast}!important;
+                }
+            }
+        }
+
+        & .techs {
             font-size: 16px;
             font-weight: 300;
             color: #ffffff90;
@@ -271,7 +311,7 @@ const Infos = styled.div`
                 box-shadow: none;
             }
 
-            & strong {
+            & > strong {
                 color: #ffffff;
                 font-size: 16px;
                 font-weight: 600;
@@ -396,7 +436,7 @@ export default function ProjectDetailsAbout({ slug }) {
                     />
                 </FullscreenModal>
             )}
-            <Container>
+            <Container data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                 <Texts>
                     <aside>
                         <h2>Sobre o projeto <strong>/ {currentProject.title || "-"}</strong></h2>
@@ -407,10 +447,17 @@ export default function ProjectDetailsAbout({ slug }) {
                     />
                 </Texts>
                 <Infos>
-                    <ul>
-                        <li><strong>Tipo de projeto</strong> {currentProject.siteType || "-"}</li>
-                        <li><strong>Data / Duração</strong> {currentProject.date || "-"} / {currentProject.duration || "-"}h</li>
-                        <li><strong>Tecnologias</strong>
+                    <ul className="list">
+                        <div className="timing">
+                            <li>
+                                <h2>Tipo de projeto</h2>
+                                <p>{currentProject.siteType || "-"}</p>
+                            </li>
+                            <li className="badge-hours">
+                                <h6>{currentProject.date || "-"} | {currentProject.duration || "-"}h</h6>
+                            </li>
+                        </div>
+                        <li className="techs"><strong>Tecnologias</strong>
                             <ul>
                                 {(currentProject.stack || []).map((tech, i) => (
                                     <Stack
