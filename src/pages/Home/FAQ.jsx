@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { rgba } from "polished";
 
 import iconAleph from "/icon-black-aleph-desenvolvedor-web.svg";
+import { sendToSheet } from "@/lib/sendToSheet";
 
 const Container = styled.div`
     width: 100%;
@@ -230,6 +231,9 @@ const Doubts = styled.div`
 
 export default function FAQ() {
     const [openIndex, setOpenIndex] = React.useState(0);
+    const [sending, setSending] = React.useState(false);
+    const [message, setMessage] = React.useState("");
+    const [feedback, setFeedback] = React.useState(null);
     const faqs = [
         {
             q: "Quanto custa para desenvolver um site profissional?",
@@ -269,6 +273,42 @@ export default function FAQ() {
         setOpenIndex((current) => (next ? index : current === index ? null : current));
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!message?.trim() || sending) return;
+        setSending(true);
+        setFeedback(null);
+
+        const payload = {
+            type: "faq",
+            source: "FAQ Form",
+            message: message.trim(),
+            utm: (() => {
+                const p = new URLSearchParams(window.location.search);
+                const obj = {};
+                p.forEach((v, k) => {
+                    const key = k.toLowerCase();
+                    if (key.startsWith("utm_") || ["gclid", "msclkid", "fbclid"].includes(key)) obj[k] = v;
+                });
+                return obj;
+            })(),
+            page: typeof window !== "undefined" ? {
+                url: window.location.href,
+                title: document.title,
+                referrer: document.referrer || undefined
+            } : undefined
+        };
+
+        const result = await sendToSheet(payload);
+        if (result.ok) {
+            setFeedback({ type: "success", text: "Mensagem enviada! Vou te responder em breve." });
+            setMessage("");
+        } else {
+            setFeedback({ type: "error", text: "Não foi possível enviar agora. Tente novamente." });
+        }
+        setSending(false);
+    };
+
     return (
         <>
             <Container>
@@ -293,12 +333,27 @@ export default function FAQ() {
                                 <span>Aleph Developer <strong>atendimento</strong></span>
                             </aside>
                             <h2>Entre em contato diretamente comigo e tire sua dúvida agora mesmo!</h2>
-                            <form>
+                            <form onSubmit={handleSubmit}>
                                 <label htmlFor="message">Mensagem:
-                                    <input type="text" id="message" placeholder="Digite sua dúvida  " required />
+                                    <input
+                                        type="text"
+                                        id="message"
+                                        placeholder="Digite sua dúvida  "
+                                        required
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        disabled={sending}
+                                    />
                                 </label>
-                                <button type="submit">Enviar</button>
+                                <button type="submit" disabled={sending}>{sending ? "Enviando..." : "Enviar"}</button>
                             </form>
+                            {feedback ? (
+                                <small style={{
+                                    color: feedback.type === 'success' ? '#3bd671' : '#ff6b6b'
+                                }}>
+                                    {feedback.text}
+                                </small>
+                            ) : null}
                         </div>
                     </Texts>
                     <Doubts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">

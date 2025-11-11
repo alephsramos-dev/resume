@@ -5,6 +5,7 @@ import { rgba } from "polished";
 import { Controller, useForm } from "react-hook-form";
 import AlephIcon from "@assets/brands/aleph.svg?react";
 import { XIcon } from "@phosphor-icons/react/dist/ssr";
+import { sendToSheet } from "@/lib/sendToSheet";
 
 const Overlay = styled.div`
 	position: fixed;
@@ -207,7 +208,7 @@ const CheckboxRow = styled.label`
 		border-radius: 6px;
 		border: 1px solid ${(props) => rgba(props.theme.colors.gray[300], 0.45)};
 		background: ${(props) => rgba(props.theme.colors.gray[800] || "#0f0f0f", 0.6)};
-		accent-color: ${(props) =>  props.theme.colors.pink.basic};
+		accent-color: ${(props) => props.theme.colors.pink.basic};
 		appearance: none;
 		display: grid;
 		place-content: center;
@@ -216,7 +217,7 @@ const CheckboxRow = styled.label`
 
             &:focus {
                 outline: none;
-                box-shadow: 0 0 0 3px ${(props) => rgba( props.theme.colors.pink.basic, 0.25)};
+                box-shadow: 0 0 0 3px ${(props) => rgba(props.theme.colors.pink.basic, 0.25)};
             }
 
             &::before {
@@ -226,12 +227,12 @@ const CheckboxRow = styled.label`
                 border-radius: 3px;
                 transform: scale(0);
                 transition: transform 0.18s ease;
-                background: ${(props) =>  props.theme.colors.pink.basic};
+                background: ${(props) => props.theme.colors.pink.basic};
             }
 
             &:checked {
-                border-color: ${(props) => rgba( props.theme.colors.pink.basic, 0.9)};
-                background: ${(props) => rgba( props.theme.colors.pink.basic, 0.2)};
+                border-color: ${(props) => rgba(props.theme.colors.pink.basic, 0.9)};
+                background: ${(props) => rgba(props.theme.colors.pink.basic, 0.2)};
             }
 
             &:checked::before {
@@ -269,7 +270,7 @@ const SubmitButton = styled.button`
 	font-size: 15px;
 	font-weight: ${(props) => props.theme.fontWeights.medium};
 	cursor: pointer;
-	background: ${(props) =>  props.theme.colors.pink.basic};
+	background: ${(props) => props.theme.colors.pink.basic};
 	color: ${(props) => props.theme.colors.gray[900] || "#0a0a0a"};
 	transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 
@@ -377,29 +378,7 @@ function formatPhoneToE164(value = "") {
 }
 
 function buildWhatsappMessage(payload) {
-    const lines = [
-        `Novo contato via ${payload.source || "formulário"}`,
-        `Nome: ${payload.name}`,
-        `Telefone: ${payload.phone}`
-    ];
-
-    if (payload.page?.url) {
-        lines.push(`Página: ${payload.page.url}`);
-    }
-
-    if (payload.page?.referrer) {
-        lines.push(`Origem: ${payload.page.referrer}`);
-    }
-
-    const utmEntries = Object.entries(payload.utm || {});
-    if (utmEntries.length) {
-        lines.push("UTMs:");
-        utmEntries.forEach(([key, value]) => {
-            lines.push(` - ${key}: ${value}`);
-        });
-    }
-
-    return encodeURIComponent(lines.join("\n"));
+    return encodeURIComponent("Olá, vim do seu site, gostaria de solicitar um orçamento!");
 }
 
 export default function ContactFormModal({
@@ -508,13 +487,15 @@ export default function ContactFormModal({
     }, [toggleBodyScroll]);
 
     const onSubmit = useCallback(
-        (formValues) => {
+        async (formValues) => {
             const phone = formatPhoneToE164(formValues.phone);
 
             const payload = {
+                type: "modal",
                 source,
                 name: formValues.name.trim(),
                 phone,
+                agree: formValues.agree || false,
                 utm: utmData,
                 page: typeof window !== "undefined"
                     ? {
@@ -524,6 +505,11 @@ export default function ContactFormModal({
                     }
                     : undefined
             };
+
+            // Envia para Google Sheets (não bloquear fluxo caso falhe)
+            sendToSheet(payload).catch(err => {
+                console.warn('[ContactFormModal] Falha ao enviar para Sheets', err);
+            });
 
             const message = buildWhatsappMessage(payload);
             const whatsappUrl = `https://wa.me/5524981411940?text=${message}`;
@@ -598,6 +584,8 @@ export default function ContactFormModal({
                         />
                         {errors.name?.message ? <ErrorText>{errors.name.message}</ErrorText> : null}
                     </Fieldset>
+
+                    {/* Email removido por solicitação */}
 
                     <Fieldset>
                         <span>Telefone</span>
