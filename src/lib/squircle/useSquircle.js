@@ -30,7 +30,9 @@ export function useSquircle({ radius = 16, smoothness = 0.8 } = {}) {
     window.addEventListener('resize', update);
 
     return () => {
-      try { ro.disconnect(); } catch {}
+      try { ro.disconnect(); } catch (error) {
+        console.warn('[useSquircle] ResizeObserver cleanup falhou', error);
+      }
       window.removeEventListener('resize', update);
     };
   }, [radius, smoothness]);

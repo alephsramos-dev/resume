@@ -89,7 +89,9 @@ async function tryNoCors(endpoint, enriched) {
             const ok = navigator.sendBeacon(endpoint, blob);
             if (ok) return { ok: true, status: 0, data: { mode: 'beacon' } };
         }
-    } catch (_) { }
+    } catch (error) {
+        console.warn('[sendToSheet] navigator.sendBeacon falhou, tentando fallback', error);
+    }
 
     // 2) Fallback para fetch no-cors (resposta será opaca e não legível, mas o servidor recebe)
     try {
@@ -137,10 +139,13 @@ export async function sendToSheet(payload, { signal } = {}) {
         const fallback = await tryNoCors(endpoint, enriched);
         return fallback;
     } catch (error) {
+        console.warn('[sendToSheet] Erro no POST JSON, tentando fallback', error);
         const fallback = await tryNoCors(endpoint, enriched);
         return fallback;
     }
-}// Exemplo de estrutura esperada pelo Apps Script:
+}
+
+// Exemplo de estrutura esperada pelo Apps Script:
 // function doPost(e) {
 //   const sheet = SpreadsheetApp.getActive().getSheetByName('Leads');
 //   const data = JSON.parse(e.postData.contents);

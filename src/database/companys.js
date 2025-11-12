@@ -51,16 +51,6 @@ const companies = {
         slug: "rio-flex",
         image: rioflex,
     },
-    "fast-obras": {
-        name: "Fast Obras",
-        slug: "fast-obras",
-        image: fastobras,
-    },
-    "rio-flex": {
-        name: "Rio Flex",
-        slug: "rio-flex",
-        image: rioflex,
-    },
     "eu-yago-lopes": {
         name: "euYagoLopes",
         slug: "eu-yago-lopes",
@@ -75,11 +65,6 @@ const companies = {
         name: "Eco Frame",
         slug: "eco-frame",
         image: ecoframe,
-    },
-    "steel-conecta": {
-        name: "Steel Conecta",
-        slug: "steel-conecta",
-        image: steelconecta,
     },
 };
 

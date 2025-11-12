@@ -1,22 +1,10 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 // import { useMemo } from "react";
 // import projects from "@/database/ProjectData";
 import Title from "@/components/ui/texts/Title";
 import ContactFormModal from "@/components/ui/Modal/ContactFormModal";
 import { ArrowRightIcon, ArrowUpIcon, ArrowUpRightIcon, AsteriskIcon, GiftIcon } from "@phosphor-icons/react/dist/ssr";
 import { rgba } from "polished";
-
-const gradientFlow = keyframes`
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-`;
 
 const Container = styled.div`
     width: auto;

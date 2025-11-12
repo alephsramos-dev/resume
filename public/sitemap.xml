@@ -6,40 +6,110 @@
   
   <!-- Página Principal -->
   <url>
-    <loc>https://your-domain.com/</loc>
-    <lastmod>2025-10-07</lastmod>
+    <loc>https://www.alephsramosdev.com.br/</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Projetos -->
+
+  <!-- Páginas Institucionais -->
   <url>
-    <loc>https://your-domain.com/projects</loc>
-    <lastmod>2025-10-07</lastmod>
+    <loc>https://www.alephsramosdev.com.br/curriculo</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
+
   <!-- Serviços -->
   <url>
-    <loc>https://your-domain.com/services</loc>
-    <lastmod>2025-10-07</lastmod>
+    <loc>https://www.alephsramosdev.com.br/servicos/criacao-de-sites</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Currículo -->
   <url>
-    <loc>https://your-domain.com/resume</loc>
-    <lastmod>2025-10-07</lastmod>
+    <loc>https://www.alephsramosdev.com.br/servicos/automacao</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Contato -->
   <url>
-    <loc>https://your-domain.com/contact</loc>
-    <lastmod>2025-10-07</lastmod>
+    <loc>https://www.alephsramosdev.com.br/servicos/trafego-pago</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/servicos/design</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/servicos/copywriter</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Detalhes dos Projetos -->
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/euyagolopes</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/kdea-construtora</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/chales-fast-homes</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/pisos-vinilicos-fast</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/steel-conecta</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/lp-pousada-le-ange</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/nova-metalica</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/fast-homes</loc>
+    <lastmod>2025-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alephsramosdev.com.br/projetos/pousada-le-ange</loc>
+    <lastmod>2025-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

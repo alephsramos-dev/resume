@@ -408,7 +408,23 @@ function formatPhoneToE164(value = "") {
 }
 
 function buildWhatsappMessage(payload) {
-    return encodeURIComponent("Olá, vim do seu site, gostaria de solicitar um orçamento!");
+    const segments = [
+        "Olá, vim do seu site e gostaria de solicitar um orçamento!",
+    ];
+
+    if (payload?.name) {
+        segments.push(`Meu nome é ${payload.name}.`);
+    }
+
+    if (payload?.page?.url) {
+        segments.push(`Estou vendo a página ${payload.page.url}.`);
+    }
+
+    if (payload?.utm?.source) {
+        segments.push(`Origem: ${payload.utm.source}.`);
+    }
+
+    return encodeURIComponent(segments.join(' '));
 }
 
 export default function ContactFormModal({

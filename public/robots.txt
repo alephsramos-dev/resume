@@ -71,7 +71,7 @@ User-agent: Bytespider
 Allow: /
 
 # Sitemap
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://www.alephsramosdev.com.br/sitemap.xml
 
 # Crawl-delay para não sobrecarregar o servidor
 Crawl-delay: 1
