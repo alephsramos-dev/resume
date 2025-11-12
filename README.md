@@ -18,17 +18,19 @@ Os formulários do FAQ e do modal foram integrados para enviar os dados para uma
 	  const data = JSON.parse(e.postData.contents);
 	  sheet.appendRow([
 		 new Date(),
-		 data.type,
-		 data.source,
-		 data.name,
-		 data.phone,
-		 data.message,
-		 JSON.stringify(data.utm || {}),
-		 data.page?.url,
-		 data.page?.title,
-		 data.page?.referrer,
-		 data._meta?.userAgent,
-		 data._meta?.language
+		 data.nome,
+		 data.email,
+		 data.telefone,
+		 data.utm_source,
+		 data.utm_content,
+		 data.utm_medium,
+		 data.utm_term,
+		 data.utm_campaign,
+		 data.page_url,
+		 data.page_path,
+		 data.device,
+		 data.form_name,
+		 data.message
 	  ]);
 	  return ContentService.createTextOutput(JSON.stringify({ success: true }))
 		 .setMimeType(ContentService.MimeType.JSON);

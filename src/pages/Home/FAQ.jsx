@@ -299,7 +299,10 @@ export default function FAQ() {
             } : undefined
         };
 
+        console.log('[FAQ] Enviando para Sheets...', payload);
         const result = await sendToSheet(payload);
+        console.log('[FAQ] Resultado:', result);
+
         if (result.ok) {
             setFeedback({ type: "success", text: "Mensagem enviada! Vou te responder em breve." });
             setMessage("");

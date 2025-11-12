@@ -267,12 +267,13 @@ const SubmitButton = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	gap: 8px;
 	font-size: 15px;
 	font-weight: ${(props) => props.theme.fontWeights.medium};
 	cursor: pointer;
 	background: ${(props) => props.theme.colors.pink.basic};
 	color: ${(props) => props.theme.colors.gray[900] || "#0a0a0a"};
-	transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, background 0.3s ease;
 
 	&:hover {
 		transform: translateY(-1px);
@@ -284,6 +285,35 @@ const SubmitButton = styled.button`
 		cursor: not-allowed;
 		transform: none;
 		box-shadow: none;
+	}
+
+	&[data-success="true"] {
+		background: #3bd671;
+	}
+
+	.spinner {
+		width: 16px;
+		height: 16px;
+		border: 2px solid ${(props) => props.theme.colors.gray[900]};
+		border-top-color: transparent;
+		border-radius: 50%;
+		animation: spin 0.6s linear infinite;
+	}
+
+	.check {
+		width: 20px;
+		height: 20px;
+		animation: checkScale 0.3s ease;
+	}
+
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+
+	@keyframes checkScale {
+		0% { transform: scale(0); }
+		50% { transform: scale(1.2); }
+		100% { transform: scale(1); }
 	}
 `;
 
@@ -390,6 +420,7 @@ export default function ContactFormModal({
 }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
     const utmData = useMemo(() => parseUtmParams(), []);
     const previousOverflow = useRef();
     const closeTimerRef = useRef();
@@ -506,15 +537,22 @@ export default function ContactFormModal({
                     : undefined
             };
 
-            // Envia para Google Sheets (não bloquear fluxo caso falhe)
-            sendToSheet(payload).catch(err => {
-                console.warn('[ContactFormModal] Falha ao enviar para Sheets', err);
-            });
+            // Envia para Google Sheets ANTES do redirect
+            console.log('[ContactFormModal] Enviando para Sheets...', payload);
+            await sendToSheet(payload);
+            console.log('[ContactFormModal] Enviado!');
+
+            // Mostra check de sucesso
+            setSubmitSuccess(true);
+
+            // Aguarda 800ms para mostrar o feedback visual
+            await new Promise(resolve => setTimeout(resolve, 800));
 
             const message = buildWhatsappMessage(payload);
             const whatsappUrl = `https://wa.me/5524981411940?text=${message}`;
 
             closeModal();
+            setSubmitSuccess(false);
 
             if (typeof window !== "undefined") {
                 window.location.href = whatsappUrl;
@@ -634,8 +672,22 @@ export default function ContactFormModal({
                     </CheckboxRow>
                     {errors.agree?.message ? <ErrorText>{errors.agree.message}</ErrorText> : null}
 
-                    <SubmitButton type="submit" disabled={!isValid || isSubmitting}>
-                        Entrar em contato
+                    <SubmitButton type="submit" disabled={!isValid || isSubmitting} data-success={submitSuccess}>
+                        {isSubmitting && !submitSuccess && (
+                            <>
+                                <div className="spinner" />
+                                Enviando...
+                            </>
+                        )}
+                        {submitSuccess && (
+                            <>
+                                <svg className="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Enviado!
+                            </>
+                        )}
+                        {!isSubmitting && !submitSuccess && "Entrar em contato"}
                     </SubmitButton>
                 </Form>
             </Container>

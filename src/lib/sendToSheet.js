@@ -1,6 +1,24 @@
 // Utilitário para envio de dados para Google Sheets via Apps Script
 // Configure no .env: VITE_GOOGLE_SHEETS_ENDPOINT=https://script.google.com/macros/s/SEU_ID/exec
 
+function getDeviceType() {
+    if (typeof navigator === 'undefined') return 'desktop';
+
+    const ua = navigator.userAgent.toLowerCase();
+
+    // Detecta tablets
+    if (/(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(ua)) {
+        return 'tablet';
+    }
+
+    // Detecta mobile
+    if (/mobile|ip(hone|od)|android.+mobile|blackberry|iemobile|opera mini|webos/.test(ua)) {
+        return 'mobile';
+    }
+
+    return 'desktop';
+}
+
 function normalizeForSheet(payload = {}) {
     const utm = payload.utm || {};
     const page = payload.page || (typeof window !== 'undefined' ? {
@@ -11,6 +29,7 @@ function normalizeForSheet(payload = {}) {
     } : undefined);
 
     const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : undefined;
+    const deviceType = getDeviceType();
 
     // Normaliza campos para combinar com o cabeçalho da planilha do anexo (nome, email, telefone, utm_*, page_*, device, form_name)
     const normalized = {
@@ -18,20 +37,21 @@ function normalizeForSheet(payload = {}) {
         ...payload,
 
         // Campos normalizados (mantém ambos para flexibilidade do Apps Script)
-        nome: payload.nome || payload.name || "",
-        email: payload.email || "",
-        telefone: payload.telefone || payload.phone || "",
+        nome: payload.nome || payload.name || "-",
+        email: payload.email || "-",
+        telefone: payload.telefone || payload.phone || "-",
 
-        utm_source: utm.utm_source || utm.source || "",
-        utm_content: utm.utm_content || utm.content || "",
-        utm_medium: utm.utm_medium || utm.medium || "",
-        utm_term: utm.utm_term || utm.term || "",
-        utm_campaign: utm.utm_campaign || utm.campaign || "",
+        utm_source: utm.utm_source || utm.source || "Organico",
+        utm_content: utm.utm_content || utm.content || "-",
+        utm_medium: utm.utm_medium || utm.medium || "-",
+        utm_term: utm.utm_term || utm.term || "-",
+        utm_campaign: utm.utm_campaign || utm.campaign || "-",
 
-        page_url: page?.url || "",
-        page_path: page?.path || (page?.url ? new URL(page.url).pathname : ""),
-        device: userAgent || "",
-        form_name: payload.form_name || payload.source || payload.type || "",
+        page_url: page?.url || "-",
+        page_path: page?.path || (page?.url ? new URL(page.url).pathname : "-"),
+        device: deviceType,
+        form_name: payload.form_name || payload.source || payload.type || "-",
+        message: payload.message || "-",
     };
 
     return {
@@ -97,30 +117,30 @@ export async function sendToSheet(payload, { signal } = {}) {
 
     const enriched = normalizeForSheet(payload);
 
+    // Log para debug
+    console.log('[sendToSheet] Enviando payload:', enriched);
+    console.log('[sendToSheet] Endpoint:', endpoint);
+
     const isAppsScript = /script\.google\.com/.test(endpoint);
-    const isLocalhost = typeof window !== 'undefined' && /localhost|127\.0\.0\.1/.test(window.location.hostname);
-    const preferNoCors = isAppsScript && isLocalhost; // Evita preflight e erros ruidosos em dev
 
+    // Para Google Apps Script, sempre usa no-cors/beacon para evitar problemas de CORS
+    if (isAppsScript) {
+        const result = await tryNoCors(endpoint, enriched);
+        console.log('[sendToSheet] Resultado:', result);
+        return result;
+    }
+
+    // Para outros endpoints, tenta JSON normal primeiro
     try {
-        if (preferNoCors) {
-            // Em dev + Apps Script, use direto o caminho sem CORS para evitar erro no console
-            return await tryNoCors(endpoint, enriched);
-        }
-
-        // Tenta primeiro JSON normal (se o servidor expor CORS)
         const primary = await tryJsonPost(endpoint, enriched, { signal });
         if (primary.ok) return primary;
-        // Se não ok (ou sem CORS), cai para fallback silencioso
         const fallback = await tryNoCors(endpoint, enriched);
         return fallback;
     } catch (error) {
-        // Normalmente aqui pega erro de CORS/TypeError: Failed to fetch; usa fallback
         const fallback = await tryNoCors(endpoint, enriched);
         return fallback;
     }
-}
-
-// Exemplo de estrutura esperada pelo Apps Script:
+}// Exemplo de estrutura esperada pelo Apps Script:
 // function doPost(e) {
 //   const sheet = SpreadsheetApp.getActive().getSheetByName('Leads');
 //   const data = JSON.parse(e.postData.contents);
