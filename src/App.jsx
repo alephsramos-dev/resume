@@ -14,7 +14,6 @@ import Project from '@/pages/Projects/All'
 import ProjectDetails from './pages/Projects/ProjectDetails'
 import Developing from './components/template/developing'
 
-// ScrollToTop Component
 function ScrollToTop() {
   const { pathname } = useLocation();
 
