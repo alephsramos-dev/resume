@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styled, { css } from "styled-components";
 import { rgba } from "polished";
@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import AlephIcon from "@assets/brands/aleph.svg?react";
 import { XIcon } from "@phosphor-icons/react/dist/ssr";
 import { sendToSheet } from "@/lib/sendToSheet";
+import { usePersistedQueryParams } from "@/contexts/UtmContext.jsx";
 
 const Overlay = styled.div`
 	position: fixed;
@@ -338,28 +339,6 @@ const TriggerButton = styled.button`
 	}
 `;
 
-function parseUtmParams() {
-    if (typeof window === "undefined") {
-        return {};
-    }
-
-    const params = new URLSearchParams(window.location.search);
-    const allowedKeys = new Set(["gclid", "msclkid", "fbclid"]);
-
-    const collected = {};
-    params.forEach((value, key) => {
-        const normalizedKey = key.toLowerCase();
-        if (normalizedKey.startsWith("utm_")) {
-            collected[key] = value;
-        }
-        if (allowedKeys.has(normalizedKey)) {
-            collected[key] = value;
-        }
-    });
-
-    return collected;
-}
-
 function normalizeDigits(value = "") {
     return value.replace(/\D/g, "");
 }
@@ -437,7 +416,7 @@ export default function ContactFormModal({
     const [isOpen, setIsOpen] = useState(false);
     const [isAnimatingOut, setIsAnimatingOut] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
-    const utmData = useMemo(() => parseUtmParams(), []);
+    const { params: utmData } = usePersistedQueryParams();
     const previousOverflow = useRef();
     const closeTimerRef = useRef();
 

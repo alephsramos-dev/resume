@@ -13,6 +13,7 @@ import Curriculo from '@/pages/Resume/All'
 import Project from '@/pages/Projects/All'
 import ProjectDetails from './pages/Projects/ProjectDetails'
 import Developing from './components/template/developing'
+import { UtmProvider } from '@/contexts/UtmContext.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -51,10 +52,12 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Header />
-      <AnimatedRoutes />
-      <Footer />
+      <UtmProvider>
+        <ScrollToTop />
+        <Header />
+        <AnimatedRoutes />
+        <Footer />
+      </UtmProvider>
     </BrowserRouter>
   )
 }

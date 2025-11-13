@@ -1,6 +1,5 @@
 import styled from "styled-components";
 // import { useMemo } from "react";
-// import projects from "@/database/ProjectData";
 import Title from "@/components/ui/texts/Title";
 import ContactFormModal from "@/components/ui/Modal/ContactFormModal";
 import { ArrowRightIcon, ArrowUpIcon, ArrowUpRightIcon, AsteriskIcon, GiftIcon } from "@phosphor-icons/react/dist/ssr";
