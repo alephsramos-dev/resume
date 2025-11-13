@@ -4,8 +4,7 @@ import { rgba } from 'polished';
 import ChatNowButton from '@/components/ui/Button/Chat';
 
 import { IoStarSharp } from "react-icons/io5";
-
-import assessment from '@/db/assessment.json';
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 import Title from "@/components/ui/texts/Title";
 import Description from "@/components/ui/texts/Description";
@@ -270,6 +269,9 @@ export default function Home({
     clientsSatisfied = 119,
     averageRating = "4.9"
 }) {
+    const { assessments: assessmentsData = [], loading } = useSupabaseData();
+    const assessmentItems = assessmentsData ?? [];
+    const isLoading = loading?.assessments;
 
     return (
         <>
@@ -279,8 +281,8 @@ export default function Home({
                     <Assessment data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
                         <div className="avatars">
                             <ol className="list">
-                                {assessment.map((item, i) => (
-                                    <li key={i} className="item">
+                                {!isLoading && assessmentItems.map((item, i) => (
+                                    <li key={item.id ?? i} className="item">
                                         <img src={item.image} alt={item.alt} width={50} height={50} />
                                         <div className="info">
                                             <span>{item.name}</span>

@@ -1,13 +1,12 @@
-import Description from "@/components/ui/texts/Description";
 import Title from "@/components/ui/texts/Title";
 import styled from "styled-components";
 
 import logoAleph from "/icon-black-aleph-desenvolvedor-web.svg";
 
-import projects from "@/database/ProjectData";
 import { useMemo } from "react";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { AiOutlineExpand } from "react-icons/ai";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const Container = styled.div`
     width: 100%;
@@ -231,15 +230,29 @@ const Infos = styled.div`
             font-size: 14px;        
         }
     }
+
+    & button[disabled] {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
 `
 
 export default function ProjectDetailsHero({
     slug,
 }) {
+    const { projects: projectsData = [], loading } = useSupabaseData();
+    const isLoading = loading?.projects;
 
     const currentProject = useMemo(() => {
-        return projects.find(project => project.slug === slug);
-    }, [slug]);
+        return (projectsData ?? []).find(project => project.slug === slug);
+    }, [projectsData, slug]);
+
+    if (isLoading || !currentProject) {
+        return null;
+    }
+
+    const hasUrl = Boolean(currentProject.urlPage);
 
     return (
         <>
@@ -253,7 +266,7 @@ export default function ProjectDetailsHero({
                         <span>by Aleph</span>
                     </Company>
                     <Texts>
-                        <Title clasasName="title">
+                        <Title className="title">
                             {currentProject.title}
                         </Title>
                         <span>{currentProject.date} / © Todos os direitos reservados / <strong>{currentProject.companyName}</strong></span>
@@ -263,7 +276,10 @@ export default function ProjectDetailsHero({
                     <Infos>
                         <div>
                             <span><strong>/</strong> {currentProject.urlPage || "URL é privada"}</span>
-                            <button onClick={() => window.open(currentProject.urlPage, '_blank', 'noopener,noreferrer')}>
+                            <button
+                                disabled={!hasUrl}
+                                onClick={() => hasUrl && window.open(currentProject.urlPage, '_blank', 'noopener,noreferrer')}
+                            >
                                 <LuSquareArrowOutUpRight />
                             </button>
                         </div>

@@ -3,12 +3,20 @@ import BeneficioCard from "@/components/ui/Card/Benefits";
 import Description from "@/components/ui/texts/Description";
 import Title from "@/components/ui/texts/Title";
 import React from "react";
-import { TbMichelinStar } from "react-icons/tb";
 import styled from "styled-components";
-
-import benefits from "@/db/benefits.js";
 import { rgba } from "polished";
-import { Clover, SealCheckIcon } from "@phosphor-icons/react/dist/ssr";
+import {
+    GaugeIcon,
+    SketchLogoIcon,
+    UserFocusIcon,
+    ShieldStarIcon,
+    TrendUpIcon,
+    BrowsersIcon,
+    GitMergeIcon,
+    HeadsetIcon,
+    SealCheckIcon,
+} from "@phosphor-icons/react/dist/ssr";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const Container = styled.div`
     width: 100%;
@@ -148,9 +156,25 @@ const CardsGrid = styled.div`
            }
        }
 `;
-
+const ICON_MAP = {
+    GaugeIcon,
+    SketchLogoIcon,
+    UserFocusIcon,
+    ShieldStarIcon,
+    TrendUpIcon,
+    BrowsersIcon,
+    GitMergeIcon,
+    HeadsetIcon,
+};
 
 export default function Benefits() {
+    const { benefits: benefitsData = [], loading } = useSupabaseData();
+    const isLoading = loading?.benefits;
+    const resolvedBenefits = (benefitsData ?? []).map((item) => ({
+        ...item,
+        Icon: ICON_MAP[item.iconName] ?? GaugeIcon,
+    }));
+
     return (
         <Container>
             <Content>
@@ -174,12 +198,12 @@ export default function Benefits() {
                 </Texts>
                 <BeneficiosContent data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">
                     <CardsGrid>
-                        {benefits.map((i) => (
+                        {!isLoading && resolvedBenefits.map((benefit) => (
                             <BeneficioCard
-                                key={i.title}
-                                icon={i.icon}
-                                title={i.title}
-                                description={i.description}
+                                key={benefit.id ?? benefit.title}
+                                icon={benefit.Icon}
+                                title={benefit.title}
+                                description={benefit.description}
                             />
                         ))}
                     </CardsGrid>

@@ -5,7 +5,7 @@ import React from "react";
 import styled from "styled-components";
 import { MegaphoneIcon } from "@phosphor-icons/react/dist/ssr";
 
-import services from '@/database/services';
+import { useSupabaseData } from '@/contexts/SupabaseDataContext';
 
 const Container = styled.div`
     width: 100%;
@@ -103,31 +103,35 @@ const Grid = styled.div`
     flex-wrap: wrap;
 `
 
-export default function Services () {
+export default function Services() {
+    const { services, loading } = useSupabaseData();
+    const serviceItems = services ?? [];
+    const isLoading = loading?.services;
+
     return (
         <>
             <Container id="services">
                 <Background></Background>
                 <Content>
-                     <Texts>
+                    <Texts>
                         <div>
                             <Title
                                 children="Bem-vindo à melhor maneira de criar o melhor pro seu negócio."
                             />
                         </div>
                         <div>
-                            <Badge 
+                            <Badge
                                 children="Serviços"
-                                icon={<MegaphoneIcon weight="fill" />} 
-                                bgColor="rgba(203, 48, 224, 0.1)" 
-                                colorText="rgb(203, 48, 224)" 
+                                icon={<MegaphoneIcon weight="fill" />}
+                                bgColor="rgba(203, 48, 224, 0.1)"
+                                colorText="rgb(203, 48, 224)"
                             />
                         </div>
                     </Texts>
                     <Grid>
-                        {services.map((service, i) => (
+                        {!isLoading && serviceItems.map((service) => (
                             <ServiceCard
-                                key={i}
+                                key={service.id ?? service.slug}
                                 width={service.width}
                                 image={service.image}
                                 name={service.name}

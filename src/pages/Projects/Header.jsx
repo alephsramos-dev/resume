@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Background from '@assets/patterns/bg.jpg';
-import StackData from "@/database/StackData.json";
 
 const Container = styled.div`
     width: 100%;

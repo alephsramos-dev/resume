@@ -5,6 +5,19 @@ import Title from "../texts/Title";
 import Description from "../texts/Description";
 import { rgba } from "polished";
 
+const resolveBorderColor = ($colorBorder, theme) => {
+    if (typeof $colorBorder === 'function') {
+        try {
+            return $colorBorder({ theme });
+        } catch (error) {
+            console.warn('[ServiceCard] Failed to resolve color border function.', error);
+            return 'transparent';
+        }
+    }
+
+    return $colorBorder || 'transparent';
+};
+
 const Container = styled.main`
     display: flex;
     flex-direction: column;
@@ -20,7 +33,7 @@ const Container = styled.main`
     transition: all 0.3s ease;
 
     &:hover {
-        border-color: ${({$colorBorder}) => $colorBorder || 'transparent'};
+        border-color: ${({ $colorBorder, theme }) => resolveBorderColor($colorBorder, theme)};
     }
 
     @media (max-width: 768px){
@@ -209,12 +222,12 @@ export default function ServiceCard({
 }) {
     return (
         <>
-            <Container width={width} $colorBorder={colorBorder}> 
+            <Container width={width} $colorBorder={colorBorder}>
                 <ImageBg>
                     <img src={image} alt={name} loading="lazy" />
                 </ImageBg>
                 <Texts>
-                    <Title 
+                    <Title
                         children={name}
                     />
                     {/* <Description 

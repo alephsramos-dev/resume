@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
 import Technology from "../Badge/Technology";
 import { FaGithub } from "react-icons/fa";
-import { techIcons } from "@/db/TechIcons";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { useSquircle } from "@/lib/squircle/useSquircle";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 // Smooth corner helper using CSS masks (progressive enhancement)
 const maskWith = (r) => css`
@@ -321,6 +321,8 @@ export default function ProjectStyle({
     const siteTypeSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
     const logoBoxSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
     const buttonSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
+    const { techIcons: techIconsContext = {} } = useSupabaseData();
+    const techIconMap = useMemo(() => techIconsContext ?? {}, [techIconsContext]);
 
     const logoSrc = typeof imageCompanyUrl === 'string'
         ? imageCompanyUrl
@@ -369,11 +371,27 @@ export default function ProjectStyle({
                         </Company>
                     </div>
                     <Stack>
-                        {tecnologias.slice(0, 3).map((tec, idx) => (
-                            <li key={tec + idx} style={{ display: 'inline-block' }}>
-                                {techIcons[tec.toLowerCase()] || tec}
-                            </li>
-                        ))}
+                        {tecnologias.slice(0, 3).map((tec, idx) => {
+                            const key = typeof tec === 'string' ? tec.toLowerCase() : `tech-${idx}`;
+                            const icon = techIconMap[key];
+
+                            return (
+                                <li key={`${key}-${idx}`} style={{ display: 'inline-block' }}>
+                                    {icon ? (
+                                        <img
+                                            src={icon.src}
+                                            alt={icon.alt}
+                                            title={icon.title}
+                                            width={icon.width ?? 18}
+                                            height={icon.height ?? 18}
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        tec
+                                    )}
+                                </li>
+                            );
+                        })}
                     </Stack>
                 </Infos>
                 <Texts>

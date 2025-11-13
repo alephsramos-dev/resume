@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useMemo } from "react";
-import projects from "@/database/ProjectData";
 import ProjectStyle from "@/components/ui/Card/ProjectStyle";
 import Title from "@/components/ui/texts/Title";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 
 const Container = styled.div`
@@ -77,12 +77,25 @@ const Control = styled.div`
 export default function ProjectDetailsExplore({
     slug
 }) {
+    const { projects: projectsData = [], loading } = useSupabaseData();
+    const isLoading = loading?.projects;
 
     const currentProject = useMemo(() => {
-        return projects.find(project => project.slug === slug)
-    }, [slug]);
+        return (projectsData ?? []).find(project => project.slug === slug);
+    }, [projectsData, slug]);
 
-    const siteType = currentProject.siteType;
+    const relatedProjects = useMemo(() => {
+        if (!currentProject) {
+            return [];
+        }
+
+        const siteType = currentProject.siteType;
+        return (projectsData ?? []).filter((project) => project.siteType === siteType && project.slug !== slug);
+    }, [currentProject, projectsData, slug]);
+
+    if (isLoading || !currentProject) {
+        return null;
+    }
 
     return (
         <>
@@ -113,8 +126,8 @@ export default function ProjectDetailsExplore({
                         }}
                         style={{ width: '100%' }}
                     >
-                        {projects.filter(project => project.siteType === siteType && project.slug !== slug).map(project => (
-                            <SwiperSlide key={project.title}>
+                        {relatedProjects.map((project) => (
+                            <SwiperSlide key={project.slug ?? project.id ?? project.title}>
                                 <ProjectStyle
                                     {...project}
                                 />

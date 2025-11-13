@@ -68,38 +68,38 @@ export default defineConfig(({ mode }) => {
       }),
       ...(isProduction
         ? [
-            Sitemap({
-              hostname,
-              readable: true,
-              dynamicRoutes,
-              generateRobotsTxt: false,
-              changefreq: sitemapChangefreq,
-              priority: sitemapPriority,
-              lastmod: new Date(),
-            }),
-            ViteImageOptimizer({
-              svg: {
-                multipass: true,
-              },
-              png: {
-                quality: 80,
-              },
-              jpeg: {
-                quality: 80,
-              },
-              jpg: {
-                quality: 80,
-              },
-              webp: {
-                quality: 80,
-              },
-              avif: {
-                quality: 70,
-              },
-              includePublic: true,
-              logStats: true,
-            }),
-          ]
+          Sitemap({
+            hostname,
+            readable: true,
+            dynamicRoutes,
+            generateRobotsTxt: false,
+            changefreq: sitemapChangefreq,
+            priority: sitemapPriority,
+            lastmod: new Date(),
+          }),
+          ViteImageOptimizer({
+            svg: {
+              multipass: true,
+            },
+            png: {
+              quality: 80,
+            },
+            jpeg: {
+              quality: 80,
+            },
+            jpg: {
+              quality: 80,
+            },
+            webp: {
+              quality: 80,
+            },
+            avif: {
+              quality: 70,
+            },
+            includePublic: true,
+            logStats: true,
+          }),
+        ]
         : []),
     ],
     resolve: {

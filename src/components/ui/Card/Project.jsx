@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
-import { techIcons } from "@/db/TechIcons";
 import { rgba } from "polished";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const Content = styled.div`
     display: flex;
@@ -123,6 +123,9 @@ export default function ProjectCard({
     onClick,
     tecnologias = []
 }) {
+    const { techIcons = {} } = useSupabaseData();
+
+    const iconMap = useMemo(() => techIcons ?? {}, [techIcons]);
 
     return (
         <>
@@ -141,11 +144,28 @@ export default function ProjectCard({
                 <div>
                     <span>Tecnologias Usadas</span>
                     <ol>
-                        {tecnologias.map((tec, idx) => (
-                            <li key={tec + idx} style={{display: 'inline-block'}}>
-                                {techIcons[tec.toLowerCase()] || tec}
-                            </li>
-                        ))}
+                        {tecnologias.map((tec, idx) => {
+                            const key = typeof tec === 'string' ? tec.toLowerCase() : `tech-${idx}`;
+                            const icon = iconMap[key];
+
+                            return (
+                                <li key={`${key}-${idx}`} style={{ display: 'inline-block' }}>
+                                    {icon ? (
+                                        <img
+                                            src={icon.src}
+                                            alt={icon.alt}
+                                            title={icon.title}
+                                            width={icon.width ?? 24}
+                                            height={icon.height ?? 24}
+                                            loading="lazy"
+                                            style={{ padding: 2 }}
+                                        />
+                                    ) : (
+                                        tec
+                                    )}
+                                </li>
+                            );
+                        })}
                     </ol>
                 </div>
             </Content>

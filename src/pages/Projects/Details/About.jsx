@@ -1,10 +1,10 @@
 import styled, { createGlobalStyle } from "styled-components";
-import projects from "@/database/ProjectData";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Stack from "@/components/ui/Badge/Stack";
 import Bg from '@assets/patterns/bg.jpg'
 import mediumZoom from "medium-zoom";
 import { rgba } from "polished";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const ZoomOverrideStyles = createGlobalStyle`
     .medium-zoom-overlay {
@@ -344,10 +344,12 @@ const Infos = styled.div`
 `
 
 export default function ProjectDetailsAbout({ slug }) {
+    const { projects: projectsData = [], loading } = useSupabaseData();
+    const isLoading = loading?.projects;
 
     const currentProject = useMemo(() => {
-        return projects.find(project => project.slug === slug);
-    }, [slug]);
+        return (projectsData ?? []).find(project => project.slug === slug);
+    }, [projectsData, slug]);
     const contentRef = useRef(null);
     const zoomRef = useRef(null);
     const [fullscreenImage, setFullscreenImage] = useState(null);
@@ -409,6 +411,10 @@ export default function ProjectDetailsAbout({ slug }) {
             };
         }
     }, [currentProject, isMobile, fullscreenImage]);
+
+    if (isLoading) {
+        return null;
+    }
 
     if (!currentProject) {
         return null;

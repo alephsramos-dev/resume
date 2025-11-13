@@ -1,13 +1,12 @@
 import ProjectStyle from "@/components/ui/Card/ProjectStyle";
 import Title from "@/components/ui/texts/Title";
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
-import { projects } from "@/database/ProjectData";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
-import { GoArrowLeft, GoArrowRight } from "react-icons/go";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const Container = styled.div`
     width: 100%;
@@ -81,54 +80,78 @@ const Control = styled.div`
 `
 
 export default function Portfolio() {
-    const siteTypes = ["Landing Page", "E-commerce", "Institucional", "Aplicações"];
+    const { projects: projectsData = [], loading } = useSupabaseData();
+    const isLoading = loading?.projects;
+
+    const siteTypes = useMemo(() => {
+        const defaults = ["Landing Page", "E-commerce", "Institucional", "Aplicações"];
+        const datasetTypes = Array.from(
+            new Set(
+                (projectsData ?? [])
+                    .map((project) => project?.siteType)
+                    .filter((type) => typeof type === 'string' && type.trim().length > 0)
+            )
+        );
+
+        const merged = [...defaults];
+
+        datasetTypes.forEach((type) => {
+            if (!merged.includes(type)) {
+                merged.push(type);
+            }
+        });
+
+        return merged;
+    }, [projectsData]);
 
     return (
         <>
             <Container>
-                {siteTypes.map(type => (
-                    <Content key={type} data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
-                        {
-                            projects.filter(project => project.siteType === type).length === 0 ?
-                                null :
-                                <Header>
-                                    <Title
-                                        className="title"
-                                    >
-                                        {type}
-                                    </Title>
-                                    <Control>
-                                        <div className="portfolio-button-prev"><MdKeyboardArrowLeft /></div>
-                                        <div className="portfolio-button-next"><MdKeyboardArrowRight /></div>
-                                    </Control>
-                                </Header>
-                        }
-                        <Swiper
-                            spaceBetween={16}
-                            slidesPerView={1}
-                            modules={[Navigation]}
-                            navigation={{
-                                clickable: true,
-                                nextEl: '.portfolio-button-next',
-                                prevEl: '.portfolio-button-prev',
-                            }}
-                            breakpoints={{
-                                768: {
-                                    slidesPerView: 3,
-                                },
-                            }}
-                            style={{ width: '100%' }}
-                        >
-                            {projects.filter(project => project.siteType === type).map(project => (
-                                <SwiperSlide key={project.title}>
-                                    <ProjectStyle
-                                        {...project}
-                                    />
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </Content>
-                ))}
+                {!isLoading && siteTypes.map((type) => {
+                    const filteredProjects = (projectsData ?? []).filter((project) => project.siteType === type);
+
+                    if (filteredProjects.length === 0) {
+                        return null;
+                    }
+
+                    return (
+                        <Content key={type} data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
+                            <Header>
+                                <Title className="title">
+                                    {type}
+                                </Title>
+                                <Control>
+                                    <div className="portfolio-button-prev"><MdKeyboardArrowLeft /></div>
+                                    <div className="portfolio-button-next"><MdKeyboardArrowRight /></div>
+                                </Control>
+                            </Header>
+                            <Swiper
+                                spaceBetween={16}
+                                slidesPerView={1}
+                                modules={[Navigation]}
+                                navigation={{
+                                    clickable: true,
+                                    nextEl: '.portfolio-button-next',
+                                    prevEl: '.portfolio-button-prev',
+                                }}
+                                breakpoints={{
+                                    768: {
+                                        slidesPerView: 3,
+                                    },
+                                }}
+                                style={{ width: '100%' }}
+                            >
+                                {filteredProjects.map((project) => (
+                                    <SwiperSlide key={project.slug ?? project.id ?? project.title}>
+                                        <ProjectStyle
+                                            {...project}
+                                        />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                        </Content>
+                    );
+                })}
             </Container>
         </>
     )

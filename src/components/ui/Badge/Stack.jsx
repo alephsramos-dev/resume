@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { techIcons } from "@/db/TechIcons";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const Container = styled.ol`
     width: auto;
@@ -32,12 +32,35 @@ export default function Stack({
     techName,
     color
 }) {
+    const { techIcons = {} } = useSupabaseData();
+    const iconMap = techIcons ?? {};
+
+    const renderTechIcon = (tec, idx) => {
+        const key = typeof tec === 'string' ? tec.toLowerCase() : `tech-${idx}`;
+        const icon = iconMap[key];
+
+        if (!icon) {
+            return tec;
+        }
+
+        return (
+            <img
+                src={icon.src}
+                alt={icon.alt}
+                title={icon.title}
+                width={icon.width ?? 18}
+                height={icon.height ?? 18}
+                loading="lazy"
+            />
+        );
+    };
+
     return (
         <>
             <Container color={color}>
                 {tecnologias.map((tec, idx) => (
                     <li key={tec + idx}>
-                        {techIcons[tec.toLowerCase()] || tec}
+                        {renderTechIcon(tec, idx)}
                     </li>
                 ))}
                 <span>{techName}</span>

@@ -9,8 +9,8 @@ import '@splidejs/react-splide/css';
 import styled from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { projects as allProjects } from '../../database/ProjectData.jsx';
 import { AsteriskIcon, FolderStarIcon, FoldersIcon } from "@phosphor-icons/react/dist/ssr";
+import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const Container = styled.div`
     width: 100%;
@@ -215,7 +215,20 @@ const VerMais = styled.div`
 `
 
 function parseDateBR(dateStr) {
-    const [day, month, year] = dateStr.split('/').map(Number);
+    if (!dateStr || typeof dateStr !== 'string') {
+        return new Date(0);
+    }
+
+    const parts = dateStr.split('/');
+    if (parts.length !== 3) {
+        return new Date(0);
+    }
+
+    const [day, month, year] = parts.map(Number);
+    if ([day, month, year].some((value) => Number.isNaN(value))) {
+        return new Date(0);
+    }
+
     return new Date(year, month - 1, day);
 }
 
@@ -223,13 +236,15 @@ export default function Projects() {
     const [progress, setProgress] = useState(0);
     const splideRef = useRef(null);
     const navigate = useNavigate();
+    const { projects: projectsData = [], loading } = useSupabaseData();
+    const isLoading = loading?.projects;
 
-    const sortedProjects = allProjects
+    const sortedProjects = (projectsData ?? [])
         .slice()
         .sort((a, b) => parseDateBR(b.date) - parseDateBR(a.date))
         .slice(0, 8);
 
-    const projects = [...sortedProjects, "custom-slide-9"];
+    const projects = sortedProjects.length > 0 ? [...sortedProjects, "custom-slide-9"] : sortedProjects;
 
     const handleSplideEvent = (splide) => {
         const totalSlides = projects.length;
@@ -306,7 +321,7 @@ export default function Projects() {
                             onDragged={() => handleSplideEvent(splideRef.current.splide)}
                             aria-label="Projetos"
                         >
-                            {projects.map((proj, idx) => (
+                            {!isLoading && projects.map((proj, idx) => (
                                 proj === "custom-slide-9" ? (
                                     <SplideSlide key="custom-slide-9" style={{ width: '100%', minWidth: 0 }}>
                                         <VerMais style={{ width: '100%', minWidth: 0 }} onClick={() => navigate('/projetos')}>
@@ -315,7 +330,7 @@ export default function Projects() {
                                         </VerMais>
                                     </SplideSlide>
                                 ) : (
-                                    <SplideSlide key={proj.nome + idx} style={{ width: '100%', minWidth: 0 }}>
+                                    <SplideSlide key={`${proj.slug ?? proj.title}-${idx}`} style={{ width: '100%', minWidth: 0 }}>
                                         <ProjectCard
                                             {...proj}
                                             onClick={() => navigate(`/projetos/${proj.slug}`)}
