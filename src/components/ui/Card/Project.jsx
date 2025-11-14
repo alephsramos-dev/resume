@@ -118,6 +118,8 @@ const ImageWrapper = styled.div`
 
 export default function ProjectCard({
     image,
+    imagePreview,
+    imageFull,
     title,
     date,
     onClick,
@@ -126,6 +128,21 @@ export default function ProjectCard({
     const { techIcons = {} } = useSupabaseData();
 
     const iconMap = useMemo(() => techIcons ?? {}, [techIcons]);
+    const displayImage = imagePreview ?? image ?? imageFull ?? '';
+    const fallbackImage = imageFull ?? image ?? '';
+
+    const handleImageError = (event) => {
+        if (!fallbackImage) {
+            return;
+        }
+
+        if (event.currentTarget.dataset.fallbackApplied === 'true') {
+            return;
+        }
+
+        event.currentTarget.dataset.fallbackApplied = 'true';
+        event.currentTarget.src = fallbackImage;
+    };
 
     return (
         <>
@@ -134,7 +151,14 @@ export default function ProjectCard({
             >
                 <ImageWrapper
                 >
-                    <img src={image} alt={title} loading="lazy" title={title} />
+                    <img
+                        src={displayImage}
+                        alt={title}
+                        loading="lazy"
+                        decoding="async"
+                        onError={handleImageError}
+                        title={title}
+                    />
                 </ImageWrapper>
                 <div>
                     <h4>{title}</h4>

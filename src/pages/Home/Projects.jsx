@@ -3,7 +3,7 @@ import ProjectCard from "@/components/ui/Card/Project";
 import Description from "@/components/ui/texts/Description.jsx";
 import { useNavigate } from "react-router-dom";
 import Title from "@/components/ui/texts/Title.jsx";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import styled from "styled-components";
@@ -11,6 +11,8 @@ import { CiCirclePlus } from "react-icons/ci";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { AsteriskIcon, FolderStarIcon, FoldersIcon } from "@phosphor-icons/react/dist/ssr";
 import { useSupabaseData } from "@/contexts/SupabaseDataContext";
+import LoadingSpinner from "@/components/ui/Others/LoadingSpinner.jsx";
+import { useInView } from "react-intersection-observer";
 
 const Container = styled.div`
     width: 100%;
@@ -159,6 +161,12 @@ const CustomArrow = styled.button`
     width: 24px;
     height: 24px;
   }
+
+    &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
 `;
 
 const ProgressBar = styled.div`
@@ -179,6 +187,25 @@ const ProgressFill = styled.div`
   background: linear-gradient(90deg, ${(props) => props.theme.colors.green['contrast']}, ${(props) => props.theme.colors.green['light']});
   width: ${props => props.progress}%;
   transition: width 0.3s;
+`;
+
+const LoaderSlot = styled.div`
+    width: 100%;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const EmptyState = styled.div`
+    width: 100%;
+    padding: 48px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${(props) => props.theme.colors.gray[200]};
+    font-size: 16px;
+    text-align: center;
 `;
 
 const VerMais = styled.div`
@@ -236,8 +263,45 @@ export default function Projects() {
     const [progress, setProgress] = useState(0);
     const splideRef = useRef(null);
     const navigate = useNavigate();
-    const { projects: projectsData = [], loading } = useSupabaseData();
+    const { projects: projectsData = [], loading, ensure = {} } = useSupabaseData();
     const isLoading = loading?.projects;
+    const { ref: sectionRef, inView } = useInView({ triggerOnce: true, threshold: 0.25 });
+
+    useEffect(() => {
+        if (!inView) {
+            return;
+        }
+
+        ensure?.projects?.();
+        ensure?.techIcons?.();
+    }, [ensure, inView]);
+
+    const updateProgress = useCallback((splideInstance) => {
+        if (!splideInstance) {
+            setProgress(0);
+            return;
+        }
+
+        const controller = splideInstance.Components?.Controller;
+
+        if (!controller || typeof controller.getEnd !== 'function') {
+            setProgress(0);
+            return;
+        }
+
+        const start = controller.getStart?.() ?? 0;
+        const end = controller.getEnd?.() ?? 0;
+
+        if (end <= start) {
+            setProgress(0);
+            return;
+        }
+
+        const position = splideInstance.index - start;
+        const totalRange = end - start;
+        const ratio = Math.min(Math.max(position / totalRange, 0), 1);
+        setProgress(Math.round(ratio * 100));
+    }, []);
 
     const sortedProjects = (projectsData ?? [])
         .slice()
@@ -246,14 +310,16 @@ export default function Projects() {
 
     const projects = sortedProjects.length > 0 ? [...sortedProjects, "custom-slide-9"] : sortedProjects;
 
-    const handleSplideEvent = (splide) => {
-        const totalSlides = projects.length;
-        const perPage = splide.options.perPage || 1;
-        const maxIndex = totalSlides - perPage;
-        const index = Math.min(splide.index, maxIndex);
-        const progress = totalSlides <= perPage ? 100 : ((index) / maxIndex) * 100;
-        setProgress(progress);
-    };
+    useEffect(() => {
+        if (!splideRef.current?.splide) {
+            if (!projects.length) {
+                setProgress(0);
+            }
+            return;
+        }
+
+        updateProgress(splideRef.current.splide);
+    }, [projects.length, updateProgress]);
 
     const handlePrev = () => {
         if (splideRef.current) {
@@ -268,7 +334,7 @@ export default function Projects() {
 
     return (
         <>
-            <Container>
+            <Container ref={sectionRef}>
                 <Background></Background>
                 <Content>
                     <Texts data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
@@ -290,62 +356,75 @@ export default function Projects() {
                         </div>
                     </Texts>
                     <Carrossel data-aos="fade-up" data-aos-duration="800" data-aos-offset="0" data-aos-delay="100">
-                        <Splide
-                            ref={splideRef}
-                            options={{
-                                type: 'slide',
-                                perPage: 3,
-                                perMove: 1,
-                                gap: '1rem',
-                                pagination: false,
-                                arrows: false,
-                                drag: true,
-                                width: '100%',
-                                autoWidth: false,
-                                breakpoints: {
-                                    1200: {
-                                        perPage: 2,
-                                        gap: '1.5rem'
+                        {isLoading ? (
+                            <LoaderSlot>
+                                <LoadingSpinner />
+                            </LoaderSlot>
+                        ) : projects.length === 0 ? (
+                            <EmptyState>Nenhum projeto disponível no momento.</EmptyState>
+                        ) : (
+                            <Splide
+                                ref={splideRef}
+                                options={{
+                                    type: 'slide',
+                                    perPage: 3,
+                                    perMove: 1,
+                                    gap: '1rem',
+                                    pagination: false,
+                                    arrows: false,
+                                    drag: true,
+                                    width: '100%',
+                                    autoWidth: false,
+                                    breakpoints: {
+                                        1200: {
+                                            perPage: 2,
+                                            gap: '1.5rem'
+                                        },
+                                        900: {
+                                            perPage: 1,
+                                            gap: '1rem'
+                                        },
+                                        600: {
+                                            perPage: 1,
+                                            gap: '0.5rem'
+                                        },
                                     },
-                                    900: {
-                                        perPage: 1,
-                                        gap: '1rem'
-                                    },
-                                    600: {
-                                        perPage: 1,
-                                        gap: '0.5rem'
-                                    },
-                                },
-                            }}
-                            onMove={() => handleSplideEvent(splideRef.current.splide)}
-                            onDragged={() => handleSplideEvent(splideRef.current.splide)}
-                            aria-label="Projetos"
-                        >
-                            {!isLoading && projects.map((proj, idx) => (
-                                proj === "custom-slide-9" ? (
-                                    <SplideSlide key="custom-slide-9" style={{ width: '100%', minWidth: 0 }}>
-                                        <VerMais style={{ width: '100%', minWidth: 0 }} onClick={() => navigate('/projetos')}>
-                                            <FoldersIcon weight="thin" />
-                                            <span>Ver todos os projetos</span>
-                                        </VerMais>
-                                    </SplideSlide>
-                                ) : (
-                                    <SplideSlide key={`${proj.slug ?? proj.title}-${idx}`} style={{ width: '100%', minWidth: 0 }}>
-                                        <ProjectCard
-                                            {...proj}
-                                            onClick={() => navigate(`/projetos/${proj.slug}`)}
-                                        />
-                                    </SplideSlide>
-                                )
-                            ))}
-                        </Splide>
+                                }}
+                                onMounted={updateProgress}
+                                onUpdated={updateProgress}
+                                onMoved={updateProgress}
+                                aria-label="Projetos"
+                            >
+                                {projects.map((proj, idx) => (
+                                    proj === "custom-slide-9" ? (
+                                        <SplideSlide key="custom-slide-9" style={{ width: '100%', minWidth: 0 }}>
+                                            <VerMais style={{ width: '100%', minWidth: 0 }} onClick={() => navigate('/projetos')}>
+                                                <FoldersIcon weight="thin" />
+                                                <span>Ver todos os projetos</span>
+                                            </VerMais>
+                                        </SplideSlide>
+                                    ) : (
+                                        <SplideSlide key={`${proj.slug ?? proj.title}-${idx}`} style={{ width: '100%', minWidth: 0 }}>
+                                            <ProjectCard
+                                                {...proj}
+                                                onClick={() => navigate(`/projetos/${proj.slug}`)}
+                                            />
+                                        </SplideSlide>
+                                    )
+                                ))}
+                            </Splide>
+                        )}
                         <Navigation>
                             <div style={{ display: 'flex', justifyContent: 'center', width: 'auto', }}>
-                                <CustomArrow onClick={handlePrev}><IoIosArrowBack /></CustomArrow>
-                                <CustomArrow onClick={handleNext}><IoIosArrowForward /></CustomArrow>
+                                <CustomArrow onClick={handlePrev} disabled={isLoading || projects.length === 0}>
+                                    <IoIosArrowBack />
+                                </CustomArrow>
+                                <CustomArrow onClick={handleNext} disabled={isLoading || projects.length === 0}>
+                                    <IoIosArrowForward />
+                                </CustomArrow>
                             </div>
                             <ProgressBar>
-                                <ProgressFill progress={progress} />
+                                <ProgressFill progress={isLoading ? 0 : progress} />
                             </ProgressBar>
                         </Navigation>
                     </Carrossel>

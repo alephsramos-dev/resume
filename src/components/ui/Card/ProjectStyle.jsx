@@ -292,6 +292,8 @@ const Buttons = styled.div`
 
 export default function ProjectStyle({
     image,
+    imagePreview,
+    imageFull,
     title,
     popupContent,
     siteType,
@@ -345,11 +347,33 @@ export default function ProjectStyle({
         }
     };
 
+    const displayImage = imagePreview ?? image ?? imageFull ?? '';
+    const fallbackImage = imageFull ?? image ?? '';
+
+    const handleImageError = (event) => {
+        if (!fallbackImage) {
+            return;
+        }
+
+        if (event.currentTarget.dataset.fallbackApplied === 'true') {
+            return;
+        }
+
+        event.currentTarget.dataset.fallbackApplied = 'true';
+        event.currentTarget.src = fallbackImage;
+    };
+
     return (
         <>
             <Card $smooth={smoothCorners} $clip={cardSquircle.path} ref={cardSquircle.ref} onClick={() => window.location.href = `/projetos/${slug}`}>
                 <Image $smooth={smoothCorners} $clip={imageSquircle.path} ref={imageSquircle.ref} $popupBg={popupBg} $popupBorder={popupBorder} $popupColor={popupColor}>
-                    <img src={image} alt={title} />
+                    <img
+                        src={displayImage}
+                        alt={title}
+                        loading="lazy"
+                        decoding="async"
+                        onError={handleImageError}
+                    />
                     {
                         popupContent === '' ? null : (
                             <span ref={badgeSquircle.ref} $clipBadge={badgeSquircle.path}>
