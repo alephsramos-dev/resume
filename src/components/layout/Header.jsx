@@ -193,6 +193,7 @@ export default function Header() {
                             icon={FaInstagram}
                             color="#5B51D8"
                             onClick={() => window.open("https://www.instagram.com/alephsramosdev", "_blank")}
+                            id="clickContactIg"
                             />   
                         </li>
                         <li>
@@ -200,6 +201,7 @@ export default function Header() {
                             icon={FaWhatsapp}
                             color="#25D366"
                             onClick={() => window.open("https://wa.me/5524981411940", "_blank")}
+                            id="clickContactWpp"
                             />  
                         </li>
                         <li>
@@ -207,13 +209,15 @@ export default function Header() {
                             icon={FaGithub}
                             color="#8F9193"
                             onClick={() => window.open("https://github.com/alephsramos-dev", "_blank")}
+                            id="clickContactGit"
                             /> 
                         </li>
                         <li>
                             <IconHeader
                             icon={FaLinkedinIn}
                             color="#0e76a8"
-                            onClick={() => window.open("https://www.linkedin.com/in/aleph-ramos", "_blank")}   
+                            onClick={() => window.open("https://www.linkedin.com/in/aleph-ramos", "_blank")}
+                            id="clickContactLn"   
                             />
                         </li>
                         <li>

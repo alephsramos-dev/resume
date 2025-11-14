@@ -604,7 +604,7 @@ export default function ContactFormModal({
                     </CloseButton>
                 </Header>
 
-                <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form onSubmit={handleSubmit(onSubmit)} id="contactForm">
                     <Fieldset>
                         <span>Nome</span>
                         <input

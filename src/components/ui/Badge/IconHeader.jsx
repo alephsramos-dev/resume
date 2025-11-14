@@ -61,6 +61,7 @@ export default function IconHeader({
             onClick={onClick}
             type="button"
             {...props}
+            id={props.id}
         >
             {Icone && <Icone />}
         </Content>
