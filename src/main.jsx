@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import { ThemeProvider } from 'styled-components';
 import { SupabaseDataProvider } from './contexts/SupabaseDataContext.jsx';
-import { HelmetProvider } from 'react-helmet-async';
 
 // Importe seu tema e os estilos globais
 import { theme } from './styles/theme';
@@ -26,13 +25,11 @@ AOS.init({
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <SupabaseDataProvider>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <App />
-        </ThemeProvider>
-      </SupabaseDataProvider>
-    </HelmetProvider>
+    <SupabaseDataProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </SupabaseDataProvider>
   </React.StrictMode>,
 );

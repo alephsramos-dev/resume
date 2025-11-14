@@ -3,11 +3,10 @@ import styled from "styled-components";
 
 import logoAleph from "/icon-black-aleph-desenvolvedor-web.svg";
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { AiOutlineExpand } from "react-icons/ai";
 import { useSupabaseData } from "@/contexts/SupabaseDataContext";
-import LoadingSpinner from "@/components/ui/Others/LoadingSpinner.jsx";
 
 const Container = styled.div`
     width: 100%;
@@ -239,56 +238,21 @@ const Infos = styled.div`
     }
 `
 
-const LoaderSlot = styled.div`
-    width: 100%;
-    min-height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 export default function ProjectDetailsHero({
     slug,
 }) {
-    const { projects: projectsData = [], loading, ensure = {} } = useSupabaseData();
+    const { projects: projectsData = [], loading } = useSupabaseData();
     const isLoading = loading?.projects;
-
-    useEffect(() => {
-        ensure?.projects?.();
-    }, [ensure]);
 
     const currentProject = useMemo(() => {
         return (projectsData ?? []).find(project => project.slug === slug);
     }, [projectsData, slug]);
 
-    if (isLoading) {
-        return (
-            <LoaderSlot>
-                <LoadingSpinner />
-            </LoaderSlot>
-        );
-    }
-
-    if (!currentProject) {
+    if (isLoading || !currentProject) {
         return null;
     }
 
     const hasUrl = Boolean(currentProject.urlPage);
-    const heroImage = currentProject.imageFull ?? currentProject.image ?? '';
-    const previewFallback = currentProject.imagePreview ?? currentProject.image ?? '';
-
-    const handleHeroError = (event) => {
-        if (!previewFallback) {
-            return;
-        }
-
-        if (event.currentTarget.dataset.fallbackApplied === 'true') {
-            return;
-        }
-
-        event.currentTarget.dataset.fallbackApplied = 'true';
-        event.currentTarget.src = previewFallback;
-    };
 
     return (
         <>
@@ -319,17 +283,11 @@ export default function ProjectDetailsHero({
                                 <LuSquareArrowOutUpRight />
                             </button>
                         </div>
-                        <button onClick={() => heroImage && window.open(heroImage, '_blank', 'noopener,noreferrer')}>
+                        <button onClick={() => window.open(currentProject.image, '_blank', 'noopener,noreferrer')}>
                             <AiOutlineExpand />
                         </button>
                     </Infos>
-                    <img
-                        src={heroImage}
-                        alt={currentProject.title}
-                        loading="lazy"
-                        decoding="async"
-                        onError={handleHeroError}
-                    />
+                    <img src={currentProject.image} alt={currentProject.title} />
                 </Image>
             </Container>
         </>

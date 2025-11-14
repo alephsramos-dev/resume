@@ -2,9 +2,6 @@ import styled from "styled-components";
 import ProjectDetailsHero from "./Details/Hero";
 import { useParams } from "react-router-dom";
 import Title from "@/components/ui/texts/Title";
-import { Helmet } from 'react-helmet-async';
-import { useSupabaseData } from "@/contexts/SupabaseDataContext";
-import { useEffect, useMemo } from "react";
 
 import Bg from "@/assets/patterns/bg.jpg";
 import ProjectDetailsAbout from "./Details/About";
@@ -76,63 +73,23 @@ const Header = styled.header`
 
 export default function ProjectDetails() {
     const { slug } = useParams();
-    const { projects: projectsData = [], ensure = {} } = useSupabaseData();
-
-    useEffect(() => {
-        ensure?.projects?.();
-    }, [ensure]);
-
-    const project = useMemo(() => (
-        (projectsData ?? []).find((item) => item.slug === slug)
-    ), [projectsData, slug]);
-
-    const baseOrigin = useMemo(() => {
-        if (typeof window !== 'undefined' && window.location?.origin) {
-            return window.location.origin;
-        }
-
-        return (import.meta.env.VITE_SITE_URL ?? 'https://alephramos.com.br');
-    }, []);
-
-    const normalizedOrigin = baseOrigin.replace(/\/$/, '');
-    const canonical = `${normalizedOrigin}/projetos/${slug}`;
-    const metaTitle = project ? `${project.title} | Projetos • Aleph Ramos` : 'Projetos • Aleph Ramos';
-    const metaDescription = project?.description
-        ?? 'Conheça os projetos desenvolvidos por Aleph Ramos com foco em performance, automação e conversão.';
-    const metaImage = project?.imageFull ?? project?.imagePreview ?? null;
 
     return (
         <>
-            <Helmet>
-                <title>{metaTitle}</title>
-                <link rel="canonical" href={canonical} />
-                <meta name="description" content={metaDescription} />
-                <meta property="og:type" content="website" />
-                <meta property="og:title" content={metaTitle} />
-                <meta property="og:description" content={metaDescription} />
-                <meta property="og:url" content={canonical} />
-                <meta property="og:site_name" content="Aleph Ramos" />
-                {metaImage ? <meta property="og:image" content={metaImage} /> : null}
-                {metaImage ? <meta property="og:image:alt" content={project?.title ?? 'Projeto de Aleph Ramos'} /> : null}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={metaTitle} />
-                <meta name="twitter:description" content={metaDescription} />
-                {metaImage ? <meta name="twitter:image" content={metaImage} /> : null}
-            </Helmet>
             <Container>
                 <Content>
-                    <ProjectDetailsCallToAction
+                    <ProjectDetailsCallToAction 
                         slug={slug}
                     />
-                    <ProjectDetailsHero
-                        slug={slug}
-                    />
-                    <ProjectDetailsAbout
-                        slug={slug}
-                    />
-                    <ProjectDetailsExplore
-                        slug={slug}
-                    />
+                        <ProjectDetailsHero 
+                            slug={slug}
+                        />
+                            <ProjectDetailsAbout 
+                                slug={slug}
+                            />
+                                    <ProjectDetailsExplore 
+                                        slug={slug}
+                                    />
                 </Content>
             </Container>
         </>

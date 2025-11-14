@@ -23,75 +23,6 @@ const STORAGE_PUBLIC_BASE = SUPABASE_URL
     ? `${SUPABASE_URL.replace(/\/+$/, '')}/storage/v1/object/public/assets`
     : '';
 
-const CACHE_STORAGE_KEY = 'supabase:data-cache:v2';
-const CACHE_TTL_MS = 1000 * 60 * 60; // 1 hour
-
-const DATA_KEYS = ['projects', 'services', 'benefits', 'assessments', 'techIcons', 'companies'];
-
-const createDefaultData = () => ({
-    projects: [],
-    services: [],
-    benefits: [],
-    assessments: [],
-    techIcons: {},
-    companies: {},
-});
-
-const isObject = (value) => value !== null && typeof value === 'object';
-
-const hasUsableData = (value) => {
-    if (Array.isArray(value)) {
-        return value.length > 0;
-    }
-
-    if (isObject(value)) {
-        return Object.keys(value).length > 0;
-    }
-
-    return Boolean(value);
-};
-
-const loadCacheFromStorage = () => {
-    if (typeof window === 'undefined') {
-        return { data: createDefaultData(), meta: {} };
-    }
-
-    try {
-        const raw = window.localStorage.getItem(CACHE_STORAGE_KEY);
-
-        if (!raw) {
-            return { data: createDefaultData(), meta: {} };
-        }
-
-        const parsed = JSON.parse(raw);
-        const cachedData = isObject(parsed?.data) ? parsed.data : {};
-        const meta = isObject(parsed?.meta) ? parsed.meta : {};
-
-        return {
-            data: {
-                ...createDefaultData(),
-                ...cachedData,
-            },
-            meta,
-        };
-    } catch (error) {
-        console.warn('[Supabase] Unable to read cached data.', error);
-        return { data: createDefaultData(), meta: {} };
-    }
-};
-
-const persistCacheToStorage = (data, meta) => {
-    if (typeof window === 'undefined') {
-        return;
-    }
-
-    try {
-        window.localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify({ data, meta }));
-    } catch (error) {
-        console.warn('[Supabase] Unable to persist cache.', error);
-    }
-};
-
 const resolveStorageUrl = (value) => {
     if (!value || typeof value !== 'string') {
         return '';
@@ -120,31 +51,6 @@ const resolveStorageUrl = (value) => {
 };
 
 const SupabaseDataContext = createContext(undefined);
-
-const createTransformedImageUrl = (url, params = {}) => {
-    if (!url || typeof url !== 'string' || !/^https?:\/\//i.test(url)) {
-        return url;
-    }
-
-    try {
-        const transformedPath = url.includes('/storage/v1/object/')
-            ? url.replace('/storage/v1/object/', '/storage/v1/render/image/')
-            : url;
-
-        const parsed = new URL(transformedPath);
-
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== undefined && value !== null && `${value}`.length > 0) {
-                parsed.searchParams.set(key, value);
-            }
-        });
-
-        return parsed.toString();
-    } catch (error) {
-        console.warn('[Supabase] Unable to create transformed image url.', error);
-        return url;
-    }
-};
 
 const formatDateBR = (value) => {
     if (!value) {
@@ -204,44 +110,33 @@ const createColorBorderResolver = (expression) => {
     return trimmed;
 };
 
-const normalizeProjects = (rows = []) => rows.map((row) => {
-    const imageFull = resolveStorageUrl(row.image_url);
-    const imagePreview = createTransformedImageUrl(imageFull, {
-        width: 640,
-        quality: 70,
-        format: 'webp',
-    });
-
-    return {
-        id: row.id,
-        slug: row.slug,
-        title: row.title,
-        image: imageFull || imagePreview,
-        imagePreview: imagePreview || imageFull,
-        imageFull: imageFull,
-        popupContent: row.popup_content ?? '',
-        siteType: row.site_type ?? '',
-        imageCompanyUrl: resolveStorageUrl(row.image_company_url),
-        companyName: row.company_name ?? '',
-        tecnologias: Array.isArray(row.tecnologias) ? row.tecnologias : [],
-        stack: normalizeStack(row.stack),
-        date: formatDateBR(row.project_date),
-        duration: row.duration ?? null,
-        plataform: row.platform ?? '',
-        platform: row.platform ?? '',
-        country: row.country ?? '',
-        description: row.description ?? '',
-        urlPage: row.url_page ?? '',
-        fullDescription: row.full_description ?? '',
-        githubUrl: row.github_url ?? '',
-        popupBg: row.popup_bg ?? '',
-        popupBorder: row.popup_border ?? '',
-        popupColor: row.popup_color ?? '',
-        siteBg: row.site_bg ?? '',
-        siteBorder: row.site_border ?? '',
-        siteColor: row.site_color ?? '',
-    };
-});
+const normalizeProjects = (rows = []) => rows.map((row) => ({
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    image: resolveStorageUrl(row.image_url),
+    popupContent: row.popup_content ?? '',
+    siteType: row.site_type ?? '',
+    imageCompanyUrl: resolveStorageUrl(row.image_company_url),
+    companyName: row.company_name ?? '',
+    tecnologias: Array.isArray(row.tecnologias) ? row.tecnologias : [],
+    stack: normalizeStack(row.stack),
+    date: formatDateBR(row.project_date),
+    duration: row.duration ?? null,
+    plataform: row.platform ?? '',
+    platform: row.platform ?? '',
+    country: row.country ?? '',
+    description: row.description ?? '',
+    urlPage: row.url_page ?? '',
+    fullDescription: row.full_description ?? '',
+    githubUrl: row.github_url ?? '',
+    popupBg: row.popup_bg ?? '',
+    popupBorder: row.popup_border ?? '',
+    popupColor: row.popup_color ?? '',
+    siteBg: row.site_bg ?? '',
+    siteBorder: row.site_border ?? '',
+    siteColor: row.site_color ?? '',
+}));
 
 const normalizeServices = (rows = []) => rows.map((row) => ({
     id: row.id,
@@ -302,27 +197,24 @@ const normalizeCompanies = (rows = []) => rows.reduce((acc, company) => {
 }, {});
 
 export function SupabaseDataProvider({ children }) {
-    const cacheBootstrapRef = useRef(loadCacheFromStorage());
-    const dataRef = useRef({ ...cacheBootstrapRef.current.data });
-    const cacheMetaRef = useRef({ ...(cacheBootstrapRef.current.meta ?? {}) });
     const isMountedRef = useRef(true);
 
-    const [data, setData] = useState(() => ({
-        ...cacheBootstrapRef.current.data,
-    }));
+    const [data, setData] = useState({
+        projects: [],
+        services: [],
+        benefits: [],
+        assessments: [],
+        techIcons: {},
+        companies: {},
+    });
 
-    const [loading, setLoading] = useState(() => {
-        const initial = {};
-        const now = Date.now();
-
-        DATA_KEYS.forEach((key) => {
-            const meta = cacheMetaRef.current[key];
-            const isValid = Boolean(meta?.updatedAt) && (now - meta.updatedAt) < CACHE_TTL_MS;
-            const hasData = hasUsableData(dataRef.current[key]);
-            initial[key] = !(isValid && hasData);
-        });
-
-        return initial;
+    const [loading, setLoading] = useState({
+        projects: true,
+        services: true,
+        benefits: true,
+        assessments: true,
+        techIcons: true,
+        companies: true,
     });
 
     const [errors, setErrors] = useState({
@@ -356,32 +248,15 @@ export function SupabaseDataProvider({ children }) {
         }
     }, []);
 
-    const setDataSafe = useCallback((key, value, { persist = true } = {}) => {
+    const setDataSafe = useCallback((key, value) => {
         if (!isMountedRef.current) {
             return;
         }
 
-        setData((prev) => {
-            const next = {
-                ...prev,
-                [key]: value,
-            };
-
-            dataRef.current = next;
-
-            if (persist) {
-                const nextMeta = {
-                    ...cacheMetaRef.current,
-                    [key]: {
-                        updatedAt: Date.now(),
-                    },
-                };
-                cacheMetaRef.current = nextMeta;
-                persistCacheToStorage(next, nextMeta);
-            }
-
-            return next;
-        });
+        setData((prev) => ({
+            ...prev,
+            [key]: value,
+        }));
     }, []);
 
     const setLoadingSafe = useCallback((key, value) => {
@@ -395,23 +270,7 @@ export function SupabaseDataProvider({ children }) {
         }));
     }, []);
 
-    const isCacheValid = useCallback((key) => {
-        const meta = cacheMetaRef.current[key];
-        if (!meta?.updatedAt) {
-            return false;
-        }
-
-        return (Date.now() - meta.updatedAt) < CACHE_TTL_MS;
-    }, []);
-
-    const fetchProjects = useCallback(async ({ force = false } = {}) => {
-        const canUseCache = !force && isCacheValid('projects') && hasUsableData(dataRef.current.projects);
-
-        if (canUseCache) {
-            setLoadingSafe('projects', false);
-            return dataRef.current.projects;
-        }
-
+    const fetchProjects = useCallback(async () => {
         setLoadingSafe('projects', true);
         handleError('projects', null);
 
@@ -425,25 +284,15 @@ export function SupabaseDataProvider({ children }) {
                 throw error;
             }
 
-            const normalized = normalizeProjects(rows ?? []);
-            setDataSafe('projects', normalized);
-            return normalized;
+            setDataSafe('projects', normalizeProjects(rows));
         } catch (error) {
             handleError('projects', error);
-            return dataRef.current.projects;
         } finally {
             setLoadingSafe('projects', false);
         }
-    }, [handleError, isCacheValid, setDataSafe, setLoadingSafe]);
+    }, [handleError, setDataSafe, setLoadingSafe]);
 
-    const fetchServices = useCallback(async ({ force = false } = {}) => {
-        const canUseCache = !force && isCacheValid('services') && hasUsableData(dataRef.current.services);
-
-        if (canUseCache) {
-            setLoadingSafe('services', false);
-            return dataRef.current.services;
-        }
-
+    const fetchServices = useCallback(async () => {
         setLoadingSafe('services', true);
         handleError('services', null);
 
@@ -457,25 +306,15 @@ export function SupabaseDataProvider({ children }) {
                 throw error;
             }
 
-            const normalized = normalizeServices(rows ?? []);
-            setDataSafe('services', normalized);
-            return normalized;
+            setDataSafe('services', normalizeServices(rows));
         } catch (error) {
             handleError('services', error);
-            return dataRef.current.services;
         } finally {
             setLoadingSafe('services', false);
         }
-    }, [handleError, isCacheValid, setDataSafe, setLoadingSafe]);
+    }, [handleError, setDataSafe, setLoadingSafe]);
 
-    const fetchBenefits = useCallback(async ({ force = false } = {}) => {
-        const canUseCache = !force && isCacheValid('benefits') && hasUsableData(dataRef.current.benefits);
-
-        if (canUseCache) {
-            setLoadingSafe('benefits', false);
-            return dataRef.current.benefits;
-        }
-
+    const fetchBenefits = useCallback(async () => {
         setLoadingSafe('benefits', true);
         handleError('benefits', null);
 
@@ -489,25 +328,15 @@ export function SupabaseDataProvider({ children }) {
                 throw error;
             }
 
-            const normalized = normalizeBenefits(rows ?? []);
-            setDataSafe('benefits', normalized);
-            return normalized;
+            setDataSafe('benefits', normalizeBenefits(rows));
         } catch (error) {
             handleError('benefits', error);
-            return dataRef.current.benefits;
         } finally {
             setLoadingSafe('benefits', false);
         }
-    }, [handleError, isCacheValid, setDataSafe, setLoadingSafe]);
+    }, [handleError, setDataSafe, setLoadingSafe]);
 
-    const fetchAssessments = useCallback(async ({ force = false } = {}) => {
-        const canUseCache = !force && isCacheValid('assessments') && hasUsableData(dataRef.current.assessments);
-
-        if (canUseCache) {
-            setLoadingSafe('assessments', false);
-            return dataRef.current.assessments;
-        }
-
+    const fetchAssessments = useCallback(async () => {
         setLoadingSafe('assessments', true);
         handleError('assessments', null);
 
@@ -521,25 +350,15 @@ export function SupabaseDataProvider({ children }) {
                 throw error;
             }
 
-            const normalized = normalizeAssessments(rows ?? []);
-            setDataSafe('assessments', normalized);
-            return normalized;
+            setDataSafe('assessments', normalizeAssessments(rows));
         } catch (error) {
             handleError('assessments', error);
-            return dataRef.current.assessments;
         } finally {
             setLoadingSafe('assessments', false);
         }
-    }, [handleError, isCacheValid, setDataSafe, setLoadingSafe]);
+    }, [handleError, setDataSafe, setLoadingSafe]);
 
-    const fetchTechIcons = useCallback(async ({ force = false } = {}) => {
-        const canUseCache = !force && isCacheValid('techIcons') && hasUsableData(dataRef.current.techIcons);
-
-        if (canUseCache) {
-            setLoadingSafe('techIcons', false);
-            return dataRef.current.techIcons;
-        }
-
+    const fetchTechIcons = useCallback(async () => {
         setLoadingSafe('techIcons', true);
         handleError('techIcons', null);
 
@@ -553,25 +372,15 @@ export function SupabaseDataProvider({ children }) {
                 throw error;
             }
 
-            const normalized = normalizeTechIcons(rows ?? []);
-            setDataSafe('techIcons', normalized);
-            return normalized;
+            setDataSafe('techIcons', normalizeTechIcons(rows));
         } catch (error) {
             handleError('techIcons', error);
-            return dataRef.current.techIcons;
         } finally {
             setLoadingSafe('techIcons', false);
         }
-    }, [handleError, isCacheValid, setDataSafe, setLoadingSafe]);
+    }, [handleError, setDataSafe, setLoadingSafe]);
 
-    const fetchCompanies = useCallback(async ({ force = false } = {}) => {
-        const canUseCache = !force && isCacheValid('companies') && hasUsableData(dataRef.current.companies);
-
-        if (canUseCache) {
-            setLoadingSafe('companies', false);
-            return dataRef.current.companies;
-        }
-
+    const fetchCompanies = useCallback(async () => {
         setLoadingSafe('companies', true);
         handleError('companies', null);
 
@@ -585,16 +394,13 @@ export function SupabaseDataProvider({ children }) {
                 throw error;
             }
 
-            const normalized = normalizeCompanies(rows ?? []);
-            setDataSafe('companies', normalized);
-            return normalized;
+            setDataSafe('companies', normalizeCompanies(rows));
         } catch (error) {
             handleError('companies', error);
-            return dataRef.current.companies;
         } finally {
             setLoadingSafe('companies', false);
         }
-    }, [handleError, isCacheValid, setDataSafe, setLoadingSafe]);
+    }, [handleError, setDataSafe, setLoadingSafe]);
 
     useEffect(() => {
         fetchProjects();
@@ -617,14 +423,6 @@ export function SupabaseDataProvider({ children }) {
         loading,
         errors,
         refresh: {
-            projects: (options) => fetchProjects({ force: true, ...(options ?? {}) }),
-            services: (options) => fetchServices({ force: true, ...(options ?? {}) }),
-            benefits: (options) => fetchBenefits({ force: true, ...(options ?? {}) }),
-            assessments: (options) => fetchAssessments({ force: true, ...(options ?? {}) }),
-            techIcons: (options) => fetchTechIcons({ force: true, ...(options ?? {}) }),
-            companies: (options) => fetchCompanies({ force: true, ...(options ?? {}) }),
-        },
-        ensure: {
             projects: fetchProjects,
             services: fetchServices,
             benefits: fetchBenefits,

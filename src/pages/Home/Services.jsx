@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { MegaphoneIcon } from "@phosphor-icons/react/dist/ssr";
 
 import { useSupabaseData } from '@/contexts/SupabaseDataContext';
-import LoadingSpinner from "@/components/ui/Others/LoadingSpinner.jsx";
 
 const Container = styled.div`
     width: 100%;
@@ -104,14 +103,6 @@ const Grid = styled.div`
     flex-wrap: wrap;
 `
 
-const LoaderSlot = styled.div`
-    width: 100%;
-    padding: 48px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 export default function Services() {
     const { services, loading } = useSupabaseData();
     const serviceItems = services ?? [];
@@ -138,28 +129,20 @@ export default function Services() {
                         </div>
                     </Texts>
                     <Grid>
-                        {isLoading ? (
-                            <LoaderSlot>
-                                <LoadingSpinner />
-                            </LoaderSlot>
-                        ) : serviceItems.length === 0 ? (
-                            <LoaderSlot>Nenhum serviço disponível no momento.</LoaderSlot>
-                        ) : (
-                            serviceItems.map((service) => (
-                                <ServiceCard
-                                    key={service.id ?? service.slug}
-                                    width={service.width}
-                                    image={service.image}
-                                    name={service.name}
-                                    description={service.description}
-                                    colorBorder={service.colorBorder}
-                                    onClick={() => {
-                                        const page = service.slug;
-                                        window.location.href = `/servicos/${page}`;
-                                    }}
-                                />
-                            ))
-                        )}
+                        {!isLoading && serviceItems.map((service) => (
+                            <ServiceCard
+                                key={service.id ?? service.slug}
+                                width={service.width}
+                                image={service.image}
+                                name={service.name}
+                                description={service.description}
+                                colorBorder={service.colorBorder}
+                                onClick={() => {
+                                    const page = service.slug;
+                                    window.location.href = `/servicos/${page}`;
+                                }}
+                            />
+                        ))}
                     </Grid>
                 </Content>
             </Container>

@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import ProjectStyle from "@/components/ui/Card/ProjectStyle";
 import Title from "@/components/ui/texts/Title";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useSupabaseData } from "@/contexts/SupabaseDataContext";
-import LoadingSpinner from "@/components/ui/Others/LoadingSpinner.jsx";
 
 
 const Container = styled.div`
@@ -74,24 +73,12 @@ const Control = styled.div`
     }
 `
 
-const LoaderSlot = styled.div`
-    width: 100%;
-    min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 
 export default function ProjectDetailsExplore({
     slug
 }) {
-    const { projects: projectsData = [], loading, ensure = {} } = useSupabaseData();
+    const { projects: projectsData = [], loading } = useSupabaseData();
     const isLoading = loading?.projects;
-
-    useEffect(() => {
-        ensure?.projects?.();
-    }, [ensure]);
 
     const currentProject = useMemo(() => {
         return (projectsData ?? []).find(project => project.slug === slug);
@@ -106,15 +93,7 @@ export default function ProjectDetailsExplore({
         return (projectsData ?? []).filter((project) => project.siteType === siteType && project.slug !== slug);
     }, [currentProject, projectsData, slug]);
 
-    if (isLoading) {
-        return (
-            <LoaderSlot>
-                <LoadingSpinner />
-            </LoaderSlot>
-        );
-    }
-
-    if (!currentProject) {
+    if (isLoading || !currentProject) {
         return null;
     }
 

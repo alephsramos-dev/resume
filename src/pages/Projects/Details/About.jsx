@@ -5,7 +5,6 @@ import Bg from '@assets/patterns/bg.jpg'
 import mediumZoom from "medium-zoom";
 import { rgba } from "polished";
 import { useSupabaseData } from "@/contexts/SupabaseDataContext";
-import LoadingSpinner from "@/components/ui/Others/LoadingSpinner.jsx";
 
 const ZoomOverrideStyles = createGlobalStyle`
     .medium-zoom-overlay {
@@ -142,7 +141,7 @@ const AboutContent = styled.div`
     align-items: flex-start;
     gap: 12px;
     font-size: 18px;
-    padding-right: 28px;
+    padding-right: 32px;
 
     @media (max-width: 768px){
         padding-right: 0px;
@@ -344,21 +343,9 @@ const Infos = styled.div`
     }
 `
 
-const LoaderSlot = styled.div`
-    width: 100%;
-    min-height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 export default function ProjectDetailsAbout({ slug }) {
-    const { projects: projectsData = [], loading, ensure = {} } = useSupabaseData();
+    const { projects: projectsData = [], loading } = useSupabaseData();
     const isLoading = loading?.projects;
-
-    useEffect(() => {
-        ensure?.projects?.();
-    }, [ensure]);
 
     const currentProject = useMemo(() => {
         return (projectsData ?? []).find(project => project.slug === slug);
@@ -426,11 +413,7 @@ export default function ProjectDetailsAbout({ slug }) {
     }, [currentProject, isMobile, fullscreenImage]);
 
     if (isLoading) {
-        return (
-            <LoaderSlot>
-                <LoadingSpinner />
-            </LoaderSlot>
-        );
+        return null;
     }
 
     if (!currentProject) {
