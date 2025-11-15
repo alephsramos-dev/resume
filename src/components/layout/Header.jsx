@@ -184,47 +184,51 @@ export default function Header() {
         <>
             <Content>
                 <nav data-collapsed={collapsed} data-animating={animatingExpand ? 'expand' : undefined}>
-                    <button onClick={handleLogoClick} aria-label={collapsed ? 'Expandir navegação' : 'Voltar ao topo'}>
+                    <button
+                        id="clickContactLogo"
+                        onClick={handleLogoClick}
+                        aria-label={collapsed ? 'Expandir navegação' : 'Voltar ao topo'}
+                    >
                         <img src="/icon-aleph-desenvolvedor-web.svg" alt="logo do aleph desenvolvedor web" title="Aleph Desenvolvedor Web" loading="eager" />
                     </button>
                     <ol>
                         <li>
                             <IconHeader
-                            icon={FaInstagram}
-                            color="#5B51D8"
-                            onClick={() => window.open("https://www.instagram.com/alephsramosdev", "_blank")}
-                            id="clickContactIg"
-                            />   
-                        </li>
-                        <li>
-                            <IconHeader
-                            icon={FaWhatsapp}
-                            color="#25D366"
-                            onClick={() => window.open("https://wa.me/5524981411940", "_blank")}
-                            id="clickContactWpp"
-                            />  
-                        </li>
-                        <li>
-                            <IconHeader
-                            icon={FaGithub}
-                            color="#8F9193"
-                            onClick={() => window.open("https://github.com/alephsramos-dev", "_blank")}
-                            id="clickContactGit"
-                            /> 
-                        </li>
-                        <li>
-                            <IconHeader
-                            icon={FaLinkedinIn}
-                            color="#0e76a8"
-                            onClick={() => window.open("https://www.linkedin.com/in/aleph-ramos", "_blank")}
-                            id="clickContactLn"   
+                                icon={FaInstagram}
+                                color="#5B51D8"
+                                onClick={() => window.open("https://www.instagram.com/alephsramosdev", "_blank")}
+                                id="clickContactIg"
                             />
                         </li>
                         <li>
                             <IconHeader
-                            icon={sidebarOpen ? XIcon : DotsNineIcon}
-                            onClick={() => setSidebarOpen(!sidebarOpen)}
-                            />  
+                                icon={FaWhatsapp}
+                                color="#25D366"
+                                onClick={() => window.open("https://wa.me/5524981411940", "_blank")}
+                                id="clickContactWpp"
+                            />
+                        </li>
+                        <li>
+                            <IconHeader
+                                icon={FaGithub}
+                                color="#8F9193"
+                                onClick={() => window.open("https://github.com/alephsramos-dev", "_blank")}
+                                id="clickContactGit"
+                            />
+                        </li>
+                        <li>
+                            <IconHeader
+                                icon={FaLinkedinIn}
+                                color="#0e76a8"
+                                onClick={() => window.open("https://www.linkedin.com/in/aleph-ramos", "_blank")}
+                                id="clickContactLn"
+                            />
+                        </li>
+                        <li>
+                            <IconHeader
+                                icon={sidebarOpen ? XIcon : DotsNineIcon}
+                                onClick={() => setSidebarOpen(!sidebarOpen)}
+                            />
                         </li>
                     </ol>
                 </nav>
