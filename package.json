@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "gitpush": "cmd /c \"git add . && git commit -m 'add' && git push origin\"",
     "upload:assets": "node scripts/uploadAssetsToSupabase.mjs",
-    "seed:supabase": "node scripts/seedSupabaseData.mjs"
+    "seed:supabase": "node scripts/seedSupabaseData.mjs",
+    "add:project": "node scripts/addProject.mjs",
+    "add:company": "node scripts/addCompany.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

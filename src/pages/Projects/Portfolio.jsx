@@ -1,6 +1,6 @@
 import ProjectStyle from "@/components/ui/Card/ProjectStyle";
 import Title from "@/components/ui/texts/Title";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -77,11 +77,59 @@ const Control = styled.div`
         height: 35px;
         border-radius: 50px;
     }
+
+    @media (min-width: 769px){
+        display: none;
+    }
 `
+
+const DesktopGrid = styled.div`
+    width: 100%;
+    display: none;
+
+    @media (min-width: 769px){
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+`;
+
+const MobileCarousel = styled.div`
+    width: 100%;
+
+    @media (min-width: 769px){
+        display: none;
+    }
+`;
+
+const LoadMore = styled.button`
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid ${(props) => props.theme.colors.gray[200]};
+    background: transparent;
+    color: ${(props) => props.theme.colors.white[300]};
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        border-color: ${(props) => props.theme.colors.white[300]};
+    }
+
+    @media (max-width: 768px){
+        width: 100%;
+        text-align: center;
+    }
+`;
 
 export default function Portfolio() {
     const { projects: projectsData = [], loading } = useSupabaseData();
     const isLoading = loading?.projects;
+    const [visibleByType, setVisibleByType] = useState({});
+
+    const PAGE_SIZE = 6;
 
     const siteTypes = useMemo(() => {
         const defaults = ["Landing Page", "E-commerce", "Institucional", "Aplicações"];
@@ -110,6 +158,10 @@ export default function Portfolio() {
                 {!isLoading && siteTypes.map((type) => {
                     const filteredProjects = (projectsData ?? []).filter((project) => project.siteType === type);
 
+                    const visibleCount = visibleByType[type] ?? PAGE_SIZE;
+                    const visibleProjects = filteredProjects.slice(0, visibleCount);
+                    const hasMore = visibleCount < filteredProjects.length;
+
                     if (filteredProjects.length === 0) {
                         return null;
                     }
@@ -125,30 +177,47 @@ export default function Portfolio() {
                                     <div className="portfolio-button-next"><MdKeyboardArrowRight /></div>
                                 </Control>
                             </Header>
-                            <Swiper
-                                spaceBetween={16}
-                                slidesPerView={1}
-                                modules={[Navigation]}
-                                navigation={{
-                                    clickable: true,
-                                    nextEl: '.portfolio-button-next',
-                                    prevEl: '.portfolio-button-prev',
-                                }}
-                                breakpoints={{
-                                    768: {
-                                        slidesPerView: 3,
-                                    },
-                                }}
-                                style={{ width: '100%' }}
-                            >
-                                {filteredProjects.map((project) => (
-                                    <SwiperSlide key={project.slug ?? project.id ?? project.title}>
-                                        <ProjectStyle
-                                            {...project}
-                                        />
-                                    </SwiperSlide>
+                            <MobileCarousel>
+                                <Swiper
+                                    spaceBetween={16}
+                                    slidesPerView={1}
+                                    modules={[Navigation]}
+                                    navigation={{
+                                        clickable: true,
+                                        nextEl: '.portfolio-button-next',
+                                        prevEl: '.portfolio-button-prev',
+                                    }}
+                                    style={{ width: '100%' }}
+                                >
+                                    {visibleProjects.map((project) => (
+                                        <SwiperSlide key={project.slug ?? project.id ?? project.title}>
+                                            <ProjectStyle
+                                                {...project}
+                                            />
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            </MobileCarousel>
+                            <DesktopGrid>
+                                {visibleProjects.map((project) => (
+                                    <ProjectStyle
+                                        key={project.slug ?? project.id ?? project.title}
+                                        {...project}
+                                    />
                                 ))}
-                            </Swiper>
+                            </DesktopGrid>
+                            {hasMore && (
+                                <LoadMore
+                                    onClick={() => {
+                                        setVisibleByType((prev) => ({
+                                            ...prev,
+                                            [type]: Math.min(filteredProjects.length, (prev[type] ?? PAGE_SIZE) + PAGE_SIZE),
+                                        }));
+                                    }}
+                                >
+                                    Carregar mais
+                                </LoadMore>
+                            )}
                         </Content>
                     );
                 })}
