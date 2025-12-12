@@ -5,6 +5,9 @@ import { FaGithub } from "react-icons/fa";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { useSquircle } from "@/lib/squircle/useSquircle";
 import { useSupabaseData } from "@/contexts/SupabaseDataContext";
+import { LinkSimpleHorizontalBreakIcon } from "@phosphor-icons/react/dist/ssr";
+import { LuSquareArrowOutUpRight } from "react-icons/lu";
+import { AiOutlineExpand } from "react-icons/ai";
 
 // Smooth corner helper using CSS masks (progressive enhancement)
 const maskWith = (r) => css`
@@ -36,27 +39,28 @@ const Card = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    border-radius: 12px;
-    ${props => props.$smooth && maskWith('2px')};
-    ${props => props.$clip && css`clip-path: ${props.$clip};`}
-    background-color: ${(props) => props.theme.colors.black[100]};
     padding-bottom: 6px;
-    gap: 8px;
+    gap: 12px;
     cursor: pointer;
+    position: relative;
+    
+
 `
 
 const Image = styled.div`
     width: 100%;
-    height: 300px;
+    height: 340px;
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     overflow: hidden;
     z-index: 0;
+    border-radius: 22px;
 
     @media (max-width: 768px){
-        height: 250px;
+        height: 260px;
+        border-radius: 8px 22px 8px 8px;
     }
 
     & img {
@@ -65,28 +69,6 @@ const Image = styled.div`
         height: 100%;
         position: relative;
         z-index: 0;
-    }
-
-    & span {
-        top: 8px;
-        left: 8px;
-        position: absolute;
-        padding: 6px 10px;
-        border-radius: 8px;
-        font-size: 14px;
-        ${props => props.$smooth && maskWith('8px')};
-        ${props => props.$clipBadge && css`clip-path: ${props.$clipBadge};`}
-        font-weight: 400;
-        background-color: ${props => props.$popupBg || '#2bba0060'};
-        border: 1px solid ${props => props.$popupBorder || '#2bba0070'};
-        color: ${props => props.$popupColor || '#fff'};
-        backdrop-filter: blur(4px);
-
-        @media (max-width: 768px){
-            font-size: 12px;
-            left: 8px;
-            top: 8px;
-        }
     }
 `
 
@@ -98,75 +80,21 @@ const Infos = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 18px 0 18px;
+    padding: 0 12px;
 
     & .info-content {
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 12px;
+        font-size: 26px;
+        color: ${(props) => props.theme.colors.white[300]};
         width: auto;
-    }
-`
-
-const SiteType = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 8px;
-    border-radius: 8px;
-    ${props => props.$smooth && maskWith('8px')};
-    ${props => props.$clip && css`clip-path: ${props.$clip};`}
-    background-color: ${props => props.$siteBg || '#b5000020'};
-    border: 1px solid ${props => props.$siteBorder || '#b5000040'};
-    color: ${props => props.$siteColor || '#b50000'};
-
-    @media (max-width: 768px){
-        display: none;
-    }
-
-    & p {
-        font-size: 12px;
-        font-weight: 600;
-    }
-`
-
-const Company = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: 100%;
-
-    & div {
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 6px;
-        ${props => props.$smooth && maskWith('8px')};
-        ${props => props.$clip && css`clip-path: ${props.$clip};`}
-        padding: 2px;
-
-        & img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-
-            @media (max-width: 768px){
-                width: 32px;
-                height: 32px;
-            }
-        }
-    }
-
-    & p {
-        font-size: 14px;
-        font-weight: 300;
-        color: ${(props) => props.theme.colors.gray[400]};
+        font-weight: 200;
+        letter-spacing: -0.4px;
 
         @media (max-width: 768px){
-            font-size: 16px;
+            font-size: 20px;
         }
     }
 `
@@ -178,37 +106,11 @@ const Stack = styled.ol`
     gap: 4px;
 `
 
-const Texts = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    position: relative;
-    gap: 12px;
-    padding: 4px 18px;
-
-    & h2 {
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 1.1;
-        color: ${(props) => props.theme.colors.white[500]};
-    }
-
-    & p {
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 1.2;
-        color: ${(props) => props.theme.colors.gray[100]};
-    }
-
-`
-
 const Buttons = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 18px 18px 18px;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    position: absolute;
 
     & .restrict {
         cursor: not-allowed;
@@ -230,38 +132,28 @@ const Buttons = styled.div`
         }
 
         & > button {
-            padding: 8px 12px;
+            padding: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
-            ${props => props.$smooth && maskWith('8px')};
-            ${props => props.$clipBtn && css`clip-path: ${props.$clipBtn};`}
             cursor: pointer;
-            font-weight: 400;
-            transition: opacity 0.2s;
-
-            &:hover {
-                opacity: 0.8;
-            }
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: -0.6px;
 
             @media (max-width: 768px){
                 font-size: 14px;
             }
 
             &:nth-child(1){
-                border: 1px solid #ffffff60;
-                color: #fff;
-            }
-
-            &:nth-child(2){
-                border: 1px solid #fff;
-                background-color: #fff;
-                color: #000;
+                background-color: #ffffff40;
+                border: 1px solid #ffffff40;
+                backdrop-filter: blur(8px);
+                color: ${(props) => props.theme.colors.white[100]};
+                border-radius: 99px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-weight: 500;
                 gap: 12px;
 
                 & svg {
@@ -293,22 +185,12 @@ const Buttons = styled.div`
 export default function ProjectStyle({
     image,
     title,
-    popupContent,
-    siteType,
-    imageCompanyUrl,
-    companyName,
     tecnologias = [],
-    data,
-    description,
     urlPage = '',
-    githubUrl,
     popupBg,
     popupBorder,
     popupColor,
-    siteBg,
-    siteBorder,
     slug,
-    siteColor,
     smoothCorners = true,
     cornerRadius = 6,
     cornerSmoothing = 3,
@@ -317,16 +199,10 @@ export default function ProjectStyle({
     // Figma-like squircles for strong smoothing
     const cardSquircle = useSquircle({ radius: cornerRadius, smoothness: cornerSmoothing });
     const imageSquircle = useSquircle({ radius: cornerRadius, smoothness: cornerSmoothing });
-    const badgeSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
-    const siteTypeSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
-    const logoBoxSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
     const buttonSquircle = useSquircle({ radius: 2, smoothness: cornerSmoothing });
     const { techIcons: techIconsContext = {} } = useSupabaseData();
     const techIconMap = useMemo(() => techIconsContext ?? {}, [techIconsContext]);
 
-    const logoSrc = typeof imageCompanyUrl === 'string'
-        ? imageCompanyUrl
-        : imageCompanyUrl?.default ?? imageCompanyUrl?.src ?? '';
 
     const openTarget = (target) => {
         if (!target) return;
@@ -350,28 +226,22 @@ export default function ProjectStyle({
             <Card $smooth={smoothCorners} $clip={cardSquircle.path} ref={cardSquircle.ref} onClick={() => window.location.href = `/projetos/${slug}`}>
                 <Image $smooth={smoothCorners} $clip={imageSquircle.path} ref={imageSquircle.ref} $popupBg={popupBg} $popupBorder={popupBorder} $popupColor={popupColor}>
                     <img src={image} alt={title} />
-                    {
-                        popupContent === '' ? null : (
-                            <span ref={badgeSquircle.ref} $clipBadge={badgeSquircle.path}>
-                                {popupContent}
-                            </span>
-                        )
-                    }
+                    <Buttons $smooth={smoothCorners} $clipBtn={buttonSquircle.path}>
+                        <div ref={buttonSquircle.ref}>
+                            {
+                                urlPage === ''
+                                    ? <button onClick={() => alert('Essa página é privada!')} className="restrict">Bloqueado</button>
+                                    : <button onClick={() => openTarget(urlPage)}><AiOutlineExpand /></button>
+                            }
+                        </div>
+                    </Buttons>
                 </Image>
                 <Infos>
                     <div className="info-content">
-                        <SiteType $smooth={smoothCorners} $clip={siteTypeSquircle.path} ref={siteTypeSquircle.ref} $siteBg={siteBg} $siteBorder={siteBorder} $siteColor={siteColor}>
-                            <p>{siteType}</p>
-                        </SiteType>
-                        <Company $smooth={smoothCorners}>
-                            <div ref={logoBoxSquircle.ref} $clip={logoBoxSquircle.path}>
-                                {logoSrc && <img src={logoSrc} alt={companyName} />}
-                            </div>
-                            <p>{companyName}</p>
-                        </Company>
+                        <p>{title}</p>
                     </div>
                     <Stack>
-                        {tecnologias.slice(0, 3).map((tec, idx) => {
+                        {tecnologias.slice(0, 5).map((tec, idx) => {
                             const key = typeof tec === 'string' ? tec.toLowerCase() : `tech-${idx}`;
                             const icon = techIconMap[key];
 
@@ -382,8 +252,8 @@ export default function ProjectStyle({
                                             src={icon.src}
                                             alt={icon.alt}
                                             title={icon.title}
-                                            width={icon.width ?? 18}
-                                            height={icon.height ?? 18}
+                                            width={20}
+                                            height={20}
                                             loading="lazy"
                                         />
                                     ) : (
@@ -394,24 +264,6 @@ export default function ProjectStyle({
                         })}
                     </Stack>
                 </Infos>
-                <Texts>
-                    <span>{data}</span>
-                    <h2>{title}</h2>
-                    <p>{description}</p>
-                </Texts>
-                <Buttons $smooth={smoothCorners} $clipBtn={buttonSquircle.path}>
-                    <div ref={buttonSquircle.ref}>
-                        <button onClick={() => window.location.href = `/projetos/${slug}`}>Detalhes</button>
-                        {
-                            urlPage === ''
-                                ? <button onClick={() => alert('Essa página é privada!')} className="restrict">Acesso restrito</button>
-                                : <button onClick={() => openTarget(urlPage)}>Acessar<BsBoxArrowUpRight /></button>
-                        }
-                    </div>
-                    <button onClick={() => openTarget(githubUrl)}>
-                        <FaGithub />
-                    </button>
-                </Buttons>
             </Card>
         </>
     )

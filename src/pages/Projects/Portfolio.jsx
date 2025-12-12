@@ -1,11 +1,7 @@
 import ProjectStyle from "@/components/ui/Card/ProjectStyle";
 import Title from "@/components/ui/texts/Title";
-import React, { useMemo, useState } from "react";
-import styled from "styled-components";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import styled, { keyframes } from "styled-components";
 import { useSupabaseData } from "@/contexts/SupabaseDataContext";
 
 const Container = styled.div`
@@ -43,7 +39,6 @@ const Content = styled.section`
         padding: 2.5% 5%;
     }
 `;
-
 const Header = styled.header`
     width: 100%;
     display: flex;
@@ -54,173 +49,114 @@ const Header = styled.header`
         font-size: 32px;
         color: ${(props) => props.theme.colors.white[300]};
     }
-`
+`;
 
-const Control = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    position: relative;
-    z-index: 2;
-    cursor: pointer;
-
-    & div{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28px;
-        background-color: transparent;
-        color: #fff;
-        border: 1px solid #fff;
-        width: 35px;
-        height: 35px;
-        border-radius: 50px;
+const fadeUp = keyframes`
+    from {
+        opacity: 0;
+        transform: translateY(12px);
     }
-
-    @media (min-width: 769px){
-        display: none;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
-`
+`;
 
-const DesktopGrid = styled.div`
+const Grid = styled.div`
     width: 100%;
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
 
     @media (min-width: 769px){
-        display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
+        gap: 18px;
     }
 `;
 
-const MobileCarousel = styled.div`
+const CardItem = styled.div`
+    animation: ${fadeUp} 0.4s ease forwards;
+    opacity: 0;
+`;
+
+const Sentinel = styled.div`
     width: 100%;
-
-    @media (min-width: 769px){
-        display: none;
-    }
-`;
-
-const LoadMore = styled.button`
-    margin-top: 12px;
-    padding: 10px 14px;
-    border-radius: 12px;
-    border: 1px solid ${(props) => props.theme.colors.gray[200]};
-    background: transparent;
-    color: ${(props) => props.theme.colors.white[300]};
-    font-size: 14px;
-    cursor: pointer;
-    transition: all .2s ease;
-
-    &:hover {
-        transform: translateY(-2px);
-        border-color: ${(props) => props.theme.colors.white[300]};
-    }
-
-    @media (max-width: 768px){
-        width: 100%;
-        text-align: center;
-    }
+    height: 1px;
 `;
 
 export default function Portfolio() {
     const { projects: projectsData = [], loading } = useSupabaseData();
     const isLoading = loading?.projects;
-    const [visibleByType, setVisibleByType] = useState({});
+    const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
+    const [visibleCount, setVisibleCount] = useState(0);
+    const sentinelRef = useRef(null);
 
-    const PAGE_SIZE = 6;
+    const PAGE_SIZE_MOBILE = 4;
+    const PAGE_SIZE_DESKTOP = 6;
 
-    const siteTypes = useMemo(() => {
-        const defaults = ["Landing Page", "E-commerce", "Institucional", "Aplicações"];
-        const datasetTypes = Array.from(
-            new Set(
-                (projectsData ?? [])
-                    .map((project) => project?.siteType)
-                    .filter((type) => typeof type === 'string' && type.trim().length > 0)
-            )
+    const sortedProjects = useMemo(() => {
+        return (projectsData ?? [])
+            .slice()
+            .sort((a, b) => new Date(b.project_date || b.date || 0) - new Date(a.project_date || a.date || 0));
+    }, [projectsData]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize, { passive: true });
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        const initial = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP;
+        setVisibleCount((prev) => (prev === 0 ? initial : prev));
+    }, [isMobile]);
+
+    useEffect(() => {
+        if (!sentinelRef.current) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setVisibleCount((prev) => {
+                            const pageSize = isMobile ? PAGE_SIZE_MOBILE : PAGE_SIZE_DESKTOP;
+                            const next = prev + pageSize;
+                            return Math.min(next, sortedProjects.length);
+                        });
+                    }
+                });
+            },
+            {
+                root: null,
+                rootMargin: '0px 0px 200px 0px',
+                threshold: 0.1,
+            }
         );
 
-        const merged = [...defaults];
+        observer.observe(sentinelRef.current);
 
-        datasetTypes.forEach((type) => {
-            if (!merged.includes(type)) {
-                merged.push(type);
-            }
-        });
-
-        return merged;
-    }, [projectsData]);
+        return () => observer.disconnect();
+    }, [isMobile, sortedProjects.length]);
 
     return (
         <>
             <Container>
-                {!isLoading && siteTypes.map((type) => {
-                    const filteredProjects = (projectsData ?? []).filter((project) => project.siteType === type);
-
-                    const visibleCount = visibleByType[type] ?? PAGE_SIZE;
-                    const visibleProjects = filteredProjects.slice(0, visibleCount);
-                    const hasMore = visibleCount < filteredProjects.length;
-
-                    if (filteredProjects.length === 0) {
-                        return null;
-                    }
-
-                    return (
-                        <Content key={type} data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
-                            <Header>
-                                <Title className="title">
-                                    {type}
-                                </Title>
-                                <Control>
-                                    <div className="portfolio-button-prev"><MdKeyboardArrowLeft /></div>
-                                    <div className="portfolio-button-next"><MdKeyboardArrowRight /></div>
-                                </Control>
-                            </Header>
-                            <MobileCarousel>
-                                <Swiper
-                                    spaceBetween={16}
-                                    slidesPerView={1}
-                                    modules={[Navigation]}
-                                    navigation={{
-                                        clickable: true,
-                                        nextEl: '.portfolio-button-next',
-                                        prevEl: '.portfolio-button-prev',
-                                    }}
-                                    style={{ width: '100%' }}
-                                >
-                                    {visibleProjects.map((project) => (
-                                        <SwiperSlide key={project.slug ?? project.id ?? project.title}>
-                                            <ProjectStyle
-                                                {...project}
-                                            />
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            </MobileCarousel>
-                            <DesktopGrid>
-                                {visibleProjects.map((project) => (
-                                    <ProjectStyle
-                                        key={project.slug ?? project.id ?? project.title}
-                                        {...project}
-                                    />
-                                ))}
-                            </DesktopGrid>
-                            {hasMore && (
-                                <LoadMore
-                                    onClick={() => {
-                                        setVisibleByType((prev) => ({
-                                            ...prev,
-                                            [type]: Math.min(filteredProjects.length, (prev[type] ?? PAGE_SIZE) + PAGE_SIZE),
-                                        }));
-                                    }}
-                                >
-                                    Carregar mais
-                                </LoadMore>
-                            )}
-                        </Content>
-                    );
-                })}
+                {!isLoading && (
+                    <Content data-aos="fade-up" data-aos-duration="800" data-aos-offset="0">
+                        <Grid>
+                            {sortedProjects.slice(0, visibleCount).map((project, index) => (
+                                <CardItem key={project.slug ?? project.id ?? project.title ?? index} style={{ animationDelay: `${Math.min(index, 8) * 40}ms` }}>
+                                    <ProjectStyle {...project} />
+                                </CardItem>
+                            ))}
+                        </Grid>
+                        <Sentinel ref={sentinelRef} />
+                    </Content>
+                )}
             </Container>
         </>
     )
