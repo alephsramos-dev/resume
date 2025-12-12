@@ -49,7 +49,7 @@ const Card = styled.div`
 
 const Image = styled.div`
     width: 100%;
-    height: 340px;
+    height: 320px;
     position: relative;
     display: flex;
     align-items: flex-end;
